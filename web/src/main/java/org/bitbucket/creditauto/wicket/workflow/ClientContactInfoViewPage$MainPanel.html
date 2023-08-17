@@ -1,0 +1,64 @@
+<html>
+<body>
+<wicket:panel>
+<div class="section">
+        <form wicket:id="form">
+    <fieldset style="border:none;">
+       <div class="entry">
+            <div class="label" style="color:black;text-align:center;">Контактная информация клиента</div>
+       </div>
+       <fieldset><legend>Контактная информация:</legend><table style="width:100%;">
+<tr wicket:id="in_person.phone_line"><td class="right-aligned"><div class="label">Номер телефона клиента (Код города + №)</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.phone_border">
+        <input id="in_person_phone" wicket:id="in_person.phone_id" size="11" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.mobile_phone_line"><td class="right-aligned"><div class="label">Номер мобильного телефона клиента</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.mobile_phone_border">
+        <input id="in_person_mobile_phone" wicket:id="in_person.mobile_phone_id" size="11" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.email_line"><td class="right-aligned"><div class="label">E-mail адрес</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.email_border">
+        <input id="in_person_email" wicket:id="in_person.email_id" size="20" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.last_name_latin_line"><td class="right-aligned"><div class="label">Фамилия латинскими буквами</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.last_name_latin_border">
+        <input id="in_person_last_name_latin" wicket:id="in_person.last_name_latin_id" size="40" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.first_name_latin_line"><td class="right-aligned"><div class="label">Имя латинскими буквами</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.first_name_latin_border">
+        <input id="in_person_first_name_latin" wicket:id="in_person.first_name_latin_id" size="40" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_goods.0.car_driving_license_ownership_line"><td class="right-aligned"><div class="label">Наличие водительского удостоверения</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_goods.0.car_driving_license_ownership_border">
+        <input id="in_goods_0_car_driving_license_ownership" wicket:id="in_goods.0.car_driving_license_ownership_id" style="width:160px;" title=""/>
+         </div>       </div></td>
+</tr>
+</table>
+
+</fieldset>
+<wicket:child/>
+      <br />
+        <input id="back" name="back" wicket:id="back" wicket:message="value:navigation.back" type="submit"/>
+        <input id="next" name="next" wicket:id="next" wicket:message="value:navigation.next" type="submit"/>
+    </fieldset> 
+    
+ 
+
+    </form>
+      
+</div>
+    
+</wicket:panel>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<html>
+<body>
+<wicket:panel>
+<div class="section">
+        <form wicket:id="form">
+    <fieldset style="border:none;">
+       <div class="entry">
+            <div class="label" style="color:black;text-align:center;">Список пользователей системы</div>
+       </div>
+       <fieldset><legend>Пользователи:</legend><table style="width:100%;">
+</table>
+
+<div wicket:id="list_container">
+<table class="oddeven">
+
+   <tr class="oddeven-head" style="vertical-align:text-top;">   <th class="oddeven-head" style="width:100px;text-align:left" ><span>Логин пользователя</span></th>
+      <th class="oddeven-head" style="width:100px;text-align:left" ><span>Имя пользователя</span></th>
+      <th class="oddeven-head" style="width:100px;text-align:left" ><span>Описание </span></th>
+      <th class="oddeven-head" style="width:60px;text-align:left" ><span>Дата создания</span></th>
+      <th class="oddeven-head" style="width:80px;text-align:left" ><span>Пользователь заблокирован</span></th>
+      <th class="oddeven-head" style="width:60px;text-align:left" ><span>Начало блокирования</span></th>
+      <th class="oddeven-head" style="width:60px;text-align:left" ><span>Окончание блокирования</span></th>
+      <th class="oddeven-head" style="width:60px;text-align:left" ><span>Временно заблокирован</span></th>
+      <th class="oddeven-head" style="width:40px;text-align:left" ><span>Действие</span></th>
+      </tr>
+   <tr class="oddeven" wicket:id="list">        <td style="width:100px;text-align:left" wicket:id="login" ><span>1111 fake</span></td>
+               <td style="width:100px;text-align:left" wicket:id="name" ><span>1111 fake</span></td>
+               <td style="width:100px;text-align:left" wicket:id="description" ><span>1111 fake</span></td>
+               <td style="width:60px;text-align:left" wicket:id="created" ><span>1111 fake</span></td>
+               <td style="width:80px;text-align:left"  ><input type="checkbox" wicket:id="blocked"  /></td>
+               <td style="width:60px;text-align:left" wicket:id="blocked_start" ><span>1111 fake</span></td>
+               <td style="width:60px;text-align:left" wicket:id="blocked_finish" ><span>1111 fake</span></td>
+               <td style="width:60px;text-align:left" wicket:id="blocked_temporary" ><span>1111 fake</span></td>
+                <td style="width:40px;text-align:left">
+        <ul class="linknavig">
+                            <li><a wicket:id="viewlink"  class="viewlink"   title="Просмотр данных агента"  >xxx</a></li>
+                                                <li><a wicket:id="editlink"  class="editlink"   title="Редактировать данные агента"  >xxx</a></li>
+                                    </ul>
+     </td>
+          </tr>
+</table>
+</div>
+<!-- Repeater -->   
+</fieldset>
+<wicket:child/>
+      <br />
+    </fieldset> 
+    
+ 
+
+    </form>
+      
+</div>
+    
+</wicket:panel>
+</body>
+</html>

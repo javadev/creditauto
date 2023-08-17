@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration debug="false" xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <!-- console stdout -->
+    <appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+        <param name="Threshold" value="DEBUG"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{HH:mm:ss} %-5p %c{2} %x - %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- LOG database creation SQL commands -->
+<!--
+    <category name="org.hibernate.tool.hbm2ddl">
+       <priority value="DEBUG"/>
+    </category>
+-->
+
+    <category name="org.bitbucket.creditauto">
+       <priority value="DEBUG"/>
+    </category>
+
+    <!-- ensemble des traces -->
+    <root>
+        <priority value="ERROR"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</log4j:configuration>

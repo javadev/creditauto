@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<classes>
+    <class name="AddNewUserPage">
+        <pageTitle>Добаление нового пользователя системы</pageTitle>
+        <sectionTitle>Введите данные нового пользователя</sectionTitle>
+        <compoundPropertyModel><![CDATA[ user ]]>
+        </compoundPropertyModel>
+        <formInit><![CDATA[private User user = new User();]]>
+        </formInit>
+        <variable name="login" type="TextField" label="Логин входа в систему" size="15">
+            <afterInit>ddc1.add(new org.bitbucket.creditauto.wicket.UserLoginValidator(user.getId()))</afterInit>
+        </variable>
+        <variable name="name" type="TextField" label="ФИО пользователя" size="15" />
+        <button name="next" type="SubmitLink">
+        user.setPassword(AuthorizationServerImpl.DEFAULT_PASS);
+        new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().save(user);
+        saveWorkflowPath("AddNewUserPage");
+        saveWorkflowPath("UserRolesPage");
+        setResponsePage(new UserRolesPage(user));
+        </button>
+    </class>
+    <class name="UsersListPage">
+        <pageTitle>Поиск пользователей системы</pageTitle>
+        <sectionTitle>Введите критерии поиска:</sectionTitle>
+        <compoundPropertyModel><![CDATA[this]]>
+        </compoundPropertyModel>
+        <formInit><![CDATA[private SearchData searchData = new SearchData();
+                    ]]>
+        </formInit>
+        <formMethods><![CDATA[
+                    public SearchData getSearchData() {
+                         return searchData;
+                    }
+                    public void setSearchData(SearchData searchData) {
+                        this.searchData = searchData;
+                    }
+                    ]]>
+        </formMethods>
+        <variable name="searchData.allUsers.userLogin" type="TextField" label="Логин пользователя" size="9"/>
+        <variable name="searchData.allUsers.userTableNumber" type="TextField" label="Номер пользователя" size="9"/>
+        <variable name="searchData.allUsers.userName" type="TextField" label="Имя пользователя" size="9"/>
+        <variable name="searchData.allUsers.powerOfAttNumber" type="TextField" label="Номер доверенности" size="9"/>
+        <variable name="searchData.allUsers.powerOfAttStart" type="DateTextField" label="Начало действия доверенности" size="9"/>
+        <variable name="searchData.allUsers.powerOfAttFinish" type="DateTextField" label="Окончание действия доверенности" size="9"/>
+        <variable name="search" type="AjaxLink" label="Поиск">
+                <onSubmit><![CDATA[getCreditautoSession().setSearchData(searchData);
+                setResponsePage(new UsersListResultPage());]]>
+                </onSubmit>
+        </variable>
+
+    </class>
+    
+    <class name="UserPage">
+        <pageTitle>Параметры пользователя</pageTitle>
+        <sectionTitle> Основные параметры пользователя:</sectionTitle>
+        <compoundPropertyModel><![CDATA[user]]>
+        </compoundPropertyModel>
+        <pageInit><![CDATA[protected  User user = new User();
+        final ModalWindow modal2 = new ModalWindow("modal2");]]>
+        </pageInit>
+        <constructor>
+            <parameters>User user</parameters>
+            <body>this.user = user;</body>
+        </constructor>
+        <variable name="login" type="TextField" label="Логин входа в систему" size="15" />
+        <variable name="name" type="TextField" label="ФИО пользователя" size="15" />
+        <variable name="description" type="TextField" label="Описание" size="15" />
+        <variable name="is_nst" type="CheckBox" label="Не сотрудник банка" size="15" />
+        <variable name="table_number" type="TextField" label="Номер пользователя" size="15" />
+        <variable name="phone" type="TextField" label="Номер телефона" size="15" />
+        <variable name="phone2" type="TextField" label="Дополнительный номер телефона" size="15" />
+        <modalWindow>       
+        add(modal2);
+        modal2.setTitle("Информационное сообщение");
+        modal2.setResizable(false);
+        modal2.setInitialWidth(30);
+        modal2.setInitialHeight(10);
+        modal2.setWidthUnit("em");
+        modal2.setHeightUnit("em");
+        </modalWindow>
+        <button name="back" type="Link">
+        </button>
+        <button name="next" type="SubmitLink">
+           new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().save(user);
+           setResponsePage(new UserManagementPage(user));
+        </button>
+    </class>
+    
+<class name="UserManagementPage" extends="UserPage">
+        <pageTitle>Параметры пользователя</pageTitle>
+        <sectionTitle> Управление пользователем:</sectionTitle>
+        <constructor>
+            <parameters>User user</parameters>
+            <body>this.user = user;</body>
+        </constructor>
+        <compoundPropertyModel><![CDATA[user]]>
+        </compoundPropertyModel>
+        <formInit><![CDATA[]]>
+        </formInit>
+        <variable name="isDefaultPassword" type="AjaxCheckBox" label="Изменить пароль пользователя на начальный" size="15" >
+           <onUpdate><![CDATA[]]>
+           </onUpdate>
+        </variable>
+        <variable name="isDeleted" type="AjaxCheckBox" label="Удалить пользователя из системы" size="15"  >
+           <onUpdate><![CDATA[this.getForm().get("deleted_comment_line").setVisible(((Boolean) this.getConvertedInput()));
+                       target.addComponent((LineBorder) form.get("deleted_comment_line"));]]>
+           </onUpdate>
+        </variable>
+        <variable name="deleted_comment" type="TextField" label="Комментарий" size="15" >
+         <afterInit>form.get("deleted_comment_line").setOutputMarkupPlaceholderTag(true)</afterInit>
+         <afterInit>form.get("deleted_comment_line").setVisible(user.getIsDeleted() != null ? user.getIsDeleted() : false)</afterInit>
+        </variable>
+        
+        <variable name="blocked" type="AjaxCheckBox" label="Блокировать пользователя" size="15" >
+           <onUpdate><![CDATA[this.getForm().get("blocked_comment_line").setVisible(((Boolean) this.getConvertedInput()));
+                       target.addComponent((LineBorder) form.get("blocked_comment_line"));]]>
+           </onUpdate>
+        </variable>
+        <variable name="blocked_comment" type="TextField" label="Комментарий" size="15" >
+         <afterInit>form.get("blocked_comment_line").setOutputMarkupPlaceholderTag(true)</afterInit>
+         <afterInit>form.get("blocked_comment_line").setVisible(user.getBlocked() != null ? user.getBlocked() : false)</afterInit>
+        </variable>
+        
+        <variable name="isBlockedDateSet" type="AjaxCheckBox" label="Установить даты блокировки пользователя" size="15" >
+           <onUpdate><![CDATA[this.getForm().get("blocked_start_line").setVisible(((Boolean) this.getConvertedInput()));
+                       target.addComponent((LineBorder) form.get("blocked_start_line"));
+                       this.getForm().get("blocked_finish_line").setVisible(((Boolean) this.getConvertedInput()));
+                       target.addComponent((LineBorder) form.get("blocked_finish_line"));]]>
+           </onUpdate>
+        </variable>
+        <variable name="blocked_start" type="TextField" label="Дата с" size="15" >
+         <afterInit>form.get("blocked_start_line").setOutputMarkupPlaceholderTag(true)</afterInit>
+         <afterInit>form.get("blocked_start_line").setVisible(user.getIsBlockedDateSet() != null ? user.getIsBlockedDateSet() : false)</afterInit>
+        </variable>
+        <variable name="blocked_finish" type="TextField" label="Дата по" size="15" >
+         <afterInit>form.get("blocked_finish_line").setOutputMarkupPlaceholderTag(true)</afterInit>
+         <afterInit>form.get("blocked_finish_line").setVisible(user.getIsBlockedDateSet() != null ? user.getIsBlockedDateSet() : false)</afterInit>
+        </variable>
+        <button name="back" type="Link">
+         saveWorkflowPath("UserRolesPage");
+         setResponsePage(new UserRolesPage(user));
+        </button>
+        <button name="next" type="SubmitLink">
+            user.setDeleted(user.getIsDeleted() ? new Date() : null);
+            user.setPassword(user.getIsDefaultPassword() ? org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl.DEFAULT_PASSWORD : user.getPassword());
+            user.setActivated(user.getIsDefaultPassword() ? null : user.getActivated());
+            user.setBlocked_comment(user.getBlocked() ? user.getBlocked_comment() : null);
+            user.setBlocked_start(user.getIsBlockedDateSet() ? user.getBlocked_start() : null);
+            user.setBlocked_finish(user.getIsBlockedDateSet() ? user.getBlocked_finish() : null);
+            new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().save(user);
+            saveWorkflowPath("UserShopsPage");
+            setResponsePage(new UserShopsPage(user));
+        </button>
+    </class>
+    <class name="UserPowerOfAttorneyPage" extends="UserManagementPage">
+        <pageTitle>Параметры пользователя</pageTitle>
+        <sectionTitle>Доверенности пользователя:</sectionTitle>
+        <pageInit>
+        private SimpleDateFormat format;
+        private ITarification tarification;</pageInit>
+        <constructor>
+            <parameters>User user</parameters>
+            <body>this.user = user;
+            if (this.user.getPowerofattorneys() == null ) {
+                 this.user.setPowerofattorneys(new ArrayList&lt;Powerofattorney&gt;());
+            }
+            tarification = new TarificationServerImpl();
+            this.user.getPowerofattorneys().add(0, new Powerofattorney());
+            this.user.getPowerofattorneys().get(0).setProduct(!tarification.getProductTypes().isEmpty() ? tarification.getProductTypes().get(0) : null);
+            format = new SimpleDateFormat("yyyy-MM-dd");
+            </body>
+        </constructor>
+        <compoundPropertyModel><![CDATA[user]]>
+        </compoundPropertyModel>
+
+        <variable name="powerofattorneys.0.attorney_number" type="TextField" label="Номер доверенности" size="15" />
+        <variable name="powerofattorneys.0.attorney_date_start" type="TextField" label="Начало действия" size="15" />
+        <variable name="powerofattorneys.0.attorney_date_finish" type="TextField" label="Конец действия" size="15" />
+        <variable name="powerofattorneys.0.dictionary_type_of_attorney" type="DropDownChoice" label="Тип доверенности" size="15">
+            <model><![CDATA[,
+                    dictionary.getDictionary("attorney_types", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="powerofattorneys.0.product" type="DropDownChoice" label="Продукт доверенности" size="15">
+            <model><![CDATA[, model.bind("powerofattorneys.0.product"),
+                    new TarificationServerImpl().getProductTypes(),
+                        new ChoiceRenderer("name", "id")]]></model>
+        </variable>
+        <variable name="powerofattorneys.0.dictionary_type_purpose" type="DropDownChoice" label="Цель доверенности" size="15">
+            <model><![CDATA[,
+                    dictionary.getDictionary("attorney_purposes", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="addPow" type="AjaxSubmitLink" label="Добавить" defaultFormProcess="false">
+                <onSubmit><![CDATA[ if (user.getPowerofattorneys().get(0) != null) {
+                 user.getPowerofattorneys().get(0).setUser(user);
+                 user.getPowerofattorneys().get(0).setExternaldistributor(getCreditautoSession().getUserShop());
+                 new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().save(user.getPowerofattorneys().get(0));
+                 ((ListView)form.get("list_container:list")).setModelObject(new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().getUserPowerofattorneys(user));
+                 target.addComponent(form.get("list_container"));
+                 user.getPowerofattorneys().add(0, new Powerofattorney());
+                 user.getPowerofattorneys().get(0).setProduct(!tarification.getProductTypes().isEmpty() ? tarification.getProductTypes().get(0) : null);
+                 form.setModelObject(user);
+                 target.addComponent(form);
+             }]]>
+        </onSubmit>
+        </variable>
+        <repeater name="list" type="ListView">
+           <header name="hattorney_number" label="Номер доверенности" size="100" />
+           <header name="hattorney_date_start" label="Начало действия" size="100" />
+           <header name="hattorney_date_finish" label="Конец действия" size="100" />
+           <header name="hdictionary_type_of_attorney" label="Тип доверенности" size="60" />
+           <header name="hproduct" label="Продукт доверенности" size="80" />
+           <header name="hdictionary_type_purpose" label="Цель доверенности" size="60" />
+           <header name="hact" label="Действие" size="40" />
+           <model><![CDATA[new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().getUserPowerofattorneys(user)]]></model>
+           <modelClass><![CDATA[Powerofattorney]]></modelClass>
+           <data name="attorney_number" label="Номер доверенности" size="100" />
+           <data name="attorney_date_start" label="Начало действия" size="100" >
+              <model><![CDATA[modelObject.getAttorney_date_start() != null ? format.format(modelObject.getAttorney_date_start()) : ""]]></model>
+           </data>
+           <data name="attorney_date_finish" label="Конец действия" size="100" >
+              <model><![CDATA[modelObject.getAttorney_date_finish() != null ? format.format(modelObject.getAttorney_date_finish()) : ""]]></model>
+           </data>
+           <data name="dictionary_type_of_attorney" label="Тип доверенности" size="60" />
+           <data name="product.name" label="Продукт доверенности" size="80" />
+           <data name="dictionary_type_purpose" label="Цель доверенности" size="60" />
+           <data name="id" label="Действие" size="40" type="links" >
+              <links>
+                 <link name="droplink" title="Удалить" size="40" type="AjaxLink" cssclass="droplink">
+                   <onClick><![CDATA[
+                   modal2.setContent(new ModalTextOnlyPanel(modal2.getContentId(), "Вы уверенны, что хотите звершить доверенность " + modelObject.getProduct().getName() + " №" + modelObject.getAttorney_number() + " пользователя " + user.getName() + "?", true) {
+                   @Override
+                   protected  void onConfirm(AjaxRequestTarget target) {
+                        Long result = new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().deleteUserPowerofattorney(user, modelObject);
+                       ((ListView)form.get("list_container:list")).setDefaultModelObject(new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().getUserPowerofattorneys(user));
+                       target.addComponent(form.get("list_container")); 
+                       modal2.close(target);
+                   }
+                   @Override
+                   protected  void onCancel(AjaxRequestTarget target) {
+                       modal2.close(target);
+                   }
+               });
+               modal2.show(target);]]>  </onClick>
+                 </link>
+              </links>
+               
+           </data>
+        </repeater>
+        <button name="back" type="Link">setResponsePage(new UserManagementPage(user));</button>
+        <button name="next" type="SubmitLink">
+            saveWorkflowPath("UserShopsPage");
+            setResponsePage(new UserShopsPage(user));
+        </button>
+        
+    </class>
+    <class name="UserShopsPage" extends="UserPowerOfAttorneyPage">
+        <pageTitle>Параметры пользователя</pageTitle>
+        <sectionTitle>Привязать пользователя к магазину:</sectionTitle>
+        
+        <constructor>
+            <parameters>User user</parameters>
+            <body>this.user = user;
+            if (this.user.getExternaldistributors() == null ) {
+                 this.user.setExternaldistributors(new ArrayList&lt;Externaldistributor&gt;());
+            }
+            this.user.getExternaldistributors().add(0, new Externaldistributor());
+            </body>
+        </constructor>
+        <compoundPropertyModel><![CDATA[user]]>
+        </compoundPropertyModel>
+        <variable name="externaldistributors.0.ext_id" type="TextField" label="Номер магазина" size="15" >
+         <afterInit>form.get("externaldistributors.0.ext_id_line").setOutputMarkupPlaceholderTag(true)</afterInit>
+        </variable>
+        <variable name="addShop" type="AjaxSubmitLink" label="Добавить" defaultFormProcess="false">
+                <onSubmit><![CDATA[ if (user.getExternaldistributors() != null && !user.getExternaldistributors().isEmpty() && user.getExternaldistributors().get(0) != null) {
+                 Long result = new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().addUserExternaldistributor(user, user.getExternaldistributors().get(0).getExt_id());
+                 if (result == -1) {
+                     modal2.setContent(new ModalTextOnlyPanel(modal2.getContentId(), "Магазин с номером " + user.getExternaldistributors().get(0).getExt_id() + " не найден.", false));
+                     modal2.show(target);
+                 } 
+                 if (result == -2) {
+                     modal2.setContent(new ModalTextOnlyPanel(modal2.getContentId(), "Магазин с номером " + user.getExternaldistributors().get(0).getExt_id() + " уже привязан к пользователю " + user.getName() + ".", false));
+                     modal2.show(target);
+                 } 
+                  if (result > -1) {
+                    ((ListView)form.get("listShops_container:listShops")).setDefaultModelObject(new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().getUserExternaldistributors(user));
+                     target.addComponent(form.get("listShops_container"));
+                     user.getExternaldistributors().add(0, new Externaldistributor());
+                     form.setModelObject(user);
+                     target.addComponent((LineBorder) form.get("externaldistributors.0.ext_id_line"));
+                 }
+             }]]>
+              </onSubmit>
+        </variable>
+        <repeater name="listShops" type="ListView">
+           <header name="hext_id" label="Код магазина" size="60" />
+           <header name="hname" label="Название" size="140" />
+           <header name="hcity" label="Город" size="80" />
+           <header name="hprov" label="Область" size="80" />
+           <header name="hstreet" label="Улица" size="80" />
+           <header name="hhouse" label="Дом" size="60" />
+           <header name="hact" label="Действие" size="40" />
+           <model><![CDATA[new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().getUserExternaldistributors(user)]]></model>
+           <modelClass><![CDATA[Externaldistributor]]></modelClass>
+           <data name="ext_id" label="Код магазина" size="60" />
+           <data name="name" label="Название" size="140" />
+           <data name="city" label="Город" size="80" />
+           <data name="province" label="Область" size="80" />
+           <data name="street" label="Улица" size="80" />
+           <data name="house" label="Дом" size="60" />
+           <data name="id" label="Действие" size="40" type="links" >
+              <links>
+                 <link name="droplink" title="Удалить" size="40" type="AjaxLink" cssclass="droplink">
+                  <onClick><![CDATA[
+                   modal2.setContent(new ModalTextOnlyPanel(modal2.getContentId(), "Вы уверенны, что хотите отвязать магазин " + modelObject.getExt_id() + " от пользователя " + user.getName() + "?", true) {
+                   @Override
+                   protected  void onConfirm(AjaxRequestTarget target) {
+                       Long result = new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().deleteUserExternaldistributor(user, modelObject);
+                       ((ListView)form.get("listShops_container:listShops")).setDefaultModelObject(new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().getUserExternaldistributors(user));
+                       target.addComponent(form.get("listShops_container")); 
+                       modal2.close(target);
+                   }
+                   @Override
+                   protected  void onCancel(AjaxRequestTarget target) {
+                       modal2.close(target);
+                   }
+               });
+               modal2.show(target);]]></onClick>
+               </link>
+              </links>
+           </data>
+        </repeater>
+         <button name="back" type="Link">
+         saveWorkflowPath("UserManagementPage");
+         setResponsePage(new UserManagementPage(user));
+        </button>
+        <button name="next" type="SubmitLink">
+            <afterInit>form.get("next").setVisible(false)</afterInit>
+        </button>
+    </class>
+    <class name="UserRolesPage">
+        <sectionTitle>Назначение ролей</sectionTitle>
+        <pageTitle>Назначение ролей пользователю системы:</pageTitle>
+        <constructor>
+            <parameters>User user</parameters>
+            <body>this.user = user;
+            for(Urole role : new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().getAllRoles()) {
+                rolesMap.put(role.getId(), role.getUsers().contains(user));
+            }
+            </body>
+        </constructor>
+        <pageInit><![CDATA[protected  User user = new User();
+        private Map<Long, Boolean> rolesMap = new HashMap<Long, Boolean>();
+        
+        public Map<Long, Boolean> getRolesMap(){
+           return this.rolesMap;
+        }
+        public void setRolesMap(Map<Long, Boolean> rolesMap){
+            this.rolesMap = rolesMap;
+        }
+        ]]>
+        </pageInit>
+        <compoundPropertyModel><![CDATA[user]]>
+        </compoundPropertyModel>
+
+        <repeater name="listRoles" type="ListView">
+           <header name="hid" label="Идентификатор" size="60" />
+           <header name="hname" label="Название" size="120" />
+           <header name="hdescription" label="Описание" size="120" />
+           <header name="hcompetence_level" label="Уровень компетенций" size="100" />
+           <header name="hact" label="Назначить роль" size="100" />
+           <model><![CDATA[new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().getAllRoles()]]></model>
+           <modelClass><![CDATA[Urole]]></modelClass>
+           <data name="id" label="Идентификатор" size="60" />
+           <data name="name" label="Название" size="120" />
+           <data name="description" label="Описание" size="120" />
+           <data name="competence_level.name" label="Уровень компетенций" size="100" />
+           <data name="actid" label="Назначить роль" size="100" type="links" >
+              <links>
+                 <link name="droplink" title="Назначить роль" size="40" type="AjaxCheckBox">
+                  <onClick><![CDATA[
+                         if (this.getConvertedInput() != null) {
+                             rolesMap.put(modelObject.getId(), this.getConvertedInput());
+                         }]]></onClick>
+                  <model><![CDATA[getRolesMap().get(modelObject.getId())]]></model>
+               </link>
+              </links>
+           </data>
+        </repeater>
+        <button name="next" type="SubmitLink">
+        for(Long id : rolesMap.keySet()){
+             if (rolesMap.get(id) == Boolean.TRUE) {
+                new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().addUserRole(user, id);
+             } else {
+                new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().deleteUserRole(user, id);
+             }
+        }
+        saveWorkflowPath("UserRolesPage");
+        saveWorkflowPath("UserManagementPage");
+        setResponsePage(new UserManagementPage(user));
+        </button>
+    </class>
+</classes>

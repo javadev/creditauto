@@ -1,0 +1,39 @@
+<html>
+<body>
+<wicket:panel>
+<div class="section">
+        <form wicket:id="form">
+    <fieldset style="border:none;">
+       <div class="entry">
+            <div class="label" style="color:black;text-align:center;">Добаление нового пользователя системы</div>
+       </div>
+       <fieldset><legend>Введите данные нового пользователя</legend><table style="width:100%;">
+<tr wicket:id="login_line"><td class="right-aligned"><div class="label">Логин входа в систему</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="login_border">
+        <input id="login" wicket:id="login_id" size="15" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="name_line"><td class="right-aligned"><div class="label">ФИО пользователя</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="name_border">
+        <input id="name" wicket:id="name_id" size="15" title=""/>
+         </div>       </div></td>
+</tr>
+</table>
+
+</fieldset>
+<wicket:child/>
+      <br />
+        <input id="next" name="next" wicket:id="next" wicket:message="value:navigation.next" type="submit"/>
+    </fieldset> 
+    
+ 
+
+    </form>
+      
+</div>
+    
+</wicket:panel>
+</body>
+</html>

@@ -1,0 +1,1136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>CreateViewDossierCar</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CreateViewDossierCar</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/creditauto</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeElementPresent</td>
+	<td>id=login</td>
+	<td>loginPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${loginPresent}</td>
+	<td>doLogin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Выйти из системы</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>doLogin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Вход в систему</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@name='username']</td>
+	<td>demo</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@name='password']</td>
+	<td>Qwerty+1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=logonForm:sap_bp_id</td>
+	<td>00123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Добро пожаловать, Demo User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>skipLogin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Создать заявку</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Создать заявку</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__goods_0_dictionary__carBrand__id</td>
+	<td>label=Audi</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__goods_0_dictionary__carModel__id</td>
+	<td>label=A4</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in__goods_0_price__id</td>
+	<td>120000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in__dossier_down__payment__value__id</td>
+	<td>40</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__dossier_down__payment__calc__method__id</td>
+	<td>label=Процент</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in__goods_0_car__issue__year__id</td>
+	<td>2009</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=div.section &gt; fieldset &gt; table.1.1</td>
+	<td>поле не должно быть пустым</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in__goods_0_car__bundling__type__id</td>
+	<td>Комплектация</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Выбор типа кредита</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeValue</td>
+	<td>partialId=in__dossier_down__payment__id</td>
+	<td>downPayment</td>
+</tr>
+<tr>
+	<td>assertExpression</td>
+	<td>javascript{storedVars['downPayment'].replace(/\D+/,'')}</td>
+	<td>48000,00</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__dossier_credittype__id</td>
+	<td>label=“Акція_24_15%”</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Персональные данные клиента</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=dictionary_gender</td>
+	<td>label=Мужской</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=last_name_ru_id</td>
+	<td>Фамилия</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=first_name_ru_id</td>
+	<td>Имя</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=patronymic_name_ru_id</td>
+	<td>Отчество</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=last__name__id</td>
+	<td>Прізвище</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=first__name__id</td>
+	<td>Ім'я</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=patronymic__name__id</td>
+	<td>По-батькові</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=birthday_id</td>
+	<td>01011980</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=birth_place</td>
+	<td>Место рождения</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=tin_id</td>
+	<td>2345678902</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=date_of_issue_tin_certificate</td>
+	<td>01011996</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=date_of_giving_tin_certificate</td>
+	<td>01011997</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=issuer_of_tin</td>
+	<td>Кем выдан ИНН</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=identity_document_number</td>
+	<td>ОО345678</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=date_of_issuing_identity_doc</td>
+	<td>01011998</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=issuer_of_identity_document</td>
+	<td>Кем выдан паспорт</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=number_of_children</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=habit_situation_start_date</td>
+	<td>2007</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>поле не должно быть пустым</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=dictionary_marital_status</td>
+	<td>label=regexp:Женат\s/\sзамужем</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=dictionary_habitation_situation</td>
+	<td>label=regexp:Владелец\sнедвижимости\sвыплачивает\sкредит</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=dictionary__gender__id</td>
+	<td>label=Женский</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=last_name_ru_id</td>
+	<td>ФамилияП</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=first_name_ru_id</td>
+	<td>ИмяП</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=patronymic_name_ru_id</td>
+	<td>ОтчествоП</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=last__name__id</td>
+	<td>Прізвище</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=first__name__id</td>
+	<td>Ім'я</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=patronymic__name__id</td>
+	<td>По-батькові</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=birthday__id</td>
+	<td>01011980</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=birth__place__id</td>
+	<td>Место рождения П</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=tin__id</td>
+	<td>1234567899</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=date__of__issue__tin__certificate__id</td>
+	<td>01011999</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=date__of__giving__tin__certificate__id</td>
+	<td>01011999</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=issuer__of__tin__id</td>
+	<td>Кем выдан ИНН П</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=identity__document__number__id</td>
+	<td>аа456788</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=date__of__issuing__identity__doc__id</td>
+	<td>01011999</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=issuer__of__identity__document__id</td>
+	<td>Кем выдан паспорт П</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=dictionary_regprovince</td>
+	<td>label=Київська</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=dictionary_regregion</td>
+	<td>label=Києво-Святошинський</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=dictionary_regcity</td>
+	<td>label=Гатне</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=regstreet_id</td>
+	<td>Улица</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=reghouse_id</td>
+	<td>12</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=regflat_id</td>
+	<td>23</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=dictionary_mailprovince</td>
+	<td>label=Вінницька</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=dictionary_mailregion</td>
+	<td>label=Гайсинський</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=dictionary_mailcity</td>
+	<td>label=Гайсин 1</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=mailstreet_id</td>
+	<td>Улица 2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=mailhouse_id</td>
+	<td>45</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=mailflat_id</td>
+	<td>56</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person_dict__level__of__education__id</td>
+	<td>label=Высшее</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person_dict__activity__sector__id</td>
+	<td>label=Комерческий сектор</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person_dict__type__of__activity__spd__id</td>
+	<td>label=Государственные структуры, органы госуправления</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person_dict__profession__id</td>
+	<td>label=Администратор</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person_dict__employment__type__id</td>
+	<td>label=Без срока окончания</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in__person_start__employment__date__id</td>
+	<td>012009</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in__person_employer__id</td>
+	<td>гос. компания</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person_dict__empl__regprovince__id</td>
+	<td>label=Київська</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person_dict__empl__regregion__id</td>
+	<td>label=Київ</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person_dict__empl__regcity__id</td>
+	<td>label=КИЇВ</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person_dict__empl__regcity__id</td>
+	<td>label=Київ 134</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in__person_empl__regstreet__id</td>
+	<td>пр. Московский</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in__person_empl__reghouse__id</td>
+	<td>23</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in__person_phone__of__employer__id</td>
+	<td>0444020202</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person_dict__type__employer__by__size__id</td>
+	<td>label=Большая компания</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in__person_prev__employer__name__id</td>
+	<td>гос. компания 2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in__person_prev__employer__num__years__experience__id</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in__person_number__of__years__of__experience__id</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person_number__of__months__of__experience__id</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Трудовая деятельность партнера</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person__partner_dict__level__of__education__id</td>
+	<td>label=Высшее</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person__partner_dict__activity__sector__id</td>
+	<td>label=Комерческий сектор</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person__partner_dict__type__of__activity__spd__id</td>
+	<td>label=Государственные структуры, органы госуправления</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person__partner_dict__profession__id</td>
+	<td>label=Администратор</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person__partner_dict__employment__type__id</td>
+	<td>label=Без срока окончания</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in__person__partner_start__employment__date__id</td>
+	<td>012009</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in__person__partner_employer__id</td>
+	<td>гос. компания</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person__partner_dict__empl__regprovince__id</td>
+	<td>label=Київська</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person__partner_dict__empl__regregion__id</td>
+	<td>label=Київ</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person__partner_dict__empl__regcity__id</td>
+	<td>label=КИЇВ</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person__partner_dict__empl__regcity__id</td>
+	<td>label=Київ 134</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in__person__partner_empl__regstreet__id</td>
+	<td>пр. Московский</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in__person__partner_empl__reghouse__id</td>
+	<td>23</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in__person__partner_phone__of__employer__id</td>
+	<td>0444020202</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person__partner_dict__type__employer__by__size__id</td>
+	<td>label=Большая компания</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in__person__partner_prev__employer__name__id</td>
+	<td>гос. компания 2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in__person__partner_prev__employer__num__years__experience__id</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in__person__partner_number__of__years__of__experience__id</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=in__person__partner_number__of__months__of__experience__id</td>
+	<td>label=00</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in_person.gross_income</td>
+	<td>1000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in_person.other_income</td>
+	<td>2000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in_person.expenses_for_renting</td>
+	<td>3000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in_person.expenses_for_car_loan</td>
+	<td>4000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in_person.expenses_for_other_loans</td>
+	<td>5000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in_person.expenses_for_alimony</td>
+	<td>6000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Собственность клиента</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=dictionary_asset_id</td>
+	<td>label=автомобиль</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=count__of__id</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Контактная информация клиента</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in_person.mobile_phone</td>
+	<td>0675010101</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in_person.email</td>
+	<td>test@mail.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in_person.last_name_latin</td>
+	<td>Familia</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in_person.first_name_latin</td>
+	<td>Imia</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Информация о третьем лице:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in_third_person.last_name</td>
+	<td>Петров</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in_third_person.first_name</td>
+	<td>Иван</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in_third_person.patronymic_name</td>
+	<td>ИИванович</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in_third_person.phone</td>
+	<td>0444020202</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Анкета-заявление</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>partialId=is_application_form_signed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=back</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Анкета-заявление</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>partialId=is_application_form_signed</td>
+	<td>off</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=back</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Контактная информация клиента</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=back</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Контактная информация клиента</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=back</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Собственность клиента</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=back</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Информация о доходах клиента</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Собственность клиента</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Контактная информация клиента</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>partialId=dict_type_of_relation_client</td>
+	<td>label=Супруг</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Анкета-заявление</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>partialId=is_application_form_signed</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Требуемые Скан-копии документов</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Паспорт клиента</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>ИНН клиента</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Фото клиента</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in_document_stores.0.data</td>
+	<td>javascript{absolutify('passport.jpg', 'file:///' + editor.suiteTreeView.currentTestCase.file.path)}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in_document_stores.1.data</td>
+	<td>javascript{absolutify('pin.jpg', 'file:///' + editor.suiteTreeView.currentTestCase.file.path)}</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=in_document_stores.2.data</td>
+	<td>javascript{absolutify('photo_client.jpg', 'file:///' + editor.suiteTreeView.currentTestCase.file.path)}</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>partialId=in__dossier_preview__documents__id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Ваш запрос отправлен на обработку</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Все заявки</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>partialId=viewlink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Выбор типа товара</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Выбор кредита</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Персональные данные</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Заполнение адреса клиента</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Трудовая деятельность клиента</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Информация о доходах клиента</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Собственность клиента</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Контактная информация клиента</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Информация о третьем лице:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Требуемые Скан-копии документов</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Выйти из системы</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Вход в систему</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

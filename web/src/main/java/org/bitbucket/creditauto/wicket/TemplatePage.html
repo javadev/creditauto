@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title wicket:id="title">Personal finance::Главная страница</title>
+<link rel="shortcut icon" href="favicon.ico"/>
+<link href="css/style.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript" src="js/jquery.tools.min.js"></script>
+<script type="text/javascript">
+/*
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-27246148-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+*/
+$(document).ready(function() {
+$(":input:not(input[type=submit])").tooltip({
+    position: "center right",
+    offset: [-2, 10],
+    effect: "fade",
+    opacity: 0.7
+});
+});
+</script>
+</head>
+<body>
+<div id="wrapper">
+    <div id="header">
+        <div id="logo">
+            <h1><a href="#">&nbsp;&nbsp;&nbsp;Персональные финансы</a></h1>
+        </div>
+        <div id="user-info">
+<p>Пользователь <span wicket:id="userName">[user name]</span> @ <span wicket:id="shopName">[shop name]</span>
+</p>
+        </div>
+    </div>
+    <!-- end #header -->
+    <div id="menu">
+        <ul>
+            <li class="current_page_item"><a href="#">Предварительная проверка</a></li>
+            <li><a id="goodSelectionPageMenu" wicket:id="goodSelectionPageMenu">Создать заявку</a></li>
+            <li><a href="#">Одобренные заявки</a></li>
+            <li><a id="requestsListPageMenu" wicket:id="requestsListPageMenu">Все заявки</a></li>
+            <li><a wicket:id="logout" href="#">Выйти из системы</a></li>
+        </ul>
+    </div>
+    <!-- end #menu -->
+    <div id="page">
+    <div id="page-bgtop">
+    <div id="page-bgbtm">
+        <div id="content">
+            <wicket:child/>
+        <div style="clear: both;">&nbsp;</div>
+        </div>
+        <!-- end #content -->
+        <div id="sidebar">
+            <ul>
+                <li>
+                    <h2>Заявки</h2>
+                    <ul>
+                        <li><a href="#">Предварительная проверка</a></li>
+                        <li><a id="goodSelectionPage" wicket:id="goodSelectionPage">Создать заявку</a></li>
+                        <li><a href="#">Одобренные заявки</a></li>
+                        <li><a href="#">Подписанные контракты</a></li>
+                        <li><a href="#">Заявки к финансированию</a></li>
+                        <li><a id="requestsListPage" wicket:id="requestsListPage">Все заявки</a></li>
+                        <li><a href="#">Отклоненные заявки</a></li>
+                        <li><a href="#">Предложения</a></li>
+                        <li><a href="#">Прерванные заявки</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h2>Реестр</h2>
+                    <ul>
+                        <li><a href="#">Ежедневные реестр</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h2>Сервисы</h2>
+                    <ul>
+                        <li><a href="#">Почтовый сервис</a></li>
+                        <li><a wicket:id="passwordPage">Изменить пароль</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h2>Управление пользователями</h2>
+                    <ul>
+                        <li><a wicket:id="usersListPage">Поиск пользователей</a></li>
+                        <li><a wicket:id="addNewUserPage">Добаление нового пользователя</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h2>Обратная связь</h2>
+                    <ul>
+                        <li><a href="#">Диагностика проблем</a></li>
+                        <li><a wicket:id="complainPage">Сообщить о проблеме</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- end #sidebar -->
+        <div style="clear: both;">&nbsp;</div>
+    </div>
+    </div>
+    </div>
+    <!-- end #page -->
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<html>
+<body>
+<wicket:panel>
+<div class="section">
+        <form wicket:id="form">
+    <fieldset style="border:none;">
+       <div class="entry">
+            <div class="label" style="color:black;text-align:center;">Выбор типа кредита</div>
+       </div>
+       <fieldset><legend>Выбор кредита</legend><table style="width:100%;">
+<tr wicket:id="in_dossier.down_payment_line"><td class="right-aligned"><div class="label">Первый платеж, грн</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_dossier.down_payment_border">
+        <input id="in_dossier_down_payment" wicket:id="in_dossier.down_payment_id" size="15" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_dossier.amount_of_loan_line"><td class="right-aligned"><div class="label">Сумма кредита</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_dossier.amount_of_loan_border">
+        <input id="in_dossier_amount_of_loan" wicket:id="in_dossier.amount_of_loan_id" size="15" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_dossier.credittype_line"><td class="right-aligned"><div class="label">Тип кредита</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_dossier.credittype_border">
+        <select id="in_dossier_credittype" wicket:id="in_dossier.credittype_id" style="width:160px;" title=""/>
+         </div>       </div></td>
+</tr>
+</table>
+
+</fieldset>
+<wicket:child/>
+      <br />
+        <input id="back" name="back" wicket:id="back" wicket:message="value:navigation.back" type="submit"/>
+        <input id="next" name="next" wicket:id="next" wicket:message="value:navigation.next" type="submit"/>
+    </fieldset> 
+    
+ 
+
+    </form>
+      
+</div>
+    
+</wicket:panel>
+</body>
+</html>

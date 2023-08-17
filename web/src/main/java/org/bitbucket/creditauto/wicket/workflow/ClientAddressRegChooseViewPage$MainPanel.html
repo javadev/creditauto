@@ -1,0 +1,84 @@
+<html>
+<body>
+<wicket:panel>
+<div class="section">
+        <form wicket:id="form">
+    <fieldset style="border:none;">
+       <div class="entry">
+            <div class="label" style="color:black;text-align:center;">Заполнение адреса клиента</div>
+       </div>
+       <fieldset><legend>Адрес регистрации:</legend><table style="width:100%;">
+<tr wicket:id="in_person.dictionary_regprovince_line"><td class="right-aligned"><div class="label">Область</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.dictionary_regprovince_border">
+        <input id="in_person_dictionary_regprovince" wicket:id="in_person.dictionary_regprovince_id" style="width:160px;" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.dictionary_regregion_line"><td class="right-aligned"><div class="label">Район</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.dictionary_regregion_border">
+        <input id="in_person_dictionary_regregion" wicket:id="in_person.dictionary_regregion_id" style="width:160px;" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.dictionary_regcity_line"><td class="right-aligned"><div class="label">Населенный пункт</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.dictionary_regcity_border">
+        <input id="in_person_dictionary_regcity" wicket:id="in_person.dictionary_regcity_id" style="width:160px;" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.regpostindex_line"><td class="right-aligned"><div class="label">Почтовый индекс</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.regpostindex_border">
+        <input id="in_person_regpostindex" wicket:id="in_person.regpostindex_id" size="15" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.regstreet_line"><td class="right-aligned"><div class="label">Улица</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.regstreet_border">
+        <input id="in_person_regstreet" wicket:id="in_person.regstreet_id" size="40" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.reghouse_line"><td class="right-aligned"><div class="label">Дом</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.reghouse_border">
+        <input id="in_person_reghouse" wicket:id="in_person.reghouse_id" size="15" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.regflat_line"><td class="right-aligned"><div class="label">Квартира</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.regflat_border">
+        <input id="in_person_regflat" wicket:id="in_person.regflat_id" size="15" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.regadditionalinfo_line"><td class="right-aligned"><div class="label">Дополнительная информация (корпус, блок, другое)</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.regadditionalinfo_border">
+        <input id="in_person_regadditionalinfo" wicket:id="in_person.regadditionalinfo_id" size="15" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.is_regstatus_temporary_line"><td class="right-aligned"><div class="label">Временная регистрация</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.is_regstatus_temporary_border">
+        <input id="in_person_is_regstatus_temporary" wicket:id="in_person.is_regstatus_temporary_id" type="checkbox" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="copy_to_mail_address_submit_line"><td style="text-align: center;" colspan="2"><div class="input"><input id="copy_to_mail_address_submit" wicket:id="copy_to_mail_address_submit_id" value="Скопировать в адрес проживания" type="submit"/>       </div></td>
+</tr>
+</table>
+
+</fieldset>
+<wicket:child/>
+      <br />
+        <input id="back" name="back" wicket:id="back" wicket:message="value:navigation.back" type="submit"/>
+        <input id="next" name="next" wicket:id="next" wicket:message="value:navigation.next" type="submit"/>
+    </fieldset> 
+    
+ 
+
+    </form>
+      
+</div>
+    
+</wicket:panel>
+</body>
+</html>

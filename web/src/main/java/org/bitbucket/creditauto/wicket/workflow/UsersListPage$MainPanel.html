@@ -1,0 +1,64 @@
+<html>
+<body>
+<wicket:panel>
+<div class="section">
+        <form wicket:id="form">
+    <fieldset style="border:none;">
+       <div class="entry">
+            <div class="label" style="color:black;text-align:center;">Поиск пользователей системы</div>
+       </div>
+       <fieldset><legend>Введите критерии поиска:</legend><table style="width:100%;">
+<tr wicket:id="searchData.allUsers.userLogin_line"><td class="right-aligned"><div class="label">Логин пользователя</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="searchData.allUsers.userLogin_border">
+        <input id="searchData_allUsers_userLogin" wicket:id="searchData.allUsers.userLogin_id" size="9" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="searchData.allUsers.userTableNumber_line"><td class="right-aligned"><div class="label">Номер пользователя</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="searchData.allUsers.userTableNumber_border">
+        <input id="searchData_allUsers_userTableNumber" wicket:id="searchData.allUsers.userTableNumber_id" size="9" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="searchData.allUsers.userName_line"><td class="right-aligned"><div class="label">Имя пользователя</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="searchData.allUsers.userName_border">
+        <input id="searchData_allUsers_userName" wicket:id="searchData.allUsers.userName_id" size="9" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="searchData.allUsers.powerOfAttNumber_line"><td class="right-aligned"><div class="label">Номер доверенности</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="searchData.allUsers.powerOfAttNumber_border">
+        <input id="searchData_allUsers_powerOfAttNumber" wicket:id="searchData.allUsers.powerOfAttNumber_id" size="9" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="searchData.allUsers.powerOfAttStart_line"><td class="right-aligned"><div class="label">Начало действия доверенности</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="searchData.allUsers.powerOfAttStart_border">
+        <input id="searchData_allUsers_powerOfAttStart" wicket:id="searchData.allUsers.powerOfAttStart_id" size="9" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="searchData.allUsers.powerOfAttFinish_line"><td class="right-aligned"><div class="label">Окончание действия доверенности</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="searchData.allUsers.powerOfAttFinish_border">
+        <input id="searchData_allUsers_powerOfAttFinish" wicket:id="searchData.allUsers.powerOfAttFinish_id" size="9" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="search_line"><td style="text-align: center;" colspan="2"><div class="input"><input id="search" wicket:id="search_id" value="Поиск" type="submit"/>       </div></td>
+</tr>
+</table>
+
+</fieldset>
+<wicket:child/>
+      <br />
+    </fieldset> 
+    
+ 
+
+    </form>
+      
+</div>
+    
+</wicket:panel>
+</body>
+</html>

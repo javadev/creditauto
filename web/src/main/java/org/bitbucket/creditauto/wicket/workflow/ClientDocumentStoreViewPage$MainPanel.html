@@ -1,0 +1,63 @@
+<html>
+<body>
+<wicket:panel>
+<div class="section">
+        <form wicket:id="form">
+    <fieldset style="border:none;">
+       <div class="entry">
+            <div class="label" style="color:black;text-align:center;">Требуемые Скан-копии документов</div>
+       </div>
+       <fieldset><legend>Скан-копии документов:</legend><table style="width:100%;">
+<tr wicket:id="in_document_stores.0.data_line"><td class="right-aligned"><div class="label">Паспорт клиента</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_document_stores.0.data_border">
+        <input id="in_document_stores_0_data" type="file" wicket:id="in_document_stores.0.data_id">
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_document_stores.0.is_not_required_line"><td class="right-aligned"><div class="label">Скан-копия загружена альтернативным путем</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_document_stores.0.is_not_required_border">
+        <input id="in_document_stores_0_is_not_required" wicket:id="in_document_stores.0.is_not_required_id" type="checkbox" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_document_stores.1.data_line"><td class="right-aligned"><div class="label">ИНН коиента</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_document_stores.1.data_border">
+        <input id="in_document_stores_1_data" type="file" wicket:id="in_document_stores.1.data_id">
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_document_stores.1.is_not_required_line"><td class="right-aligned"><div class="label">Скан-копия загружена альтернативным путем</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_document_stores.1.is_not_required_border">
+        <input id="in_document_stores_1_is_not_required" wicket:id="in_document_stores.1.is_not_required_id" type="checkbox" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_document_stores.2.data_line"><td class="right-aligned"><div class="label">Фото клиента</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_document_stores.2.data_border">
+        <input id="in_document_stores_2_data" type="file" wicket:id="in_document_stores.2.data_id">
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_document_stores.2.is_not_required_line"><td class="right-aligned"><div class="label">Скан-копия загружена альтернативным путем</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_document_stores.2.is_not_required_border">
+        <input id="in_document_stores_2_is_not_required" wicket:id="in_document_stores.2.is_not_required_id" type="checkbox" title=""/>
+         </div>       </div></td>
+</tr>
+</table>
+
+</fieldset>
+<wicket:child/>
+      <br />
+        <input id="back" name="back" wicket:id="back" wicket:message="value:navigation.back" type="submit"/>
+    </fieldset> 
+    
+ 
+
+    </form>
+      
+</div>
+    
+</wicket:panel>
+</body>
+</html>

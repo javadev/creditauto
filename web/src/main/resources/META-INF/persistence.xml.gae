@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+             version="1.0">
+    <persistence-unit name="creditautoDatabase">
+        <class>org.bitbucket.creditauto.entity.Competence_level</class>
+        <class>org.bitbucket.creditauto.entity.Credittype</class>
+        <class>org.bitbucket.creditauto.entity.Credittype_has_extdistributor</class>
+        <class>org.bitbucket.creditauto.entity.Dictionary_data</class>
+        <class>org.bitbucket.creditauto.entity.Externaldistributor</class>
+        <class>org.bitbucket.creditauto.entity.Goodexternaldistributor</class>
+        <class>org.bitbucket.creditauto.entity.In_asset</class>
+        <class>org.bitbucket.creditauto.entity.In_bloknot</class>
+        <class>org.bitbucket.creditauto.entity.In_document_store</class>
+        <class>org.bitbucket.creditauto.entity.In_dossier</class>
+        <class>org.bitbucket.creditauto.entity.In_good</class>
+        <class>org.bitbucket.creditauto.entity.In_person</class>
+        <class>org.bitbucket.creditauto.entity.In_third_person</class>
+        <class>org.bitbucket.creditauto.entity.Powerofattorney</class>
+        <class>org.bitbucket.creditauto.entity.Product</class>
+        <class>org.bitbucket.creditauto.entity.Rgroup</class>
+        <class>org.bitbucket.creditauto.entity.Uright</class>
+        <class>org.bitbucket.creditauto.entity.Urole</class>
+        <class>org.bitbucket.creditauto.entity.Urole_has_uright</class>
+        <class>org.bitbucket.creditauto.entity.User</class>
+        <class>org.bitbucket.creditauto.entity.User_has_externaldistributor</class>
+        <class>org.bitbucket.creditauto.entity.User_has_urole</class>
+        <provider>org.datanucleus.api.jpa.PersistenceProviderImpl</provider>
+        <properties>
+            <property name="datanucleus.NontransactionalRead" value="true"/>
+            <property name="datanucleus.NontransactionalWrite" value="true"/>
+            <property name="datanucleus.ConnectionURL" value="appengine"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>

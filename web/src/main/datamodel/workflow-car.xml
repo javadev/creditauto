@@ -1,0 +1,982 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<classes>
+    <class name="GoodSelectionPage" template="WicketHorizontal.html" combines="GoodSelectionPage" showDossierInfo="true">
+        <pageTitle>Выбор типа товара</pageTitle>
+        <sectionTitle>Выбор товара</sectionTitle>
+        <defaultConstructor>
+            org.bitbucket.creditauto.entity.Product product = new org.bitbucket.creditauto.entity.Product();
+            product.setId(1L);
+            product.setName("CAR");
+            getCreditautoSession().setInInstance(new DossierServerServerImpl().initDossier(
+                getCreditautoSession().getUserShop(), getCreditautoSession().getUser(), product).inInstance);
+        </defaultConstructor>
+        <variable name="in_goods.0.dictionary_carBrand" type="DropDownChoice" label="Марка автомобиля" title="Марка автомобиля">
+            <model><![CDATA[,
+                    dictionary.getDictionary("carBrand", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[
+                DropDownChoice carBrand = (DropDownChoice) form.get("in_goods.0.dictionary_carBrand_line:in_goods.0.dictionary_carBrand_border:in_goods.0.dictionary_carBrand_id");
+                DropDownChoice carModel = (DropDownChoice) form.get("in_goods.0.dictionary_carModel_line:in_goods.0.dictionary_carModel_border:in_goods.0.dictionary_carModel_id");
+                inInstance.getIn_goods().get(0).setDictionary_carModel(null);
+                carModel.setChoices(dictionary.getDictionary("carModel", ((Dictionary_data) carBrand.getModelObject()).getDkey(), IDictionary.LANGUAGE_RU, new Date()));
+                target.addComponent(carModel);]]>
+            </ajaxOnUpdate>
+        </variable>
+        <variable name="in_goods.0.dictionary_carModel" type="DropDownChoice" label="Модель автомобиля" title="Модель автомобиля">
+            <model><![CDATA[,
+                    dictionary.getDictionary("carModel", inInstance.getIn_goods().get(0).getDictionary_carBrand(), IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[
+                DropDownChoice carModel = (DropDownChoice) form.get("in_goods.0.dictionary_carModel_line:in_goods.0.dictionary_carModel_border:in_goods.0.dictionary_carModel_id");
+                DropDownChoice carColor = (DropDownChoice) form.get("in_goods.0.dict_car_color_line:in_goods.0.dict_car_color_border:in_goods.0.dict_car_color_id");
+                DropDownChoice carBodyType = (DropDownChoice) form.get("in_goods.0.dict_car_body_type_line:in_goods.0.dict_car_body_type_border:in_goods.0.dict_car_body_type_id");
+                
+                if (carColor != null && carBodyType != null) {
+                   carColor.setChoices(dictionary.getDictionary("carColorList", 
+                        ((Dictionary_data)((FormComponent)get("in_goods.0.dictionary_carModel_line:in_goods.0.dictionary_carModel_border:in_goods.0.dictionary_carModel_id")).getModelObject()).getDkey(),
+                        IDictionary.LANGUAGE_RU, new Date()));
+                   carBodyType.setChoices(dictionary.getDictionary("carBodyTypeList",
+                       ((Dictionary_data)((FormComponent)get("in_goods.0.dictionary_carModel_line:in_goods.0.dictionary_carModel_border:in_goods.0.dictionary_carModel_id")).getModelObject()).getDkey(),
+                        IDictionary.LANGUAGE_RU, new Date()));
+                
+                   target.addComponent(carColor);
+                   target.addComponent(carBodyType);
+                }
+                ]]>
+            </ajaxOnUpdate>
+        </variable>
+        <variable name="in_goods.0.price" type="TextField" label="Цена автомобиля (с НДС), грн" size="15" title="Цена автомобиля">
+            <ajaxOnUpdate><![CDATA[
+                    updateDownPayment(target);
+            ]]></ajaxOnUpdate>
+        </variable>
+        <variable name="in_dossier.down_payment_value" type="TextField" label="Величина первого платежа, грн" size="15" title="Величина первого платежа">
+            <ajaxOnUpdate><![CDATA[
+                    updateDownPayment(target);
+            ]]></ajaxOnUpdate>
+        </variable>
+        <variable name="in_dossier.down_payment_calc_method" type="DropDownChoice" label="Расчет первого платежа" title="Расчет первого платежа">
+            <model><![CDATA[,
+                    dictionary.getDictionary("priceVariant", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[
+                    updateDownPayment(target);
+            ]]></ajaxOnUpdate>
+            <afterInit>if (inInstance.getIn_dossier().getDown_payment_calc_method() == null) { inInstance.getIn_dossier().setDown_payment_calc_method("1"); }</afterInit>
+            <afterInit>ddc5.setNullValid(false);</afterInit>
+        </variable>
+        <variable name="in_dossier.down_payment_prc" type="TextField" label="Процент" size="15" readonly="true" title="Процент">
+            <afterInit>form.add(new org.bitbucket.creditauto.wicket.validator.PercentValidator(
+(FormComponent) form.get("in_dossier.down_payment_value_line:in_dossier.down_payment_value_border:in_dossier.down_payment_value_id"),
+(FormComponent) form.get("in_dossier.down_payment_calc_method_line:in_dossier.down_payment_calc_method_border:in_dossier.down_payment_calc_method_id")));
+            form.add(new org.bitbucket.creditauto.wicket.validator.SumValidator(
+(FormComponent) form.get("in_dossier.down_payment_value_line:in_dossier.down_payment_value_border:in_dossier.down_payment_value_id"),
+(FormComponent) form.get("in_dossier.down_payment_calc_method_line:in_dossier.down_payment_calc_method_border:in_dossier.down_payment_calc_method_id"),
+(FormComponent) form.get("in_goods.0.price_line:in_goods.0.price_border:in_goods.0.price_id")));
+            </afterInit>
+        </variable>
+        <variable name="in_dossier.down_payment" type="TextField" label="Первый платеж, грн" size="15" readonly="true" title="Первый платеж"/>
+        <button name="back" type="Link">
+            <afterInit>form.get("back").setVisible(false)</afterInit>
+        </button>
+        <button name="next" type="SubmitLink">
+            updateDownPayment(new AjaxRequestTarget(GoodSelectionPage.this));
+            org.bitbucket.creditauto.wicket.InstanceHelper.save(inInstance);
+            saveWorkflowPath("GoodSelectionPage");
+            saveWorkflowPath("CarDetailsInfoPage");
+                    
+            if (inInstance.getIn_dossier().getTotal_price() != null &amp;&amp; inInstance.getIn_dossier().getDown_payment() != null) {
+                inInstance.getIn_dossier().setAmount_of_loan(inInstance.getIn_dossier().getTotal_price()
+                        .subtract(inInstance.getIn_dossier().getDown_payment()));
+            }
+            setResponsePage(new CarDetailsInfoPage(inInstance));</button>
+        <formMethods><![CDATA[
+        public void updateDownPayment(AjaxRequestTarget target) {
+            if (inInstance.getIn_dossier().getDown_payment_calc_method() != null && 
+                inInstance.getIn_goods() != null && !inInstance.getIn_goods().isEmpty() && 
+                !java.math.BigDecimal.ZERO.equals(inInstance.getIn_goods().get(0).getPrice())) {
+                            
+                String calcType = inInstance.getIn_dossier().getDown_payment_calc_method();
+
+                java.math.BigDecimal rez = org.bitbucket.creditauto.tarification.server.Calculator.calculateDownPayment(
+                    inInstance.getIn_goods().get(0).getPrice(),
+                    inInstance.getIn_dossier().getDown_payment_value(),
+                    inInstance.getIn_dossier().getDown_payment_calc_method());
+                inInstance.getIn_dossier().setDown_payment(calcType.equals(org.bitbucket.creditauto.tarification.server.Calculator.TYPE_PER_CENT) ? rez : inInstance.getIn_dossier().getDown_payment_value());
+                inInstance.getIn_dossier().setDown_payment_prc(calcType.equals(org.bitbucket.creditauto.tarification.server.Calculator.TYPE_PER_CENT) ? inInstance.getIn_dossier().getDown_payment_value() : rez);
+                inInstance.getIn_dossier().setTotal_price(inInstance.getIn_goods().get(0).getPrice());
+            } 
+            target.addComponent(get("in_dossier.down_payment_prc_line:in_dossier.down_payment_prc_border:in_dossier.down_payment_prc_id"));
+            target.addComponent(get("in_dossier.down_payment_line:in_dossier.down_payment_border:in_dossier.down_payment_id"));
+        }]]></formMethods>
+    </class>
+    <class name="CarDetailsInfoPage" extends="GoodSelectionPage" combines="CarDetailsInfoPage">
+        <pageTitle>Выбор типа товара</pageTitle>
+        <sectionTitle>Данные автомобиля:</sectionTitle>
+        <variable name="in_goods.0.car_issue_year" type="TextField" label="Год производства" size="11"/>
+        <variable name="in_goods.0.car_bundling_type" type="TextArea" label="Комплектация"/>
+        <button name="back" type="Link">
+            setResponsePage(new GoodSelectionPage(inInstance));</button>
+        <button name="next" type="SubmitLink">
+            saveWorkflowPath("CredittypeSelectionPage");
+            if (inInstance.getIn_dossier().getTotal_price() != null &amp;&amp; inInstance.getIn_dossier().getDown_payment() != null) {
+                inInstance.getIn_dossier().setAmount_of_loan(inInstance.getIn_dossier().getTotal_price()
+                        .subtract(inInstance.getIn_dossier().getDown_payment()));
+            }
+            org.bitbucket.creditauto.wicket.InstanceHelper.save(inInstance);
+            setResponsePage(new CredittypeSelectionPage());</button>
+    </class>
+    <class name="CredittypeSelectionPage" combines="CarDetailsInfoPage,CredittypeSelectionPage">
+        <pageTitle>Выбор типа кредита</pageTitle>
+        <sectionTitle>Выбор кредита</sectionTitle>
+        <variable name="in_dossier.down_payment" type="TextField" label="Первый платеж, грн" size="15" readonly="true"/>
+        <variable name="in_dossier.amount_of_loan" type="TextField" label="Сумма кредита" size="15" readonly="true"/>
+        <variable name="in_dossier.credittype" type="DropDownChoice" label="Тип кредита">
+            <model><![CDATA[, model.bind("in_dossier.credittype"),
+                    getCredittypes(form).credittypes,
+                        new ChoiceRenderer("namescreen", "id")]]></model>
+        </variable>
+        <formMethods><![CDATA[
+        public org.bitbucket.creditauto.tarification.facade.CreditTypesResult getCredittypes(Form form) {
+            org.bitbucket.creditauto.tarification.facade.CreditTypesResult result = new org.bitbucket.creditauto.tarification.server.TarificationServerImpl().getCreditTypes(
+                new org.bitbucket.creditauto.tarification.facade.CreditTypeInputParam(
+                    inInstance.getIn_goods(), getCreditautoSession().getUserShop(), inInstance.getIn_dossier().getDown_payment(),
+                    inInstance.getIn_dossier().getTotal_price(), getCreditautoSession().getUser()));
+            if (result.isError) {
+                form.get("in_dossier.down_payment_line:in_dossier.down_payment_border:in_dossier.down_payment_id").error(result.messageKey);
+            }
+            return result;
+        }]]></formMethods>
+        <button name="back" type="Link">
+            setResponsePage(new CarDetailsInfoPage(inInstance));</button>
+        <button name="next" type="SubmitLink">
+            inInstance.getIn_dossier().setDuration(inInstance.getIn_dossier().getCredittype().getDurationmax());
+            saveWorkflowPath("ClientPersonalInfoPage");
+            org.bitbucket.creditauto.wicket.InstanceHelper.save(inInstance);
+            setResponsePage(new ClientPersonalInfoPage());</button>
+    </class>
+    <class name="CredittypeDetailInfoPage" extends="CredittypeSelectionPage" combines="CarDetailsInfoPage,CredittypeDetailInfoPage">
+        <pageTitle>Выбор типа кредита</pageTitle>
+        <sectionTitle>Параметры кредита</sectionTitle>
+        <variable readonly="true" name="in_dossier.credittype.name" type="TextField" label="Тип кредита"/>
+        <variable readonly="true" name="in_dossier.date_of_entering_dossier" type="TextField" label="Дата заведения сделки"/>
+        <variable readonly="true" name="in_dossier.date_of_end_of_the_deal" type="TextField" label="Дата окончания кредита"/>
+        <variable readonly="true" name="date_of_print_contract_sign" type="TextField" label="Дата подписания контракта клиентом"/>
+        <variable readonly="true" name="in_dossier.duration" type="TextField" label="Термин кредитования, мес."/>
+        <variable readonly="true" name="in_dossier.due_date" type="TextField" label="День погашения кредита"/>
+        <variable readonly="true" name="in_dossier.annuity_sum" type="TextField" label="Ежемесячный платеж, грн."/>
+        <variable readonly="true" name="in_dossier.total_monthly_payment" type="TextField" label="Ежемесячный платеж с учетом комиссий, грн."/>
+        <variable readonly="true" name="in_dossier.rate" type="TextField" label="Процентная ставка, %"/>
+        <variable readonly="true" name="in_dossier.opening_fee" type="TextField" label="Комиссия за открытие кредита, %"/>
+        <variable readonly="true" name="in_dossier.monthly_fee" type="TextField" label="Ежемесячная комиссия, %"/>
+        <variable readonly="true" name="in_dossier.monthly_fee_payment" type="TextField" label="Ежемесячная комиссия, грн."/>
+        <variable readonly="true" name="in_dossier.effective_rate" type="TextField" label="Реальная процентная ставка, %"/>
+        <variable readonly="true" name="in_dossier.total_interest" type="TextField" label="Сумма процентов/комиссий, грн."/>
+        <variable readonly="true" name="in_dossier.total_loan_cost" type="TextField" label="Сумма кредита с процентами/комиссиями, грн."/>
+        <button name="back" type="Link">
+            setResponsePage(new CredittypeSelectionPage());</button>
+        <button name="next" type="SubmitLink">
+            saveWorkflowPath("CredittypeDetailInfoPage");
+            setResponsePage(new CredittypeDetailInfoPage());</button>
+    </class>
+    <class name="ClientPersonalInfoPage" combines="CarDetailsInfoPage,CredittypeSelectionPage,ClientPersonalInfoPage">
+        <pageTitle>Персональные данные клиента</pageTitle>
+        <sectionTitle>Персональные данные</sectionTitle>
+        <variable name="clientPassport" type="PassportInfoPanel" >
+             <model><![CDATA[new PropertyModel(inInstance, "in_person")]]></model>
+             <afterInit>form.add(new org.bitbucket.creditauto.wicket.AgeMoreThan16Validator(
+(FormComponent) form.get("clientPassport:birthday_line:birthday_border:birthday_id"),
+(FormComponent) form.get("clientPassport:date_of_issue_tin_certificate_line:date_of_issue_tin_certificate_border:date_of_issue_tin_certificate_id")));
+                form.add(new org.bitbucket.creditauto.wicket.AgeMoreThan16Validator(
+(FormComponent) form.get("clientPassport:birthday_line:birthday_border:birthday_id"),
+(FormComponent) form.get("clientPassport:date_of_giving_tin_certificate_line:date_of_giving_tin_certificate_border:date_of_giving_tin_certificate_id")));
+                form.add(new org.bitbucket.creditauto.wicket.AgeMoreThan16Validator(
+(FormComponent) form.get("clientPassport:birthday_line:birthday_border:birthday_id"),
+(FormComponent) form.get("clientPassport:date_of_issuing_identity_doc_line:date_of_issuing_identity_doc_border:date_of_issuing_identity_doc_id")))
+             </afterInit>
+        </variable>
+        <button name="back" type="Link">
+            setResponsePage(new CredittypeSelectionPage());</button>
+        <button name="next" type="SubmitLink">
+            saveWorkflowPath("ClientMaritalStatusPage");
+            org.bitbucket.creditauto.wicket.InstanceHelper.save(inInstance);
+            setResponsePage(new ClientMaritalStatusPage());</button>
+    </class>
+    <class name="ClientMaritalStatusPage" extends="ClientPersonalInfoPage" combines="CarDetailsInfoPage,CredittypeSelectionPage,ClientMaritalStatusPage">
+        <pageTitle>Персональные данные клиента</pageTitle>
+        <sectionTitle>Семейное положение:</sectionTitle>
+        <variable name="clientMarital" type="MaritalStatusPanel" >
+             <model><![CDATA[new PropertyModel(inInstance, "in_person")]]></model>
+        </variable>
+        <button name="back" type="Link">
+            setResponsePage(new ClientPersonalInfoPage());</button>
+        <button name="next" type="SubmitLink"><![CDATA[
+            Dictionary_data maritasStatus = ((DropDownChoice<Dictionary_data>) form.get(
+                "clientMarital:dictionary_marital_status_line:dictionary_marital_status_border:dictionary_marital_status_id")).getConvertedInput();
+            if (maritasStatus != null && ("1".equals(maritasStatus.getDkey()) || "5".equals(maritasStatus.getDkey())) ) {
+                saveWorkflowPath("PartnerPersonalInfoPage");
+                org.bitbucket.creditauto.wicket.InstanceHelper.save(inInstance);
+                setResponsePage(new PartnerPersonalInfoPage());
+            } else {
+                In_person in_person_partner = new In_person();
+                in_person_partner.setDict_client_type("2");
+                in_person_partner.setIn_dossier(inInstance.getIn_dossier());
+                inInstance.setIn_person_partner(in_person_partner);
+                saveWorkflowPath("ClientAddressMailChoosePage");
+                org.bitbucket.creditauto.wicket.InstanceHelper.save(inInstance);
+                setResponsePage(new ClientAddressMailChoosePage());
+            }]]></button>
+    </class>
+    <class name="PartnerPersonalInfoPage" combines="CarDetailsInfoPage,CredittypeSelectionPage,ClientMaritalStatusPage,PartnerPersonalInfoPage">
+        <pageTitle>Персональные данные партнера</pageTitle>
+        <sectionTitle>Персональные данные</sectionTitle>
+        <variable name="partnerPassport" type="PassportInfoPanel" >
+             <model><![CDATA[new PropertyModel(inInstance, "in_person_partner")]]></model>
+             <afterInit>form.add(new org.bitbucket.creditauto.wicket.AgeMoreThan16Validator(
+(FormComponent) form.get("partnerPassport:birthday_line:birthday_border:birthday_id"),
+(FormComponent) form.get("partnerPassport:date_of_issue_tin_certificate_line:date_of_issue_tin_certificate_border:date_of_issue_tin_certificate_id")));
+                form.add(new org.bitbucket.creditauto.wicket.AgeMoreThan16Validator(
+(FormComponent) form.get("partnerPassport:birthday_line:birthday_border:birthday_id"),
+(FormComponent) form.get("partnerPassport:date_of_giving_tin_certificate_line:date_of_giving_tin_certificate_border:date_of_giving_tin_certificate_id")));
+                form.add(new org.bitbucket.creditauto.wicket.AgeMoreThan16Validator(
+(FormComponent) form.get("partnerPassport:birthday_line:birthday_border:birthday_id"),
+(FormComponent) form.get("partnerPassport:date_of_issuing_identity_doc_line:date_of_issuing_identity_doc_border:date_of_issuing_identity_doc_id")))
+             </afterInit>
+        </variable>
+        <button name="back" type="Link">
+            setResponsePage(new ClientMaritalStatusPage());</button>
+        <button name="next" type="SubmitLink">
+            saveWorkflowPath("ClientAddressMailChoosePage");
+            org.bitbucket.creditauto.wicket.InstanceHelper.save(inInstance);
+            setResponsePage(new ClientAddressMailChoosePage());</button>
+    </class>
+    <class name="ClientEmployerInfoPage" combines="CarDetailsInfoPage,CredittypeSelectionPage,ClientMaritalStatusPage,PartnerPersonalInfoPage,ClientAddressMailChoosePage,ClientEmployerInfoPage">
+        <pageTitle>Трудовая деятельность клиента</pageTitle>
+        <sectionTitle>Данные трудовой деятельности клиента</sectionTitle>
+        <variable name="in_person.dict_level_of_education" type="DropDownChoice" label="Уровень образования">
+            <model><![CDATA[,
+                    dictionary.getDictionary("levelOfEducation", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="in_person.dict_activity_sector" type="DropDownChoice" label="Сфера деятельности" style="width:350px;">
+            <model><![CDATA[,
+                    dictionary.getDictionary("activitySector", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="in_person.dict_type_of_activity_spd" type="DropDownChoice" label="Вид экономической деятельности работодателя" style="width:350px;">
+            <model><![CDATA[,
+                    dictionary.getDictionary("typeOfActivitySectorSpd", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="in_person.dict_profession" type="DropDownChoice" label="Профессия" style="width:350px;">
+            <model><![CDATA[,
+                    dictionary.getDictionary("profession", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="in_person.dict_employment_type" type="DropDownChoice" label="Тип трудового соглашения" style="width:350px;">
+            <model><![CDATA[,
+                    dictionary.getDictionary("employmentType", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="in_person.start_employment_date" type="TextField" label="Дата начала действия трудового соглашения, ммгггг" size="9">
+            <model>, new org.bitbucket.creditauto.wicket.DateModelWrapper("MMyyyy", model.bind("in_person.start_employment_date"))</model>
+        </variable>
+        <variable name="in_person.end_data_of_employment" type="TextField" label="Дата окончания действия трудового соглашения, ддммггг" size="9"/>
+        <variable name="in_person.employer" type="TextField" label="Работодатель" size="60"/>
+        <variable name="in_person.dict_empl_regprovince" type="DropDownChoice" label="Область">
+            <model><![CDATA[,
+                    dictionary.getDictionary("provinceList", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[
+                DropDownChoice regprovince = (DropDownChoice) form.get("in_person.dict_empl_regprovince_line:in_person.dict_empl_regprovince_border:in_person.dict_empl_regprovince_id");
+                DropDownChoice regregion = (DropDownChoice) form.get("in_person.dict_empl_regregion_line:in_person.dict_empl_regregion_border:in_person.dict_empl_regregion_id");
+                inInstance.getIn_person().setDict_empl_regregion(null);
+                regregion.setChoices(dictionary.getDictionary("regionList", ((Dictionary_data) regprovince.getConvertedInput()).getDkey(), IDictionary.LANGUAGE_RU, new Date()));
+                target.addComponent(regregion);]]>
+            </ajaxOnUpdate>
+        </variable>
+        <variable name="in_person.dict_empl_regregion" type="DropDownChoice" label="Район">
+            <model><![CDATA[,
+                    dictionary.getDictionary("regionList", inInstance.getIn_person().getDict_empl_regprovince(), IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[
+                DropDownChoice regprovince = (DropDownChoice) form.get("in_person.dict_empl_regprovince_line:in_person.dict_empl_regprovince_border:in_person.dict_empl_regprovince_id");
+                DropDownChoice regregion = (DropDownChoice) form.get("in_person.dict_empl_regregion_line:in_person.dict_empl_regregion_border:in_person.dict_empl_regregion_id");
+                DropDownChoice regcity = (DropDownChoice) form.get("in_person.dict_empl_regcity_line:in_person.dict_empl_regcity_border:in_person.dict_empl_regcity_id");
+                inInstance.getIn_person().setDict_empl_regcity(null);
+                regcity.setChoices(dictionary.getDictionary("cityList", ((Dictionary_data) regregion.getConvertedInput()).getDkey(),
+                    ((Dictionary_data) regprovince.getModelObject()).getDkey(), IDictionary.LANGUAGE_RU, new Date()));
+                target.addComponent(regcity);]]>
+            </ajaxOnUpdate>
+        </variable>
+        <variable name="in_person.dict_empl_regcity" type="DropDownChoice" label="Населенный пункт">
+            <model><![CDATA[,
+                    dictionary.getDictionary("cityList", inInstance.getIn_person().getDict_empl_regregion(),
+                        inInstance.getIn_person().getDict_empl_regprovince(), IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[
+                DropDownChoice regcity = (DropDownChoice) form.get("in_person.dict_empl_regcity_line:in_person.dict_empl_regcity_border:in_person.dict_empl_regcity_id");
+                TextField regpostindex = (TextField) form.get("in_person.empl_regpostindex_line:in_person.empl_regpostindex_border:in_person.empl_regpostindex_id");
+                inInstance.getIn_person().setEmpl_regpostindex(((Dictionary_data) regcity.getConvertedInput()).getExpkey3());
+                target.addComponent(regpostindex);]]>
+            </ajaxOnUpdate>
+        </variable>
+        <variable name="in_person.empl_regpostindex" type="TextField" label="Почтовый индекс" size="15" readonly="true"/>
+        <variable name="in_person.edrpou_of_employer" type="TextField" label="ЕДРПОУ работодателя клиента" size="15"/>
+        <variable name="in_person.empl_regstreet" type="TextField" label="Улица" size="40"/>
+        <variable name="in_person.empl_reghouse" type="TextField" label="Дом" size="15"/>
+        <variable name="in_person.empl_regflat" type="TextField" label="Квартира" size="15"/>
+        <variable name="in_person.empl_regadditionalinfo" type="TextField" label="Дополнительная информация (корпус, блок, другое)" size="15"/>
+        <variable name="in_person.phone_of_employer" type="TextField" label="Номер телефона работодателя (Код города + №)" size="11"/>
+        <variable name="in_person.second_phone_employer" type="TextField" label="Другой номер телефона работодателя (Код города + №)" size="11"/>
+        <variable name="in_person.dict_type_employer_by_size" type="DropDownChoice" label="Тип работодателя по величине штата" style="width:200px;">
+            <model><![CDATA[,
+                    dictionary.getDictionary("typeEmployerBySize", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="in_person.another_employers" type="TextArea" label="Другие предыдущие работодатели клиента"/>
+        <variable name="in_person.prev_employer_name" type="TextField" label="Предыдущее место работы" size="30"/>
+        <variable name="in_person.prev_employer_num_years_experience" type="TextField" label="Стаж на предыдущем месте работы, лет" size="5"/>
+        <variable name="in_person.number_of_years_of_experience" type="TextField" label="Полный трудовой стаж, полных лет" size="5"/>
+        <variable name="in_person.number_of_months_of_experience" type="DropDownChoice" label="и месяцев" style="width:80px;">
+            <model>, new org.bitbucket.creditauto.wicket.IntegerModelWrapper(model.bind("in_person.number_of_months_of_experience")),
+                java.util.Arrays.asList("00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11")</model>
+        </variable>
+        <button name="back" type="Link">
+            setResponsePage(new ClientAddressMailChoosePage());</button>
+        <button name="next" type="SubmitLink"><![CDATA[
+            String maritasStatus = inInstance.getIn_person().getDictionary_marital_status();
+            if (maritasStatus != null && ("1".equals(maritasStatus) || "5".equals(maritasStatus)) ) {
+            saveWorkflowPath("PartnerEmployerInfoPage");
+            org.bitbucket.creditauto.wicket.InstanceHelper.save(inInstance);
+            setResponsePage(new PartnerEmployerInfoPage());
+            } else {
+            saveWorkflowPath("ClientIncomeInfoPage");
+            org.bitbucket.creditauto.wicket.InstanceHelper.save(inInstance);
+            setResponsePage(new ClientIncomeInfoPage());
+            };]]></button>
+    </class>    
+    <class name="PartnerEmployerInfoPage" combines="CarDetailsInfoPage,CredittypeSelectionPage,ClientMaritalStatusPage,PartnerPersonalInfoPage,ClientAddressMailChoosePage,ClientEmployerInfoPage,PartnerEmployerInfoPage">
+        <pageTitle>Трудовая деятельность партнера</pageTitle>
+        <sectionTitle>Данные трудовой деятельности партнера</sectionTitle>
+        <variable name="in_person_partner.dict_level_of_education" type="DropDownChoice" label="Уровень образования">
+            <model><![CDATA[,
+                    dictionary.getDictionary("levelOfEducation", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="in_person_partner.dict_activity_sector" type="DropDownChoice" label="Сфера деятельности" style="width:350px;">
+            <model><![CDATA[,
+                    dictionary.getDictionary("activitySector", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="in_person_partner.dict_type_of_activity_spd" type="DropDownChoice" label="Вид экономической деятельности работодателя" style="width:350px;">
+            <model><![CDATA[,
+                    dictionary.getDictionary("typeOfActivitySectorSpd", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="in_person_partner.dict_profession" type="DropDownChoice" label="Профессия" style="width:350px;">
+            <model><![CDATA[,
+                    dictionary.getDictionary("profession", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="in_person_partner.dict_employment_type" type="DropDownChoice" label="Тип трудового соглашения" style="width:350px;">
+            <model><![CDATA[,
+                    dictionary.getDictionary("employmentType", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="in_person_partner.start_employment_date" type="TextField" label="Дата начала действия трудового соглашения, ммгггг" size="9">
+            <model>, new org.bitbucket.creditauto.wicket.DateModelWrapper("MMyyyy", model.bind("in_person_partner.start_employment_date"))</model>
+        </variable>
+        <variable name="in_person_partner.end_data_of_employment" type="TextField" label="Дата окончания действия трудового соглашения, ддммггг" size="9"/>
+        <variable name="in_person_partner.employer" type="TextField" label="Работодатель" size="60"/>
+        <variable name="in_person_partner.dict_empl_regprovince" type="DropDownChoice" label="Область">
+            <model><![CDATA[,
+                    dictionary.getDictionary("provinceList", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[
+                DropDownChoice regprovince = (DropDownChoice) form.get("in_person_partner.dict_empl_regprovince_line:in_person_partner.dict_empl_regprovince_border:in_person_partner.dict_empl_regprovince_id");
+                DropDownChoice regregion = (DropDownChoice) form.get("in_person_partner.dict_empl_regregion_line:in_person_partner.dict_empl_regregion_border:in_person_partner.dict_empl_regregion_id");
+                inInstance.getIn_person_partner().setDict_empl_regregion(null);
+                regregion.setChoices(dictionary.getDictionary("regionList", ((Dictionary_data) regprovince.getConvertedInput()).getDkey(), IDictionary.LANGUAGE_RU, new Date()));
+                target.addComponent(regregion);]]>
+            </ajaxOnUpdate>
+        </variable>
+        <variable name="in_person_partner.dict_empl_regregion" type="DropDownChoice" label="Район">
+            <model><![CDATA[,
+                    dictionary.getDictionary("regionList", inInstance.getIn_person().getDict_empl_regprovince(), IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[
+                DropDownChoice regprovince = (DropDownChoice) form.get("in_person_partner.dict_empl_regprovince_line:in_person_partner.dict_empl_regprovince_border:in_person_partner.dict_empl_regprovince_id");
+                DropDownChoice regregion = (DropDownChoice) form.get("in_person_partner.dict_empl_regregion_line:in_person_partner.dict_empl_regregion_border:in_person_partner.dict_empl_regregion_id");
+                DropDownChoice regcity = (DropDownChoice) form.get("in_person_partner.dict_empl_regcity_line:in_person_partner.dict_empl_regcity_border:in_person_partner.dict_empl_regcity_id");
+                inInstance.getIn_person_partner().setDict_empl_regcity(null);
+                regcity.setChoices(dictionary.getDictionary("cityList", ((Dictionary_data) regregion.getConvertedInput()).getDkey(),
+                    ((Dictionary_data) regprovince.getModelObject()).getDkey(), IDictionary.LANGUAGE_RU, new Date()));
+                target.addComponent(regcity);]]>
+            </ajaxOnUpdate>
+        </variable>
+        <variable name="in_person_partner.dict_empl_regcity" type="DropDownChoice" label="Населенный пункт">
+            <model><![CDATA[,
+                    dictionary.getDictionary("cityList", inInstance.getIn_person().getDict_empl_regregion(),
+                        inInstance.getIn_person().getDict_empl_regprovince(), IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[
+                DropDownChoice regcity = (DropDownChoice) form.get("in_person_partner.dict_empl_regcity_line:in_person_partner.dict_empl_regcity_border:in_person_partner.dict_empl_regcity_id");
+                TextField regpostindex = (TextField) form.get("in_person_partner.empl_regpostindex_line:in_person_partner.empl_regpostindex_border:in_person_partner.empl_regpostindex_id");
+                inInstance.getIn_person_partner().setEmpl_regpostindex(((Dictionary_data) regcity.getConvertedInput()).getExpkey3());
+                target.addComponent(regpostindex);]]>
+            </ajaxOnUpdate>
+        </variable>
+        <variable name="in_person_partner.empl_regpostindex" type="TextField" label="Почтовый индекс" size="15" readonly="true"/>
+        <variable name="in_person_partner.edrpou_of_employer" type="TextField" label="ЕДРПОУ работодателя партнера" size="15"/>
+        <variable name="in_person_partner.empl_regstreet" type="TextField" label="Улица" size="40"/>
+        <variable name="in_person_partner.empl_reghouse" type="TextField" label="Дом" size="15"/>
+        <variable name="in_person_partner.empl_regflat" type="TextField" label="Квартира" size="15"/>
+        <variable name="in_person_partner.empl_regadditionalinfo" type="TextField" label="Дополнительная информация (корпус, блок, другое)" size="15"/>
+        <variable name="in_person_partner.phone_of_employer" type="TextField" label="Номер телефона работодателя (Код города + №)" size="11"/>
+        <variable name="in_person_partner.second_phone_employer" type="TextField" label="Другой номер телефона работодателя (Код города + №)" size="11"/>
+        <variable name="in_person_partner.dict_type_employer_by_size" type="DropDownChoice" label="Тип работодателя по величине штата" style="width:200px;">
+            <model><![CDATA[,
+                    dictionary.getDictionary("typeEmployerBySize", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="in_person_partner.prev_employer_name" type="TextField" label="Предыдущее место работы" size="30"/>
+        <variable name="in_person_partner.prev_employer_num_years_experience" type="TextField" label="Стаж на предыдущем месте работы, лет" size="5"/>
+        <variable name="in_person_partner.number_of_years_of_experience" type="TextField" label="Полный трудовой стаж, полных лет" size="5"/>
+        <variable name="in_person_partner.number_of_months_of_experience" type="DropDownChoice" label="и месяцев" style="width:80px;">
+            <model>, new org.bitbucket.creditauto.wicket.IntegerModelWrapper(model.bind("in_person_partner.number_of_months_of_experience")),
+                java.util.Arrays.asList("00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11")</model>
+        </variable>
+        <button name="back" type="Link">
+            setResponsePage(new ClientEmployerInfoPage());</button>
+        <button name="next" type="SubmitLink">
+            saveWorkflowPath("ClientIncomeInfoPage");
+            org.bitbucket.creditauto.wicket.InstanceHelper.save(inInstance);
+            setResponsePage(new ClientIncomeInfoPage());</button>
+    </class>    
+    <class name="ClientIncomeInfoPage" combines="CarDetailsInfoPage,CredittypeSelectionPage,ClientMaritalStatusPage,PartnerPersonalInfoPage,ClientAddressMailChoosePage,ClientEmployerInfoPage,PartnerEmployerInfoPage,ClientIncomeInfoPage">
+        <pageTitle>Информация о доходах клиента</pageTitle>
+        <sectionTitle>Информация о доходах:</sectionTitle>
+        <variable name="in_person.dict_type_of_income_doc" type="DropDownChoice" label="Тип документа, подтверждающий доходы клиента">
+            <model><![CDATA[,
+                    dictionary.getDictionary("typeOfIncomeProofDoc", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="in_person.gross_income" type="TextField" label="Ежемесячный доход, заявленый клиентом, грн" size="11"/>
+        <variable name="in_person.other_income" type="TextField" label="Другие доходы клиента, грн" size="11"/>
+        <variable name="in_person.expenses_for_renting" type="TextField" label="Ежемесячный платеж по кредиту/аренде жилья, грн" size="11"/>
+        <variable name="in_person.expenses_for_car_loan" type="TextField" label="Ежемесячный платеж по кредиту за автомобиль, грн" size="11"/>
+        <variable name="in_person.expenses_for_other_loans" type="TextField" label="Ежемесячный платеж по другим кредитам, грн" size="11"/>
+        <variable name="in_person.expenses_for_alimony" type="TextField" label="Алименты, грн" size="11"/>
+        <button name="back" type="Link">
+            setResponsePage(new ClientEmployerInfoPage());</button>
+        <button name="next" type="SubmitLink">
+            saveWorkflowPath("ClientAssetPage");
+            // TODO: move to the constructor of the GoodSelectionPage class
+            inInstance.getIn_dossier().setExternaldistributor(getCreditautoSession().getUserShop());
+            org.bitbucket.creditauto.entity.Product product = new org.bitbucket.creditauto.entity.Product();
+            product.setId(1L);
+            product.setName("CAR");
+            inInstance.getIn_dossier().setProduct(product);
+            inInstance.getIn_dossier().setDate_of_entering_dossier(new Date());
+            inInstance.getIn_dossier().setUser_name_enters_dossier(getCreditautoSession().getUser().getName());
+            // end TODO
+            inInstance.getIn_dossier().setDict_status_of_dossier(InDossierStatus.INTERRUPTED.getKey());
+            org.bitbucket.creditauto.wicket.InstanceHelper.save(inInstance);
+            org.bitbucket.creditauto.wicket.InstanceHelper.load(inInstance.getIn_dossier().getId());
+            org.bitbucket.creditauto.wicket.InstanceHelper.save(inInstance);
+            setResponsePage(new ClientAssetPage());</button>
+    </class>
+    <class name="ClientAssetPage" combines="CarDetailsInfoPage,CredittypeSelectionPage,ClientMaritalStatusPage,PartnerPersonalInfoPage,ClientAddressMailChoosePage,ClientEmployerInfoPage,PartnerEmployerInfoPage,ClientIncomeInfoPage,ClientAssetPage">
+        <pageTitle>Собственность клиента</pageTitle>
+        <sectionTitle>Собственность клиента:</sectionTitle>
+        <variable visible="inInstance.getIn_assets().get(0).getVisible()" name="in_assets.0.dictionary_asset" type="DropDownChoice" label="Тип собственности">
+            <model><![CDATA[,
+                    dictionary.getDictionary("assetList", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable visible="inInstance.getIn_assets().get(0).getVisible()" name="in_assets.0.count_of" type="TextField" label="Количество" size="5"/>
+        <variable visible="inInstance.getIn_assets().get(0).getVisible()" name="in_assets.0.selected" type="AjaxCheckBox" label="удалить">
+           <onUpdate> </onUpdate>
+        </variable>
+        <variable visible="inInstance.getIn_assets().get(1).getVisible()" name="in_assets.1.dictionary_asset" type="DropDownChoice" label="Тип собственности">
+            <model><![CDATA[,
+                    dictionary.getDictionary("assetList", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable visible="inInstance.getIn_assets().get(1).getVisible()" name="in_assets.1.count_of" type="TextField" label="Количество" size="5"/>
+        <variable visible="inInstance.getIn_assets().get(1).getVisible()" name="in_assets.1.selected" type="AjaxCheckBox" label="удалить">
+           <onUpdate> </onUpdate>
+        </variable>
+        <variable visible="inInstance.getIn_assets().get(2).getVisible()" name="in_assets.2.dictionary_asset" type="DropDownChoice" label="Тип собственности">
+            <model><![CDATA[,
+                    dictionary.getDictionary("assetList", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable visible="inInstance.getIn_assets().get(2).getVisible()" name="in_assets.2.count_of" type="TextField" label="Количество" size="5"/>
+        <variable visible="inInstance.getIn_assets().get(2).getVisible()" name="in_assets.2.selected" type="AjaxCheckBox" label="удалить">
+           <onUpdate> </onUpdate>
+        </variable>
+        <variable visible="inInstance.getIn_assets().get(3).getVisible()" name="in_assets.3.dictionary_asset" type="DropDownChoice" label="Тип собственности">
+            <model><![CDATA[,
+                    dictionary.getDictionary("assetList", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable visible="inInstance.getIn_assets().get(3).getVisible()" name="in_assets.3.count_of" type="TextField" label="Количество" size="5"/>
+        <variable visible="inInstance.getIn_assets().get(3).getVisible()" name="in_assets.3.selected" type="AjaxCheckBox" label="удалить">
+            <onUpdate> </onUpdate>
+        </variable>
+        <button name="back" type="Link">
+            setResponsePage(new ClientIncomeInfoPage());</button>
+        <button name="new" type="Link" label="Новая запись"><![CDATA[
+            for (int index = 0; index < 4; index += 1) {
+                if (inInstance.getIn_assets().get(index).getVisible() == null
+                    || !inInstance.getIn_assets().get(index).getVisible()) {
+                    inInstance.getIn_assets().get(index).setVisible(true);
+                    form.get("in_assets." + index + ".dictionary_asset_line").setVisible(true);
+                    form.get("in_assets." + index + ".count_of_line").setVisible(true);
+                    form.get("in_assets." + index + ".selected_line").setVisible(true);
+                    break;
+                }
+            };
+            setVisibleForDeleteButton(form);
+            ]]></button>
+        <button name="delete" type="Link" label="Удалить указанные записи"><![CDATA[
+            for (int index = 0; index < 4; index += 1) {
+                if (inInstance.getIn_assets().get(index).getVisible() != null
+                    && inInstance.getIn_assets().get(index).getVisible()
+                    && inInstance.getIn_assets().get(index).getSelected() != null
+                    && inInstance.getIn_assets().get(index).getSelected()) {
+                    inInstance.getIn_assets().get(index).setVisible(false);
+                    form.get("in_assets." + index + ".dictionary_asset_line").setVisible(false);
+                    form.get("in_assets." + index + ".count_of_line").setVisible(false);
+                    form.get("in_assets." + index + ".selected_line").setVisible(false);
+                }
+            };
+            setVisibleForDeleteButton(form);
+            ]]>
+            <afterInit>
+            form.get("delete").setOutputMarkupPlaceholderTag(true);
+            setVisibleForDeleteButton(form)
+            </afterInit>
+        </button>
+        <button name="next" type="SubmitLink">
+            boolean guarantorPresent = inInstance.getIn_guarantor() != null &amp;&amp; inInstance.getIn_guarantor().getTin() != null &amp;&amp; !inInstance.getIn_guarantor().getTin().isEmpty();
+            saveWorkflowPath(guarantorPresent ? "GuaranteePartnerInfoPage" : "ClientContactInfoPage");
+            org.bitbucket.creditauto.wicket.InstanceHelper.save(inInstance);
+            setResponsePage(guarantorPresent ? new GuaranteePartnerInfoPage(inInstance) : new ClientContactInfoPage());
+        </button>
+        <formMethods><![CDATA[
+        public void setVisibleForDeleteButton(Form form) {
+            int countVisible = 0;
+            for (int index = 0; index < 4; index += 1) {
+                if (inInstance.getIn_assets().get(index).getVisible() != null
+                    && inInstance.getIn_assets().get(index).getVisible()) {
+                    countVisible += 1;
+                }
+            }
+            form.get("delete").setVisible(countVisible > 0);
+        }
+        ]]></formMethods>
+    </class>
+    <class name="ClientContactInfoPage" combines="CarDetailsInfoPage,CredittypeSelectionPage,ClientMaritalStatusPage,PartnerPersonalInfoPage,ClientAddressMailChoosePage,ClientEmployerInfoPage,PartnerEmployerInfoPage,ClientIncomeInfoPage,ClientAssetPage,GuaranteePartnerInfoPage,ClientContactInfoPage">
+        <pageTitle>Контактная информация клиента</pageTitle>
+        <sectionTitle>Контактная информация:</sectionTitle>
+        <variable name="in_person.phone" type="TextField" label="Номер телефона клиента (Код города + №)" size="11"/>
+        <variable name="in_person.mobile_phone" type="TextField" label="Номер мобильного телефона клиента" size="11"/>
+        <variable name="in_person.email" type="TextField" label="E-mail адрес" size="20"/>
+        <variable name="in_person.last_name_latin" type="TextField" label="Фамилия латинскими буквами" size="40">
+            <afterInit>if (inInstance.getIn_person().getLast_name_latin() == null) { inInstance.getIn_person().setLast_name_latin(org.bitbucket.creditauto.wicket.UkrainianToLatin.generateLat(inInstance.getIn_person().getLast_name())); }</afterInit>
+        </variable>
+        <variable name="in_person.first_name_latin" type="TextField" label="Имя латинскими буквами" size="40">
+            <afterInit>if (inInstance.getIn_person().getFirst_name_latin() == null) { inInstance.getIn_person().setFirst_name_latin(org.bitbucket.creditauto.wicket.UkrainianToLatin.generateLat(inInstance.getIn_person().getFirst_name())); }</afterInit>
+        </variable>
+        <variable name="in_goods.0.car_driving_license_ownership" type="DropDownChoice" label="Наличие водительского удостоверения">
+            <model><![CDATA[,
+                    dictionary.getDictionary("drivingLicense", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <button name="back" type="Link">
+            setResponsePage(inInstance.getIn_guarantor() != null &amp;&amp; inInstance.getIn_guarantor().getTin() != null &amp;&amp; !inInstance.getIn_guarantor().getTin().isEmpty() ? new GuaranteePartnerInfoPage() : new ClientAssetPage());</button>
+        <button name="addGuarantee" type="SubmitLink" label="Добавить информацию о поручителе">
+            <afterInit>form.get("addGuarantee").setVisible(false)</afterInit>
+        </button>
+        <button name="next" type="SubmitLink">
+            saveWorkflowPath("ThirdPersonInfoPage");
+            setResponsePage(new ThirdPersonInfoPage());</button>
+    </class>
+    <class name="ThirdPersonInfoPage" extends="ClientContactInfoPage" combines="CarDetailsInfoPage,CredittypeSelectionPage,ClientMaritalStatusPage,PartnerPersonalInfoPage,ClientAddressMailChoosePage,ClientEmployerInfoPage,PartnerEmployerInfoPage,ClientIncomeInfoPage,ClientAssetPage,ThirdPersonInfoPage">
+        <pageTitle>Контактная информация клиента</pageTitle>
+        <sectionTitle>Информация о третьем лице:</sectionTitle>
+        <variable name="in_third_person.last_name" type="TextField" label="Фамилия третьего лица" size="40"/>
+        <variable name="in_third_person.first_name" type="TextField" label="Имя третьего лица" size="40"/>
+        <variable name="in_third_person.patronymic_name" type="TextField" label="Отчество третьего лица" size="40"/>
+        <variable name="in_third_person.phone" type="TextField" label="Номер телефона третьего лица" size="11"/>
+        <variable name="in_third_person.dict_type_of_relation_client" type="DropDownChoice" label="Кем приходится третье лицо">
+            <model><![CDATA[,
+                    dictionary.getDictionary("relationThirdPartyList", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <button name="back" type="Link">
+            setResponsePage(new ClientContactInfoPage());</button>
+        <button name="addGuarantee" type="SubmitLink" label="Добавить информацию о поручителе"><![CDATA[
+              saveWorkflowPath("GuaranteePartnerInfoPage");
+              setResponsePage(new GuaranteePartnerInfoPage());
+        ]]></button>
+        <button name="next" type="SubmitLink">
+            saveWorkflowPath("PrintApplicationFormPage");
+            org.bitbucket.creditauto.wicket.InstanceHelper.save(inInstance);
+            setResponsePage(new PrintApplicationFormPage());</button>
+    </class>
+    <class name="PrintApplicationFormPage" combines="CarDetailsInfoPage,CredittypeSelectionPage,ClientMaritalStatusPage,PartnerPersonalInfoPage,ClientAddressMailChoosePage,ClientEmployerInfoPage,PartnerEmployerInfoPage,ClientIncomeInfoPage,ClientAssetPage,ThirdPersonInfoPage,GuaranteePartnerInfoPage,PrintApplicationFormPage">
+        <pageTitle>Анкета-заявление</pageTitle>
+        <sectionTitle>Печать анкеты-заявления:</sectionTitle>
+        <variable name="print-application-form" type="Link" label="Сохранить анкету-заявление">
+                <onSubmit><![CDATA[
+        try {
+            byte[] applicatinData = new org.bitbucket.creditauto.printer.server.PrinterServerImpl().printDocumentFromInstance(inInstance,
+                org.bitbucket.creditauto.printer.facade.PrinterDocumentType.APPLICATION_FORM);
+            getRequestCycle().setRequestTarget(
+                new org.bitbucket.creditauto.wicket.ByteDataRequestTarget("application/pdf", applicatinData,
+                    "application-form-" + inInstance.getIn_dossier().getId() + ".pdf"));
+        } catch (Exception ex) {
+            LOG.error(this, ex, ex.getMessage());
+        };]]></onSubmit>
+        </variable>
+        <variable name="in_dossier.is_application_form_signed" type="AjaxCheckBox" label="Клиент подписал Анкету-Заявление">
+            <onUpdate> </onUpdate>
+            <afterInit>inInstance.getIn_dossier().setIs_application_form_signed(false)</afterInit>
+        </variable>
+        <button name="back" type="Link">
+            setResponsePage(new ThirdPersonInfoPage());</button>
+        <button name="next" type="SubmitLink">
+            saveWorkflowPath("ClientDocumentStorePage");
+            setResponsePage(new ClientDocumentStorePage());</button>
+    </class>
+    <class name="ClientDocumentStorePage" combines="CarDetailsInfoPage,CredittypeSelectionPage,ClientMaritalStatusPage,PartnerPersonalInfoPage,ClientAddressMailChoosePage,ClientEmployerInfoPage,PartnerEmployerInfoPage,ClientIncomeInfoPage,ClientAssetPage,ThirdPersonInfoPage,GuaranteePartnerInfoPage,PrintApplicationFormPage,ClientDocumentStorePage">
+        <pageTitle>Требуемые Скан-копии документов</pageTitle>
+        <sectionTitle>Скан-копии документов:</sectionTitle>
+        <variable name="in_document_stores.0.data"  type="FileUploadField" label="Паспорт клиента" size="10">
+            <afterInit>form.add(new org.bitbucket.creditauto.wicket.InDocumentStoreValidator(ddc1, inInstance.getIn_document_stores().get(0)))</afterInit>
+        </variable>
+        <variable visible="Boolean.FALSE" name="preview_doc_0_link" type="AjaxLink" label="Предварительный просмотр">
+                <onSubmit><![CDATA[setResponsePage(new org.bitbucket.creditauto.wicket.PreviewPage("Паспорт клиента", inInstance.getIn_document_stores().get(0), ClientDocumentStorePage.this)); ]]>
+        </onSubmit>
+        </variable>
+        <variable name="in_document_stores.0.is_not_required" type="AjaxCheckBox" label="Скан-копия загружена альтернативным путем">
+           <onUpdate> </onUpdate>
+        </variable>
+        <variable name="in_document_stores.1.data"  type="FileUploadField" label="ИНН клиента" size="10">
+            <afterInit>form.add(new org.bitbucket.creditauto.wicket.InDocumentStoreValidator(ddc4, inInstance.getIn_document_stores().get(1)))</afterInit>
+        </variable>
+        <variable visible="Boolean.FALSE" name="preview_doc_1_link" type="AjaxLink" label="Предварительный просмотр">
+                <onSubmit><![CDATA[setResponsePage(new org.bitbucket.creditauto.wicket.PreviewPage("ИНН клиента", inInstance.getIn_document_stores().get(1), ClientDocumentStorePage.this)); ]]>
+        </onSubmit>
+        </variable>
+        <variable name="in_document_stores.1.is_not_required" type="AjaxCheckBox" label="Скан-копия загружена альтернативным путем">
+           <onUpdate> </onUpdate>
+        </variable>
+        <variable name="in_document_stores.2.data"  type="FileUploadField" label="Фото клиента" size="10">
+            <afterInit>form.add(new org.bitbucket.creditauto.wicket.InDocumentStoreValidator(ddc7, inInstance.getIn_document_stores().get(2)))</afterInit>
+        </variable>
+        <variable visible="Boolean.FALSE" name="preview_doc_2_link" type="AjaxLink" label="Предварительный просмотр">
+                <onSubmit><![CDATA[setResponsePage(new org.bitbucket.creditauto.wicket.PreviewPage("Фото клиента", inInstance.getIn_document_stores().get(2), ClientDocumentStorePage.this)); ]]>
+        </onSubmit>
+        </variable>
+        <variable name="in_document_stores.2.is_not_required" type="AjaxCheckBox" label="Скан-копия загружена альтернативным путем">
+           <onUpdate> </onUpdate>
+        </variable>
+        <variable name="in_dossier.preview_documents" type="AjaxCheckBox" label="Предварительный просмотр документов">
+           <onUpdate> </onUpdate>
+            <afterInit>inInstance.getIn_dossier().setPreview_documents(true)</afterInit>
+        </variable>
+        <button name="back" type="Link">
+            setResponsePage(new PrintApplicationFormPage());</button>
+        <button name="next" type="SubmitLink">
+            if (inInstance.getIn_dossier().getPreview_documents()) {
+                if (!inInstance.getIn_document_stores().get(0).getIs_not_required()) {
+                form.get("preview_doc_0_link_line").setVisible(true);
+                }
+                if (!inInstance.getIn_document_stores().get(1).getIs_not_required()) {
+                form.get("preview_doc_1_link_line").setVisible(true);
+                }
+                if (!inInstance.getIn_document_stores().get(2).getIs_not_required()) {
+                form.get("preview_doc_2_link_line").setVisible(true);
+                }
+            } else {
+            saveWorkflowPath("ConfirmSendRequestPage");
+            // TODO: change to the new DossierAnalyserServerImpl().startAnalyse()
+            inInstance.getIn_dossier().setDict_status_of_dossier(InDossierStatus.TOBE_STUDY.getKey());
+            org.bitbucket.creditauto.wicket.InstanceHelper.save(inInstance);
+            setResponsePage(new ConfirmSendRequestPage()); }</button>
+    </class>
+    <class name="ConfirmSendRequestPage">
+        <pageTitle></pageTitle>
+        <sectionTitle></sectionTitle>
+        <message>Ваш запрос отправлен на обработку</message>
+        <button name="back" type="Link">
+            saveWorkflowPath("ClientDocumentStorePage");
+            setResponsePage(new ClientDocumentStorePage());</button>
+    </class>
+    <class name="ComplainPage">
+        <pageTitle>Сообщить о проблеме</pageTitle>
+        <sectionTitle>Проблема, которая возникла во время работы</sectionTitle>
+        <formInit><![CDATA[
+        class Trouble {
+            public String troubleType;
+            public String comment;
+        }
+        private Trouble trouble = new Trouble();
+        ]]></formInit>
+        <compoundPropertyModel>trouble</compoundPropertyModel>
+        <variable name="troubleType" type="DropDownChoice" label="Тип проблемы" style="width:100%;">
+            <model><![CDATA[,
+                    dictionary.getDictionary("troubleType", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="comment" type="TextArea" label="Комментарий проблемы" style="width:100%"/>
+        <button name="next" type="SubmitLink">
+            setResponsePage(new ConfirmTroublePage());</button>
+    </class>
+    <class name="ConfirmTroublePage">
+        <pageTitle></pageTitle>
+        <sectionTitle></sectionTitle>
+        <message>Ваш запрос отправлен на обработку</message>
+        <button name="back" type="Link">
+            setResponsePage(new ComplainPage());</button>
+    </class>
+    <class name="PassportInfoPanel" extends="Panel">
+        <pageTitle>Личная информация</pageTitle>
+        <sectionTitle>Личная информация</sectionTitle>
+        <compoundPropertyModel>In_person in_person</compoundPropertyModel>
+        <constructor><parameters>String id, IModel model</parameters><body></body></constructor>
+        <variable name="dictionary_gender" type="DropDownChoice" label="Пол">
+            <model><![CDATA[,
+                    dictionary.getDictionary("gender", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="last_name_ru" type="TextField" label="Фамилия" size="40"/>
+        <variable name="first_name_ru" type="TextField" label="Имя" size="40"/>
+        <variable name="patronymic_name_ru" type="TextField" label="Отчество" size="40"/>
+        <variable name="is_client_changed_surname" type="AjaxCheckBox" label="Изменялась ли фамилия">
+           <onUpdate><![CDATA[
+                       form.get("prev_last_name_line").setVisible(((Boolean) this.getConvertedInput()));
+                       target.addComponent((LineBorder) form.get("prev_last_name_line"));
+]]>
+           </onUpdate>
+        </variable>
+        <variable name="prev_last_name" type="TextField" label="Предыдущая фамилия" size="40">
+           <afterInit>form.get("prev_last_name_line").setOutputMarkupPlaceholderTag(true)</afterInit>
+           <afterInit>form.get("prev_last_name_line").setVisible(modelObject.getIs_client_changed_surname() == null ? false : modelObject.getIs_client_changed_surname())</afterInit>
+        </variable>
+        <variable name="last_name" type="TextField" label="Фамилия на украинском языке" size="40"/>
+        <variable name="first_name" type="TextField" label="Имя на украинском языке" size="40"/>
+        <variable name="patronymic_name" type="TextField" label="Отчество на украинском языке" size="40"/>
+        <variable name="birthday" type="TextField" label="Дата рождения, ддммгггг" size="9"/>
+        <variable name="birth_place" type="TextField" label="Место рождения" size="60"/>
+        <variable name="tin" type="TextField" label="ИНН" size="11"/>
+        <variable name="date_of_issue_tin_certificate" type="TextField" label="Дата регистрации ИНН, ддммгггг" size="9"/> 
+        <variable name="date_of_giving_tin_certificate" type="TextField" label="Дата выдачи ИНН, ддммгггг" size="9"/>
+        <variable name="issuer_of_tin" type="TextField" label="Кем выдан ИНН" size="60"/>
+        <variable name="identity_document_number" type="TextField" label="Номер паспорта, 2 буквы и 6 цифр без пробела" size="9"/>
+        <variable name="date_of_issuing_identity_doc" type="TextField" label="Дата выдачи паспорта, ддммгггг" size="9"/>
+        <variable name="issuer_of_identity_document" type="TextField" label="Кем выдан паспорт" size="60"/>
+    </class>
+    <class name="MaritalStatusPanel" extends="Panel">
+        <sectionTitle>Семейное положение:</sectionTitle>
+        <compoundPropertyModel>In_person in_person</compoundPropertyModel>
+        <variable name="dictionary_marital_status" type="DropDownChoice" label="Семейное положение">
+            <model><![CDATA[,
+                    dictionary.getDictionary("maritalStatus", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="number_of_children" type="TextField" label="Количество человек на содержании, в том числе несовершеннолетние дети" size="7"/>
+        <variable name="dictionary_habitation_situation" type="DropDownChoice" label="Ситуация с жильем и местом жительства">
+            <model><![CDATA[,
+                    dictionary.getDictionary("habitationSituation", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="habit_situation_start_date" type="TextField" label="С какого времени ситуация с жильем, гггг" size="9">
+            <model>, new org.bitbucket.creditauto.wicket.DateModelWrapper("yyyy", model.bind("habit_situation_start_date"))</model>
+        </variable>
+    </class>
+    <class name="EmployerAddressPanel" extends="Panel">
+        <sectionTitle>Семейное положение:</sectionTitle>
+        <compoundPropertyModel>In_person in_person</compoundPropertyModel>
+        <variable name="dict_empl_regprovince" type="DropDownChoice" label="Область">
+            <model><![CDATA[,
+                    dictionary.getDictionary("provinceList", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[
+                DropDownChoice regprovince = (DropDownChoice) form.get("dict_empl_regprovince_line:dict_empl_regprovince_border:dict_empl_regprovince_id");
+                DropDownChoice regregion = (DropDownChoice) form.get("dict_empl_regregion_line:dict_empl_regregion_border:dict_empl_regregion_id");
+                modelObject.setDict_empl_regregion(null);
+                regregion.setChoices(dictionary.getDictionary("regionList", ((Dictionary_data) regprovince.getConvertedInput()).getDkey(), IDictionary.LANGUAGE_RU, new Date()));
+                target.addComponent(regregion);]]>
+            </ajaxOnUpdate>
+        </variable>
+        <variable name="dict_empl_regregion" type="DropDownChoice" label="Район">
+            <model><![CDATA[,
+                    dictionary.getDictionary("regionList", modelObject.getDict_empl_regprovince(), IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[
+                DropDownChoice regprovince = (DropDownChoice) form.get("dict_empl_regprovince_line:dict_empl_regprovince_border:dict_empl_regprovince_id");
+                DropDownChoice regregion = (DropDownChoice) form.get("dict_empl_regregion_line:dict_empl_regregion_border:dict_empl_regregion_id");
+                DropDownChoice regcity = (DropDownChoice) form.get("dict_empl_regcity_line:dict_empl_regcity_border:dict_empl_regcity_id");
+                modelObject.setDict_empl_regcity(null);
+                regcity.setChoices(dictionary.getDictionary("cityList", ((Dictionary_data) regregion.getConvertedInput()).getDkey(),
+                    ((Dictionary_data) regprovince.getModelObject()).getDkey(), IDictionary.LANGUAGE_RU, new Date()));
+                target.addComponent(regcity);]]>
+            </ajaxOnUpdate>
+        </variable>
+        <variable name="dict_empl_regcity" type="DropDownChoice" label="Населенный пункт">
+            <model><![CDATA[,
+                    dictionary.getDictionary("cityList", modelObject.getDict_empl_regregion(),
+                        modelObject.getDict_empl_regprovince(), IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[
+                DropDownChoice regcity = (DropDownChoice) form.get("dict_empl_regcity_line:dict_empl_regcity_border:dict_empl_regcity_id");
+                TextField regpostindex = (TextField) form.get("empl_regpostindex_line:empl_regpostindex_border:empl_regpostindex_id");
+                modelObject.setEmpl_regpostindex(((Dictionary_data) regcity.getConvertedInput()).getExpkey3());
+                target.addComponent(regpostindex);]]>
+            </ajaxOnUpdate>
+        </variable>
+        <variable name="empl_regpostindex" type="TextField" label="Почтовый индекс" size="15" readonly="true"/>
+        <variable name="empl_regstreet" type="TextField" label="Улица" size="40"/>
+        <variable name="empl_reghouse" type="TextField" label="Дом" size="15"/>
+        <variable name="empl_regflat" type="TextField" label="Квартира" size="15"/>
+        <variable name="empl_regadditionalinfo" type="TextField" label="Дополнительная информация (корпус, блок, другое)" size="15"/>
+        <variable name="phone_of_employer" type="TextField" label="Номер телефона работодателя (Код города + №)" size="11"/>
+        <variable name="second_phone_employer" type="TextField" label="Другой номер телефона работодателя (Код города + №)" size="11"/>
+    </class>
+    <class name="ClientAddInfoPanel" extends="Panel">
+        <sectionTitle>Семейное положение:</sectionTitle>
+        <compoundPropertyModel>In_person in_person</compoundPropertyModel>
+        
+        <variable name="phone" type="TextField" label="Номер телефона" size="7"/>
+        <variable name="mobile_phone" type="TextField" label="Номер мобильного телефона" size="7"/>
+        <variable name="email" type="TextField" label="Электронная почта" size="7"/>
+        <variable name="dict_relation" type="DropDownChoice" label="Кем является для клиента">
+            <model><![CDATA[,
+                    dictionary.getDictionary("relationType", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+    </class>
+    <class name="NotesPanel" extends="Panel">
+        <sectionTitle>Заметки для блокнота:</sectionTitle>
+        <compoundPropertyModel>In_dossier in_dossier</compoundPropertyModel>
+        <pageInit><![CDATA[
+        private String text;
+        public String getText() {
+            return this.text;
+        }
+         public void setText(String text) {
+            this.text = text;
+        }
+        public In_dossier getIn_dossier() {
+            return this.modelObject;
+        }
+         ]]></pageInit>
+          <constructor><parameters></parameters>
+          <body></body></constructor>
+        <variable name="text" type="TextArea" label="Заметка для блокнота" size="15" >
+         <model>, new PropertyModel(this, "text")</model>
+         <afterInit>form.get("text_line").setOutputMarkupPlaceholderTag(true)</afterInit>
+        </variable>
+        <variable name="addNote" type="AjaxSubmitLink" label="Добавить заметку" defaultFormProcess="false">
+                <onSubmit><![CDATA[
+                In_bloknot bloknot = new In_bloknot();
+                bloknot.setEnter_date(new Date());
+                bloknot.setIn_dossier(modelObject);
+                bloknot.setBloknot_type("Хостес");
+                bloknot.setUser_login(CreditautoSession.get().getUser().getLogin());
+                bloknot.setText(((FormComponent)form.get("guarantorNotesPanel:text_line:text_border:text_id")).getInput());
+                if (modelObject.getIn_bloknots() == null) {
+                 modelObject.setIn_bloknots(new ArrayList<In_bloknot>());
+                }
+                modelObject.getIn_bloknots().add(0, bloknot);
+                target.addComponent(form.get("guarantorNotesPanel:listNotes_container"));
+                setText(null);
+                target.addComponent(form.get("guarantorNotesPanel:text_line"));]]>
+              </onSubmit>
+        </variable>
+        <repeater name="listNotes" type="ListView">
+           <header name="henter_date" label="Дата" size="60" />
+           <header name="huser_login" label="Логин пользователя" size="140" />
+           <header name="hbloknot_type" label="Тип записи" size="80" />
+           <header name="htext" label="Текст" size="200" />
+           <header name="hact" label="Действие" size="40" />
+           <model><![CDATA[modelObject.getIn_bloknots()]]></model>
+           <modelClass><![CDATA[In_bloknot]]></modelClass>
+           <data name="enter_date" label="Дата" size="60" />
+           <data name="user_login" label="Логин пользователя" size="140" />
+           <data name="bloknot_type" label="Тип записи" size="80" />
+           <data name="text" label="Текст" size="200" />
+           <data name="id" label="Действие" size="40" type="links" >
+              <links>
+                 <link name="droplink" title="Удалить" size="40" type="AjaxLink" cssclass="droplink">
+                  <onClick><![CDATA[
+                getIn_dossier().getIn_bloknots().remove(modelObject);
+                target.addComponent(form.get("listNotes_container"));]]></onClick>
+               </link>
+              </links>
+           </data>
+        </repeater>
+    </class>
+    <class name="PartnerPassportPanel" extends="Panel">
+        <pageTitle>Партнер поручителя кредита</pageTitle>
+        <sectionTitle>Партнер поручителя кредита</sectionTitle>
+        <compoundPropertyModel>In_person in_person</compoundPropertyModel>
+        <constructor><parameters>String id, IModel model</parameters><body></body></constructor>
+        
+        <variable name="last_name_ru" type="TextField" label="Фамилия" size="40"/>
+        <variable name="first_name_ru" type="TextField" label="Имя" size="40"/>
+        <variable name="patronymic_name_ru" type="TextField" label="Отчество" size="40"/>
+        <variable name="birthday" type="TextField" label="Дата рождения, ддммгггг" size="9"/>
+        <variable name="has_no_tin" type="AjaxCheckBox" label="У партнера поручителя нет ИНН" size="60" >
+           <onSelectionChanged />
+           <onUpdate><![CDATA[
+                       modelObject.setTin(((Boolean) this.getConvertedInput()) != null && ((Boolean) this.getConvertedInput()) ? "0000000000" : "");
+                       form.get("tin_line").setVisible(!((Boolean) this.getConvertedInput()));
+                       form.get("date_of_issue_tin_certificate_line").setVisible(!((Boolean) this.getConvertedInput()));
+                       form.get("date_of_giving_tin_certificate_line").setVisible(!((Boolean) this.getConvertedInput()));
+                       form.get("issuer_of_tin_line").setVisible(!((Boolean) this.getConvertedInput()));
+                       target.addComponent((LineBorder) form.get("tin_line"));
+                       target.addComponent((LineBorder) form.get("date_of_issue_tin_certificate_line"));
+                       target.addComponent((LineBorder) form.get("date_of_giving_tin_certificate_line"));
+                       target.addComponent((LineBorder) form.get("issuer_of_tin_line"));]]>
+           </onUpdate>
+        </variable>
+        <variable name="tin" type="TextField" label="ИНН" size="11">
+           <afterInit>form.get("tin_line").setOutputMarkupPlaceholderTag(true)</afterInit>
+           <afterInit>form.get("tin_line").setVisible(modelObject.getHas_no_tin() == null ? true : !modelObject.getHas_no_tin())</afterInit>
+        </variable>
+        <variable name="date_of_issue_tin_certificate" type="TextField" label="Дата регистрации ИНН, ддммгггг" size="9">
+           <afterInit>form.get("date_of_issue_tin_certificate_line").setOutputMarkupPlaceholderTag(true)</afterInit>
+           <afterInit>form.get("date_of_issue_tin_certificate_line").setVisible(modelObject.getHas_no_tin() == null ? true : !modelObject.getHas_no_tin())</afterInit>
+        </variable>
+        <variable name="date_of_giving_tin_certificate" type="TextField" label="Дата выдачи ИНН, ддммгггг" size="9">
+           <afterInit>form.get("date_of_giving_tin_certificate_line").setOutputMarkupPlaceholderTag(true)</afterInit>
+           <afterInit>form.get("date_of_giving_tin_certificate_line").setVisible(modelObject.getHas_no_tin() == null ? true : !modelObject.getHas_no_tin())</afterInit>
+        </variable>
+        <variable name="issuer_of_tin" type="TextField" label="Кем выдан ИНН" size="60">
+           <afterInit>form.get("issuer_of_tin_line").setOutputMarkupPlaceholderTag(true)</afterInit>
+           <afterInit>form.get("issuer_of_tin_line").setVisible(modelObject.getHas_no_tin() == null ? true : !modelObject.getHas_no_tin())</afterInit>
+        </variable>
+        <variable name="citizenship" type="DropDownChoice" label="Гражданство">
+            <model><![CDATA[,
+                    dictionary.getDictionary("citizenship", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="dict_identity_document_type" type="DropDownChoice" label="Тип документа">
+            <model><![CDATA[,
+                    dictionary.getDictionary("docTypes", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable name="identity_document_number" type="TextField" label="Номер документа" size="9"/>
+        <variable name="date_of_issuing_identity_doc" type="TextField" label="Дата выдачи документа, ддммгггг" size="9"/>
+        <variable name="issuer_of_identity_document" type="TextField" label="Кем выдан документа" size="60"/>
+        <variable name="phone" type="TextField" label="Номер телефона партнера" size="60"/>
+        <variable name="mobile_phone" type="TextField" label="Мобильный телефон" size="60"/>
+    </class>
+</classes>

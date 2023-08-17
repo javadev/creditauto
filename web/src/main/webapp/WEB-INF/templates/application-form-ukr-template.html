@@ -1,0 +1,583 @@
+#macro( regaddr $in_person )
+$in_person.regpostindex #dictionary("provinceList", $in_person.dictionary_regprovince) обл.,
+ #dictionaryExp("regionList", $in_person.dictionary_regregion, $in_person.dictionary_regprovince) район,
+ м. #dictionaryExp2("cityList", $in_person.dictionary_regcity, $in_person.dictionary_regregion, $in_person.dictionary_regprovince), $in_person.regstreet $in_person.reghouse#if($in_person.regflat), $in_person.regflat#end#if($in_person.regadditionalinfo), $in_person.regadditionalinfo#end
+#end
+#macro( mailaddr $in_person )
+$in_person.mailpostindex #dictionary("provinceList", $in_person.dictionary_mailprovince) обл.,
+ #dictionaryExp("regionList", $in_person.dictionary_mailregion, $in_person.dictionary_mailprovince) район,
+ м. #dictionaryExp2("cityList", $in_person.dictionary_mailcity, $in_person.dictionary_mailregion, $in_person.dictionary_mailprovince), $in_person.mailstreet $in_person.mailhouse#if($in_person.mailflat), $in_person.mailflat#end#if($in_person.mailadditionalinfo), $in_person.mailadditionalinfo#end
+#end
+#macro( empladdr $in_person )
+$in_person.empl_regpostindex #dictionary("provinceList", $in_person.dict_empl_regprovince) обл.,
+ #dictionaryExp("regionList", $in_person.dict_empl_regregion, $in_person.dict_empl_regprovince) район,
+ м. #dictionaryExp2("cityList", $in_person.dict_empl_regcity, $in_person.dict_empl_regregion, $in_person.dict_empl_regprovince), $in_person.empl_regstreet $in_person.empl_reghouse#if($in_person.empl_regflat), $in_person.mailflat#end#if($in_person.empl_regadditionalinfo), $in_person.empl_regadditionalinfo#end
+#end
+<?xml version="1.0" encoding="utf8"?>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta name="Generator" content="Microsoft Word 14 (filtered)" /><style><![CDATA[
+<!--
+ /* Font Definitions */
+ @font-face
+ {font-family:Calibri;
+ panose-1:2 15 5 2 2 2 4 3 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+ {margin-top:0cm;
+ margin-right:0cm;
+ margin-bottom:10.0pt;
+ margin-left:0cm;
+ line-height:115%;
+ font-size:11.0pt;
+ font-family:"Calibri","sans-serif";}
+@page WordSection1
+ {size:595.3pt 841.9pt;
+ margin:36.0pt 36.0pt 36.0pt 36.0pt;}
+div.WordSection1
+ {page:WordSection1;}
+@page WordSection2
+ {size:595.3pt 841.9pt;
+ margin:36.0pt 36.0pt 36.0pt 36.0pt;}
+div.WordSection2
+ {page:WordSection2;}
+@page WordSection3
+ {size:595.3pt 841.9pt;
+ margin:36.0pt 36.0pt 36.0pt 36.0pt;}
+div.WordSection3
+ {page:WordSection3;}
+div.footer {
+  display: block;
+  position: running(footer);}
+@page { @top-center { content: element(header) }}
+@page { @bottom-center { content: element(footer) }}
+-->
+]]></style></head><body lang="UK">
+
+
+
+
+
+
+
+
+
+
+<span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"><br clear="all" style="page-break-before:auto" />
+</span>
+
+
+ 
+  
+  
+  
+ 
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse"><tbody><tr><td width="237" valign="top" style="width:178.0pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"><img width="53" height="53" src="application-form-ukr.files/image001.jpg" /></span></p>
+  </td><td width="237" valign="top" style="width:178.05pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:center;line-height:normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
+  </td><td width="237" valign="top" style="width:178.05pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:center;line-height:normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
+  </td></tr></tbody></table>
+
+<p class="MsoNormal" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">АНКЕТА – ЗАЯВА КЛІЄНТА</span></p>
+
+<p class="MsoNormal" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">на надання споживчого
+кредиту</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Я,
+<b>${in_person_fio}</b> прошу АТ «Банк» надати мені споживчий кредит на таких
+умовах:</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Строк
+користування кредитом <b>${in_dossier.duration}</b> міс. Сума кредиту <b>#moneyUAH(${in_dossier.getAmount_of_loan()})
+(#moneyToStrUAH(${in_dossier.amount_of_loan}))</b>. Перший внесок <b>#moneyUAH(${in_dossier.down_payment})</b></span><b><span lang="EN-US" style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"></span></b><b><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> (#moneyToStrUAH(${in_dossier.down_payment}))</span></b><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">.
+Валюта кредиту <b>гривня</b>.</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Також,
+прошу АТ «Банк» надати мені додатковий кредит - Кредитну картку з наступними
+умовами (на умовах Кредитного договору):</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Максимальна
+сума ліміту додаткового кредиту <b>50 000, 00</b> гривень.</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Максимальна
+процентна ставка за додатковим кредитом <b>40%</b> річних від фактично
+використаної суми додаткового кредиту.</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Строк
+дії ліміту кредитування <b>24</b> місяці (з можливістю подовження на новий
+строк за рішенням Банку).</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><i><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Цим
+підписом я відмовляюсь від можливості отримання додаткового кредиту
+_____________ (Підпис, ${in_person_fio}</span></i><i><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">)</span></i></p>
+
+<p class="MsoNormal" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal;background:#92D050;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Особисті відомості про
+клієнта</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Прізвище
+(латинськими буквами): <b>${in_person.last_name_latin}</b> Ім&apos;я (латинськими буквами): <b>${in_person.first_name_latin}</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Прізвище,
+ім’я, по-батькові (російською мовою): <b>${in_person_fio_ru}</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Прізвище,
+ім’я, по-батькові (українською мовою): <b>${in_person_fio} </b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Чи
+змінював клієнт прізвище <b>Ні</b> Дата народження: <b>#date(${in_person.birthday})</b> Місце
+народження: <b>${in_person.birth_place}</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">ІПН
+<b>${in_person.tin}</b> Дата видачі ІПН <b>#date(${in_person.date_of_giving_tin_certificate})</b> Дата реєстрації ІПН <b>#date(${in_person.date_of_issue_tin_certificate})</b>
+Ким виданий ІПН <b>${in_person.issuer_of_tin}</b> Громадянство <b>Українське</b> Стать: <b>#dictionary("gender", ${in_person.dictionary_gender})</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Паспорт:
+Серія, номер: <b>${in_person.identity_document_number}</b> Дата видачі: <b>#date(${in_person.date_of_issuing_identity_doc})</b> Виданий: <b>${in_person.issuer_of_identity_document}</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Адреса
+за реєстрацією (постійна): <b>#regaddr($in_person)</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Адреса
+фактичного місця проживання: <b>#mailaddr($in_person)</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Ситуація
+з житлом #dictionary("habitationSituation", ${in_person.dictionary_habitation_situation}) З якого часу <b>#date(${in_person.habit_situation_start_date})</b> року. Сімейний стан: <b>#dictionary("maritalStatus", ${in_person.dictionary_marital_status})</b>
+Кількість осіб на утриманні: <b>${in_person.number_of_children}</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Рівень
+освіти: <b>#dictionary("levelOfEducation", ${in_person.dict_level_of_education})</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Наявність
+водійського посвідчення:<b>Клієнт має водійське посвідчення</b></span></p>
+
+#if(${in_person_partner.dictionary_gender})<p class="MsoNormal" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal;background:#92D050;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Особисті відомості про
+дружину/чоловіка клієнта</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Прізвище
+<b>${in_person_partner.last_name}</b> Ім&apos;я та по-батькові <b>${in_person_partner.first_name} ${in_person_partner.patronymic_name}</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Дата
+народження <b>#date(${in_person_partner.birthday})</b> Стать <b>#dictionary("gender", ${in_person_partner.dictionary_gender})</b> ІПН: <b>${in_person_partner.tin}</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Громадянство
+<b>Українське</b> Дата реєстрації ІПН: <b>#date(${in_person_partner.date_of_issue_tin_certificate})</b> Дата видачі ІПН: <b>#date(${in_person_partner.date_of_giving_tin_certificate})</b>
+Ким виданий ІПН: <b>${in_person_partner.issuer_of_tin}</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Тип
+документу <b>Паспорт громадянина України</b> Серія, номер <b>${in_person_partner.identity_document_number}</b> Дата
+видачі: <b>#date(${in_person_partner.date_of_issuing_identity_doc})</b> Виданий: <b>${in_person_partner.issuer_of_identity_document}</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Рівень
+освіти <b>#dictionary("levelOfEducation", ${in_person_partner.dict_level_of_education})</b></span></p>#end
+
+<p class="MsoNormal" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal;background:#92D050;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Інформація про
+автомобіль</span></p>
+
+
+ 
+  
+  
+  
+  
+  
+ 
+ 
+  
+  
+  
+  
+  
+ 
+ 
+  
+  
+  
+  
+  
+ 
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style=""><tbody><tr><td width="182" valign="top" style="width:136.35pt;border:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">№
+  </span></p>
+  </td><td width="126" valign="top" style="width:94.15pt;border:solid windowtext 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Тип
+  транспортного засобу</span></p>
+  </td><td width="125" valign="top" style="width:94.1pt;border:solid windowtext 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Марка
+  автомобіля</span></p>
+  </td><td width="125" valign="top" style="width:94.1pt;border:solid windowtext 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Модель
+  автомобіля</span></p>
+  </td><td width="125" valign="top" style="width:94.1pt;border:solid windowtext 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Ціна
+  автомобіля</span></p>
+  </td></tr><tr><td width="182" valign="top" style="width:136.35pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">1
+  </span></p>
+  </td><td width="126" valign="top" style="width:94.15pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Новий
+  автомобіль</span></p>
+  </td><td width="125" valign="top" style="width:94.1pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">#dictionary("carBrand", ${in_goods.get(0).dictionary_carBrand})</span></p>
+  </td><td width="125" valign="top" style="width:94.1pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">#dictionary("carModel", ${in_goods.get(0).dictionary_carModel})</span></p>
+  </td><td width="125" valign="top" style="width:94.1pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">#money(${in_goods.get(0).price})</span></p>
+  </td></tr><tr><td width="182" valign="top" style="width:136.35pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal;text-autospace:none"><span style="font-size:9.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
+  </td><td width="126" valign="top" style="width:94.15pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal;text-autospace:none"><span style="font-size:9.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
+  </td><td width="125" valign="top" style="width:94.1pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal;text-autospace:none"><span style="font-size:9.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
+  </td><td width="125" valign="top" style="width:94.1pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal;text-autospace:none"><span style="font-size:9.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">ВСЬОГО:</span></p>
+  </td><td width="125" valign="top" style="width:94.1pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal;text-autospace:none"><span style="font-size:9.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">#money(${in_dossier.total_price})
+  </span></p>
+  </td></tr></tbody></table>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:6.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Даний
+автомобіль передається під заставу. Сума забезпечення застави – загальна ціна
+автомобіля/ів.</span></p>
+
+<p class="MsoNormal" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal;background:#92D050;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Інформація про
+страховку</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Страховий
+продукт (тип страховки) Комплексне страхування позичальника по автомобільному
+кредитуванню від хвороби та нещасних</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">випадків
+Сума страховки <b>2 592,58</b></span></p>
+
+<p class="MsoNormal" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal;background:#92D050;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Інформація про трудову
+діяльність клієнта</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Сфера
+діяльності <b>#dictionary("activitySector", ${in_person.dict_activity_sector})</b>. Фах <b>#dictionary("profession", ${in_person.dict_profession})</b>.</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Поточне
+місце роботи: Назва роботодавця <b>${in_person.employer}</b> #if(${in_person.edrpou_of_employer})ЄДРПОУ <b>${in_person.edrpou_of_employer}</b>#end</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Тип
+трудової угоди Без терміну закінчення Повний трудовий стаж <b>${in_person.number_of_years_of_experience}</b> р. Дата
+працевлаштування <b>#date(${in_person.start_employment_date})</b> р.</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Тип
+роботодавця за чисельністю штату <b>Велика компанія</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Фактична
+адреса роботодавця: <b>#empladdr($in_person)</b>. Номер телефону <b>(044) 402-02-02</b>.</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Другий
+номер телефону <b>(044) 402-02-02</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><b><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">02.12.2011</span></b><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">
+_____________________________ /<b>${in_person_fio}</b>/</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><b><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">02.12.2011</span></b><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">
+_____________________________ /<b>${in_person_partner_fio}</b> /</span></p>
+
+<div class="footer">
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:5.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Своїм
+підписом клієнт підтверджує свою згоду на доступ Банку до його кредитної
+історії, збір, зберіганні, використання та розповсюдження через Бюро кредитних
+історій інформації про нього (в тому числі інформації, що міститься у державних
+реєстрах та інших базах даних публічного використання) у порядку, визначеному
+Законом України «Про організацію формування та обігу кредитних історій». Також
+своїм підписом клієнт підтверджує, що він проінформований Банком про те, що
+інформація про назву та адресу Бюро кредитних історій до яких АТ «Банк» буде
+передавати інформацію для формування кредитних історій.</span></p>
+</div>
+<span style="font-size:5.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">
+<div clear="all" style="page-break-before:always" />
+</span>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:5.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
+
+<span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"><br clear="all" style="page-break-before:always" />
+</span>
+
+<p class="MsoNormal" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal;background:#92D050;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Інформація про трудову
+діяльність дружини/чоловіка клієнта</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Сфера
+діяльності <b>Державний/бюджетний сектор</b> Професія <b>Автослюсар/механік/технік/монтажник/електрик</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Назва
+організації-роботодавця <b>Роботодавець партнера</b> ЄДРПОУ <b>09509502</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Тип
+трудової угоди <b>Без терміну закінчення</b> Повний трудовий стаж <b>1</b> р.
+Дата працевлаштування <b>10.2007</b> Тип роботодавця за чисельністю штату</span><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span><b><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Велика компанія</span></b></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Фактична
+адреса організації роботодавця: <b>23014 Вінницька обл., Барський район, м.
+Антонівка, Вулиця, 2, 45</b> Номер телефону <b>(044)</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><b><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">111-22-33</span></b><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> Другий номер
+телефону: <b>(044) 111-22-33</b></span></p>
+
+<p class="MsoNormal" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal;background:#92D050;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Інформація про доходи/витрати
+клієнта та дружини/чоловіка</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Щомісячний
+дохід (за винятком податків): Доходи клієнта <b>20 000,00 грн</b>. Доходи
+дружини/чоловіка <b>3 000,00 грн</b>. Інші доходи <b>1 000,00 грн</b>.</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Щомісячні
+витрати: Щомісячний платіж по кредиту/оренда за житло <b>0,00 грн</b>. Щомісячний
+платіж за кредитом на автомобіль <b>0,00 грн</b>. Щомісячні платежі</span><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">за іншими кредитами <b>0,00
+грн</b>. Аліменти <b>0,00 грн</b>.</span></p>
+
+<p class="MsoNormal" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal;background:#92D050;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Контактна інформація
+(клієнт)</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Мобільний
+телефон клієнта (в т.ч. для СМС інформування): <b>(068) 350-50-50</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Телефон
+дружини/чоловіка: <b>(044) 402-03-03</b> Мобільний телефон дружини/чоловіка <b>(067)
+402-03-03</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Слово-пароль
+для отримання інформації про стан рахунку по телефону Контакт-центру Банку:
+___________________</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Третя
+особа: Прізвище <b>Петров</b> Ім’я та по-батькові <b>Иван Иванович</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Ким
+є клієнту третя сторона <b>Брат/Сестра</b> Номер телефону <b>(044) 350-50-50</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:7.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Підтверджую
+коректність і повноту наданої мною інформації і не заперечую проти її
+додаткової перевірки.</span></p>
+
+<p class="MsoNormal" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal;background:#92D050;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Особисті відомості про
+поручителя</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Прізвище,
+ім’я, по-батькові (російською мовою): <b>ФамилияП ИмяП ОтчествоП</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Прізвище,
+ім’я, по-батькові (українською мовою): <b>ПрізвищеГар ІмяГар ПобатьковіГар</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Чи
+змінював поручитель прізвище <b>Ні</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Дата
+народження: <b>01.01.1976</b> р. Місце народження: <b>Місце народження</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">ІПН:
+<b>2345678901</b> Дата реєстрації ІПН <b>01.01.1993</b> Дата видачі ІПН <b>01.01.1995</b>
+Ким виданий ІПН: <b>Ким видано ІПН</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Паспорт:
+Серія, номер: <b>СН123456</b>. Дата видачі: <b>01.01.1994</b> Виданий: <b>Ким
+видано документ</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Адреса
+за реєстрацією: (постiйна), <b>98500, АР Крим обл., Алушта район, м. Алушта,
+Вулиця 2, 45</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Адреса
+фактичного місця проживання: <b>98500 АР Крим обл., Алушта район, м. Алушта,
+Вулиця 2, 45</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Сімейний
+стан: <b>Одружений/заміжня</b></span></p>
+
+<p class="MsoNormal" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal;background:#92D050;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Особисті відомості про
+дружину/чоловіка поручителя</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Прізвище
+<b>ПріГарПар</b> Ім’я та по-батькові <b>ІмГарПар ПобГарПар</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Дата
+народження: <b>03.03.1975 р</b>. Громадянство <b>Українське</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">ІПН:
+<b>2567834567</b> Дата реєстрації ІПН: <b>01.01.1993</b> Дата видачі ІПН: <b>01.01.1994</b>
+Ким виданий ІПН: Ким видано, ІПН</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Тип
+документу <b>Паспорт громадянина України</b> Серія, номер <b>АА256783</b>. Дата
+видачі: <b>01.01.1994</b>. Виданий: Ким видано документ</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Інформація
+про трудову діяльність поручителя</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Поточне
+місце роботи: <b>Назва роботодавця</b> Роботодавець ЄДРПОУ <b>09090909</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Фактична
+адреса роботодавця: <b>23014 Вінницька обл., Барський район, м. Антонівка,
+Вулиця, 12, 23, 1</b>. Номер телефону <b>(044) 402-02-02</b>. Другий</span><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">номер телефону <b>(044)
+402-02-03</b></span></p>
+
+<p class="MsoNormal" align="center" style="margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal;background:#92D050;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Інформація про доходи
+поручителя</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Щомісячний
+дохід (за винятком податків): Доходи <b>10 000,00 грн</b>.</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Контактна
+інформація (поручитель)</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Домашній
+телефон: <b>(044) 402-02-02</b> Мобільний телефон поручителя: <b>(067)
+402-02-02</b> E-mail поручителя: <b>test@m.com</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Ким
+є клієнту поручитель: <b>Батько або мати</b></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:7.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Надана
+мною в цій анкеті інформація є достовірною, я не заперечую проти її додаткової
+перевірки.</span></p>
+
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><b><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">02.12.2011</span></b><span style="font-size:8.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">
+_____________________________ /<b>ПрізвищеГар ІмяГар ПобатьковіГар</b>/</span></p>
+
+<div class='footer'>
+<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+normal;text-autospace:none"><span style="font-size:5.0pt;font-family:&quot;Arial&quot;,&quot;sans-serif&quot;">Своїм
+підписом поручитель підтверджує свою згоду на доступ Банку до його кредитної
+історії, збір, зберіганні, використання та розповсюдження через Бюро кредитних
+історій інформації про нього (в тому числі інформації, що міститься у державних
+реєстрах та інших базах даних публічного використання) у порядку, визначеному
+Законом України «Про організацію формування та обігу кредитних історій». Також
+своїм підписом поручитель підтверджує, що він проінформований Банком про те, що
+інформація. про назву та адресу Бюро кредитних історій до яких АТ «Банк» буде
+передавати інформацію для формування кредитних історій.</span></p>
+
+<p class="MsoNormal"><span style="font-family:&quot;Arial&quot;,&quot;sans-serif&quot;"> </span></p>
+</div>
+
+
+
+</body></html>

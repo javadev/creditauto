@@ -1,0 +1,44 @@
+<html>
+<body>
+<wicket:panel>
+<wicket:extend>
+<div class="section">
+       <fieldset><legend>Работодатель и бюджет поручителя кредита</legend><table style="width:100%;">
+<tr wicket:id="in_guarantor.employer_line"><td class="right-aligned"><div class="label">Работодатель</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_guarantor.employer_border">
+        <input id="in_guarantor_employer" wicket:id="in_guarantor.employer_id" size="60" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_guarantor.edrpou_of_employer_line"><td class="right-aligned"><div class="label">ЕДРПОУ работодателя</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_guarantor.edrpou_of_employer_border">
+        <input id="in_guarantor_edrpou_of_employer" wicket:id="in_guarantor.edrpou_of_employer_id" size="60" title=""/>
+         </div>       </div></td>
+</tr>
+</table>
+<span wicket:id="guarantorEmployer"/>
+<table style="width:100%;">
+<tr wicket:id="in_guarantor.gross_income_line"><td class="right-aligned"><div class="label">Ежемесячный доход поручителя, грн</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_guarantor.gross_income_border">
+        <input id="in_guarantor_gross_income" wicket:id="in_guarantor.gross_income_id" size="11" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_guarantor.other_income_line"><td class="right-aligned"><div class="label">Другие доходы поручителя, грн</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_guarantor.other_income_border">
+        <input id="in_guarantor_other_income" wicket:id="in_guarantor.other_income_id" size="11" title=""/>
+         </div>       </div></td>
+</tr>
+</table>
+
+</fieldset>
+<wicket:child/>
+      
+</div>
+    
+</wicket:extend>
+</wicket:panel>
+</body>
+</html>

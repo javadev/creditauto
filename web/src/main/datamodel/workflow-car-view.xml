@@ -1,0 +1,487 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<classes>
+    <class name="GoodSelectionViewPage" template="WicketHorizontal.html">
+        <pageTitle>Выбор типа товара</pageTitle>
+        <sectionTitle>Выбор товара</sectionTitle>
+        <variable readonly="true" name="in_goods.0.dictionary_carBrand" type="DictionaryTextField" label="Марка автомобиля">
+            <model><![CDATA[,
+                    dictionary.getDictionary("carBrand", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_goods.0.dictionary_carModel" type="DictionaryTextField" label="Модель автомобиля">
+            <model><![CDATA[,
+                    dictionary.getDictionary("carModel", inInstance.getIn_goods().get(0).getDictionary_carBrand(), IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_goods.0.price" type="TextField" label="Цена автомобиля (с НДС), грн" size="15">
+        </variable>
+        <variable readonly="true" name="in_dossier.down_payment_value" type="TextField" label="Величина первого платежа" size="15">
+        </variable>
+        <variable readonly="true" name="in_dossier.down_payment_calc_method" type="DictionaryTextField" label="Расчет первого платежа">
+            <model><![CDATA[,
+                    dictionary.getDictionary("priceVariant", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_dossier.down_payment_prc" type="TextField" label="Процент" size="15"/>
+        <variable readonly="true" name="in_dossier.down_payment" type="TextField" label="Первый платеж, грн" size="15"/>
+        <button name="next" type="SubmitLink">
+            setResponsePage(new CarDetailsInfoViewPage(inInstance));</button>
+    </class>
+    <class name="CarDetailsInfoViewPage" extends="GoodSelectionViewPage" combines="CarDetailsInfoViewPage,CredittypeSelectionViewPage,ClientMaritalStatusViewPage,PartnerPersonalInfoViewPage,ClientAddressMailChooseViewPage,ClientEmployerInfoViewPage,ClientIncomeInfoViewPage,ClientAssetViewPage,ThirdPersonInfoViewPage,GuaranteePartnerInfoViewPage,PrintApplicationFormViewPage,ClientDocumentStoreViewPage">
+        <pageTitle>Выбор типа товара</pageTitle>
+        <sectionTitle>Данные автомобиля:</sectionTitle>
+        <variable readonly="true" name="in_goods.0.car_issue_year" type="TextField" label=" Год производства" size="11"/>
+        <variable readonly="true" name="in_goods.0.car_bundling_type" type="TextArea" label="Комплектация"/>
+        <button name="back" type="Link">
+            setResponsePage(new GoodSelectionViewPage(inInstance));</button>
+        <button name="next" type="SubmitLink">
+            setResponsePage(new CredittypeSelectionViewPage(inInstance));</button>
+    </class>
+    <class name="CredittypeSelectionViewPage" combines="CarDetailsInfoViewPage,CredittypeSelectionViewPage,ClientMaritalStatusViewPage,PartnerPersonalInfoViewPage,ClientAddressMailChooseViewPage,ClientEmployerInfoViewPage,ClientIncomeInfoViewPage,ClientAssetViewPage,ThirdPersonInfoViewPage,GuaranteePartnerInfoViewPage,PrintApplicationFormViewPage,ClientDocumentStoreViewPage">
+        <pageTitle>Выбор типа кредита</pageTitle>
+        <sectionTitle>Выбор кредита</sectionTitle>
+        <variable readonly="true" name="in_dossier.down_payment" type="TextField" label="Первый платеж, грн" size="15"/>
+        <variable readonly="true" name="in_dossier.amount_of_loan" type="TextField" label="Сумма кредита" size="15"/>
+        <variable readonly="true" name="in_dossier.credittype" type="DropDownChoice" label="Тип кредита">
+            <model><![CDATA[, model.bind("in_dossier.credittype"),
+                    getCredittypes(form).credittypes,
+                        new ChoiceRenderer("name", "id")]]></model>
+        </variable>
+        <formMethods><![CDATA[
+        public org.bitbucket.creditauto.tarification.facade.CreditTypesResult getCredittypes(Form form) {
+            org.bitbucket.creditauto.tarification.facade.CreditTypesResult result = new org.bitbucket.creditauto.tarification.server.TarificationServerImpl().getCreditTypes(
+                new org.bitbucket.creditauto.tarification.facade.CreditTypeInputParam(
+                    inInstance.getIn_goods(), getCreditautoSession().getUserShop(), inInstance.getIn_dossier().getDown_payment(),
+                    inInstance.getIn_dossier().getTotal_price(), getCreditautoSession().getUser()));
+            if (result.isError) {
+                form.get("in_dossier.down_payment_line:in_dossier.down_payment_border:in_dossier.down_payment_id").error(result.messageKey);
+            }
+            return result;
+        }]]></formMethods>
+        <button name="back" type="Link">
+            setResponsePage(new CarDetailsInfoViewPage(inInstance));</button>
+        <button name="next" type="SubmitLink">
+            setResponsePage(new ClientMaritalStatusViewPage(inInstance));</button>
+    </class>
+    <class name="ClientPersonalInfoViewPage" combines="CarDetailsInfoViewPage,CredittypeSelectionViewPage,ClientMaritalStatusViewPage,PartnerPersonalInfoViewPage,ClientAddressMailChooseViewPage,ClientEmployerInfoViewPage,ClientIncomeInfoViewPage,ClientAssetViewPage,ThirdPersonInfoViewPage,GuaranteePartnerInfoViewPage,PrintApplicationFormViewPage,ClientDocumentStoreViewPage">
+        <pageTitle>Персональные данные клиента</pageTitle>
+        <sectionTitle>Персональные данные</sectionTitle>
+        <variable readonly="true" name="in_person.dictionary_gender" type="DictionaryTextField" label="Пол">
+            <model><![CDATA[,
+                    dictionary.getDictionary("gender", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_person.last_name" type="TextField" label="Фамилия" size="40"/>
+        <variable readonly="true" name="in_person.first_name" type="TextField" label="Имя" size="40"/>
+        <variable readonly="true" name="in_person.patronymic_name" type="TextField" label="Отчество" size="40"/>
+        <variable readonly="true" name="in_person.birthday" type="TextField" label="Дата рождения, ддммгггг" size="9"/>
+        <variable readonly="true" name="in_person.birth_place" type="TextField" label="Место рождения" size="60"/>
+        <variable readonly="true" name="in_person.tin" type="TextField" label="ИНН" size="11"/>
+        <variable readonly="true" name="in_person.date_of_issue_tin_certificate" type="TextField" label="Дата регистрации ИНН, ддммгггг" size="9"/>
+        <variable readonly="true" name="in_person.date_of_giving_tin_certificate" type="TextField" label="Дата выдачи ИНН, ддммгггг" size="9"/>
+        <variable readonly="true" name="in_person.issuer_of_tin" type="TextField" label="Кем выдан ИНН" size="60"/>
+        <variable readonly="true" name="in_person.identity_document_number" type="TextField" label="Номер паспорта, 2 буквы и 6 цифр без пробела" size="9"/>
+        <variable readonly="true" name="in_person.date_of_issuing_identity_doc" type="TextField" label="Дата выдачи паспорта, ддммгггг" size="9"/>
+        <variable readonly="true" name="in_person.issuer_of_identity_document" type="TextField" label="Кем выдан паспорт" size="60"/>
+        <button name="back" type="Link">
+            setResponsePage(new CredittypeSelectionViewPage(inInstance));</button>
+        <button name="next" type="SubmitLink">
+            setResponsePage(new ClientMaritalStatusViewPage(inInstance));</button>
+    </class>
+    <class name="ClientMaritalStatusViewPage" extends="ClientPersonalInfoViewPage" combines="CarDetailsInfoViewPage,CredittypeSelectionViewPage,ClientMaritalStatusViewPage,PartnerPersonalInfoViewPage,ClientAddressMailChooseViewPage,ClientEmployerInfoViewPage,ClientIncomeInfoViewPage,ClientAssetViewPage,ThirdPersonInfoViewPage,GuaranteePartnerInfoViewPage,PrintApplicationFormViewPage,ClientDocumentStoreViewPage">
+        <pageTitle>Персональные данные клиента</pageTitle>
+        <sectionTitle>Семейное положение:</sectionTitle>
+        <variable readonly="true" name="in_person.dictionary_marital_status" type="DictionaryTextField" label="Семейное положение">
+            <model><![CDATA[,
+                    dictionary.getDictionary("maritalStatus", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_person.number_of_children" type="TextField" label="Количество человек на содержании, в том числе несовершеннолетние дети" size="7"/>
+        <variable readonly="true" name="in_person.dictionary_habitation_situation" type="DictionaryTextField" label="Ситуация с жильем и местом жительства">
+            <model><![CDATA[,
+                    dictionary.getDictionary("habitationSituation", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_person.habit_situation_start_date" type="TextField" label="С какого времени ситуация с жильем" size="9"/>
+        <button name="back" type="Link">
+            setResponsePage(new CredittypeSelectionViewPage(inInstance));</button>
+        <button name="next" type="SubmitLink">
+            setResponsePage(new ClientAddressMailChooseViewPage(inInstance));</button>
+    </class>
+    <class name="PartnerPersonalInfoViewPage" combines="CarDetailsInfoViewPage,CredittypeSelectionViewPage,ClientMaritalStatusViewPage,PartnerPersonalInfoViewPage,ClientAddressMailChooseViewPage,ClientEmployerInfoViewPage,ClientIncomeInfoViewPage,ClientAssetViewPage,ThirdPersonInfoViewPage,GuaranteePartnerInfoViewPage,PrintApplicationFormViewPage,ClientDocumentStoreViewPage">
+        <pageTitle>Персональные данные партнера</pageTitle>
+        <sectionTitle>Персональные данные</sectionTitle>
+        <variable name="partnerPassport" type="PartnerPassportViewPanel" >
+             <model><![CDATA[new PropertyModel(inInstance, "in_person_partner")]]></model>
+        </variable>
+        <button name="back" type="Link">
+            setResponsePage(new ClientMaritalStatusViewPage());</button>
+        <button name="next" type="SubmitLink">
+            setResponsePage(new ClientAddressMailChooseViewPage());</button>
+    </class>
+    <class name="ClientEmployerInfoViewPage" combines="CarDetailsInfoViewPage,CredittypeSelectionViewPage,ClientMaritalStatusViewPage,PartnerPersonalInfoViewPage,ClientAddressMailChooseViewPage,ClientEmployerInfoViewPage,ClientIncomeInfoViewPage,ClientAssetViewPage,ThirdPersonInfoViewPage,GuaranteePartnerInfoViewPage,PrintApplicationFormViewPage,ClientDocumentStoreViewPage">
+        <pageTitle>Трудовая деятельность клиента</pageTitle>
+        <sectionTitle>Данные трудовой деятельности клиента</sectionTitle>
+        <variable readonly="true" name="in_person.dict_level_of_education" type="DictionaryTextField" label="Уровень образования">
+            <model><![CDATA[,
+                    dictionary.getDictionary("levelOfEducation", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_person.dict_activity_sector" type="DictionaryTextField" label="Сфера деятельности" style="width:350px;">
+            <model><![CDATA[,
+                    dictionary.getDictionary("activitySector", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_person.dict_type_of_activity_spd" type="DictionaryTextField" label="Вид экономической деятельности работодателя" style="width:350px;">
+            <model><![CDATA[,
+                    dictionary.getDictionary("typeOfActivitySectorSpd", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_person.dict_profession" type="DictionaryTextField" label="Профессия" style="width:350px;">
+            <model><![CDATA[,
+                    dictionary.getDictionary("profession", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_person.dict_employment_type" type="DictionaryTextField" label="Тип трудового соглашения" style="width:350px;">
+            <model><![CDATA[,
+                    dictionary.getDictionary("employmentType", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_person.start_employment_date" type="TextField" label="Дата начала действия трудового соглашения, ммгггг" size="9">
+            <model>, new org.bitbucket.creditauto.wicket.DateModelWrapper("MMyyyy", model.bind("in_person.start_employment_date"))</model>
+        </variable>
+        <variable readonly="true" name="in_person.end_data_of_employment" type="TextField" label="Дата окончания действия трудового соглашения, ддммггг" size="9"/>
+        <variable readonly="true" name="in_person.employer" type="TextField" label="Работодатель" size="60"/>
+        <variable readonly="true" name="in_person.dict_empl_regprovince" type="DictionaryTextField" label="Область">
+            <model><![CDATA[,
+                    dictionary.getDictionary("provinceList", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_person.dict_empl_regregion" type="DictionaryTextField" label="Район">
+            <model><![CDATA[,
+                    dictionary.getDictionary("regionList", inInstance.getIn_person().getDict_empl_regprovince(), IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_person.dict_empl_regcity" type="DictionaryTextField" label="Населенный пункт">
+            <model><![CDATA[,
+                    dictionary.getDictionary("cityList", inInstance.getIn_person().getDict_empl_regregion(),
+                        inInstance.getIn_person().getDict_empl_regprovince(), IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_person.empl_regpostindex" type="TextField" label="Почтовый индекс" size="15"/>
+        <variable readonly="true" name="in_person.edrpou_of_employer" type="TextField" label="ЕДРПОУ работодателя клиента" size="15"/>
+        <variable readonly="true" name="in_person.empl_regstreet" type="TextField" label="Улица" size="40"/>
+        <variable readonly="true" name="in_person.empl_reghouse" type="TextField" label="Дом" size="15"/>
+        <variable readonly="true" name="in_person.empl_regflat" type="TextField" label="Квартира" size="15"/>
+        <variable readonly="true" name="in_person.empl_regadditionalinfo" type="TextField" label="Дополнительная информация (корпус, блок, другое)" size="15"/>
+        <variable readonly="true" name="in_person.phone_of_employer" type="TextField" label="Номер телефона работодателя (Код города + №)" size="11"/>
+        <variable readonly="true" name="in_person.second_phone_employer" type="TextField" label="Другой номер телефона работодателя (Код города + №)" size="11"/>
+        <variable readonly="true" name="in_person.dict_type_employer_by_size" type="DictionaryTextField" label="Тип работодателя по величине штата" style="width:200px;">
+            <model><![CDATA[,
+                    dictionary.getDictionary("typeEmployerBySize", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_person.another_employers" type="TextArea" label="Другие предыдущие работодатели клиента"/>
+        <variable readonly="true" name="in_person.prev_employer_name" type="TextField" label="Предыдущее место работы" size="30"/>
+        <variable readonly="true" name="in_person.prev_employer_num_years_experience" type="TextField" label="Стаж на предыдущем месте работы, лет" size="5"/>
+        <variable readonly="true" name="in_person.number_of_years_of_experience" type="TextField" label="Полный трудовой стаж, полных лет" size="5"/>
+        <variable readonly="true" name="in_person.number_of_months_of_experience" type="DropDownChoice" label="и месяцев" style="width:80px;">
+            <model>, new org.bitbucket.creditauto.wicket.IntegerModelWrapper(model.bind("in_person.number_of_months_of_experience")),
+                java.util.Arrays.asList("00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11")</model>
+        </variable>
+        <button name="back" type="Link">
+            setResponsePage(new ClientAddressMailChooseViewPage(inInstance));</button>
+        <button name="next" type="SubmitLink">
+            setResponsePage(new ClientIncomeInfoViewPage(inInstance));</button>
+    </class>    
+    <class name="ClientIncomeInfoViewPage" combines="CarDetailsInfoViewPage,CredittypeSelectionViewPage,ClientMaritalStatusViewPage,PartnerPersonalInfoViewPage,ClientAddressMailChooseViewPage,ClientEmployerInfoViewPage,ClientIncomeInfoViewPage,ClientAssetViewPage,ThirdPersonInfoViewPage,GuaranteePartnerInfoViewPage,PrintApplicationFormViewPage,ClientDocumentStoreViewPage">
+        <pageTitle>Информация о доходах клиента</pageTitle>
+        <sectionTitle>Информация о доходах:</sectionTitle>
+        <variable readonly="true" name="in_person.dict_type_of_income_doc" type="DictionaryTextField" label="Тип документа, подтверждающий доходы клиента">
+            <model><![CDATA[,
+                    dictionary.getDictionary("typeOfIncomeProofDoc", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_person.gross_income" type="TextField" label="Ежемесячный доход, заявленый клиентом, грн" size="11"/>
+        <variable readonly="true" name="in_person.other_income" type="TextField" label="Другие доходы клиента, грн" size="11"/>
+        <variable readonly="true" name="in_person.expenses_for_renting" type="TextField" label="Ежемесячный платеж по кредиту/аренде жилья, грн" size="11"/>
+        <variable readonly="true" name="in_person.expenses_for_car_loan" type="TextField" label="Ежемесячный платеж по кредиту за автомобиль, грн" size="11"/>
+        <variable readonly="true" name="in_person.expenses_for_other_loans" type="TextField" label="Ежемесячный платеж по другим кредитам, грн" size="11"/>
+        <variable readonly="true" name="in_person.expenses_for_alimony" type="TextField" label="Алименты, грн" size="11"/>
+        <button name="back" type="Link">
+            setResponsePage(new ClientEmployerInfoViewPage(inInstance));</button>
+        <button name="next" type="SubmitLink">
+            setResponsePage(new ClientAssetViewPage(inInstance));</button>
+    </class>
+    <class name="ClientAssetViewPage" combines="CarDetailsInfoViewPage,CredittypeSelectionViewPage,ClientMaritalStatusViewPage,PartnerPersonalInfoViewPage,ClientAddressMailChooseViewPage,ClientEmployerInfoViewPage,ClientIncomeInfoViewPage,ClientAssetViewPage,ThirdPersonInfoViewPage,GuaranteePartnerInfoViewPage,PrintApplicationFormViewPage,ClientDocumentStoreViewPage">
+        <pageTitle>Собственность клиента</pageTitle>
+        <sectionTitle>Собственность клиента:</sectionTitle>
+        <variable readonly="true" visible="inInstance.getIn_assets().size() > 0 &amp;&amp; inInstance.getIn_assets().get(0).getCount_of() != null" name="in_assets.0.dictionary_asset" type="DictionaryTextField" label="Тип собственности">
+            <model><![CDATA[,
+                    dictionary.getDictionary("assetList", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" visible="inInstance.getIn_assets().size() > 0 &amp;&amp; inInstance.getIn_assets().get(0).getCount_of() != null" name="in_assets.0.count_of" type="TextField" label="Количество" size="5"/>
+        <variable readonly="true" visible="inInstance.getIn_assets().size() > 1 &amp;&amp; inInstance.getIn_assets().get(1).getCount_of() != null" name="in_assets.1.dictionary_asset" type="DropDownChoice" label="Тип собственности">
+            <model><![CDATA[,
+                    dictionary.getDictionary("assetList", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" visible="inInstance.getIn_assets().size() > 1 &amp;&amp; inInstance.getIn_assets().get(1).getCount_of() != null" name="in_assets.1.count_of" type="TextField" label="Количество" size="5"/>
+        <variable readonly="true" visible="inInstance.getIn_assets().size() > 2 &amp;&amp; inInstance.getIn_assets().get(2).getCount_of() != null" name="in_assets.2.dictionary_asset" type="DictionaryTextField" label="Тип собственности">
+            <model><![CDATA[,
+                    dictionary.getDictionary("assetList", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" visible="inInstance.getIn_assets().size() > 2 &amp;&amp; inInstance.getIn_assets().get(2).getCount_of() != null" name="in_assets.2.count_of" type="TextField" label="Количество" size="5"/>
+        <variable readonly="true" visible="inInstance.getIn_assets().size() > 3 &amp;&amp; inInstance.getIn_assets().get(3).getCount_of() != null" name="in_assets.3.dictionary_asset" type="DictionaryTextField" label="Тип собственности">
+            <model><![CDATA[,
+                    dictionary.getDictionary("assetList", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" visible="inInstance.getIn_assets().size() > 3 &amp;&amp; inInstance.getIn_assets().get(3).getCount_of() != null" name="in_assets.3.count_of" type="TextField" label="Количество" size="5"/>
+        <button name="back" type="Link">
+            setResponsePage(new ClientIncomeInfoViewPage(inInstance));</button>
+        <button name="next" type="SubmitLink">
+            boolean guarantorPresent = inInstance.getIn_guarantor() != null &amp;&amp; inInstance.getIn_guarantor().getTin() != null &amp;&amp; !inInstance.getIn_guarantor().getTin().isEmpty();
+            setResponsePage(guarantorPresent ? new GuaranteePartnerInfoViewPage(inInstance) : new ClientContactInfoViewPage(inInstance));
+        </button>
+    </class>
+    <class name="ClientContactInfoViewPage" combines="CarDetailsInfoViewPage,CredittypeSelectionViewPage,ClientMaritalStatusViewPage,ClientAddressMailChooseViewPage,ClientEmployerInfoViewPage,ClientIncomeInfoViewPage,ClientAssetViewPage,GuaranteePartnerInfoViewPage,ClientContactInfoViewPage,PrintApplicationFormViewPage,ClientDocumentStoreViewPage">
+        <pageTitle>Контактная информация клиента</pageTitle>
+        <sectionTitle>Контактная информация:</sectionTitle>
+        <variable readonly="true" name="in_person.phone" type="TextField" label="Номер телефона клиента (Код города + №)" size="11"/>
+        <variable readonly="true" name="in_person.mobile_phone" type="TextField" label="Номер мобильного телефона клиента" size="11"/>
+        <variable readonly="true" name="in_person.email" type="TextField" label="E-mail адрес" size="20"/>
+        <variable readonly="true" name="in_person.last_name_latin" type="TextField" label="Фамилия латинскими буквами" size="40"/>
+        <variable readonly="true" name="in_person.first_name_latin" type="TextField" label="Имя латинскими буквами" size="40"/>
+        <variable readonly="true" name="in_goods.0.car_driving_license_ownership" type="DictionaryTextField" label="Наличие водительского удостоверения">
+            <model><![CDATA[,
+                    dictionary.getDictionary("drivingLicense", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <button name="back" type="Link">
+            setResponsePage(inInstance.getIn_guarantor() != null &amp;&amp; inInstance.getIn_guarantor().getTin() != null &amp;&amp; !inInstance.getIn_guarantor().getTin().isEmpty() ? new GuaranteePartnerInfoViewPage(inInstance) : new ClientAssetViewPage(inInstance));</button>
+        <button name="next" type="SubmitLink">
+            setResponsePage(new ThirdPersonInfoViewPage(inInstance));</button>
+    </class>
+    <class name="ThirdPersonInfoViewPage" extends="ClientContactInfoViewPage" combines="CarDetailsInfoViewPage,CredittypeSelectionViewPage,ClientMaritalStatusViewPage,PartnerPersonalInfoViewPage,ClientAddressMailChooseViewPage,ClientEmployerInfoViewPage,ClientIncomeInfoViewPage,ClientAssetViewPage,ThirdPersonInfoViewPage,GuaranteePartnerInfoViewPage,PrintApplicationFormViewPage,ClientDocumentStoreViewPage">
+        <pageTitle>Контактная информация клиента</pageTitle>
+        <sectionTitle>Информация о третьем лице:</sectionTitle>
+        <variable readonly="true" name="in_third_person.last_name" type="TextField" label="Фамилия третьего лица" size="40"/>
+        <variable readonly="true" name="in_third_person.first_name" type="TextField" label="Имя третьего лица" size="40"/>
+        <variable readonly="true" name="in_third_person.patronymic_name" type="TextField" label="Отчество третьего лица" size="40"/>
+        <variable readonly="true" name="in_third_person.phone" type="TextField" label="Номер телефона третьего лица" size="11"/>
+        <variable readonly="true" name="in_third_person.dict_type_of_relation_client" type="DictionaryTextField" label="Кем приходится третье лицо">
+            <model><![CDATA[,
+                    dictionary.getDictionary("relationThirdPartyList", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <button name="back" type="Link">
+            setResponsePage(new ClientContactInfoViewPage(inInstance));</button>
+        <button name="next" type="SubmitLink">
+            setResponsePage(new PrintApplicationFormViewPage(inInstance));</button>
+    </class>
+    <class name="PrintApplicationFormViewPage" combines="CarDetailsInfoViewPage,CredittypeSelectionViewPage,ClientMaritalStatusViewPage,PartnerPersonalInfoViewPage,ClientAddressMailChooseViewPage,ClientEmployerInfoViewPage,ClientIncomeInfoViewPage,ClientAssetViewPage,ThirdPersonInfoViewPage,GuaranteePartnerInfoViewPage,PrintApplicationFormViewPage,ClientDocumentStoreViewPage">>
+        <pageTitle>Анкета-заявление</pageTitle>
+        <sectionTitle>Печать анкеты-заявления:</sectionTitle>
+        <variable name="print-application-form" type="Link" label="Сохранить анкету-заявление">
+                <onSubmit><![CDATA[
+        try {
+            byte[] applicatinData = new org.bitbucket.creditauto.printer.server.PrinterServerImpl().printDocumentFromInstance(inInstance,
+                org.bitbucket.creditauto.printer.facade.PrinterDocumentType.APPLICATION_FORM);
+            getRequestCycle().setRequestTarget(
+                new org.bitbucket.creditauto.wicket.ByteDataRequestTarget("application/pdf", applicatinData,
+                    "application-form-" + inInstance.getIn_dossier().getId() + ".pdf"));
+        } catch (Exception ex) {
+            LOG.error(this, ex, ex.getMessage());
+        };]]></onSubmit>
+        </variable>
+        <variable readonly="true" name="in_dossier.is_application_form_signed" type="AjaxCheckBox" label="Клиент подписал Анкету-Заявление">
+            <onUpdate> </onUpdate>
+            <afterInit>inInstance.getIn_dossier().setIs_application_form_signed(false)</afterInit>
+        </variable>
+        <button name="back" type="Link">
+            setResponsePage(new ThirdPersonInfoViewPage(inInstance));</button>
+        <button name="next" type="SubmitLink">
+            setResponsePage(new ClientDocumentStoreViewPage(inInstance));</button>
+    </class>
+    <class name="ClientDocumentStoreViewPage" combines="CarDetailsInfoViewPage,CredittypeSelectionViewPage,ClientMaritalStatusViewPage,PartnerPersonalInfoViewPage,ClientAddressMailChooseViewPage,ClientEmployerInfoViewPage,ClientIncomeInfoViewPage,ClientAssetViewPage,ThirdPersonInfoViewPage,GuaranteePartnerInfoViewPage,PrintApplicationFormViewPage,ClientDocumentStoreViewPage">
+        <pageTitle>Требуемые Скан-копии документов</pageTitle>
+        <sectionTitle>Скан-копии документов:</sectionTitle>
+        <variable readonly="true" name="in_document_stores.0.data"  type="FileUploadField" label="Паспорт клиента" size="10"/>
+        <variable readonly="true" name="in_document_stores.0.is_not_required" type="AjaxCheckBox" label="Скан-копия загружена альтернативным путем">
+           <onUpdate> </onUpdate>
+        </variable>
+        <variable readonly="true" name="in_document_stores.1.data"  type="FileUploadField" label="ИНН коиента" size="10"/>
+        <variable readonly="true" name="in_document_stores.1.is_not_required" type="AjaxCheckBox" label="Скан-копия загружена альтернативным путем">
+           <onUpdate> </onUpdate>
+        </variable>
+        <variable readonly="true" name="in_document_stores.2.data"  type="FileUploadField" label="Фото клиента" size="10"/>
+        <variable readonly="true" name="in_document_stores.2.is_not_required" type="AjaxCheckBox" label="Скан-копия загружена альтернативным путем">
+           <onUpdate> </onUpdate>
+        </variable>
+        <button name="back" type="Link">
+            setResponsePage(new PrintApplicationFormViewPage(inInstance));</button>
+    </class>
+    <class name="EmployerAddressViewPanel" extends="Panel">
+        <sectionTitle>Семейное положение:</sectionTitle>
+        <compoundPropertyModel>In_person in_person</compoundPropertyModel>
+        <variable readonly="true" name="dict_empl_regprovince" type="DictionaryTextField" label="Область">
+            <model><![CDATA[,
+                    dictionary.getDictionary("provinceList", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[]]>
+            </ajaxOnUpdate>
+        </variable>
+        <variable readonly="true" name="dict_empl_regregion" type="DictionaryTextField" label="Район">
+            <model><![CDATA[,
+                    dictionary.getDictionary("regionList", modelObject.getDict_empl_regprovince(), IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[]]>
+            </ajaxOnUpdate>
+        </variable>
+        <variable readonly="true" name="dict_empl_regcity" type="DictionaryTextField" label="Населенный пункт">
+            <model><![CDATA[,
+                    dictionary.getDictionary("cityList", modelObject.getDict_empl_regregion(),
+                        modelObject.getDict_empl_regprovince(), IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[]]>
+            </ajaxOnUpdate>
+        </variable>
+        <variable readonly="true" name="empl_regpostindex" type="TextField" label="Почтовый индекс" size="15" />
+        <variable readonly="true" name="empl_regstreet" type="TextField" label="Улица" size="40"/>
+        <variable readonly="true" name="empl_reghouse" type="TextField" label="Дом" size="15"/>
+        <variable readonly="true" name="empl_regflat" type="TextField" label="Квартира" size="15"/>
+        <variable readonly="true" name="empl_regadditionalinfo" type="TextField" label="Дополнительная информация (корпус, блок, другое)" size="15"/>
+        <variable readonly="true" name="phone_of_employer" type="TextField" label="Номер телефона работодателя (Код города + №)" size="11"/>
+        <variable readonly="true" name="second_phone_employer" type="TextField" label="Другой номер телефона работодателя (Код города + №)" size="11"/>
+    </class>
+    <class name="ClientAddInfoViewPanel" extends="Panel">
+        <sectionTitle>Семейное положение:</sectionTitle>
+        <compoundPropertyModel>In_person in_person</compoundPropertyModel>
+        
+        <variable readonly="true" name="phone" type="TextField" label="Номер телефона" size="7"/>
+        <variable readonly="true" name="mobile_phone" type="TextField" label="Номер мобильного телефона" size="7"/>
+        <variable readonly="true" name="email" type="TextField" label="Электронная почта" size="7"/>
+        <variable readonly="true" name="dict_relation" type="DictionaryTextField" label="Кем является для клиента">
+            <model><![CDATA[,
+                    dictionary.getDictionary("relationType", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+    </class>
+    <class name="PassportInfoViewPanel" extends="Panel">
+        <pageTitle>Личная информация</pageTitle>
+        <sectionTitle>Личная информация</sectionTitle>
+        <compoundPropertyModel>In_person in_person</compoundPropertyModel>
+        <constructor><parameters>String id, IModel model</parameters><body></body></constructor>
+        <variable readonly="true" name="dictionary_gender" type="DictionaryTextField" label="Пол">
+            <model><![CDATA[,
+                    dictionary.getDictionary("gender", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="last_name_ru" type="TextField" label="Фамилия" size="40"/>
+        <variable readonly="true" name="first_name_ru" type="TextField" label="Имя" size="40"/>
+        <variable readonly="true" name="patronymic_name_ru" type="TextField" label="Отчество" size="40"/>
+        <variable readonly="true" name="is_client_changed_surname" type="AjaxCheckBox" label="Изменялась ли фамилия">
+           <onUpdate> </onUpdate>
+        </variable>
+        <variable readonly="true" name="prev_last_name" type="TextField" label="Предыдущая фамилия" size="40">
+           <afterInit>form.get("prev_last_name_line").setVisible(modelObject.getIs_client_changed_surname() == null ? false : modelObject.getIs_client_changed_surname())</afterInit>
+        </variable>
+        <variable readonly="true" name="last_name" type="TextField" label="Фамилия на украинском языке" size="40"/>
+        <variable readonly="true" name="first_name" type="TextField" label="Имя на украинском языке" size="40"/>
+        <variable readonly="true" name="patronymic_name" type="TextField" label="Отчество на украинском языке" size="40"/>
+        <variable readonly="true" name="birthday" type="TextField" label="Дата рождения, ддммгггг" size="9"/>
+        <variable readonly="true" name="birth_place" type="TextField" label="Место рождения" size="60"/>
+        <variable readonly="true" name="tin" type="TextField" label="ИНН" size="11"/>
+        <variable readonly="true" name="date_of_issue_tin_certificate" type="TextField" label="Дата регистрации ИНН, ддммгггг" size="9"/> 
+        <variable readonly="true" name="date_of_giving_tin_certificate" type="TextField" label="Дата выдачи ИНН, ддммгггг" size="9"/>
+        <variable readonly="true" name="issuer_of_tin" type="TextField" label="Кем выдан ИНН" size="60"/>
+        <variable readonly="true" name="identity_document_number" type="TextField" label="Номер паспорта, 2 буквы и 6 цифр без пробела" size="9"/>
+        <variable readonly="true" name="date_of_issuing_identity_doc" type="TextField" label="Дата выдачи паспорта, ддммгггг" size="9"/>
+        <variable readonly="true" name="issuer_of_identity_document" type="TextField" label="Кем выдан паспорт" size="60"/>
+    </class>
+    <class name="MaritalStatusViewPanel" extends="Panel">
+        <sectionTitle>Семейное положение:</sectionTitle>
+        <compoundPropertyModel>In_person in_person</compoundPropertyModel>
+        <variable readonly="true" name="dictionary_marital_status" type="DictionaryTextField" label="Семейное положение">
+            <model><![CDATA[,
+                    dictionary.getDictionary("maritalStatus", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="number_of_children" type="TextField" label="Количество человек на содержании, в том числе несовершеннолетние дети" size="7"/>
+        <variable readonly="true" name="dictionary_habitation_situation" type="DictionaryTextField" label="Ситуация с жильем и местом жительства">
+            <model><![CDATA[,
+                    dictionary.getDictionary("habitationSituation", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="habit_situation_start_date" type="TextField" label="С какого времени ситуация с жильем, гггг" size="9">
+            <model>, new org.bitbucket.creditauto.wicket.DateModelWrapper("yyyy", model.bind("habit_situation_start_date"))</model>
+        </variable>
+    </class>
+    <class name="NotesViewPanel" extends="Panel">
+        <sectionTitle>Заметки для блокнота:</sectionTitle>
+        <compoundPropertyModel>In_dossier in_dossier</compoundPropertyModel>
+        <pageInit><![CDATA[
+        private In_bloknot in_bloknot = new In_bloknot();
+        public In_bloknot getIn_bloknot() {
+                            return in_bloknot;
+        }
+         public void setIn_bloknot(In_bloknot in_bloknot) {
+                            this.in_bloknot = in_bloknot;
+        }
+        public In_dossier getIn_dossier() {
+                            return modelObject;
+        }
+         ]]></pageInit>
+          <constructor><parameters></parameters>
+          <body></body></constructor>
+        <repeater name="listNotes" type="ListView">
+           <header name="henter_date" label="Дата" size="60" />
+           <header name="huser_login" label="Логин пользователя" size="140" />
+           <header name="hbloknot_type" label="Тип записи" size="80" />
+           <header name="htext" label="Текст" size="250" />
+           <model><![CDATA[modelObject.getIn_bloknots()]]></model>
+           <modelClass><![CDATA[In_bloknot]]></modelClass>
+           <data name="enter_date" label="Дата" size="60" />
+           <data name="user_login" label="Логин пользователя" size="140" />
+           <data name="bloknot_type" label="Тип записи" size="80" />
+           <data name="text" label="Текст" size="250" />
+        </repeater>
+    </class>
+    <class name="PartnerPassportViewPanel" extends="Panel">
+        <pageTitle>Партнер поручителя кредита</pageTitle>
+        <sectionTitle>Партнер поручителя кредита</sectionTitle>
+        <compoundPropertyModel>In_person in_person</compoundPropertyModel>
+        <constructor><parameters>String id, IModel model</parameters><body></body></constructor>
+        
+        <variable readonly="true" name="last_name" type="TextField" label="Фамилия" size="40"/>
+        <variable readonly="true" name="first_name" type="TextField" label="Имя" size="40"/>
+        <variable readonly="true" name="patronymic_name" type="TextField" label="Отчество" size="40"/>
+        <variable readonly="true" name="birthday" type="TextField" label="Дата рождения, ддммгггг" size="9"/>
+        <variable readonly="true" name="has_no_tin" type="CheckBox" label="У партнера поручителя нет ИНН" size="60" />
+        <variable readonly="true" name="tin" type="TextField" label="ИНН" size="11">
+           <afterInit>form.get("tin_line").setOutputMarkupPlaceholderTag(true)</afterInit>
+           <afterInit>form.get("tin_line").setVisible(modelObject.getHas_no_tin() == null ? true : !modelObject.getHas_no_tin())</afterInit>
+        </variable>
+        <variable readonly="true" name="date_of_issue_tin_certificate" type="TextField" label="Дата регистрации ИНН, ддммгггг" size="9"/> 
+        <variable readonly="true" name="date_of_giving_tin_certificate" type="TextField" label="Дата выдачи ИНН, ддммгггг" size="9"/>
+        <variable readonly="true" name="issuer_of_tin" type="TextField" label="Кем выдан ИНН" size="60"/>
+        <variable readonly="true" name="citizenship" type="DictionaryTextField" label="Гражданство">
+            <model><![CDATA[,
+                    dictionary.getDictionary("citizenship", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="dict_identity_document_type" type="DictionaryTextField" label="Тип документа">
+            <model><![CDATA[,
+                    dictionary.getDictionary("docTypes", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="identity_document_number" type="TextField" label="Номер документа" size="9"/>
+        <variable readonly="true" name="date_of_issuing_identity_doc" type="TextField" label="Дата выдачи документа, ддммгггг" size="9"/>
+        <variable readonly="true" name="issuer_of_identity_document" type="TextField" label="Кем выдан документа" size="60"/>
+        <variable readonly="true" name="phone" type="TextField" label="Номер телефона партнера" size="60"/>
+        <variable readonly="true" name="mobile_phone" type="TextField" label="Мобильный телефон" size="60"/>
+    </class>
+</classes>

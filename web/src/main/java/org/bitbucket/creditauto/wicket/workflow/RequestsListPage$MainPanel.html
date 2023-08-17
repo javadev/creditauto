@@ -1,0 +1,77 @@
+<html>
+<body>
+<wicket:panel>
+<div class="section">
+        <form wicket:id="form">
+    <fieldset style="border:none;">
+       <div class="entry">
+            <div class="label" style="color:black;text-align:center;">Перечень всех заявок</div>
+       </div>
+       <fieldset><legend>Все заявки:</legend><table style="width:100%;">
+<tr wicket:id="dateFrom_line"><td class="right-aligned"><div class="label">Дата с, ддммгггг</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="dateFrom_border">
+        <input id="dateFrom" wicket:id="dateFrom_id" size="9" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="dateTo_line"><td class="right-aligned"><div class="label">Дата по, ддммгггг</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="dateTo_border">
+        <input id="dateTo" wicket:id="dateTo_id" size="9" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="search_line"><td style="text-align: center;" colspan="2"><div class="input"><input id="search" wicket:id="search_id" value="Поиск" type="submit"/>       </div></td>
+</tr>
+</table>
+
+<!-- Repeater -->   
+<div wicket:id="list_container">
+<table class="oddeven">
+
+   <tr class="oddeven-head" style="vertical-align:text-top;">   <th class="oddeven-head" style="width:50px;text-align:left" ><span>Номер</span></th>
+      <th class="oddeven-head" style="width:90px;text-align:left" ><span>Торговая точка</span></th>
+      <th class="oddeven-head" style="width:100px;text-align:left" ><span>Дата ввода</span></th>
+      <th class="oddeven-head" style="width:60px;text-align:left" ><span>Продукт</span></th>
+      <th class="oddeven-head" style="width:60px;text-align:left" ><span>Статус</span></th>
+      <th class="oddeven-head" style="width:100px;text-align:left" ><span>Фамилия</span></th>
+      <th class="oddeven-head" style="width:80px;text-align:left" ><span>Имя</span></th>
+      <th class="oddeven-head" style="width:60px;text-align:left" ><span>Сумма кредита</span></th>
+      <th class="oddeven-head" style="width:60px;text-align:left" ><span>Код клиента</span></th>
+      <th class="oddeven-head" style="width:60px;text-align:left" ><span>Код договора</span></th>
+      <th class="oddeven-head" style="width:90px;text-align:left" ><span>Агент</span></th>
+      <th class="oddeven-head" style="width:35px;text-align:left" ><span>Действие</span></th>
+      </tr>
+   <tr class="oddeven" wicket:id="list">        <td style="width:50px;text-align:left" wicket:id="in_dossier.id" ><span>1111 fake</span></td>
+               <td style="width:90px;text-align:left" wicket:id="in_dossier.externaldistributor.name" ><span>1111 fake</span></td>
+               <td style="width:100px;text-align:left" wicket:id="in_dossier.date_of_entering_dossier" ><span>1111 fake</span></td>
+               <td style="width:60px;text-align:left" wicket:id="in_dossier.product.name" ><span>1111 fake</span></td>
+               <td style="width:60px;text-align:left" wicket:id="in_dossier.dict_status_of_dossier" ><span>1111 fake</span></td>
+               <td style="width:100px;text-align:left" wicket:id="in_person.last_name" ><span>1111 fake</span></td>
+               <td style="width:80px;text-align:left" wicket:id="in_person.first_name" ><span>1111 fake</span></td>
+               <td style="width:60px;text-align:left" wicket:id="in_dossier.amount_of_loan" ><span>1111 fake</span></td>
+               <td style="width:60px;text-align:left" wicket:id="in_person.exp_id" ><span>1111 fake</span></td>
+               <td style="width:60px;text-align:left" wicket:id="in_dossier.dossier_exp_id" ><span>1111 fake</span></td>
+               <td style="width:90px;text-align:left" wicket:id="in_dossier.user_name_enters_dossier" ><span>1111 fake</span></td>
+                <td style="width:35px;text-align:left">
+        <ul class="linknavig">
+                            <li><a wicket:id="viewlink"  class="viewlink"   title="Просмотр данных заявки"  >xxx</a></li>
+                                    </ul>
+     </td>
+          </tr>
+</table>
+</div>
+<!-- Repeater -->   
+</fieldset>
+<wicket:child/>
+      <br />
+    </fieldset> 
+    
+ 
+
+    </form>
+      
+</div>
+    
+</wicket:panel>
+</body>
+</html>

@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<classes>
+    <class name="RequestsListPage">
+        <pageTitle>Перечень всех заявок</pageTitle>
+        <sectionTitle>Все заявки:</sectionTitle>
+        <compoundPropertyModel><![CDATA[
+                    this
+                    ]]>
+        </compoundPropertyModel>
+        <formInit><![CDATA[
+                    private Date dateFrom = getCreditautoSession().getSearchData().getAllDossiers().getFrom();
+                    private Date dateTo = getCreditautoSession().getSearchData().getAllDossiers().getTo();
+                    ]]>
+        </formInit>
+        <formMethods><![CDATA[
+                    public Date getDateFrom() {
+                         return dateFrom;
+                    }
+                    public void setDateFrom(Date dateFrom) {
+                        this.dateFrom = dateFrom;
+                    }
+                    public Date getDateTo() {
+                         return dateTo;
+                    }
+                    public void setDateTo(Date dateTo) {
+                        this.dateTo = dateTo;
+                    }
+                    ]]>
+        </formMethods>
+        <variable name="dateFrom" type="TextField" label="Дата с, ддммгггг" size="9"/>
+        <variable name="dateTo" type="TextField" label="Дата по, ддммгггг" size="9"/>
+        <variable name="search" type="AjaxLink" label="Поиск">
+                <onSubmit><![CDATA[
+                getCreditautoSession().getSearchData().getAllDossiers().setFrom(dateFrom);
+                getCreditautoSession().getSearchData().getAllDossiers().setTo(dateTo);
+                ((ListView)form.get("list_container:list")).setModelObject(org.bitbucket.creditauto.wicket.InstanceHelper.load(dateFrom, dateTo));
+                target.addComponent(form);
+]]>
+                </onSubmit>
+        </variable>
+        <repeater name="list" type="ListView">
+           <header name="id" label="Номер" size="50" />
+           <header name="shop" label="Торговая точка" size="90" />
+           <header name="date" label="Дата ввода" size="100" />
+           <header name="product" label="Продукт" size="60" />
+           <header name="status" label="Статус" size="60" />
+           <header name="f" label="Фамилия" size="100" />
+           <header name="i" label="Имя" size="80" />
+           <header name="sum" label="Сумма кредита" size="60" />
+           <header name="clcode" label="Код клиента" size="60" />
+           <header name="dealcode" label="Код договора" size="60" />
+           <header name="agent" label="Агент" size="90" />
+           <header name="hact" label="Действие" size="35" />
+           <model><![CDATA[org.bitbucket.creditauto.wicket.InstanceHelper.load(dateFrom, dateTo)
+                    ]]></model>
+           <modelClass><![CDATA[In_instance]]></modelClass>
+           <data name="in_dossier.id" label="Номер заявки" size="50" />
+           <data name="in_dossier.externaldistributor.name" label="Торговая точка" size="90" />
+           <data name="in_dossier.date_of_entering_dossier" label="Дата" size="100" />
+           <data name="in_dossier.product.name" label="Продукт" size="60" />
+           <data name="in_dossier.dict_status_of_dossier" label="Статус" size="60" >
+               <model><![CDATA[InDossierStatus.getStatusNameByKey(modelObject.getIn_dossier().getDict_status_of_dossier())]]></model>
+           </data>
+           <data name="in_person.last_name" label="Ф клиента" size="100" />
+           <data name="in_person.first_name" label="И клиента" size="80" />
+           <data name="in_dossier.amount_of_loan" label="Сумма кредита" size="60" />
+           <data name="in_person.exp_id" label="Код клиента" size="60" />
+           <data name="in_dossier.dossier_exp_id" label="Код договора" size="60" />
+           <data name="in_dossier.user_name_enters_dossier" label="Агент" size="90" />
+           <data name="id" label="Действие" size="35" type="links" >
+              <links>
+                 <link name="viewlink" title="Просмотр данных заявки" size="40" type="AjaxLink" cssclass="viewlink">
+                   <onClick><![CDATA[setResponsePage(new CarDetailsInfoViewPage(org.bitbucket.creditauto.wicket.InstanceHelper.load(modelObject.getIn_dossier().getId())));]]></onClick>
+                 </link>
+              </links>
+           </data>
+        </repeater>
+    </class>
+    <class name="UsersListResultPage">
+        <pageTitle>Список пользователей системы</pageTitle>
+        <sectionTitle>Пользователи:</sectionTitle>
+        <compoundPropertyModel><![CDATA[this]]>
+        </compoundPropertyModel>
+        
+        
+        <repeater name="list" type="ListView">
+           <header name="userLogin" label="Логин пользователя" size="100" />
+           <header name="userName" label="Имя пользователя" size="100" />
+           <header name="userDescription" label="Описание " size="100" />
+           <header name="creat" label="Дата создания" size="60" />
+           <header name="block" label="Пользователь заблокирован" size="80" />
+           <header name="blockedStart" label="Начало блокирования" size="60" />
+           <header name="blockedFinish" label="Окончание блокирования" size="60" />
+           <header name="blockedTemporary" label="Временно заблокирован" size="60" />
+           <header name="hact" label="Действие" size="40" />
+           <model><![CDATA[
+                    new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().getUsers(getCreditautoSession().getSearchData().getAllUsers())
+                    ]]></model>
+           <modelClass><![CDATA[User]]></modelClass>
+           <data name="login" label="Логин пользователя" size="100" />
+           <data name="name" label="Имя пользователя" size="100" />
+           <data name="description" label="Описание " size="100" />
+           <data name="created" label="Дата создания" size="60" />
+           <data name="blocked" label="Пользователь заблокирован" size="80" type="CheckBox"/>
+           <data name="blocked_start" label="Начало блокирования" size="60" />
+           <data name="blocked_finish" label="Окончание блокирования" size="60" />
+           <data name="blocked_temporary" label="Временно заблокирован" size="60" />
+           <data name="id" label="Действие" size="40" type="links" >
+              <links>
+                 <link name="viewlink" title="Просмотр данных агента" size="40" type="AjaxLink" cssclass="viewlink">
+                   <onClick><![CDATA[setResponsePage(new UserRolesViewPage(modelObject));]]>  </onClick>
+                 </link>
+                 <link name="editlink" title="Редактировать данные агента" size="40" type="AjaxLink" cssclass="editlink">
+                   <onClick><![CDATA[setResponsePage(new UserRolesPage(modelObject));]]>  </onClick>
+                 </link>
+              </links>
+               
+           </data>
+        </repeater>
+    </class>
+</classes>

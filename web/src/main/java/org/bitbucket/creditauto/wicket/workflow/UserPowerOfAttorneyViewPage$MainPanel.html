@@ -1,0 +1,43 @@
+<html>
+<body>
+<wicket:panel>
+<wicket:extend>
+<div class="section">
+       <fieldset><legend>Доверенности пользователя:</legend><table style="width:100%;">
+</table>
+
+<div wicket:id="list_container">
+<table class="oddeven">
+
+   <tr class="oddeven-head" style="vertical-align:text-top;">   <th class="oddeven-head" style="width:100px;text-align:left" ><span>Номер доверенности</span></th>
+      <th class="oddeven-head" style="width:100px;text-align:left" ><span>Начало действия</span></th>
+      <th class="oddeven-head" style="width:100px;text-align:left" ><span>Конец действия</span></th>
+      <th class="oddeven-head" style="width:60px;text-align:left" ><span>Тип доверенности</span></th>
+      <th class="oddeven-head" style="width:80px;text-align:left" ><span>Продукт доверенности</span></th>
+      <th class="oddeven-head" style="width:60px;text-align:left" ><span>Цель доверенности</span></th>
+      <th class="oddeven-head" style="width:40px;text-align:left" ><span>Действие</span></th>
+      </tr>
+   <tr class="oddeven" wicket:id="list">        <td style="width:100px;text-align:left" wicket:id="attorney_number" ><span>1111 fake</span></td>
+               <td style="width:100px;text-align:left" wicket:id="attorney_date_start" ><span>1111 fake</span></td>
+               <td style="width:100px;text-align:left" wicket:id="attorney_date_finish" ><span>1111 fake</span></td>
+               <td style="width:60px;text-align:left" wicket:id="dictionary_type_of_attorney" ><span>1111 fake</span></td>
+               <td style="width:80px;text-align:left" wicket:id="product.name" ><span>1111 fake</span></td>
+               <td style="width:60px;text-align:left" wicket:id="dictionary_type_purpose" ><span>1111 fake</span></td>
+                <td style="width:40px;text-align:left">
+        <ul class="linknavig">
+                            <li><a wicket:id="droplink"  class="droplink"   title="Удалить"  >xxx</a></li>
+                                    </ul>
+     </td>
+          </tr>
+</table>
+</div>
+<!-- Repeater -->   
+</fieldset>
+<wicket:child/>
+      
+</div>
+    
+</wicket:extend>
+</wicket:panel>
+</body>
+</html>

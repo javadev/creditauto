@@ -1,0 +1,39 @@
+<html>
+<body>
+<wicket:panel>
+<div class="section">
+        <form wicket:id="form">
+    <fieldset style="border:none;">
+       <div class="entry">
+            <div class="label" style="color:black;text-align:center;">Сообщить о проблеме</div>
+       </div>
+       <fieldset><legend>Проблема, которая возникла во время работы</legend><table style="width:100%;">
+<tr wicket:id="troubleType_line"><td class="right-aligned"><div class="label">Тип проблемы</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="troubleType_border">
+        <select id="troubleType" wicket:id="troubleType_id" style="width:100%;" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="comment_line"><td class="right-aligned"><div class="label">Комментарий проблемы</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="comment_border">
+        <textarea id="comment" wicket:id="comment_id" style="width:100%" rows="3" cols="20"></textarea title="">
+         </div>       </div></td>
+</tr>
+</table>
+
+</fieldset>
+<wicket:child/>
+      <br />
+        <input id="next" name="next" wicket:id="next" wicket:message="value:navigation.next" type="submit"/>
+    </fieldset> 
+    
+ 
+
+    </form>
+      
+</div>
+    
+</wicket:panel>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<html>
+<body>
+<wicket:panel>
+<div class="section">
+        <form wicket:id="form">
+    <fieldset style="border:none;">
+       <div class="entry">
+            <div class="label" style="color:black;text-align:center;">Параметры пользователя</div>
+       </div>
+       <fieldset><legend> Основные параметры пользователя:</legend><table style="width:100%;">
+<tr wicket:id="login_line"><td class="right-aligned"><div class="label">Логин входа в систему</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="login_border">
+        <input id="login" wicket:id="login_id" size="15" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="name_line"><td class="right-aligned"><div class="label">ФИО пользователя</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="name_border">
+        <input id="name" wicket:id="name_id" size="15" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="description_line"><td class="right-aligned"><div class="label">Описание</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="description_border">
+        <input id="description" wicket:id="description_id" size="15" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="is_nst_line"><td class="right-aligned"><div class="label">Не сотрудник банка</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="is_nst_border">
+        <input id="is_nst" wicket:id="is_nst_id" type="checkbox" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="table_number_line"><td class="right-aligned"><div class="label">Номер пользователя</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="table_number_border">
+        <input id="table_number" wicket:id="table_number_id" size="15" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="phone_line"><td class="right-aligned"><div class="label">Номер телефона</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="phone_border">
+        <input id="phone" wicket:id="phone_id" size="15" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="phone2_line"><td class="right-aligned"><div class="label">Дополнительный номер телефона</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="phone2_border">
+        <input id="phone2" wicket:id="phone2_id" size="15" title=""/>
+         </div>       </div></td>
+</tr>
+</table>
+
+</fieldset>
+<wicket:child/>
+      <br />
+        <input id="back" name="back" wicket:id="back" wicket:message="value:navigation.back" type="submit"/>
+        <input id="next" name="next" wicket:id="next" wicket:message="value:navigation.next" type="submit"/>
+    </fieldset> 
+    
+ 
+
+    </form>
+      
+</div>
+    <div wicket:id="modal2" style="background-color: #FFFEC4;"></div><br/>
+
+</wicket:panel>
+</body>
+</html>

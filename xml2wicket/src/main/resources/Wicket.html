@@ -1,0 +1,119 @@
+<html>
+<body>
+#if ($extends.endsWith("Panel"))
+<wicket:panel>
+#else
+<wicket:panel>
+#if (!$extends.isEmpty())
+<wicket:extend>
+#end
+#end
+<div class="section">
+#if ($extends.isEmpty())
+        <form wicket:id="form">
+    <fieldset style="border:none;">
+       <div class="entry">
+            <div class="label" style="color:black;text-align:center;">$xmltag.getText("pageTitle")</div>
+       </div>
+#end
+#if (!$extends.endsWith("Panel"))             
+       <fieldset>#if (!$xmltag.getText("sectionTitle").isEmpty())<legend>$xmltag.getText("sectionTitle")</legend>#end
+#end
+#if ($xmltag.hasTag("message"))
+            <div class="label" style="color:black;text-align:center;">$xmltag.getText("message")</div>
+#end
+<table style="width:100%;">
+#foreach ($var in $variables)
+#if ($var.get("type").endsWith("Panel"))
+</table>
+<span wicket:id="$var.get("name")"/>
+<table style="width:100%;">
+#else
+<tr wicket:id="$var.get("name")_line">#if ($var.get("type") == "AjaxLink" || $var.get("type") == "Link" || $var.get("type") == "AjaxSubmitLink")
+<td style="text-align: center;" colspan="2"><div class="input"><$var.get("htmlType") id="$var.get("htmlId")" wicket:id="$var.get("name")_id"$var.get("style")$var.get("size")/>#else
+<td class="right-aligned"><div class="label">$var.get("label")</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="$var.get("name")_border">
+#if ($var.get("type") == "TextArea")
+        <$var.get("htmlType") id="$var.get("htmlId")" wicket:id="$var.get("name")_id"$var.get("style")$var.get("size")></$var.get("htmlType") title="$var.get("title")">
+#elseif ($var.get("type") == "FileUploadField")
+        <input id="$var.get("htmlId")" type="file" wicket:id="$var.get("name")_id">
+#else
+        <$var.get("htmlType") id="$var.get("htmlId")" wicket:id="$var.get("name")_id"$var.get("style")$var.get("size") title="$var.get("title")"/>
+#end
+         </div>#end
+       </div></td>
+</tr>
+#end
+#end             
+</table>
+
+#if (!$repeaters.isEmpty() && !$variables.isEmpty())
+<!-- Repeater -->   
+#end
+#foreach ($rep in $repeaters) 
+<div wicket:id="$rep.getExtra().get("name")_container">
+<table class="oddeven">
+
+   <tr class="oddeven-head" style="vertical-align:text-top;">#foreach ($hed in $rep.getHeaders())
+   <th class="oddeven-head" style="width:${hed.get("size")}px;text-align:left" ><span>$hed.get("label")</span></th>
+   #end
+   </tr>
+   <tr class="oddeven" wicket:id="${rep.getExtra().get("name")}">#foreach ($data in $rep.getData())
+   #if ($data.get("type") == "links")
+      <td style="width:${data.get("size")}px;text-align:left">
+        <ul class="linknavig">
+        #foreach ($link in $rep.getLinks())
+          #if ($link.get("type").endsWith("Link"))
+          <li><a wicket:id="${link.get("name")}" #if (!$link.get("cssclass").isEmpty()) class="${link.get("cssclass")}" #end #if (!$link.get("title").isEmpty()) title="${link.get("title")}" #end >xxx</a></li>
+          #end
+          #if ($link.get("type").endsWith("Box"))
+           <li><input type="checkbox" wicket:id="${link.get("name")}" #if (!$link.get("cssclass").isEmpty()) class="${link.get("cssclass")}" #end #if (!$link.get("title").isEmpty()) title="${link.get("title")}" #end /></li>
+          #end
+        #end
+        </ul>
+     </td>
+    #elseif ($data.get("type") == "Link" || $data.get("type") == "AjaxLink")
+     <td style="width:${data.get("size")}px;text-align:left"  ><a id="${data.get("name")}_id" wicket:id="link" #if (!$data.get("cssclass").isEmpty()) class="${data.get("cssclass")}" #end> <span wicket:id="${data.get("name")}"/></a></td>
+    #elseif ($data.get("type") == "CheckBox")
+     <td style="width:${data.get("size")}px;text-align:left"  ><input type="checkbox" wicket:id="${data.get("name")}" #if (!$data.get("cssclass").isEmpty()) class="${data.get("cssclass")}" #end /></td>
+    #else
+     <td style="width:${data.get("size")}px;text-align:left" wicket:id="${data.get("name")}" ><span>1111 fake</span></td>
+    #end
+   #end
+   </tr>
+</table>
+</div>
+<!-- Repeater -->   
+#end
+#if (!$extends.endsWith("Panel"))
+</fieldset>
+#end
+<wicket:child/>
+#if ($extends.isEmpty())
+      <br />
+#foreach ($button in $buttons) 
+        <input id="${button.get("name")}" name="${button.get("name")}" wicket:id="${button.get("name")}"#if ($button.get("label").isEmpty()) wicket:message="value:navigation.${button.get("name")}"#else value="${button.get("label")}"#end type="submit"/>
+#end
+    </fieldset> 
+    
+ 
+
+    </form>
+#end    
+      
+</div>
+    #if ($xmltag.hasTag("modalWindow"))
+<div wicket:id="modal2" style="background-color: #FFFEC4;"></div><br/>
+#end
+
+#if ($extends.endsWith("Panel"))
+</wicket:panel>
+#else
+#if (!$extends.isEmpty())
+</wicket:extend>
+#end
+</wicket:panel>
+#end
+</body>
+</html>

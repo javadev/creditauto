@@ -1,0 +1,17 @@
+@org.hibernate.annotations.Table(
+   appliesTo = "dictionary_data",
+   indexes = {
+      @org.hibernate.annotations.Index(name="name_valid_from_to_language_index", columnNames = {"name", "valid", "fromdate", "todate", "language"}),
+      @org.hibernate.annotations.Index(name="dvalue_index", columnNames = {"dvalue"})
+   }
+)
+@org.hibernate.annotations.Table(
+   appliesTo = "in_dossier",
+   indexes = {
+      @org.hibernate.annotations.Index(name="date_of_entering_dossier_index", columnNames = {"date_of_entering_dossier"})
+   }
+)
+CREATE INDEX name_valid_from_to_language_index ON dictionary_data (name, valid, fromdate, todate, language);
+CREATE INDEX dvalue_index ON dictionary_data (dvalue);
+CREATE INDEX date_of_entering_dossier_index ON in_dossier (date_of_entering_dossier); 
+

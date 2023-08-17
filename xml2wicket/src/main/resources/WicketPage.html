@@ -1,0 +1,13 @@
+<html>
+<body>
+<wicket:extend>
+#if ($extends.isEmpty())
+<div class="entry">
+     <div class="label" style="color:black;" wicket:id="header"></div>
+</div>
+<div wicket:id="panel" class="tabpanel"/>
+#end
+<wicket:child/>
+</wicket:extend>
+</body>
+</html>

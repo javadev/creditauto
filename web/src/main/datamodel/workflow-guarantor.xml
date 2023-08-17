@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<classes>
+    <class name="GuaranteePersonalInfoPage">
+        <pageTitle>Информация о поручителе</pageTitle>
+        <sectionTitle>Личная информация о поручителе</sectionTitle>
+        <variable name="guarantorPassport" type="PassportInfoPanel" >
+             <model><![CDATA[new PropertyModel(inInstance, "in_guarantor")]]></model>
+             <afterInit>form.add(new org.bitbucket.creditauto.wicket.AgeMoreThan16Validator(
+(FormComponent) form.get("guarantorPassport:birthday_line:birthday_border:birthday_id"),
+(FormComponent) form.get("guarantorPassport:date_of_issue_tin_certificate_line:date_of_issue_tin_certificate_border:date_of_issue_tin_certificate_id")));
+                form.add(new org.bitbucket.creditauto.wicket.AgeMoreThan16Validator(
+(FormComponent) form.get("guarantorPassport:birthday_line:birthday_border:birthday_id"),
+(FormComponent) form.get("guarantorPassport:date_of_giving_tin_certificate_line:date_of_giving_tin_certificate_border:date_of_giving_tin_certificate_id")));
+                form.add(new org.bitbucket.creditauto.wicket.AgeMoreThan16Validator(
+(FormComponent) form.get("guarantorPassport:birthday_line:birthday_border:birthday_id"),
+(FormComponent) form.get("guarantorPassport:date_of_issuing_identity_doc_line:date_of_issuing_identity_doc_border:date_of_issuing_identity_doc_id")))
+             </afterInit>
+        </variable>
+        <variable name="guarantorMarital" type="MaritalStatusPanel" >
+             <model><![CDATA[new PropertyModel(inInstance, "in_guarantor")]]></model>
+        </variable>
+        <button name="back" type="Link"></button>
+        <button name="refuseGuarantee" type="Link" label="Отказаться от поручителя"/>
+        <button name="next" type="SubmitLink"></button>
+    </class>
+    <class name="GuaranteeContactPage" extends="GuaranteePersonalInfoPage">
+        <pageTitle>Информация о поручителе</pageTitle>
+        <sectionTitle>Контактная информация поручителя</sectionTitle>
+        <variable name="guarantorAddressReg" type="AddressRegPanel" >
+             <model><![CDATA[new PropertyModel(inInstance, "in_guarantor")]]></model>
+        </variable>
+        <variable name="guarantorAddressMail" type="AddressMailPanel" >
+             <model><![CDATA[new PropertyModel(inInstance, "in_guarantor")]]></model>
+        </variable>
+    </class>
+    <class name="GuaranteeEmployerInfoPage" extends="GuaranteeContactPage">
+        <pageTitle>Информация о поручителе</pageTitle>
+        <sectionTitle>Работодатель и бюджет поручителя кредита</sectionTitle>
+        <variable name="in_guarantor.employer" type="TextField" label="Работодатель" size="60"/>
+        <variable name="in_guarantor.edrpou_of_employer" type="TextField" label="ЕДРПОУ работодателя" size="60"/>
+        <variable name="guarantorEmployer" type="EmployerAddressPanel" >
+             <model><![CDATA[new PropertyModel(inInstance, "in_guarantor")]]></model>
+        </variable>
+        <variable name="in_guarantor.gross_income" type="TextField" label="Ежемесячный доход поручителя, грн" size="11"/>
+        <variable name="in_guarantor.other_income" type="TextField" label="Другие доходы поручителя, грн" size="11"/>
+    </class>
+    <class name="GuaranteeAddInfoPage" extends="GuaranteeEmployerInfoPage">
+        <pageTitle>Информация о поручителе</pageTitle>
+        <sectionTitle>Дополнительные данные о поручителе кредита</sectionTitle>
+        <variable name="guarantorAddInfo" type="ClientAddInfoPanel" >
+             <model><![CDATA[new PropertyModel(inInstance, "in_guarantor")]]></model>
+        </variable>
+        <variable name="guarantorNotesPanel" type="NotesPanel" >
+             <model><![CDATA[new PropertyModel(inInstance, "in_dossier")]]></model>
+        </variable>
+    </class>
+    <class name="GuaranteePartnerInfoPage" extends="GuaranteeAddInfoPage" combines="CarDetailsInfoPage,CredittypeSelectionPage,ClientPersonalInfoPage,PartnerPersonalInfoPage,ClientAddressMailChoosePage,ClientEmployerInfoPage,PartnerEmployerInfoPage,ClientIncomeInfoPage,ClientAssetPage,ThirdPersonInfoPage,GuaranteePartnerInfoPage">
+        <pageTitle>Информация о поручителе</pageTitle>
+        <sectionTitle>Данные о Партнере поручителя кредита</sectionTitle>
+        <variable name="guarantorPartnerInfo" type="PartnerPassportPanel" >
+             <model><![CDATA[new PropertyModel(inInstance, "in_guarantor_partner")]]></model>
+        </variable>
+        <button name="back" type="Link">
+            setResponsePage(new ThirdPersonInfoPage());</button>
+        <button name="refuseGuarantee" type="Link" label="Отказаться от поручителя"><![CDATA[
+            In_person in_guarantor = new In_person();
+            in_guarantor.setDict_client_type("3");
+            inInstance.setIn_guarantor(in_guarantor);
+            In_person in_guarantor_partner = new In_person();
+            in_guarantor_partner.setDict_client_type("4");
+            inInstance.setIn_guarantor_partner(in_guarantor_partner);
+            inInstance.getIn_guarantor().setIn_dossier(inInstance.getIn_dossier());
+            inInstance.getIn_guarantor_partner().setIn_dossier(inInstance.getIn_dossier());
+            setResponsePage(new ThirdPersonInfoPage());
+        ]]></button>
+        <button name="next" type="SubmitLink">
+            saveWorkflowPath("PrintApplicationFormPage");
+            org.bitbucket.creditauto.wicket.InstanceHelper.save(inInstance);
+            setResponsePage(new PrintApplicationFormPage());</button>
+    </class>
+</classes>

@@ -1,0 +1,106 @@
+<html>
+<body>
+<wicket:panel>
+<div class="section">
+        <form wicket:id="form">
+    <fieldset style="border:none;">
+       <div class="entry">
+            <div class="label" style="color:black;text-align:center;">Персональные данные клиента</div>
+       </div>
+       <fieldset><legend>Персональные данные</legend><table style="width:100%;">
+<tr wicket:id="in_person.dictionary_gender_line"><td class="right-aligned"><div class="label">Пол</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.dictionary_gender_border">
+        <input id="in_person_dictionary_gender" wicket:id="in_person.dictionary_gender_id" style="width:160px;" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.last_name_line"><td class="right-aligned"><div class="label">Фамилия</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.last_name_border">
+        <input id="in_person_last_name" wicket:id="in_person.last_name_id" size="40" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.first_name_line"><td class="right-aligned"><div class="label">Имя</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.first_name_border">
+        <input id="in_person_first_name" wicket:id="in_person.first_name_id" size="40" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.patronymic_name_line"><td class="right-aligned"><div class="label">Отчество</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.patronymic_name_border">
+        <input id="in_person_patronymic_name" wicket:id="in_person.patronymic_name_id" size="40" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.birthday_line"><td class="right-aligned"><div class="label">Дата рождения, ддммгггг</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.birthday_border">
+        <input id="in_person_birthday" wicket:id="in_person.birthday_id" size="9" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.birth_place_line"><td class="right-aligned"><div class="label">Место рождения</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.birth_place_border">
+        <input id="in_person_birth_place" wicket:id="in_person.birth_place_id" size="60" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.tin_line"><td class="right-aligned"><div class="label">ИНН</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.tin_border">
+        <input id="in_person_tin" wicket:id="in_person.tin_id" size="11" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.date_of_issue_tin_certificate_line"><td class="right-aligned"><div class="label">Дата регистрации ИНН, ддммгггг</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.date_of_issue_tin_certificate_border">
+        <input id="in_person_date_of_issue_tin_certificate" wicket:id="in_person.date_of_issue_tin_certificate_id" size="9" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.date_of_giving_tin_certificate_line"><td class="right-aligned"><div class="label">Дата выдачи ИНН, ддммгггг</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.date_of_giving_tin_certificate_border">
+        <input id="in_person_date_of_giving_tin_certificate" wicket:id="in_person.date_of_giving_tin_certificate_id" size="9" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.issuer_of_tin_line"><td class="right-aligned"><div class="label">Кем выдан ИНН</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.issuer_of_tin_border">
+        <input id="in_person_issuer_of_tin" wicket:id="in_person.issuer_of_tin_id" size="60" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.identity_document_number_line"><td class="right-aligned"><div class="label">Номер паспорта, 2 буквы и 6 цифр без пробела</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.identity_document_number_border">
+        <input id="in_person_identity_document_number" wicket:id="in_person.identity_document_number_id" size="9" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.date_of_issuing_identity_doc_line"><td class="right-aligned"><div class="label">Дата выдачи паспорта, ддммгггг</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.date_of_issuing_identity_doc_border">
+        <input id="in_person_date_of_issuing_identity_doc" wicket:id="in_person.date_of_issuing_identity_doc_id" size="9" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.issuer_of_identity_document_line"><td class="right-aligned"><div class="label">Кем выдан паспорт</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.issuer_of_identity_document_border">
+        <input id="in_person_issuer_of_identity_document" wicket:id="in_person.issuer_of_identity_document_id" size="60" title=""/>
+         </div>       </div></td>
+</tr>
+</table>
+
+</fieldset>
+<wicket:child/>
+      <br />
+        <input id="back" name="back" wicket:id="back" wicket:message="value:navigation.back" type="submit"/>
+        <input id="next" name="next" wicket:id="next" wicket:message="value:navigation.next" type="submit"/>
+    </fieldset> 
+    
+ 
+
+    </form>
+      
+</div>
+    
+</wicket:panel>
+</body>
+</html>

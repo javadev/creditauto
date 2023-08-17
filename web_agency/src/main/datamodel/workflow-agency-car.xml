@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<classes>
+    <class name="AllRequestsPage">
+        <pageTitle>Все заявки агенства</pageTitle>
+        <sectionTitle></sectionTitle>
+        <compoundPropertyModel><![CDATA[
+                    this
+                    ]]>
+        </compoundPropertyModel>
+        <formInit><![CDATA[
+                    private Date dateFrom = getCreditautoSession().getSearchData().getAllDossiers().getFrom();
+                    private Date dateTo = getCreditautoSession().getSearchData().getAllDossiers().getTo();
+                    ]]>
+        </formInit>
+        <formMethods><![CDATA[
+                    public Date getDateFrom() {
+                         return dateFrom;
+                    }
+                    public void setDateFrom(Date dateFrom) {
+                        this.dateFrom = dateFrom;
+                    }
+                    public Date getDateTo() {
+                         return dateTo;
+                    }
+                    public void setDateTo(Date dateTo) {
+                        this.dateTo = dateTo;
+                    }
+                    ]]>
+        </formMethods>
+        <variable name="dateFrom" type="TextField" label="Дата с, ддммгггг" size="9"/>
+        <variable name="dateTo" type="TextField" label="Дата по, ддммгггг" size="9"/>
+        <variable name="search" type="AjaxLink" label="Поиск">
+                <onSubmit><![CDATA[
+                getCreditautoSession().getSearchData().getAllDossiers().setFrom(dateFrom);
+                getCreditautoSession().getSearchData().getAllDossiers().setTo(dateTo);
+                ((ListView)form.get("list_container:list")).setModelObject(org.bitbucket.creditauto.wicket.InstanceHelper.load(dateFrom, dateTo));
+                target.addComponent(form);
+]]>
+                </onSubmit>
+        </variable>
+        <repeater name="list" type="ListView">
+           <header name="id" label="Номер" size="50" />
+           <header name="externaldistributor_name" label="Точка продаж" size="90" />
+           <header name="date_of_comming" label="Дата поступления в агенство" size="100" />
+           <header name="product_name" label="Продукт" size="60" />
+           <header name="dict_status_of_dossier" label="Статус заявки" size="60" />
+           <header name="last_name" label="Фамилия" size="100" />
+           <header name="first_name" label="Имя" size="80" />
+           <header name="amount_of_loan" label="Сумма кредита" size="60" />
+           <header name="exp_id" label="Код клиента" size="60" />
+           <header name="dossier_exp_id" label="Код договора" size="60" />
+           <header name="user_name_enteres_dossier" label="ФИО пользователя, который ввел заявку" size="90" />
+<!--           <header name="is_blocked" label="Блокирование" size="50" /> -->
+           <model><![CDATA[org.bitbucket.creditauto.wicket.InstanceHelper.load(dateFrom, dateTo)
+                    ]]></model>
+           <modelClass><![CDATA[In_instance]]></modelClass>
+           <data name="in_dossier.id" label="Номер заявки" size="50" />
+           <data name="in_dossier.externaldistributor.name" label="Торговая точка" size="90" />
+           <data name="in_dossier.date_of_coming_dossier" label="Дата" size="100" />
+           <data name="in_dossier.product.name" label="Продукт" size="60" />
+           <data name="in_dossier.dict_status_of_dossier" label="Статус" size="60" >
+               <model><![CDATA[InDossierStatus.getStatusNameByKey(modelObject.getIn_dossier().getDict_status_of_dossier())]]></model>
+           </data>
+           <data name="in_person.last_name" label="Ф клиента" size="100" />
+           <data name="in_person.first_name" label="И клиента" size="80" />
+           <data name="in_dossier.amount_of_loan" label="Сумма кредита" size="60" />
+           <data name="in_person.exp_id" label="Код клиента" size="60" />
+           <data name="in_dossier.dossier_exp_id" label="Код договора" size="60" />
+           <data name="in_dossier.user_name_enters_dossier" label="Агент" size="90" />
+        </repeater>
+    </class>
+    <class name="AllToStudyRequestPage">
+        <pageTitle>Все заявки агенства к изучению</pageTitle>
+        <sectionTitle></sectionTitle>
+    </class>
+</classes>

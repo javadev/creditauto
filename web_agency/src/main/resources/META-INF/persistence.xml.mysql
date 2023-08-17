@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" 
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" 
+             version="1.0">
+    <persistence-unit name="creditautoDatabase">
+        <class>org.bitbucket.creditauto.entity.Competence_level</class>
+        <class>org.bitbucket.creditauto.entity.Credittype</class>
+        <class>org.bitbucket.creditauto.entity.Credittype_has_extdistributor</class>
+        <class>org.bitbucket.creditauto.entity.Dictionary_data</class>
+        <class>org.bitbucket.creditauto.entity.Externaldistributor</class>
+        <class>org.bitbucket.creditauto.entity.Goodexternaldistributor</class>
+        <class>org.bitbucket.creditauto.entity.In_asset</class>
+        <class>org.bitbucket.creditauto.entity.In_bloknot</class>
+        <class>org.bitbucket.creditauto.entity.In_document_store</class>
+        <class>org.bitbucket.creditauto.entity.In_dossier</class>
+        <class>org.bitbucket.creditauto.entity.In_good</class>
+        <class>org.bitbucket.creditauto.entity.In_instance</class>
+        <class>org.bitbucket.creditauto.entity.In_person</class>
+        <class>org.bitbucket.creditauto.entity.In_third_person</class>
+        <class>org.bitbucket.creditauto.entity.Powerofattorney</class>
+        <class>org.bitbucket.creditauto.entity.Product</class>
+        <class>org.bitbucket.creditauto.entity.Rgroup</class>
+        <class>org.bitbucket.creditauto.entity.Uright</class>
+        <class>org.bitbucket.creditauto.entity.Urole</class>
+        <class>org.bitbucket.creditauto.entity.Urole_has_uright</class>
+        <class>org.bitbucket.creditauto.entity.User</class>
+        <class>org.bitbucket.creditauto.entity.User_has_externaldistributor</class>
+        <class>org.bitbucket.creditauto.entity.User_has_urole</class>
+        <properties>
+            <property name="hibernate.archive.autodetection" value="class, hbm"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+            <property name="hibernate.connection.username" value="creditauto"/>
+            <property name="hibernate.connection.password" value="22creditauto22"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://mariadb-creditauto.jelastic.com/cadb?characterEncoding=utf8&amp;useUnicode=true&amp;connectionCollation=utf8_general_ci&amp;characterSetResults=utf8&amp;autoReconnect=true"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect"/>
+            <property name="hibernate.c3p0.min_size" value="5"/>
+            <property name="hibernate.c3p0.max_size" value="20"/>
+            <property name="hibernate.c3p0.timeout" value="300"/>
+            <property name="hibernate.c3p0.max_statements" value="50"/>
+            <property name="hibernate.c3p0.idle_test_period" value="3000"/>
+            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider"/>
+            <property name="hibernate.hbm2ddl.import_files" value="/import.sql,/import-address.sql"/>
+            <property name="javax.persistence.validation.group.pre-persist" value="org.bitbucket.creditauto.entity.validator.In_instanceGroup"/>
+            <property name="javax.persistence.validation.group.pre-update" value="org.bitbucket.creditauto.entity.validator.In_instanceGroup"/>
+        </properties>
+    </persistence-unit>
+</persistence>

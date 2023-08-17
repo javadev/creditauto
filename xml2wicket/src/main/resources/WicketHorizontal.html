@@ -1,0 +1,59 @@
+<html>
+<body>
+<wicket:panel>
+
+<div class="section">
+#if ($extends.isEmpty())
+        <form wicket:id="form">
+    <fieldset style="border:none;">
+       <div class="entry">
+            <div class="label" style="color:black;text-align:center;">$xmltag.getText("pageTitle")</div>
+       </div>
+#end             
+       <fieldset><legend>$xmltag.getText("sectionTitle")</legend>
+<table style="width:100%;">
+<tr>
+#foreach ($var in $variables)
+#if ($foreach.count <= 3)
+        <td style="width:200px;" wicket:id="$var.get("name")_line">
+        <div class="entry">
+            <div class="label">$var.get("label")</div>
+            <div class="input" wicket:id="$var.get("name")_border">
+                <$var.get("htmlType") id="$var.get("htmlId")" wicket:id="$var.get("name")_id"$var.get("style")$var.get("size") title="$var.get("title")"/>
+            </div>
+        </div>
+        </td>
+#end
+#end             
+</tr>
+<tr>
+#foreach ($var in $variables)
+#if ($foreach.count > 3)
+        <td style="width:200px;" wicket:id="$var.get("name")_line">
+        <div class="entry">
+            <div class="label">$var.get("label")</div>
+            <div class="input" wicket:id="$var.get("name")_border">
+                <$var.get("htmlType") id="$var.get("htmlId")" wicket:id="$var.get("name")_id"$var.get("style")$var.get("size") title="$var.get("title")"/>
+            </div>
+        </div>
+        </td>
+#end
+#end             
+</tr>
+</table>
+</fieldset>
+<wicket:child/>
+      <br />
+#foreach ($button in $buttons) 
+        <input id="${button.get("name")}" name="${button.get("name")}" wicket:id="${button.get("name")}" wicket:message="value:navigation.${button.get("name")}" type="submit"/>
+#end
+#if ($extends.isEmpty())
+    </fieldset> 
+        
+    </form>
+#end             
+</div>
+    
+</wicket:panel>
+</body>
+</html>

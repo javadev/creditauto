@@ -1,0 +1,45 @@
+<html>
+<body>
+<wicket:panel>
+<div class="section">
+<table style="width:100%;">
+<tr wicket:id="text_line"><td class="right-aligned"><div class="label">Заметка для блокнота</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="text_border">
+        <textarea id="text" wicket:id="text_id" rows="3" cols="20"></textarea title="">
+         </div>       </div></td>
+</tr>
+<tr wicket:id="addNote_line"><td style="text-align: center;" colspan="2"><div class="input"><input id="addNote" wicket:id="addNote_id" value="Добавить заметку" type="submit"/>       </div></td>
+</tr>
+</table>
+
+<!-- Repeater -->   
+<div wicket:id="listNotes_container">
+<table class="oddeven">
+
+   <tr class="oddeven-head" style="vertical-align:text-top;">   <th class="oddeven-head" style="width:60px;text-align:left" ><span>Дата</span></th>
+      <th class="oddeven-head" style="width:140px;text-align:left" ><span>Логин пользователя</span></th>
+      <th class="oddeven-head" style="width:80px;text-align:left" ><span>Тип записи</span></th>
+      <th class="oddeven-head" style="width:200px;text-align:left" ><span>Текст</span></th>
+      <th class="oddeven-head" style="width:40px;text-align:left" ><span>Действие</span></th>
+      </tr>
+   <tr class="oddeven" wicket:id="listNotes">        <td style="width:60px;text-align:left" wicket:id="enter_date" ><span>1111 fake</span></td>
+               <td style="width:140px;text-align:left" wicket:id="user_login" ><span>1111 fake</span></td>
+               <td style="width:80px;text-align:left" wicket:id="bloknot_type" ><span>1111 fake</span></td>
+               <td style="width:200px;text-align:left" wicket:id="text" ><span>1111 fake</span></td>
+                <td style="width:40px;text-align:left">
+        <ul class="linknavig">
+                            <li><a wicket:id="droplink"  class="droplink"   title="Удалить"  >xxx</a></li>
+                                    </ul>
+     </td>
+          </tr>
+</table>
+</div>
+<!-- Repeater -->   
+<wicket:child/>
+      
+</div>
+    
+</wicket:panel>
+</body>
+</html>

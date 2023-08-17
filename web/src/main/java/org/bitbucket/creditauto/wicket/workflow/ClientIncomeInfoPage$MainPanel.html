@@ -1,0 +1,70 @@
+<html>
+<body>
+<wicket:panel>
+<div class="section">
+        <form wicket:id="form">
+    <fieldset style="border:none;">
+       <div class="entry">
+            <div class="label" style="color:black;text-align:center;">Информация о доходах клиента</div>
+       </div>
+       <fieldset><legend>Информация о доходах:</legend><table style="width:100%;">
+<tr wicket:id="in_person.dict_type_of_income_doc_line"><td class="right-aligned"><div class="label">Тип документа, подтверждающий доходы клиента</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.dict_type_of_income_doc_border">
+        <select id="in_person_dict_type_of_income_doc" wicket:id="in_person.dict_type_of_income_doc_id" style="width:160px;" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.gross_income_line"><td class="right-aligned"><div class="label">Ежемесячный доход, заявленый клиентом, грн</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.gross_income_border">
+        <input id="in_person_gross_income" wicket:id="in_person.gross_income_id" size="11" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.other_income_line"><td class="right-aligned"><div class="label">Другие доходы клиента, грн</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.other_income_border">
+        <input id="in_person_other_income" wicket:id="in_person.other_income_id" size="11" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.expenses_for_renting_line"><td class="right-aligned"><div class="label">Ежемесячный платеж по кредиту/аренде жилья, грн</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.expenses_for_renting_border">
+        <input id="in_person_expenses_for_renting" wicket:id="in_person.expenses_for_renting_id" size="11" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.expenses_for_car_loan_line"><td class="right-aligned"><div class="label">Ежемесячный платеж по кредиту за автомобиль, грн</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.expenses_for_car_loan_border">
+        <input id="in_person_expenses_for_car_loan" wicket:id="in_person.expenses_for_car_loan_id" size="11" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.expenses_for_other_loans_line"><td class="right-aligned"><div class="label">Ежемесячный платеж по другим кредитам, грн</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.expenses_for_other_loans_border">
+        <input id="in_person_expenses_for_other_loans" wicket:id="in_person.expenses_for_other_loans_id" size="11" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="in_person.expenses_for_alimony_line"><td class="right-aligned"><div class="label">Алименты, грн</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_person.expenses_for_alimony_border">
+        <input id="in_person_expenses_for_alimony" wicket:id="in_person.expenses_for_alimony_id" size="11" title=""/>
+         </div>       </div></td>
+</tr>
+</table>
+
+</fieldset>
+<wicket:child/>
+      <br />
+        <input id="back" name="back" wicket:id="back" wicket:message="value:navigation.back" type="submit"/>
+        <input id="next" name="next" wicket:id="next" wicket:message="value:navigation.next" type="submit"/>
+    </fieldset> 
+    
+ 
+
+    </form>
+      
+</div>
+    
+</wicket:panel>
+</body>
+</html>

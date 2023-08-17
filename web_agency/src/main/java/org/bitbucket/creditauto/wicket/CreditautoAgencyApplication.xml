@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="username">Имя пользователя</entry>
+<entry key="shopId">Код магазина</entry>
+<entry key="oldpassword">Старый пароль</entry>
+<entry key="password">Новый пароль</entry>
+<entry key="verify">Подтвердите новый пароль</entry>
+
+<entry key="carBrand">Марка автомобиля</entry>
+<entry key="carModel">Модель автомобиля</entry>
+<entry key="carPrice">Цена автомобиля (с НДС), грн</entry>
+<entry key="initPayment">Величина первого платежа</entry>
+<entry key="carModel">Модель автомобиля</entry>
+<entry key="initPaymentCalc">Расчет первого платежа</entry>
+<entry key="perCent">%</entry>
+<entry key="UAH">UAH</entry>
+<entry key="perCentText">Процент</entry>
+<entry key="sumText">Сумма</entry>
+<entry key="initPaymentAmount">Первый платеж, грн</entry>
+<entry key="initPaymentPerCent">Проценты, %</entry>
+<entry key="passwordHelp">Пароль должен содержать от 8 до 15 символов, со следующими признаками: большие/строчные буквы, цифры, спецсимволы (например: !@#$%^&amp;*-+=)</entry>
+<entry key="inputOldPassword">Введите старый пароль:</entry>
+<entry key="inputNewPassword">Введите новый пароль:</entry>
+<entry key="repeatNewPassword">Подтвердите новый пароль:</entry>
+<entry key="changePassword">Изменить пароль</entry>
+<entry key="cancelPassword">Отмена</entry>
+<entry key="passwordWasChanged">Пароль был успешно изменен</entry>
+
+<entry key="navigation.back">&lt; Назад</entry>
+<entry key="navigation.next">Далее &gt;</entry>
+
+<entry key="incorrectShopId">Недопустимый магазин для данного пользователя</entry>
+<entry key="Required">Поле '${label}' является обязательным.</entry>
+<entry key="null">- не выбрано -</entry>
+<entry key="nullValid">- не выбрано -</entry>
+<entry key="InDocumentStoreValidator">поле не должно быть пустым</entry>
+<entry key="AgeMoreThan16Validator">дата должна быть на 16 лет больше, чем дата рождения</entry>
+<entry key="PercentValidator">величина должна быть от 0 до 100</entry>
+<entry key="SumValidator">неверная сумма</entry>
+
+</properties>

@@ -1,0 +1,85 @@
+<html>
+<body>
+<wicket:panel>
+
+<div class="section">
+        <form wicket:id="form">
+    <fieldset style="border:none;">
+       <div class="entry">
+            <div class="label" style="color:black;text-align:center;">Выбор типа товара</div>
+       </div>
+       <fieldset><legend>Выбор товара</legend>
+<table style="width:100%;">
+<tr>
+        <td style="width:200px;" wicket:id="in_goods.0.dictionary_carBrand_line">
+        <div class="entry">
+            <div class="label">Марка автомобиля</div>
+            <div class="input" wicket:id="in_goods.0.dictionary_carBrand_border">
+                <input id="in_goods_0_dictionary_carBrand" wicket:id="in_goods.0.dictionary_carBrand_id" style="width:160px;" title=""/>
+            </div>
+        </div>
+        </td>
+        <td style="width:200px;" wicket:id="in_goods.0.dictionary_carModel_line">
+        <div class="entry">
+            <div class="label">Модель автомобиля</div>
+            <div class="input" wicket:id="in_goods.0.dictionary_carModel_border">
+                <input id="in_goods_0_dictionary_carModel" wicket:id="in_goods.0.dictionary_carModel_id" style="width:160px;" title=""/>
+            </div>
+        </div>
+        </td>
+        <td style="width:200px;" wicket:id="in_goods.0.price_line">
+        <div class="entry">
+            <div class="label">Цена автомобиля (с НДС), грн</div>
+            <div class="input" wicket:id="in_goods.0.price_border">
+                <input id="in_goods_0_price" wicket:id="in_goods.0.price_id" size="15" title=""/>
+            </div>
+        </div>
+        </td>
+</tr>
+<tr>
+        <td style="width:200px;" wicket:id="in_dossier.down_payment_value_line">
+        <div class="entry">
+            <div class="label">Величина первого платежа</div>
+            <div class="input" wicket:id="in_dossier.down_payment_value_border">
+                <input id="in_dossier_down_payment_value" wicket:id="in_dossier.down_payment_value_id" size="15" title=""/>
+            </div>
+        </div>
+        </td>
+        <td style="width:200px;" wicket:id="in_dossier.down_payment_calc_method_line">
+        <div class="entry">
+            <div class="label">Расчет первого платежа</div>
+            <div class="input" wicket:id="in_dossier.down_payment_calc_method_border">
+                <input id="in_dossier_down_payment_calc_method" wicket:id="in_dossier.down_payment_calc_method_id" style="width:160px;" title=""/>
+            </div>
+        </div>
+        </td>
+        <td style="width:200px;" wicket:id="in_dossier.down_payment_prc_line">
+        <div class="entry">
+            <div class="label">Процент</div>
+            <div class="input" wicket:id="in_dossier.down_payment_prc_border">
+                <input id="in_dossier_down_payment_prc" wicket:id="in_dossier.down_payment_prc_id" size="15" title=""/>
+            </div>
+        </div>
+        </td>
+        <td style="width:200px;" wicket:id="in_dossier.down_payment_line">
+        <div class="entry">
+            <div class="label">Первый платеж, грн</div>
+            <div class="input" wicket:id="in_dossier.down_payment_border">
+                <input id="in_dossier_down_payment" wicket:id="in_dossier.down_payment_id" size="15" title=""/>
+            </div>
+        </div>
+        </td>
+</tr>
+</table>
+</fieldset>
+<wicket:child/>
+      <br />
+        <input id="next" name="next" wicket:id="next" wicket:message="value:navigation.next" type="submit"/>
+    </fieldset> 
+        
+    </form>
+</div>
+    
+</wicket:panel>
+</body>
+</html>

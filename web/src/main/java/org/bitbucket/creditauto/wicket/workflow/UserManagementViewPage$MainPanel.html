@@ -1,0 +1,65 @@
+<html>
+<body>
+<wicket:panel>
+<wicket:extend>
+<div class="section">
+       <fieldset><legend> Управление пользователем:</legend><table style="width:100%;">
+<tr wicket:id="isDefaultPassword_line"><td class="right-aligned"><div class="label">Изменить пароль пользователя на начальный</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="isDefaultPassword_border">
+        <input id="isDefaultPassword" wicket:id="isDefaultPassword_id" type="checkbox" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="isDeleted_line"><td class="right-aligned"><div class="label">Удалить пользователя из системы</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="isDeleted_border">
+        <input id="isDeleted" wicket:id="isDeleted_id" type="checkbox" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="deleted_comment_line"><td class="right-aligned"><div class="label">Комментарий</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="deleted_comment_border">
+        <input id="deleted_comment" wicket:id="deleted_comment_id" size="15" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="blocked_line"><td class="right-aligned"><div class="label">Блокировать пользователя</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="blocked_border">
+        <input id="blocked" wicket:id="blocked_id" type="checkbox" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="blocked_comment_line"><td class="right-aligned"><div class="label">Комментарий</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="blocked_comment_border">
+        <input id="blocked_comment" wicket:id="blocked_comment_id" size="15" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="isBlockedDateSet_line"><td class="right-aligned"><div class="label">Установить даты блокировки пользователя</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="isBlockedDateSet_border">
+        <input id="isBlockedDateSet" wicket:id="isBlockedDateSet_id" type="checkbox" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="blocked_start_line"><td class="right-aligned"><div class="label">Дата с</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="blocked_start_border">
+        <input id="blocked_start" wicket:id="blocked_start_id" size="15" title=""/>
+         </div>       </div></td>
+</tr>
+<tr wicket:id="blocked_finish_line"><td class="right-aligned"><div class="label">Дата по</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="blocked_finish_border">
+        <input id="blocked_finish" wicket:id="blocked_finish_id" size="15" title=""/>
+         </div>       </div></td>
+</tr>
+</table>
+
+</fieldset>
+<wicket:child/>
+      
+</div>
+    
+</wicket:extend>
+</wicket:panel>
+</body>
+</html>

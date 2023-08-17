@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Personal finance::Вход в систему</title>
+<link rel="shortcut icon" href="favicon.ico"/>
+<link href="css/style.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="css/logon.css" rel="stylesheet" type="text/css" media="screen" />
+</head>
+<body style="background: none">
+<div id="wrapper">
+    <div id="header">
+    </div>
+    <!-- end #header -->
+    <div id="menu">
+    </div>
+    <!-- end #menu -->
+    <div id="page">
+    <div id="page-bgtop">
+    <div id="page-bgbtm">
+<table cellspacing="0" cellpadding="0" border="0" width="97%" height="97%" class="login">
+  <tbody>
+  <tr>
+      <td class="head_title"></td>
+  </tr>
+  <tr>
+      <td class="head_title">Personal Finance</td>
+  </tr>
+  <tr>  
+      <td class="head_version"></td>
+  </tr>
+  <tr>
+    <td>
+    <form wicket:id="form">
+        <table cellspacing="0" cellpadding="3" border="0" align="center" width="500">
+          <tbody>
+          <tr height="20%" class="login"><td colspan="4" class="login">&nbsp;</td></tr>
+          <tr>
+            <th>&nbsp;</th>
+            <th align="center" colspan="2" class="login">
+                <nobr>Вход в систему</nobr>
+            </th>
+            <th>&nbsp;</th>
+          </tr>
+              <tr>
+                  <td align="center" colspan="4" class="login">
+                      <div class="errors" wicket:id="messages"></div>
+                  </td>
+              </tr>
+          <tr>
+            <td width="50%" class="login">&nbsp;</td>
+            <td align="left" width="80" class="login">
+                Логин:
+            </td>
+            <td align="right" width="180" class="login">
+              <input wicket:id="username" type="text" class="text" size="20" value="" name="logonForm:login">
+            </td>
+            <td width="50%" class="login">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="50%" class="login">&nbsp;</td>
+            <td align="left" width="80" class="login">
+                Пароль:
+            </td>
+            <td align="right" width="180" class="login">
+              <input wicket:id="password" type="password" class="text" size="20" name="logonForm:pwd">
+            </td>
+            <td width="50%" class="login">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="50%" class="login">&nbsp;</td>
+            <td align="left" width="80" class="login">
+                <nobr>Код магазина:</nobr>
+            </td>
+            <td align="right" width="180" class="login">
+                <input wicket:id="shopId" class="text" name="logonForm:sap_bp_id" id="logonForm:sap_bp_id" >
+            </td>
+            <td width="50%" class="login">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="50%" class="login">&nbsp;</td>
+            <td colspan="2" class="login">
+                    <table border="0" width="100%">
+                        <tbody><tr>
+                            <td class="login" rowspan="2">
+                            </td>
+                            <td align="left" valign="bottom" class="login">
+                            </td>                           
+                        </tr>
+                        <tr>
+                            <td align="left" class="login">
+                            </td>
+                        </tr>
+                    </tbody></table>
+            </td>
+            <td width="50%" class="login">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="50%" class="login">&nbsp;</td>
+            <td align="left" class="login">
+                <nobr>Тестовый режим</nobr>
+            </td>
+            <td align="right" class="login">
+              <input type="checkbox" class="text" value="true" name="logonForm:_idJsp11">
+            </td>
+            <td width="50%" class="login">&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="50%" class="login">&nbsp;</td>
+            <td align="center" colspan="2" class="login">
+              <input type="submit" class="button" onclick="" value="Войти" name="login" id="login">
+            </td>
+            <td width="50%" class="login">&nbsp;</td>
+          </tr>
+        </tbody></table>                
+</form>  
+    </td>
+  </tr>
+</tbody>
+</table>
+        <!-- end #content -->
+        <div style="clear: both;">&nbsp;</div>
+    </div>
+    </div>
+    </div>
+    <!-- end #page -->
+</div>
+</body>
+</html>

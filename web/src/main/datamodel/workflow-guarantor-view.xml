@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<classes>
+    <class name="GuaranteePersonalInfoViewPage">
+        <pageTitle>Информация о поручителе</pageTitle>
+        <sectionTitle>Личная информация о поручителе</sectionTitle>
+        <variable name="guarantorPassport" type="PassportInfoViewPanel" >
+             <model><![CDATA[new PropertyModel(inInstance, "in_guarantor")]]></model>
+        </variable>
+        <variable name="guarantorMarital" type="MaritalStatusViewPanel" >
+             <model><![CDATA[new PropertyModel(inInstance, "in_guarantor")]]></model>
+        </variable>
+        <button name="back" type="Link"></button>
+        <button name="next" type="SubmitLink"></button>
+    </class>
+    <class name="GuaranteeContactViewPage" extends="GuaranteePersonalInfoViewPage">
+        <pageTitle>Информация о поручителе</pageTitle>
+        <sectionTitle>Контактная информация поручителя</sectionTitle>
+        <variable readonly="true" name="guarantorAddressReg" type="AddressRegViewPanel" >
+             <model><![CDATA[new PropertyModel(inInstance, "in_guarantor")]]></model>
+        </variable>
+        <variable readonly="true" name="guarantorAddressMail" type="AddressMailViewPanel" >
+             <model><![CDATA[new PropertyModel(inInstance, "in_guarantor")]]></model>
+        </variable>
+    </class>
+    <class name="GuaranteeEmployerInfoViewPage" extends="GuaranteeContactViewPage">
+        <pageTitle>Информация о поручителе</pageTitle>
+        <sectionTitle>Работодатель и бюджет поручителя кредита</sectionTitle>
+        <variable readonly="true" name="in_guarantor.employer" type="TextField" label="Работодатель" size="60"/>
+        <variable readonly="true" name="in_guarantor.edrpou_of_employer" type="TextField" label="ЕДРПОУ работодателя" size="60"/>
+        <variable readonly="true" name="guarantorEmployer" type="EmployerAddressViewPanel" >
+             <model><![CDATA[new PropertyModel(inInstance, "in_guarantor")]]></model>
+        </variable>
+        <variable readonly="true" name="in_guarantor.gross_income" type="TextField" label="Ежемесячный доход поручителя, грн" size="11"/>
+        <variable readonly="true" name="in_guarantor.other_income" type="TextField" label="Другие доходы поручителя, грн" size="11"/>
+    </class>
+    <class name="GuaranteeAddInfoViewPage" extends="GuaranteeEmployerInfoViewPage">
+        <pageTitle>Информация о поручителе</pageTitle>
+        <sectionTitle>Дополнительные данные о поручителе кредита</sectionTitle>
+        <variable readonly="true" name="guarantorAddInfo" type="ClientAddInfoViewPanel" >
+             <model><![CDATA[new PropertyModel(inInstance, "in_guarantor")]]></model>
+        </variable>
+        <variable readonly="true" name="guarantorNotesPanel" type="NotesViewPanel" >
+             <model><![CDATA[new PropertyModel(inInstance, "in_dossier")]]></model>
+        </variable>
+    </class>
+    <class name="GuaranteePartnerInfoViewPage" extends="GuaranteeAddInfoViewPage" combines="CarDetailsInfoViewPage,CredittypeSelectionViewPage,ClientMaritalStatusViewPage,ClientAddressMailChooseViewPage,ClientEmployerInfoViewPage,ClientIncomeInfoViewPage,ClientAssetViewPage,GuaranteePartnerInfoViewPage,ThirdPersonInfoViewPage,PrintApplicationFormViewPage,ClientDocumentStoreViewPage">
+        <pageTitle>Информация о поручителе</pageTitle>
+        <sectionTitle>Данные о Партнере поручителя кредита</sectionTitle>
+        <variable name="guarantorPartnerInfo" type="PartnerPassportViewPanel" >
+             <model><![CDATA[new PropertyModel(inInstance, "in_guarantor_partner")]]></model>
+        </variable>
+         <button name="back" type="Link">
+            setResponsePage(new ThirdPersonInfoViewPage());</button>
+         <button name="next" type="SubmitLink">
+            setResponsePage(new PrintApplicationFormViewPage());</button>
+    </class>
+</classes>

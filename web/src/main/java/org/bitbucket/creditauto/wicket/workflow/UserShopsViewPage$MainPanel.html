@@ -1,0 +1,43 @@
+<html>
+<body>
+<wicket:panel>
+<wicket:extend>
+<div class="section">
+       <fieldset><legend>Магазины пользователя:</legend><table style="width:100%;">
+</table>
+
+<div wicket:id="listShops_container">
+<table class="oddeven">
+
+   <tr class="oddeven-head" style="vertical-align:text-top;">   <th class="oddeven-head" style="width:60px;text-align:left" ><span>Код магазина</span></th>
+      <th class="oddeven-head" style="width:140px;text-align:left" ><span>Название</span></th>
+      <th class="oddeven-head" style="width:80px;text-align:left" ><span>Город</span></th>
+      <th class="oddeven-head" style="width:80px;text-align:left" ><span>Область</span></th>
+      <th class="oddeven-head" style="width:80px;text-align:left" ><span>Улица</span></th>
+      <th class="oddeven-head" style="width:60px;text-align:left" ><span>Дом</span></th>
+      <th class="oddeven-head" style="width:40px;text-align:left" ><span>Действие</span></th>
+      </tr>
+   <tr class="oddeven" wicket:id="listShops">        <td style="width:60px;text-align:left" wicket:id="ext_id" ><span>1111 fake</span></td>
+               <td style="width:140px;text-align:left" wicket:id="name" ><span>1111 fake</span></td>
+               <td style="width:80px;text-align:left" wicket:id="city" ><span>1111 fake</span></td>
+               <td style="width:80px;text-align:left" wicket:id="province" ><span>1111 fake</span></td>
+               <td style="width:80px;text-align:left" wicket:id="street" ><span>1111 fake</span></td>
+               <td style="width:60px;text-align:left" wicket:id="house" ><span>1111 fake</span></td>
+                <td style="width:40px;text-align:left">
+        <ul class="linknavig">
+                            <li><a wicket:id="droplink"  class="droplink"   title="Удалить"  >xxx</a></li>
+                                    </ul>
+     </td>
+          </tr>
+</table>
+</div>
+<!-- Repeater -->   
+</fieldset>
+<wicket:child/>
+      
+</div>
+    
+</wicket:extend>
+</wicket:panel>
+</body>
+</html>

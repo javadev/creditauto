@@ -1,0 +1,36 @@
+<html>
+<body>
+<wicket:panel>
+<div class="section">
+        <form wicket:id="form">
+    <fieldset style="border:none;">
+       <div class="entry">
+            <div class="label" style="color:black;text-align:center;">Анкета-заявление</div>
+       </div>
+       <fieldset><legend>Печать анкеты-заявления:</legend><table style="width:100%;">
+<tr wicket:id="print-application-form_line"><td style="text-align: center;" colspan="2"><div class="input"><input id="print-application-form" wicket:id="print-application-form_id" value="Сохранить анкету-заявление" type="submit"/>       </div></td>
+</tr>
+<tr wicket:id="in_dossier.is_application_form_signed_line"><td class="right-aligned"><div class="label">Клиент подписал Анкету-Заявление</div></td>
+<td><div class="input">
+       <div class="input" wicket:id="in_dossier.is_application_form_signed_border">
+        <input id="in_dossier_is_application_form_signed" wicket:id="in_dossier.is_application_form_signed_id" type="checkbox" title=""/>
+         </div>       </div></td>
+</tr>
+</table>
+
+</fieldset>
+<wicket:child/>
+      <br />
+        <input id="back" name="back" wicket:id="back" wicket:message="value:navigation.back" type="submit"/>
+        <input id="next" name="next" wicket:id="next" wicket:message="value:navigation.next" type="submit"/>
+    </fieldset> 
+    
+ 
+
+    </form>
+      
+</div>
+    
+</wicket:panel>
+</body>
+</html>

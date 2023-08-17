@@ -1,0 +1,30 @@
+<html>
+<body>
+<wicket:panel>
+<div class="section">
+<table style="width:100%;">
+</table>
+
+<div wicket:id="listNotes_container">
+<table class="oddeven">
+
+   <tr class="oddeven-head" style="vertical-align:text-top;">   <th class="oddeven-head" style="width:60px;text-align:left" ><span>Дата</span></th>
+      <th class="oddeven-head" style="width:140px;text-align:left" ><span>Логин пользователя</span></th>
+      <th class="oddeven-head" style="width:80px;text-align:left" ><span>Тип записи</span></th>
+      <th class="oddeven-head" style="width:250px;text-align:left" ><span>Текст</span></th>
+      </tr>
+   <tr class="oddeven" wicket:id="listNotes">        <td style="width:60px;text-align:left" wicket:id="enter_date" ><span>1111 fake</span></td>
+               <td style="width:140px;text-align:left" wicket:id="user_login" ><span>1111 fake</span></td>
+               <td style="width:80px;text-align:left" wicket:id="bloknot_type" ><span>1111 fake</span></td>
+               <td style="width:250px;text-align:left" wicket:id="text" ><span>1111 fake</span></td>
+          </tr>
+</table>
+</div>
+<!-- Repeater -->   
+<wicket:child/>
+      
+</div>
+    
+</wicket:panel>
+</body>
+</html>

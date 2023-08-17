@@ -1,0 +1,18 @@
+<config>
+    <profile id="70" name="set_status_docs_not_correct_nst_profile">
+        <commands>
+            <command name="fraud_mock">
+                <checker class="FraudChecker" name="FraudChecker">
+                <rule>
+                    <action class="actions.ActionSleep" value="1" name="sleep_mock">
+                </rule>
+            </command>
+            <command>
+                <checker class="ExpertChecker" name="ExpertChecker">
+                <rule>
+                    <action class="actions.ActionFraudCheckClient" value="0" name="ActionFraudCheckClient">
+                </rule>
+            </command>
+        </commands>
+    </profile>
+</config>

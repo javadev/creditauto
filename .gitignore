@@ -1,0 +1,6 @@
+target/**/*
+wicket/workflow/*
+import.sql
+*.jar
+*.war
+*.orig

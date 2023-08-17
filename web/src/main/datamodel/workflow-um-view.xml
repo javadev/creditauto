@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<classes>
+
+    <class name="UserRolesViewPage">
+        <sectionTitle>Назначение ролей</sectionTitle>
+        <pageTitle>Назначение ролей пользователю системы:</pageTitle>
+        <constructor>
+            <parameters>User user</parameters>
+            <body>this.user = user;
+            for(Urole role : new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().getAllRoles()) {
+                rolesMap.put(role.getId(), role.getUsers().contains(user));
+            }
+            </body>
+        </constructor>
+        <pageInit><![CDATA[protected  User user = new User();
+        private Map<Long, Boolean> rolesMap = new HashMap<Long, Boolean>();
+        
+        public Map<Long, Boolean> getRolesMap(){
+           return this.rolesMap;
+        }
+        public void setRolesMap(Map<Long, Boolean> rolesMap){
+            this.rolesMap = rolesMap;
+        }
+        ]]>
+        </pageInit>
+        <compoundPropertyModel><![CDATA[user]]>
+        </compoundPropertyModel>
+
+        <repeater name="listRoles" type="ListView">
+           <header name="hid" label="Идентификатор" size="60" />
+           <header name="hname" label="Название" size="120" />
+           <header name="hdescription" label="Описание" size="120" />
+           <header name="hcompetence_level" label="Уровень компетенций" size="100" />
+           <header name="hact" label="Назначена" size="100" />
+           <model><![CDATA[new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().getAllRoles()]]></model>
+           <modelClass><![CDATA[Urole]]></modelClass>
+           <data name="id" label="Идентификатор" size="60" />
+           <data name="name" label="Название" size="120" />
+           <data name="description" label="Описание" size="120" />
+           <data name="competence_level.name" label="Уровень компетенций" size="100" />
+           <data name="actid" label="Назначена" size="100" type="links" >
+              <links>
+                 <link name="assign" title="Назначить роль" size="40" type="AjaxCheckBox"  readonly="true" >
+                  <onClick></onClick>
+                  <model><![CDATA[getRolesMap().get(modelObject.getId())]]></model>
+               </link>
+              </links>
+           </data>
+        </repeater>
+        <button name="next" type="SubmitLink">
+        saveWorkflowPath("UserRolesViewPage");
+        saveWorkflowPath("UserShopsViewPage");
+        setResponsePage(new UserShopsViewPage(user));
+        </button>
+    </class> 
+    
+    <class name="UserViewPage">
+        <pageTitle>Параметры пользователя</pageTitle>
+        <sectionTitle> Основные параметры пользователя:</sectionTitle>
+        <compoundPropertyModel><![CDATA[user]]>
+        </compoundPropertyModel>
+        <pageInit><![CDATA[protected  User user = new User();
+        final ModalWindow modal2 = new ModalWindow("modal2");]]>
+        </pageInit>
+        <constructor>
+            <parameters>User user</parameters>
+            <body>this.user = user;</body>
+        </constructor>
+        <variable readonly="true" name="login" type="TextField" label="Логин входа в систему" size="15" />
+        <variable readonly="true" name="name" type="TextField" label="ФИО пользователя" size="15" />
+        <variable readonly="true" name="description" type="TextField" label="Описание" size="15" />
+        <variable readonly="true" name="is_nst" type="CheckBox" label="Не сотрудник банка" size="15" />
+        <variable readonly="true" name="table_number" type="TextField" label="Номер пользователя" size="15" />
+        <variable readonly="true" name="phone" type="TextField" label="Номер телефона" size="15" />
+        <variable readonly="true" name="phone2" type="TextField" label="Дополнительный номер телефона" size="15" />
+        <modalWindow>       
+        add(modal2);
+        modal2.setTitle("Информационное сообщение");
+        modal2.setResizable(false);
+        modal2.setInitialWidth(30);
+        modal2.setInitialHeight(10);
+        modal2.setWidthUnit("em");
+        modal2.setHeightUnit("em");
+        </modalWindow>
+        
+        <button name="back" type="Link">
+            setResponsePage(new UserViewPage(user));</button>
+        <button name="next" type="SubmitLink">
+           setResponsePage(new UserManagementViewPage(user));
+        </button>
+    </class>
+    
+<class name="UserManagementViewPage" extends="UserViewPage">
+        <pageTitle>Параметры пользователя</pageTitle>
+        <sectionTitle> Управление пользователем:</sectionTitle>
+        <constructor>
+            <parameters>User user</parameters>
+            <body>this.user = user;</body>
+        </constructor>
+        <compoundPropertyModel><![CDATA[user]]>
+        </compoundPropertyModel>
+        <variable readonly="true" name="isDefaultPassword" type="CheckBox" label="Изменить пароль пользователя на начальный" size="15" />
+        <variable readonly="true" name="isDeleted" type="CheckBox" label="Удалить пользователя из системы" size="15"  />
+        <variable readonly="true" name="deleted_comment" type="TextField" label="Комментарий" size="15" />
+        <variable readonly="true" name="blocked" type="CheckBox" label="Блокировать пользователя" size="15" />
+        <variable readonly="true" name="blocked_comment" type="TextField" label="Комментарий" size="15" />
+        
+        <variable readonly="true" name="isBlockedDateSet" type="CheckBox" label="Установить даты блокировки пользователя" size="15"/>
+        <variable readonly="true" name="blocked_start" type="TextField" label="Дата с" size="15" />
+        <variable readonly="true" name="blocked_finish" type="TextField" label="Дата по" size="15" />
+        
+        <button name="back" type="Link">
+            setResponsePage(new UserViewPage(user));</button>
+        <button name="next" type="SubmitLink">
+           setResponsePage(new UserShopsViewPage(user));
+        </button>
+    </class>
+    <class name="UserPowerOfAttorneyViewPage" extends="UserManagementViewPage">
+        <pageTitle>Параметры пользователя</pageTitle>
+        <sectionTitle>Доверенности пользователя:</sectionTitle>
+        <pageInit>
+        private SimpleDateFormat format;
+        private ITarification tarification;</pageInit>
+        <constructor>
+            <parameters>User user</parameters>
+            <body>this.user = user;
+            </body>
+            format = new SimpleDateFormat("yyyy-MM-dd");
+            tarification = new TarificationServerImpl();
+        </constructor>
+        <compoundPropertyModel><![CDATA[user]]>
+        </compoundPropertyModel>
+
+        <repeater name="list" type="ListView">
+           <header name="hattorney_number" label="Номер доверенности" size="100" />
+           <header name="hattorney_date_start" label="Начало действия" size="100" />
+           <header name="hattorney_date_finish" label="Конец действия" size="100" />
+           <header name="hdictionary_type_of_attorney" label="Тип доверенности" size="60" />
+           <header name="hproduct" label="Продукт доверенности" size="80" />
+           <header name="hdictionary_type_purpose" label="Цель доверенности" size="60" />
+           <header name="hact" label="Действие" size="40" />
+           <model><![CDATA[new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().getUserPowerofattorneys(user)]]></model>
+           <modelClass><![CDATA[Powerofattorney]]></modelClass>
+           <data name="attorney_number" label="Номер доверенности" size="100" />
+           <data name="attorney_date_start" label="Начало действия" size="100" >
+              <model><![CDATA[modelObject.getAttorney_date_start() != null ? format.format(modelObject.getAttorney_date_start()) : ""]]></model>
+           </data>
+           <data name="attorney_date_finish" label="Конец действия" size="100" >
+              <model><![CDATA[modelObject.getAttorney_date_finish() != null ? format.format(modelObject.getAttorney_date_finish()) : ""]]></model>
+           </data>
+           <data name="dictionary_type_of_attorney" label="Тип доверенности" size="60" />
+           <data name="product.name" label="Продукт доверенности" size="80" />
+           <data name="dictionary_type_purpose" label="Цель доверенности" size="60" />
+           <data name="id" label="Действие" size="40" type="links" >
+              <links>
+                 <link name="droplink" title="Удалить" size="40" type="AjaxLink" cssclass="droplink">
+                   <onClick><![CDATA[]]>  </onClick>
+                 </link>
+              </links>
+               
+           </data>
+        </repeater>
+        <button name="back" type="Link">
+            setResponsePage(new UserViewPage(user));</button>
+        <button name="next" type="SubmitLink">
+            setResponsePage(new UserShopsViewPage(user));
+        </button>
+        
+    </class>
+    <class name="UserShopsViewPage" extends="UserPowerOfAttorneyViewPage">
+        <pageTitle>Параметры пользователя</pageTitle>
+        <sectionTitle>Магазины пользователя:</sectionTitle>
+        
+        <constructor>
+            <parameters>User user</parameters>
+            <body>this.user = user;
+            
+            </body>
+        </constructor>
+        <compoundPropertyModel><![CDATA[user]]>
+        </compoundPropertyModel>
+       
+        <repeater name="listShops" type="ListView">
+           <header name="hext_id" label="Код магазина" size="60" />
+           <header name="hname" label="Название" size="140" />
+           <header name="hcity" label="Город" size="80" />
+           <header name="hprov" label="Область" size="80" />
+           <header name="hstreet" label="Улица" size="80" />
+           <header name="hhouse" label="Дом" size="60" />
+           <header name="hact" label="Действие" size="40" />
+           <model><![CDATA[new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().getUserExternaldistributors(user)]]></model>
+           <modelClass><![CDATA[Externaldistributor]]></modelClass>
+           <data name="ext_id" label="Код магазина" size="60" />
+           <data name="name" label="Название" size="140" />
+           <data name="city" label="Город" size="80" />
+           <data name="province" label="Область" size="80" />
+           <data name="street" label="Улица" size="80" />
+           <data name="house" label="Дом" size="60" />
+           <data name="id" label="Действие" size="40" type="links" >
+              <links>
+                 <link name="droplink" title="Удалить" size="40" type="AjaxLink" cssclass="droplink">
+                  <onClick><![CDATA[]]></onClick>
+               </link>
+              </links>
+           </data>
+        </repeater>
+        <button name="back" type="Link">
+            setResponsePage(new UserRolesViewPage(user));</button>
+        <button name="next" type="SubmitLink">
+            <afterInit>form.get("next").setVisible(false)</afterInit>
+        </button>
+    </class>
+</classes>

@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<classes>
+    <class name="ClientAddressRegChooseViewPage">
+        <pageTitle>Заполнение адреса клиента</pageTitle>
+        <sectionTitle>Адрес регистрации:</sectionTitle>
+        <variable readonly="true" name="in_person.dictionary_regprovince" type="DictionaryTextField" label="Область">
+            <model><![CDATA[,
+                    dictionary.getDictionary("provinceList", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_person.dictionary_regregion" type="DictionaryTextField" label="Район">
+            <model><![CDATA[,
+                    dictionary.getDictionary("regionList", inInstance.getIn_person().getDictionary_regprovince(), IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_person.dictionary_regcity" type="DictionaryTextField" label="Населенный пункт">
+            <model><![CDATA[,
+                    dictionary.getDictionary("cityList", inInstance.getIn_person().getDictionary_regregion(),
+                        inInstance.getIn_person().getDictionary_regprovince(), IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_person.regpostindex" type="TextField" label="Почтовый индекс" size="15"/>
+        <variable readonly="true" name="in_person.regstreet" type="TextField" label="Улица" size="40">
+        </variable>
+        <variable readonly="true" name="in_person.reghouse" type="TextField" label="Дом" size="15">
+        </variable>
+        <variable readonly="true" name="in_person.regflat" type="TextField" label="Квартира" size="15">
+        </variable>
+        <variable readonly="true" name="in_person.regadditionalinfo" type="TextField" label="Дополнительная информация (корпус, блок, другое)" size="15">
+        </variable>
+        <variable readonly="true" name="in_person.is_regstatus_temporary" type="CheckBox" label="Временная регистрация" />
+        <variable readonly="true" name="copy_to_mail_address_submit" type="AjaxLink" label="Скопировать в адрес проживания">
+        </variable>
+        <button name="back" type="Link"/>
+        <button name="next" type="SubmitLink"/>
+    </class>
+    <class name="ClientAddressMailChooseViewPage" extends="ClientAddressRegChooseViewPage" combines="GoodSelectionViewPage,CredittypeSelectionViewPage,ClientMaritalStatusViewPage,ClientAddressMailChooseViewPage,ClientEmployerInfoViewPage,ClientIncomeInfoViewPage,ClientAssetViewPage,GuaranteeAddInfoViewPage,ThirdPersonInfoViewPage,PrintApplicationFormViewPage,ClientDocumentStoreViewPage">
+        <pageTitle>Заполнение адреса клиента</pageTitle>
+        <sectionTitle>Адрес проживания:</sectionTitle>
+        <variable readonly="true" name="in_person.dictionary_mailprovince" type="DictionaryTextField" label="Область">
+            <model><![CDATA[,
+                    dictionary.getDictionary("provinceList", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_person.dictionary_mailregion" type="DictionaryTextField" label="Район">
+            <model><![CDATA[,
+                    dictionary.getDictionary("regionList", inInstance.getIn_person().getDictionary_mailprovince(), IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_person.dictionary_mailcity" type="DictionaryTextField" label="Населенный пункт">
+            <model><![CDATA[,
+                    dictionary.getDictionary("cityList", inInstance.getIn_person().getDictionary_mailregion(),
+                        inInstance.getIn_person().getDictionary_mailprovince(), IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+        </variable>
+        <variable readonly="true" name="in_person.mailpostindex" type="TextField" label="Почтовый индекс" size="15"/>
+        <variable readonly="true" name="in_person.mailstreet" type="TextField" label="Улица" size="40">
+        </variable>
+        <variable readonly="true" name="in_person.mailhouse" type="TextField" label="Дом" size="15">
+        </variable>
+        <variable readonly="true" name="in_person.mailflat" type="TextField" label="Квартира" size="15">
+        </variable>
+        <variable readonly="true" name="in_person.mailadditionalinfo" type="TextField" label="Дополнительная информация (корпус, блок, другое)" size="15">
+        </variable>
+        <variable readonly="true" name="copy_to_reg_address_submit" type="AjaxLink" label="Скопировать в адрес регистрации">
+                <onSubmit>
+                </onSubmit>
+        </variable>
+        <button name="back" type="Link"><![CDATA[
+            String maritasStatus = inInstance.getIn_person().getDictionary_marital_status();
+            if (maritasStatus != null && ("1".equals(maritasStatus) || "5".equals(maritasStatus)) ) {
+                setResponsePage(new PartnerPersonalInfoViewPage());
+            } else {
+                setResponsePage(new ClientMaritalStatusViewPage());
+            }]]></button>
+        <button name="next" type="SubmitLink">
+            setResponsePage(new ClientEmployerInfoViewPage(inInstance));</button>
+    </class>
+    <class name="AddressRegViewPanel" extends="Panel">
+        <sectionTitle>Адрес регистрации:</sectionTitle>
+        <compoundPropertyModel>In_person in_person</compoundPropertyModel>
+        <variable readonly="true"  name="dictionary_regprovince" type="DictionaryTextField" label="Область">
+            <model><![CDATA[,
+                    dictionary.getDictionary("provinceList", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[]]>
+            </ajaxOnUpdate>
+        </variable>
+        <variable readonly="true"  name="dictionary_regregion" type="DictionaryTextField" label="Район">
+            <model><![CDATA[,
+                    dictionary.getDictionary("regionList", modelObject.getDictionary_regprovince(), IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[]]>
+            </ajaxOnUpdate>
+        </variable>
+        <variable readonly="true"  name="dictionary_regcity" type="DictionaryTextField" label="Населенный пункт">
+            <model><![CDATA[,
+                    dictionary.getDictionary("cityList", modelObject.getDictionary_regregion(),
+                        modelObject.getDictionary_regprovince(), IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[]]>
+            </ajaxOnUpdate>
+        </variable>
+        <variable readonly="true"  name="regpostindex" type="TextField" label="Почтовый индекс" size="15" />
+        <variable readonly="true"  name="regstreet" type="TextField" label="Улица" size="40">
+            <ajaxOnUpdate> </ajaxOnUpdate>
+        </variable>
+        <variable readonly="true"  name="reghouse" type="TextField" label="Дом" size="15">
+            <ajaxOnUpdate> </ajaxOnUpdate>
+        </variable>
+        <variable readonly="true"  name="regflat" type="TextField" label="Квартира" size="15">
+            <ajaxOnUpdate> </ajaxOnUpdate>
+        </variable>
+        <variable readonly="true"  name="regadditionalinfo" type="TextField" label="Дополнительная информация (корпус, блок, другое)" size="15">
+            <ajaxOnUpdate> </ajaxOnUpdate>
+        </variable>
+        <variable readonly="true"  name="is_regstatus_temporary" type="CheckBox" label="Временная регистрация" />
+    </class>
+    <class name="AddressMailViewPanel" extends="Panel">
+        <sectionTitle>Адрес проживания:</sectionTitle>
+        <compoundPropertyModel>In_person in_person</compoundPropertyModel>
+        <sectionTitle>Адрес проживания:</sectionTitle>
+        <variable readonly="true"  name="dictionary_mailprovince" type="DictionaryTextField" label="Область">
+            <model><![CDATA[,
+                    dictionary.getDictionary("provinceList", IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[]]>
+            </ajaxOnUpdate>
+        </variable>
+        <variable readonly="true"  name="dictionary_mailregion" type="DictionaryTextField" label="Район">
+            <model><![CDATA[,
+                    dictionary.getDictionary("regionList", modelObject.getDictionary_mailprovince(), IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[]]>
+            </ajaxOnUpdate>
+        </variable>
+        <variable  readonly="true" name="dictionary_mailcity" type="DictionaryTextField" label="Населенный пункт">
+            <model><![CDATA[,
+                    dictionary.getDictionary("cityList", modelObject.getDictionary_mailregion(),
+                        modelObject.getDictionary_mailprovince(), IDictionary.LANGUAGE_RU, new Date()),
+                        new ChoiceRenderer("dvalue")]]></model>
+            <ajaxOnUpdate><![CDATA[]]>
+            </ajaxOnUpdate>
+        </variable>
+        <variable readonly="true"  name="mailpostindex" type="TextField" label="Почтовый индекс" size="15" />
+        <variable readonly="true"  name="mailstreet" type="TextField" label="Улица" size="40">
+            <ajaxOnUpdate> </ajaxOnUpdate>
+        </variable>
+        <variable readonly="true"  name="mailhouse" type="TextField" label="Дом" size="15">
+            <ajaxOnUpdate> </ajaxOnUpdate>
+        </variable>
+        <variable readonly="true"  name="mailflat" type="TextField" label="Квартира" size="15">
+            <ajaxOnUpdate> </ajaxOnUpdate>
+        </variable>
+        <variable readonly="true" name="mailadditionalinfo" type="TextField" label="Дополнительная информация (корпус, блок, другое)" size="15">
+            <ajaxOnUpdate> </ajaxOnUpdate>
+        </variable>
+    </class>
+</classes>

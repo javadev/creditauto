@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>SearchUser</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SearchUsers</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/creditauto</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeElementPresent</td>
+	<td>id=login</td>
+	<td>loginPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${loginPresent}</td>
+	<td>doLogin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Выйти из системы</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>doLogin</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Вход в систему</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@name='username']</td>
+	<td>demo</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@name='password']</td>
+	<td>Qwerty+1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=logonForm:sap_bp_id</td>
+	<td>00123</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Добро пожаловать, Demo User</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>skipLogin</td>
+	<td></td>
+</tr>
+<!--search user-->
+<tr>
+	<td>assertTextPresent</td>
+	<td>Управление пользователями</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Поиск пользователей</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Поиск пользователей системы</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=userLogin_id</td>
+	<td>demo</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=searchData_allUsers_powerOfAttStart__id1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=powerOfAttStart_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>partialId=powerOfAttFinish_id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>partialId=search__id</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Список пользователей системы</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.oddeven.1.0</td>
+	<td>demo</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>css=table.oddeven.1.1</td>
+	<td>Demo User</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>partialId=editlink</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Параметры пользователя</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>partialId=login_id</td>
+	<td>demo</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>partialId=name_id</td>
+	<td>Demo User</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=next</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Управление пользователем:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Доверенности пользователя:</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Привязать пользователя к магазину:</td>
+	<td></td>
+</tr>
+<!--logout-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Выйти из системы</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td>Вход в систему</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

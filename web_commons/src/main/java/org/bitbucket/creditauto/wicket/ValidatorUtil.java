@@ -7,17 +7,17 @@ package org.bitbucket.creditauto.wicket;
 
 import java.lang.reflect.Field;
 import java.util.Set;
-
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
-
 import org.apache.wicket.validation.INullAcceptingValidator;
 import org.apache.wicket.validation.IValidatable;
 import org.apache.wicket.validation.ValidationError;
 import org.bitbucket.creditauto.LOG;
 
-/**.
+/**
+ * .
+ *
  * @author javadev
  * @version $Revision$ $Date$
  */
@@ -42,21 +42,23 @@ public final class ValidatorUtil {
                 fld.setAccessible(true);
                 oldValue = fld.get(object);
                 fld.set(object, value);
-                Set<ConstraintViolation<Object>> constraintViolations = validator.validate(object, clazz);
+                Set<ConstraintViolation<Object>> constraintViolations =
+                        validator.validate(object, clazz);
                 if (!constraintViolations.isEmpty()) {
                     String message = constraintViolations.iterator().next().getMessage();
                     v.error(new ValidationError().setMessage(message));
                 }
                 fld.set(object, oldValue);
             } catch (NoSuchFieldException ex) {
-LOG.error(this, ex, ex.getMessage());
+                LOG.error(this, ex, ex.getMessage());
             } catch (IllegalAccessException ex) {
-LOG.error(this, ex, ex.getMessage());
+                LOG.error(this, ex, ex.getMessage());
             }
         }
     }
 
-    public static INullAcceptingValidator getValidator(final Object object, final String property, final Class<?> clazz) {
+    public static INullAcceptingValidator getValidator(
+            final Object object, final String property, final Class<?> clazz) {
         return new JSR303ClassValidator(object, clazz, property);
     }
 }

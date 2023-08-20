@@ -6,21 +6,18 @@
 package org.bitbucket.creditauto.wicket;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import org.apache.wicket.Component;
 import org.apache.wicket.IConverterLocator;
 import org.apache.wicket.Request;
 import org.apache.wicket.RequestCycle;
 import org.apache.wicket.Response;
-import org.apache.wicket.RestartResponseException;
-import org.apache.wicket.authorization.Action;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.HttpSessionStore;
 import org.apache.wicket.protocol.http.WebApplication;
@@ -32,11 +29,13 @@ import org.apache.wicket.util.convert.ConverterLocator;
 import org.apache.wicket.util.convert.converters.BigDecimalConverter;
 import org.apache.wicket.util.convert.converters.DateConverter;
 
-/**.
+/**
+ * .
+ *
  * @author javadev
  * @version $Revision$ $Date$
  */
-@SuppressWarnings({ "unchecked", "serial" })
+@SuppressWarnings({"unchecked", "serial"})
 public class CommonApplication extends WebApplication {
     private NonThreadedModificationWatcher resourceWatcher = new NonThreadedModificationWatcher();
 
@@ -82,21 +81,23 @@ public class CommonApplication extends WebApplication {
     @Override
     protected IConverterLocator newConverterLocator() {
         ConverterLocator converterLocator = new ConverterLocator();
-        BigDecimalConverter converter = new BigDecimalConverter() {
-            @Override
-            public NumberFormat getNumberFormat(Locale locale) {
-                NumberFormat nf = NumberFormat.getNumberInstance(Locale.FRANCE);
-                DecimalFormat df = (DecimalFormat) nf;
-                df.applyPattern(",##0.00");
-                return nf;
-            }
-        };
-        DateConverter dateConverter = new DateConverter() {
-            @Override
-            public DateFormat getDateFormat(Locale locale) {
-                return new SimpleDateFormat("ddMMyyyy");
-            }
-        };
+        BigDecimalConverter converter =
+                new BigDecimalConverter() {
+                    @Override
+                    public NumberFormat getNumberFormat(Locale locale) {
+                        NumberFormat nf = NumberFormat.getNumberInstance(Locale.FRANCE);
+                        DecimalFormat df = (DecimalFormat) nf;
+                        df.applyPattern(",##0.00");
+                        return nf;
+                    }
+                };
+        DateConverter dateConverter =
+                new DateConverter() {
+                    @Override
+                    public DateFormat getDateFormat(Locale locale) {
+                        return new SimpleDateFormat("ddMMyyyy");
+                    }
+                };
         converterLocator.set(BigDecimal.class, converter);
         converterLocator.set(Date.class, dateConverter);
         converterLocator.set(java.sql.Timestamp.class, dateConverter);

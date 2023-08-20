@@ -14,12 +14,10 @@ import org.bitbucket.creditauto.entity.In_instance;
  * @version $Revision$ $Date$
  */
 public class InstanceResult extends GeneralResult {
-    /**
-     * Serilization/deserilization class back compatibillity.
-     */
+    /** Serilization/deserilization class back compatibillity. */
     private static final long serialVersionUID = 500L;
-    
+
     public In_instance in_instance;
-    public Boolean     isTryToReduceStatus = Boolean.FALSE;
-    public Boolean     isDossierInProcess  = Boolean.FALSE;
+    public Boolean isTryToReduceStatus = Boolean.FALSE;
+    public Boolean isDossierInProcess = Boolean.FALSE;
 }

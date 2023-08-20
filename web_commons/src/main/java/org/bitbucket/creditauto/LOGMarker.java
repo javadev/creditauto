@@ -6,13 +6,9 @@
 package org.bitbucket.creditauto;
 
 /**
- * Marker format.
- * host/time-dependent-prefix (sysid)
- * -
- * incremental counter number (session number)
- * -
- * Java internal thread number, usefull fro lock debug
- * -
+ * Marker format. host/time-dependent-prefix (sysid) - incremental counter number (session number) -
+ * Java internal thread number, usefull fro lock debug -
+ *
  * @author javadev
  * @version $Revision$ $Date$
  */
@@ -29,26 +25,20 @@ public class LOGMarker {
 
     private final String splitter = "-";
 
-    /**
-     * Marker prefix which dependent form host IP (last number).
-     * */
+    /** Marker prefix which dependent form host IP (last number). */
     private String prefix;
 
-    /**
-     * Internal incremental counter.
-     * */
+    /** Internal incremental counter. */
     private volatile long counter;
 
-    /**
-     * Internal error counter.
-     * */
+    /** Internal error counter. */
     private volatile long errorNumber;
 
     /**
      * Classical singleton.
      *
      * @return LOGMarker instance
-     * */
+     */
     public static LOGMarker instance() {
         if (instance != null) {
             return instance;
@@ -68,9 +58,7 @@ public class LOGMarker {
         return instance;
     }
 
-    /**
-     * Standard memory cleunup helper.
-     * */
+    /** Standard memory cleunup helper. */
     public static void shutdown() {
         instance = null;
     }
@@ -89,7 +77,7 @@ public class LOGMarker {
      * @return splitted data
      * @param mark from NDC (can be garbage)
      * @param sessionKey part of marker which should be stored in session.
-     * */
+     */
     private String[] extractMarkerData(String mark, String sessionKey) {
         String[] ms;
         try {
@@ -126,12 +114,11 @@ public class LOGMarker {
     }
 
     /**
-     * Convert array into marker.
-     * Mathod does not check array bounds!
+     * Convert array into marker. Mathod does not check array bounds!
      *
      * @param marks array of markers
      * @return converted array
-     * */
+     */
     private String encodeMarker(String[] marks) {
         StringBuffer buf = null;
         for (String aStr : marks) {
@@ -157,15 +144,15 @@ public class LOGMarker {
      *
      * @param sessionKey session key from HTTPSession
      * @return sessionKey which should be saved into HTTP Session.
-     * */
+     */
     public String createMarker(String sessionKey) {
-        String [] m = extractMarkerData(LOG.removeNDCMarker(), sessionKey);
+        String[] m = extractMarkerData(LOG.removeNDCMarker(), sessionKey);
         LOG.setNCDMarger(encodeMarker(m));
         return m[MARKER_POSITION_SESSION];
     }
 
     public void setUserAndInstanceId(String userId, String instId) {
-        String [] m = extractMarkerData(LOG.removeNDCMarker(), null);
+        String[] m = extractMarkerData(LOG.removeNDCMarker(), null);
         m[MARKER_POSITION_USER] = userId;
         m[MARKER_POSITION_INSTANCE] = instId;
         LOG.setNCDMarger(encodeMarker(m));
@@ -175,17 +162,18 @@ public class LOGMarker {
      * Set user Id to marker.
      *
      * @param userId user ID
-     * */
+     */
     public void setUserId(String userId) {
-        String [] m = extractMarkerData(LOG.removeNDCMarker(), null);
+        String[] m = extractMarkerData(LOG.removeNDCMarker(), null);
         m[MARKER_POSITION_USER] = userId;
         LOG.setNCDMarger(encodeMarker(m));
     }
 
     /**
      * Set instance Id to marker.
+     *
      * @param instId instance ID
-     * */
+     */
     public void setInstanceId(String instId) {
         String[] m = extractMarkerData(LOG.removeNDCMarker(), null);
         m[MARKER_POSITION_INSTANCE] = instId;
@@ -193,13 +181,13 @@ public class LOGMarker {
     }
 
     /**
-     * Generate error marker for user interface.
-     * Addiaionally can create LOG message about marker creation and marker value. (in info log level)
+     * Generate error marker for user interface. Addiaionally can create LOG message about marker
+     * creation and marker value. (in info log level)
      *
      * @param obj to which object should be bind error message
      * @param addToLog add to log (othervice obj is ignored and can be null).
      * @return Error marker for user interface
-     * */
+     */
     public String createErrorMarker(Object obj, boolean addToLog) {
         String m = "" + LOG.getNDCMarker() + "-" + nextErrorNumberValue();
         if (addToLog) {
@@ -221,9 +209,7 @@ public class LOGMarker {
         LOG.setNCDMarger(encodeMarker(m));
     }
 
-    /**
-     * Remove marker.
-     */
+    /** Remove marker. */
     public void removeMarker() {
         LOG.removeNDCMarker();
     }

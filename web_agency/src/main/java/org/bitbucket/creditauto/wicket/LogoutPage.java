@@ -9,7 +9,9 @@ import org.apache.wicket.RestartResponseException;
 import org.bitbucket.creditauto.LOG;
 import org.bitbucket.creditauto.LOGMarker;
 
-/**.
+/**
+ * .
+ *
  * @author javadev
  * @version $Revision$ $Date$
  */
@@ -22,5 +24,4 @@ public class LogoutPage extends TemplatePage {
         LOGMarker.instance().removeMarker();
         throw new RestartResponseException(HomePage.class);
     }
-
 }

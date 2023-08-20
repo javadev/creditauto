@@ -5,36 +5,35 @@
  */
 package org.bitbucket.creditauto.tarification.server.amortization;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
+import java.util.List;
 import org.bitbucket.creditauto.LOG;
 import org.bitbucket.creditauto.tarification.server.model.CalculationInputParameters;
 import org.bitbucket.creditauto.tarification.server.model.PaymentDate;
 
 /**
  * MonthlyCalendarFiller.
+ *
  * @author vko
  * @version $Revision$ $Date$
  */
 public class MonthlyCalendarFiller {
     /**
-     * In case if this duration is less than 20 days, first due date is moved to the due date in the next month.
+     * In case if this duration is less than 20 days, first due date is moved to the due date in the
+     * next month.
      */
     public static final int MIN_DAYS_FROM_START = 20;
 
-    private int repaymentday                    = 5;
-    private Date contractFinancedDate           = new Date();
-    private Date contractFinancedDateToPrint    = new Date();
-    private Date contractdateofnextworkday      = new Date();
-    private Date firstPaymentDate               = new Date();
-    private Date endPaymentDate                 = new Date();
+    private int repaymentday = 5;
+    private Date contractFinancedDate = new Date();
+    private Date contractFinancedDateToPrint = new Date();
+    private Date contractdateofnextworkday = new Date();
+    private Date firstPaymentDate = new Date();
+    private Date endPaymentDate = new Date();
 
-
-    public MonthlyCalendarFiller() {
-    }
+    public MonthlyCalendarFiller() {}
 
     public Date getContractFinancedDate() {
         return contractFinancedDate;
@@ -73,17 +72,18 @@ public class MonthlyCalendarFiller {
         calendar.setTime(start);
         previousDate = calendar.getTime();
 
-        Calendar calendarForNextDay   = Calendar.getInstance();
+        Calendar calendarForNextDay = Calendar.getInstance();
 
         calendarForNextDay.setTime(contractFinancedDateToPrint);
         calendarForNextDay.add(Calendar.DATE, 1);
 
-        // it's necessary because we need to move date on first work day after holidays to make payment in bank system
+        // it's necessary because we need to move date on first work day after holidays to make
+        // payment in bank system
         correctDate(calendarForNextDay, calendarForNextDay.get(Calendar.DATE));
         contractdateofnextworkday = calendarForNextDay.getTime();
 
-
-        // it's necessary because we need to move date on first work day after holidays to make payment in bank system
+        // it's necessary because we need to move date on first work day after holidays to make
+        // payment in bank system
         correctDate(calendar, calendar.get(Calendar.DATE));
         contractFinancedDate = calendar.getTime();
 
@@ -92,7 +92,6 @@ public class MonthlyCalendarFiller {
 
         calendar.setTime(start);
         correctDate(calendar, day);
-
 
         boolean correctDate = true;
         for (int i = 0; i < duration; i++) {
@@ -130,11 +129,10 @@ public class MonthlyCalendarFiller {
     }
 
     /**
-     * Correct date according to days in month.
-     * If requested day is more than days in month calendar date will be set to
-     * end day of month.
-     * (For example: if requested day is 31 and current calendar day is February then
-     * calendar date will be set to last day of February)
+     * Correct date according to days in month. If requested day is more than days in month calendar
+     * date will be set to end day of month. (For example: if requested day is 31 and current
+     * calendar day is February then calendar date will be set to last day of February)
+     *
      * @param calendar - calendare object can be corrected
      * @param requestedDay - repayment date
      * @return corrected Date object

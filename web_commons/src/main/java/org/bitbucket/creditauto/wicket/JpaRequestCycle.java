@@ -15,7 +15,9 @@ import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.protocol.http.WebRequest;
 import org.apache.wicket.protocol.http.WebRequestCycle;
 
-/**.
+/**
+ * .
+ *
  * @author javadev
  * @version $Revision$ $Date$
  */
@@ -34,23 +36,35 @@ public class JpaRequestCycle extends WebRequestCycle {
 
     public EntityManager getEntityManager() {
         if (em == null) {
-            EntityManagerFactory emf = ((CommonApplication) getApplication()).getEntityManagerFactory();
+            EntityManagerFactory emf =
+                    ((CommonApplication) getApplication()).getEntityManagerFactory();
             em = emf.createEntityManager();
             em.getTransaction().begin();
         }
         return em;
     }
 
-    /**
-     * Pushes an NDC with the unique session ID
-     */
+    /** Pushes an NDC with the unique session ID */
     @Override
     protected void onBeginRequest() {
         super.onBeginRequest();
-        org.bitbucket.creditauto.LOGMarker.instance().setUserAndInstanceId(
-            CreditautoSession.get().getUser() == null ? "" : CreditautoSession.get().getUser().getLogin(),
-            CreditautoSession.get().getInInstance() == null || CreditautoSession.get().getInInstance().getIn_dossier().getId() == null ? ""
-                : String.valueOf(CreditautoSession.get().getInInstance().getIn_dossier().getId()));
+        org.bitbucket.creditauto.LOGMarker.instance()
+                .setUserAndInstanceId(
+                        CreditautoSession.get().getUser() == null
+                                ? ""
+                                : CreditautoSession.get().getUser().getLogin(),
+                        CreditautoSession.get().getInInstance() == null
+                                        || CreditautoSession.get()
+                                                        .getInInstance()
+                                                        .getIn_dossier()
+                                                        .getId()
+                                                == null
+                                ? ""
+                                : String.valueOf(
+                                        CreditautoSession.get()
+                                                .getInInstance()
+                                                .getIn_dossier()
+                                                .getId()));
     }
 
     @Override

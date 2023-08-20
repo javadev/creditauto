@@ -9,12 +9,11 @@ import java.util.List;
 import org.apache.wicket.validation.INullAcceptingValidator;
 import org.apache.wicket.validation.IValidatable;
 import org.apache.wicket.validation.ValidationError;
-
 import org.bitbucket.creditauto.entity.User;
-import org.bitbucket.creditauto.wicket.SearchData;
-import org.bitbucket.creditauto.LOG;
 
-/**.
+/**
+ * .
+ *
  * @author javadev
  * @version $Revision$ $Date$
  */
@@ -24,6 +23,7 @@ public class UserLoginValidator implements INullAcceptingValidator {
 
     /**
      * Constructor.
+     *
      * @param userId the user id
      */
     public UserLoginValidator(Long userId) {
@@ -41,7 +41,9 @@ public class UserLoginValidator implements INullAcceptingValidator {
         userSearch.getAllUsers().setUserLogin(checkLoginValue);
         userSearch.getAllUsers().setPowerOfAttStart(null);
         userSearch.getAllUsers().setPowerOfAttFinish(null);
-        List<User> users = new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl().getUsers(userSearch.getAllUsers());
+        List<User> users =
+                new org.bitbucket.creditauto.usermanager.server.UsermanagerServerImpl()
+                        .getUsers(userSearch.getAllUsers());
         int countUsers = 0;
         for (User user : users) {
             if (user.getId().equals(userId)) {

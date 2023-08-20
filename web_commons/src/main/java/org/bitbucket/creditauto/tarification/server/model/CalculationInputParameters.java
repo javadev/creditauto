@@ -8,32 +8,42 @@ package org.bitbucket.creditauto.tarification.server.model;
 import java.io.Serializable;
 import java.util.Date;
 
-/**.
+/**
+ * .
+ *
  * @author vko
  * @version $Revision$ $Date$
  */
 public class CalculationInputParameters implements Serializable {
     private static final long serialVersionUID = -8460631603752150160L;
 
-    private double      amount;
-    private double      coreAmount;
-    private double      rate;
-    private double      openingRate;
-    private double      openingFeePayment;
-    private double      monthlyRate;
-    private double      annuityExample;
-    private int         duration;
-    private Date        startDate;
-    private int         repaymentDay;
-    private double      downPayment;
-    private double      installment;
-    private double      totalPrice;
-    private String      typefirstduedatecal;
+    private double amount;
+    private double coreAmount;
+    private double rate;
+    private double openingRate;
+    private double openingFeePayment;
+    private double monthlyRate;
+    private double annuityExample;
+    private int duration;
+    private Date startDate;
+    private int repaymentDay;
+    private double downPayment;
+    private double installment;
+    private double totalPrice;
+    private String typefirstduedatecal;
     /** grace period, range of the value: [1..48] */
-    private Long    endGracePeriod;
+    private Long endGracePeriod;
 
-    public CalculationInputParameters(double amount, double rate, double openingRate, double monthlyRate, int duration,
-            Date startDate, int repaymentDay, double downPayment, double installment) {
+    public CalculationInputParameters(
+            double amount,
+            double rate,
+            double openingRate,
+            double monthlyRate,
+            int duration,
+            Date startDate,
+            int repaymentDay,
+            double downPayment,
+            double installment) {
         this.amount = amount;
         this.rate = rate;
         this.openingRate = openingRate;
@@ -181,5 +191,4 @@ public class CalculationInputParameters implements Serializable {
     public void setEndGracePeriod(Long endGracePeriod) {
         this.endGracePeriod = endGracePeriod;
     }
-
 }

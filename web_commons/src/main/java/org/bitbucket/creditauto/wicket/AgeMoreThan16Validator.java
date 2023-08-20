@@ -7,13 +7,14 @@ package org.bitbucket.creditauto.wicket;
 
 import java.util.Calendar;
 import java.util.Date;
-
-import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
+import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.form.validation.AbstractFormValidator;
 
-/**.
+/**
+ * .
+ *
  * @author javadev
  * @version $Revision$ $Date$
  */
@@ -25,6 +26,7 @@ public class AgeMoreThan16Validator extends AbstractFormValidator {
 
     /**
      * Constructor.
+     *
      * @param f1 the component1 (birthday date)
      * @param f2 the component2 (doc issuer date)
      */
@@ -35,11 +37,12 @@ public class AgeMoreThan16Validator extends AbstractFormValidator {
         if (f2 == null) {
             throw new IllegalArgumentException("FormComponent2 cannot be null");
         }
-        components = new FormComponent[] { f1, f2 };
+        components = new FormComponent[] {f1, f2};
     }
 
     /**
      * getDependentFormComponents.
+     *
      * @return the components
      */
     public FormComponent[] getDependentFormComponents() {
@@ -48,6 +51,7 @@ public class AgeMoreThan16Validator extends AbstractFormValidator {
 
     /**
      * Validates the form.
+     *
      * @param form the form
      */
     public void validate(Form form) {

@@ -10,7 +10,9 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.IWrapModel;
 import org.bitbucket.creditauto.entity.In_document_store;
 
-/**.
+/**
+ * .
+ *
  * @author javadev
  * @version $Revision$ $Date$
  */
@@ -32,9 +34,12 @@ public class FileUploadModelWrapper implements IWrapModel {
 
     public void setObject(Object object) {
         if (object != null) {
-            ((In_document_store) wrappedModel.getObject()).setData(((FileUpload) object).getBytes());
-            ((In_document_store) wrappedModel.getObject()).setFilename(((FileUpload) object).getClientFileName());
-            ((In_document_store) wrappedModel.getObject()).setDoc_type(((FileUpload) object).getContentType());
+            ((In_document_store) wrappedModel.getObject())
+                    .setData(((FileUpload) object).getBytes());
+            ((In_document_store) wrappedModel.getObject())
+                    .setFilename(((FileUpload) object).getClientFileName());
+            ((In_document_store) wrappedModel.getObject())
+                    .setDoc_type(((FileUpload) object).getContentType());
         }
     }
 

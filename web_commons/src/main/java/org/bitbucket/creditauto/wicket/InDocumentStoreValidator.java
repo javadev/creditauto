@@ -11,7 +11,9 @@ import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.form.validation.AbstractFormValidator;
 import org.bitbucket.creditauto.entity.In_document_store;
 
-/**.
+/**
+ * .
+ *
  * @author javadev
  * @version $Revision$ $Date$
  */
@@ -19,10 +21,12 @@ public class InDocumentStoreValidator extends AbstractFormValidator {
     private static final long serialVersionUID = 1L;
     /** form components to be validated. */
     private final FormComponent[] components;
+
     private final In_document_store inDocumentStore;
 
     /**
      * Constructor.
+     *
      * @param f1 the component1
      * @param inDocumentStore the In_document_store
      */
@@ -30,12 +34,13 @@ public class InDocumentStoreValidator extends AbstractFormValidator {
         if (f1 == null) {
             throw new IllegalArgumentException("FormComponent1 cannot be null");
         }
-        components = new FormComponent[] { f1 };
+        components = new FormComponent[] {f1};
         this.inDocumentStore = inDocumentStore;
     }
 
     /**
      * getDependentFormComponents.
+     *
      * @return the components
      */
     public FormComponent[] getDependentFormComponents() {
@@ -44,6 +49,7 @@ public class InDocumentStoreValidator extends AbstractFormValidator {
 
     /**
      * Validates the form.
+     *
      * @param form the form
      */
     public void validate(Form form) {
@@ -53,8 +59,10 @@ public class InDocumentStoreValidator extends AbstractFormValidator {
         } else if (component1.getFileUpload() != null) {
             inDocumentStore.setData(component1.getFileUpload().getBytes());
         }
-        boolean isValid = inDocumentStore.getData() != null
-            || (inDocumentStore.getIs_not_required() != null && inDocumentStore.getIs_not_required());
+        boolean isValid =
+                inDocumentStore.getData() != null
+                        || (inDocumentStore.getIs_not_required() != null
+                                && inDocumentStore.getIs_not_required());
         if (!isValid) {
             error(component1);
         }

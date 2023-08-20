@@ -16,7 +16,9 @@ import org.bitbucket.creditauto.authorization.facade.AuthorizationResult;
 import org.bitbucket.creditauto.authorization.facade.IAuthorization;
 import org.bitbucket.creditauto.authorization.server.AuthorizationServerImpl;
 
-/**.
+/**
+ * .
+ *
  * @author javadev
  * @version $Revision$ $Date$
  */
@@ -34,7 +36,7 @@ public class HomePage extends WebPage {
         private TextField shopId = new TextField("shopId", new Model(""));
         private IAuthorization authorization;
 
-    public LoginForm(String id) {
+        public LoginForm(String id) {
             super(id);
             add(username);
             add(password.setRequired(false));
@@ -45,8 +47,9 @@ public class HomePage extends WebPage {
 
         @Override
         protected void onSubmit() {
-            AuthorizationResult result = authorization.login(username.getInput(),
-                    password.getInput(), shopId.getInput(), "");
+            AuthorizationResult result =
+                    authorization.login(
+                            username.getInput(), password.getInput(), shopId.getInput(), "");
             if (result.isError) {
                 error(result.messageKey);
                 return;

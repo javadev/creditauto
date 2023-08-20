@@ -8,7 +8,9 @@ package org.bitbucket.creditauto.wicket;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.protocol.http.WebResponse;
 
-/**.
+/**
+ * .
+ *
  * @author javadev
  * @version $Revision$ $Date$
  */
@@ -18,9 +20,7 @@ public class MainPage extends TemplatePage {
         add(new FeedbackPanel("messages"));
     }
 
-    /**
-     * Fix firefox issue. http://issues.apache.org/jira/browse/WICKET-923
-     */
+    /** Fix firefox issue. http://issues.apache.org/jira/browse/WICKET-923 */
     @Override
     protected void configureResponse() {
         super.configureResponse();

@@ -5,6 +5,8 @@
  */
 package org.bitbucket.creditauto;
 
+import com.mycila.xmltool.XMLDoc;
+import com.mycila.xmltool.XMLTag;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -16,7 +18,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugin.logging.SystemStreamLog;
@@ -26,8 +27,6 @@ import org.apache.velocity.app.Velocity;
 import org.apache.velocity.runtime.resource.loader.StringResourceLoader;
 import org.apache.velocity.runtime.resource.util.StringResourceRepository;
 
-import com.mycila.xmltool.XMLDoc;
-import com.mycila.xmltool.XMLTag;
 /**
  * WicketGenerator.
  *
@@ -45,7 +44,7 @@ public class WicketGenerator {
     /** Instance logger */
     private Log log;
 
-    /**.*/
+    /** . */
     public class Repeater {
         private List<Map<String, String>> headers = new ArrayList<Map<String, String>>();
         private List<Map<String, String>> data = new ArrayList<Map<String, String>>();
@@ -55,24 +54,31 @@ public class WicketGenerator {
         public List<Map<String, String>> getHeaders() {
             return this.headers;
         }
+
         public void setHeaders(List<Map<String, String>> headers) {
             this.headers = headers;
         }
+
         public List<Map<String, String>> getData() {
             return this.data;
         }
+
         public void setData(List<Map<String, String>> data) {
             this.data = data;
         }
+
         public List<Map<String, String>> getLinks() {
             return this.links;
         }
+
         public void setLinks(List<Map<String, String>> links) {
             this.links = links;
         }
+
         public Map<String, String> getExtra() {
             return this.extra;
         }
+
         public void setExtra(Map<String, String> extra) {
             this.extra = extra;
         }
@@ -103,7 +109,9 @@ public class WicketGenerator {
     private void generateJava() {
         Properties p = new Properties();
         p.setProperty("resource.loader", "string");
-        p.setProperty("resource.loader.class", "org.apache.velocity.runtime.resource.loader.StringResourceLoader");
+        p.setProperty(
+                "resource.loader.class",
+                "org.apache.velocity.runtime.resource.loader.StringResourceLoader");
         Velocity.init(p);
 
         Template template = getTemplate("Wicket.java");
@@ -125,7 +133,8 @@ public class WicketGenerator {
                 String formMethods = tag.rawXpathString("class[" + index + "]/formMethods");
                 String pageInit = tag.rawXpathString("class[" + index + "]/pageInit");
                 String pageMethods = tag.rawXpathString("class[" + index + "]/pageMethods");
-                String compoundPropertyModel = tag.rawXpathString("class[" + index + "]/compoundPropertyModel");
+                String compoundPropertyModel =
+                        tag.rawXpathString("class[" + index + "]/compoundPropertyModel");
 
                 VelocityContext context = new VelocityContext();
                 context.put("classname", classname);
@@ -144,15 +153,20 @@ public class WicketGenerator {
 
                 context.put("xmltag", tag.duplicate().gotoTag("class[" + index + "]"));
                 try {
-                    String outDirs = basedir + "/src/main/java/" + outPackage.replaceAll("\\.", "/");
+                    String outDirs =
+                            basedir + "/src/main/java/" + outPackage.replaceAll("\\.", "/");
                     new File(outDirs).mkdirs();
-                    Writer writer = new OutputStreamWriter(new FileOutputStream(outDirs + "/"
-                            + classname + ".java"), "utf-8");
+                    Writer writer =
+                            new OutputStreamWriter(
+                                    new FileOutputStream(outDirs + "/" + classname + ".java"),
+                                    "utf-8");
                     template.merge(context, writer);
                     writer.flush();
                     writer.close();
-                    writer = new OutputStreamWriter(new FileOutputStream(outDirs + "/"
-                            + classname + ".html"), "utf-8");
+                    writer =
+                            new OutputStreamWriter(
+                                    new FileOutputStream(outDirs + "/" + classname + ".html"),
+                                    "utf-8");
                     if (classname.endsWith("Panel")) {
                         templateHtml.merge(context, writer);
                     } else {
@@ -161,11 +175,14 @@ public class WicketGenerator {
                     writer.flush();
                     writer.close();
                     if (!classname.endsWith("Panel")) {
-                    writer = new OutputStreamWriter(new FileOutputStream(outDirs + "/"
-                            + classname + "$MainPanel.html"), "utf-8");
-                    templateHtml.merge(context, writer);
-                    writer.flush();
-                    writer.close();
+                        writer =
+                                new OutputStreamWriter(
+                                        new FileOutputStream(
+                                                outDirs + "/" + classname + "$MainPanel.html"),
+                                        "utf-8");
+                        templateHtml.merge(context, writer);
+                        writer.flush();
+                        writer.close();
                     }
                 } catch (IOException e) {
                     getLog().error(e);
@@ -196,7 +213,10 @@ public class WicketGenerator {
      */
     private String getTemplateFromResource(final String templatePath) {
         try {
-            InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(templatePath);
+            InputStream stream =
+                    Thread.currentThread()
+                            .getContextClassLoader()
+                            .getResourceAsStream(templatePath);
             return IOUtils.toString(stream, "UTF-8");
         } catch (IOException ex) {
             throw new RuntimeException(ex);
@@ -220,7 +240,8 @@ public class WicketGenerator {
             String type = xmlTag.rawXpathString(className + "/repeater[" + index + "]/@type");
             // String size = xmlTag.rawXpathString(className + "/repeater["+index+"]/@size");
             String model = xmlTag.rawXpathString(className + "/repeater[" + index + "]/model");
-            String modelClass = xmlTag.rawXpathString(className + "/repeater[" + index + "]/modelClass");
+            String modelClass =
+                    xmlTag.rawXpathString(className + "/repeater[" + index + "]/modelClass");
 
             if (name.isEmpty()) {
                 break;
@@ -233,50 +254,98 @@ public class WicketGenerator {
 
             int columns = 1;
             while (true) {
-                String hname = xmlTag.rawXpathString(className + "/repeater[" + index + "]/header[" + columns
-                        + "]/@name");
-                String hlabel = xmlTag.rawXpathString(className + "/repeater[" + index + "]/header[" + columns
-                        + "]/@label");
-                String hsize = xmlTag.rawXpathString(className + "/repeater[" + index + "]/header[" + columns
-                        + "]/@size");
+                String hname =
+                        xmlTag.rawXpathString(
+                                className
+                                        + "/repeater["
+                                        + index
+                                        + "]/header["
+                                        + columns
+                                        + "]/@name");
+                String hlabel =
+                        xmlTag.rawXpathString(
+                                className
+                                        + "/repeater["
+                                        + index
+                                        + "]/header["
+                                        + columns
+                                        + "]/@label");
+                String hsize =
+                        xmlTag.rawXpathString(
+                                className
+                                        + "/repeater["
+                                        + index
+                                        + "]/header["
+                                        + columns
+                                        + "]/@size");
 
-                String dname = xmlTag
-                        .rawXpathString(className + "/repeater[" + index + "]/data[" + columns + "]/@name");
-                String dlabel = xmlTag.rawXpathString(className + "/repeater[" + index + "]/data[" + columns
-                        + "]/@label");
-                String dsize = xmlTag
-                        .rawXpathString(className + "/repeater[" + index + "]/data[" + columns + "]/@size");
-                String dtype = xmlTag
-                        .rawXpathString(className + "/repeater[" + index + "]/data[" + columns + "]/@type");
-                String dcssclass = xmlTag.rawXpathString(className + "/repeater[" + index + "]/data[" + columns
-                        + "]/@cssclass");
-                String donClick = xmlTag.rawXpathString(className + "/repeater[" + index + "]/data[" + columns
-                        + "]/onClick");
-                String dmodel = xmlTag.rawXpathString(className + "/repeater[" + index + "]/data[" + columns
-                        + "]/model");
+                String dname =
+                        xmlTag.rawXpathString(
+                                className + "/repeater[" + index + "]/data[" + columns + "]/@name");
+                String dlabel =
+                        xmlTag.rawXpathString(
+                                className
+                                        + "/repeater["
+                                        + index
+                                        + "]/data["
+                                        + columns
+                                        + "]/@label");
+                String dsize =
+                        xmlTag.rawXpathString(
+                                className + "/repeater[" + index + "]/data[" + columns + "]/@size");
+                String dtype =
+                        xmlTag.rawXpathString(
+                                className + "/repeater[" + index + "]/data[" + columns + "]/@type");
+                String dcssclass =
+                        xmlTag.rawXpathString(
+                                className
+                                        + "/repeater["
+                                        + index
+                                        + "]/data["
+                                        + columns
+                                        + "]/@cssclass");
+                String donClick =
+                        xmlTag.rawXpathString(
+                                className
+                                        + "/repeater["
+                                        + index
+                                        + "]/data["
+                                        + columns
+                                        + "]/onClick");
+                String dmodel =
+                        xmlTag.rawXpathString(
+                                className + "/repeater[" + index + "]/data[" + columns + "]/model");
                 if ("links".equals(dtype) && links.isEmpty()) {
-                    links = getLinksList(xmlTag, className + "/repeater[" + index + "]/data[" + columns + "]/links");
+                    links =
+                            getLinksList(
+                                    xmlTag,
+                                    className
+                                            + "/repeater["
+                                            + index
+                                            + "]/data["
+                                            + columns
+                                            + "]/links");
                 }
 
                 if (hname.isEmpty()) {
                     break;
                 }
-                 Map<String, String> header = new HashMap<String, String>();
-                 header.put("name", hname);
-                 header.put("label", hlabel);
-                 header.put("size", hsize);
-                 headers.add(header);
+                Map<String, String> header = new HashMap<String, String>();
+                header.put("name", hname);
+                header.put("label", hlabel);
+                header.put("size", hsize);
+                headers.add(header);
 
-                 Map<String, String> data = new HashMap<String, String>();
-                 data.put("name", dname);
-                 data.put("label", dlabel);
-                 data.put("size", dsize);
-                 data.put("type", dtype);
-                 data.put("cssclass", dcssclass);
-                 data.put("onClick", donClick);
-                 data.put("model", dmodel);
-                 datas.add(data);
-                 columns += 1;
+                Map<String, String> data = new HashMap<String, String>();
+                data.put("name", dname);
+                data.put("label", dlabel);
+                data.put("size", dsize);
+                data.put("type", dtype);
+                data.put("cssclass", dcssclass);
+                data.put("onClick", donClick);
+                data.put("model", dmodel);
+                datas.add(data);
+                columns += 1;
             }
             Repeater rep = new Repeater();
             rep.setHeaders(headers);
@@ -296,23 +365,35 @@ public class WicketGenerator {
             String type = xmlTag.rawXpathString(className + "/variable[" + index + "]/@type");
             String style = xmlTag.rawXpathString(className + "/variable[" + index + "]/@style");
             String model = xmlTag.rawXpathString(className + "/variable[" + index + "]/model");
-            String ajaxOnUpdate = xmlTag.rawXpathString(className + "/variable[" + index + "]/ajaxOnUpdate");
-            String ajaxOnEvent = xmlTag.rawXpathString(className + "/variable[" + index + "]/ajaxOnEvent");
-            String onSubmit = xmlTag.rawXpathString(className + "/variable[" + index + "]/onSubmit");
+            String ajaxOnUpdate =
+                    xmlTag.rawXpathString(className + "/variable[" + index + "]/ajaxOnUpdate");
+            String ajaxOnEvent =
+                    xmlTag.rawXpathString(className + "/variable[" + index + "]/ajaxOnEvent");
+            String onSubmit =
+                    xmlTag.rawXpathString(className + "/variable[" + index + "]/onSubmit");
             String onError = xmlTag.rawXpathString(className + "/variable[" + index + "]/onError");
-            String onUpdate = xmlTag.rawXpathString(className + "/variable[" + index + "]/onUpdate");
+            String onUpdate =
+                    xmlTag.rawXpathString(className + "/variable[" + index + "]/onUpdate");
             String label = xmlTag.rawXpathString(className + "/variable[" + index + "]/@label");
             String size = xmlTag.rawXpathString(className + "/variable[" + index + "]/@size");
-            String setOutputMarkupId = xmlTag.rawXpathString(className + "/variable[" + index + "]/@setOutputMarkupId");
-            String readonly = xmlTag.rawXpathString(className + "/variable[" + index + "]/@readonly");
+            String setOutputMarkupId =
+                    xmlTag.rawXpathString(
+                            className + "/variable[" + index + "]/@setOutputMarkupId");
+            String readonly =
+                    xmlTag.rawXpathString(className + "/variable[" + index + "]/@readonly");
             String title = xmlTag.rawXpathString(className + "/variable[" + index + "]/@title");
-            String isEnabled = xmlTag.rawXpathString(className + "/variable[" + index + "]/isEnabled");
-            String onSelectionChanged = xmlTag
-                    .rawXpathString(className + "/variable[" + index + "]/onSelectionChanged");
-            String afterInit0 = xmlTag.rawXpathString(className + "/variable[" + index + "]/afterInit[1]");
-            String afterInit1 = xmlTag.rawXpathString(className + "/variable[" + index + "]/afterInit[2]");
-            String defaultFormProcess = xmlTag.rawXpathString(className + "/variable[" + index
-                    + "]/@defaultFormProcess");
+            String isEnabled =
+                    xmlTag.rawXpathString(className + "/variable[" + index + "]/isEnabled");
+            String onSelectionChanged =
+                    xmlTag.rawXpathString(
+                            className + "/variable[" + index + "]/onSelectionChanged");
+            String afterInit0 =
+                    xmlTag.rawXpathString(className + "/variable[" + index + "]/afterInit[1]");
+            String afterInit1 =
+                    xmlTag.rawXpathString(className + "/variable[" + index + "]/afterInit[2]");
+            String defaultFormProcess =
+                    xmlTag.rawXpathString(
+                            className + "/variable[" + index + "]/@defaultFormProcess");
             String visible = xmlTag.rawXpathString(className + "/variable[" + index + "]/@visible");
             if (name.isEmpty()) {
                 break;
@@ -329,11 +410,15 @@ public class WicketGenerator {
                 variable.put("size", " size=\"" + size + "\"");
             } else if ("DictionaryTextField".equals(type)) {
                 variable.put("htmlType", "input");
-                variable.put("style", style.isEmpty() ? " style=\"width:160px;\"" : " style=\"" + style + "\"");
+                variable.put(
+                        "style",
+                        style.isEmpty() ? " style=\"width:160px;\"" : " style=\"" + style + "\"");
                 variable.put("size", "");
             } else if ("DropDownChoice".equals(type)) {
                 variable.put("htmlType", "select");
-                variable.put("style", style.isEmpty() ? " style=\"width:160px;\"" : " style=\"" + style + "\"");
+                variable.put(
+                        "style",
+                        style.isEmpty() ? " style=\"width:160px;\"" : " style=\"" + style + "\"");
                 variable.put("size", "");
             } else if (type.endsWith("Panel")) {
                 variable.put("htmlType", "span");
@@ -341,7 +426,9 @@ public class WicketGenerator {
                 variable.put("htmlType", "input");
                 variable.put("style", "");
                 variable.put("size", " type=\"checkbox\"");
-            } else if ("AjaxLink".equals(type) || "Link".equals(type) || "AjaxSubmitLink".equals(type)) {
+            } else if ("AjaxLink".equals(type)
+                    || "Link".equals(type)
+                    || "AjaxSubmitLink".equals(type)) {
                 variable.put("htmlType", "input");
                 variable.put("style", "");
                 variable.put("label", "");
@@ -383,7 +470,8 @@ public class WicketGenerator {
             String title = xmlTag.rawXpathString(className + "/button[" + index + "]/@title");
             String readonly = xmlTag.rawXpathString(className + "/button[" + index + "]/@readonly");
             String onSubmit = xmlTag.rawXpathString(className + "/button[" + index + "]/text()");
-            String afterInit0 = xmlTag.rawXpathString(className + "/button[" + index + "]/afterInit[1]");
+            String afterInit0 =
+                    xmlTag.rawXpathString(className + "/button[" + index + "]/afterInit[1]");
             if (name.isEmpty()) {
                 break;
             }
@@ -399,6 +487,7 @@ public class WicketGenerator {
             index += 1;
         }
     }
+
     private List<Map<String, String>> getLinksList(XMLTag xmlTag, String parentPath) {
         List<Map<String, String>> links = new ArrayList<Map<String, String>>();
         int index = 1;

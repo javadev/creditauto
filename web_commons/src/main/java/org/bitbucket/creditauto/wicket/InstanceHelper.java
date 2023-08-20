@@ -10,10 +10,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
 import org.bitbucket.creditauto.LOG;
 import org.bitbucket.creditauto.entity.In_asset;
 import org.bitbucket.creditauto.entity.In_bloknot;
@@ -24,14 +22,17 @@ import org.bitbucket.creditauto.entity.In_instance;
 import org.bitbucket.creditauto.entity.In_person;
 import org.bitbucket.creditauto.entity.In_third_person;
 
-/**.
+/**
+ * .
+ *
  * @author javadev
  * @version $Revision$ $Date$
  */
-@SuppressWarnings({ "unchecked" })
+@SuppressWarnings({"unchecked"})
 public final class InstanceHelper {
 
     private static java.util.Date emptyDate;
+
     static {
         try {
             emptyDate = new java.text.SimpleDateFormat("ddMMyyyy").parse("01011900");
@@ -40,15 +41,15 @@ public final class InstanceHelper {
         }
     }
 
-
-    private InstanceHelper() {
-    }
+    private InstanceHelper() {}
 
     public static List<In_instance> load(Date df, Date dt) {
         List<In_instance> result = new ArrayList<In_instance>();
         EntityManager em = JpaRequestCycle.get().getEntityManager();
-        Query queryInDossier = em.createQuery("select p from In_person p join p.in_dossier d "
-                + " where d.date_of_entering_dossier <= :dt and d.date_of_entering_dossier >= :df and p.dict_client_type = '1'");
+        Query queryInDossier =
+                em.createQuery(
+                        "select p from In_person p join p.in_dossier d "
+                                + " where d.date_of_entering_dossier <= :dt and d.date_of_entering_dossier >= :df and p.dict_client_type = '1'");
         queryInDossier.setParameter("dt", dt);
         queryInDossier.setParameter("df", df);
         for (In_person inPerson : (List<In_person>) queryInDossier.getResultList()) {
@@ -75,8 +76,7 @@ public final class InstanceHelper {
     public static In_instance load(Long id) {
         In_instance inInstance = new In_instance(false);
         EntityManager em = JpaRequestCycle.get().getEntityManager();
-        Query queryInDossier = em.createQuery("select d from In_dossier d where "
-                        + "d.id = :id");
+        Query queryInDossier = em.createQuery("select d from In_dossier d where " + "d.id = :id");
         queryInDossier.setParameter("id", id);
         inInstance.setIn_dossier((In_dossier) queryInDossier.getResultList().get(0));
         loadInPerson(em, inInstance);
@@ -93,8 +93,8 @@ public final class InstanceHelper {
     }
 
     private static void loadInPerson(EntityManager em, In_instance inInstance) {
-        Query queryInPerson = em.createQuery("select p from In_person p where "
-                        + "p.in_dossier = :dossier_id");
+        Query queryInPerson =
+                em.createQuery("select p from In_person p where " + "p.in_dossier = :dossier_id");
         queryInPerson.setParameter("dossier_id", inInstance.getIn_dossier());
         for (In_person inPerson : (List<In_person>) queryInPerson.getResultList()) {
             if ("1".equals(inPerson.getDict_client_type())) {
@@ -107,24 +107,31 @@ public final class InstanceHelper {
                 inInstance.setIn_guarantor_partner(inPerson);
             }
         }
-        Query queryInGoods = em.createQuery("select g from In_good g where "
-                        + "g.in_dossier = :dossier_id");
+        Query queryInGoods =
+                em.createQuery("select g from In_good g where " + "g.in_dossier = :dossier_id");
         queryInGoods.setParameter("dossier_id", inInstance.getIn_dossier());
         inInstance.setIn_goods((List<In_good>) queryInGoods.getResultList());
-        Query queryInThirdPerson = em.createQuery("select dp from In_third_person dp where "
-                        + "dp.in_dossier = :dossier_id");
+        Query queryInThirdPerson =
+                em.createQuery(
+                        "select dp from In_third_person dp where " + "dp.in_dossier = :dossier_id");
         queryInThirdPerson.setParameter("dossier_id", inInstance.getIn_dossier());
         inInstance.setIn_third_person((In_third_person) queryInThirdPerson.getResultList().get(0));
-        Query queryInDocumentStore = em.createQuery("select ds from In_document_store ds where "
-                        + "ds.in_dossier = :dossier_id");
+        Query queryInDocumentStore =
+                em.createQuery(
+                        "select ds from In_document_store ds where "
+                                + "ds.in_dossier = :dossier_id");
         queryInDocumentStore.setParameter("dossier_id", inInstance.getIn_dossier());
-        inInstance.setIn_document_stores((List<In_document_store>) queryInDocumentStore.getResultList());
-        Query queryInBlocknot = em.createQuery("select ib from In_bloknot ib where "
-                + "ib.in_dossier = :dossier_id");
+        inInstance.setIn_document_stores(
+                (List<In_document_store>) queryInDocumentStore.getResultList());
+        Query queryInBlocknot =
+                em.createQuery(
+                        "select ib from In_bloknot ib where " + "ib.in_dossier = :dossier_id");
         queryInBlocknot.setParameter("dossier_id", inInstance.getIn_dossier());
-        inInstance.getIn_dossier().setIn_bloknots((List<In_bloknot>) queryInBlocknot.getResultList());
-        Query queryInAssetStore = em.createQuery("select a from In_asset a where "
-                        + "a.in_dossier = :dossier_id");
+        inInstance
+                .getIn_dossier()
+                .setIn_bloknots((List<In_bloknot>) queryInBlocknot.getResultList());
+        Query queryInAssetStore =
+                em.createQuery("select a from In_asset a where " + "a.in_dossier = :dossier_id");
         queryInAssetStore.setParameter("dossier_id", inInstance.getIn_dossier());
         inInstance.setIn_assets((List<In_asset>) queryInAssetStore.getResultList());
         inInstance.getIn_dossier().setIn_assets((List<In_asset>) queryInAssetStore.getResultList());
@@ -148,7 +155,7 @@ public final class InstanceHelper {
                 saveObject(em, inDocumentStore, isPersist);
             }
 
-            //save good notes to db, remove redundant inbloknot notes:
+            // save good notes to db, remove redundant inbloknot notes:
             Map<Long, In_bloknot> notesMap = new HashMap<Long, In_bloknot>();
             for (In_bloknot inB : inInstance.getIn_dossier().getIn_bloknots()) {
                 if (inB != null && inB.getText() != null) {
@@ -156,9 +163,12 @@ public final class InstanceHelper {
                 }
                 notesMap.put(inB.getId(), inB);
             }
-            Query queryInBlocknot = em.createQuery("select ib from In_bloknot ib where "
-                    + "ib.in_dossier = :dossier_id").setParameter("dossier_id", inInstance.getIn_dossier());
-           
+            Query queryInBlocknot =
+                    em.createQuery(
+                                    "select ib from In_bloknot ib where "
+                                            + "ib.in_dossier = :dossier_id")
+                            .setParameter("dossier_id", inInstance.getIn_dossier());
+
             for (In_bloknot inB : (List<In_bloknot>) queryInBlocknot.getResultList()) {
                 if (notesMap.get(inB.getId()) == null) {
                     removeObject(em, inB);
@@ -167,26 +177,26 @@ public final class InstanceHelper {
             for (In_asset inAsset : inInstance.getIn_assets()) {
                 saveObject(em, inAsset, isPersist);
             }
-/*
-            //assets
-            Map<Long, In_asset> assetsMap = new HashMap<Long, In_asset>();
-            if (inInstance.getIn_dossier().getIn_assets() != null) {
-                for (In_asset inA : inInstance.getIn_dossier().getIn_assets()) {
-                    if (inA != null && inA.getDictionary_asset() != null) {
-                        saveObject(em, inA, inA.getId() == null);
-                    }
-                    assetsMap.put(inA.getId(), inA);
-                }
-            }
-            Query queryInA = em.createQuery("select a from In_asset a where "
-                    + "a.in_dossier = :dossier_id").setParameter("dossier_id", inInstance.getIn_dossier());
-           
-            for (In_asset inA : (List<In_asset>) queryInA.getResultList()) {
-                if (assetsMap.get(inA.getId()) == null) {
-                    removeObject(em, inA);
-                }
-            }
-*/            
+            /*
+                        //assets
+                        Map<Long, In_asset> assetsMap = new HashMap<Long, In_asset>();
+                        if (inInstance.getIn_dossier().getIn_assets() != null) {
+                            for (In_asset inA : inInstance.getIn_dossier().getIn_assets()) {
+                                if (inA != null && inA.getDictionary_asset() != null) {
+                                    saveObject(em, inA, inA.getId() == null);
+                                }
+                                assetsMap.put(inA.getId(), inA);
+                            }
+                        }
+                        Query queryInA = em.createQuery("select a from In_asset a where "
+                                + "a.in_dossier = :dossier_id").setParameter("dossier_id", inInstance.getIn_dossier());
+
+                        for (In_asset inA : (List<In_asset>) queryInA.getResultList()) {
+                            if (assetsMap.get(inA.getId()) == null) {
+                                removeObject(em, inA);
+                            }
+                        }
+            */
             if (em.getTransaction().isActive()) {
                 em.getTransaction().commit();
             }
@@ -203,12 +213,14 @@ public final class InstanceHelper {
             em.merge(obj);
         }
     }
+
     private static void removeObject(EntityManager em, Object obj) {
         em.remove(obj);
     }
 
     /**
      * Copies reg address to the mail address.
+     *
      * @param inPerson the person object
      */
     public static void copyRegToMail(In_person inPerson) {
@@ -224,6 +236,7 @@ public final class InstanceHelper {
 
     /**
      * Copies mail address to the reg address.
+     *
      * @param inPerson the person object
      */
     public static void copyMailToReg(In_person inPerson) {
@@ -239,7 +252,8 @@ public final class InstanceHelper {
 
     private static void fillInInstance(In_instance inInstance) {
         if (inInstance.getIn_dossier().getCredittype() == null) {
-            org.bitbucket.creditauto.entity.Credittype credittype = new org.bitbucket.creditauto.entity.Credittype();
+            org.bitbucket.creditauto.entity.Credittype credittype =
+                    new org.bitbucket.creditauto.entity.Credittype();
             credittype.setId(9999L);
             inInstance.getIn_dossier().setCredittype(credittype);
         }
@@ -253,7 +267,7 @@ public final class InstanceHelper {
 
     private static void undoFillInInstance(In_instance inInstance) {
         if (inInstance.getIn_dossier().getCredittype() != null
-            && inInstance.getIn_dossier().getCredittype().getId() == 9999L) {
+                && inInstance.getIn_dossier().getCredittype().getId() == 9999L) {
             inInstance.getIn_dossier().setCredittype(null);
         }
         fillObjectDefaultValues(inInstance.getIn_person(), false);
@@ -282,11 +296,16 @@ public final class InstanceHelper {
         for (java.lang.reflect.Method method : object.getClass().getMethods()) {
             if (method.isAnnotationPresent(javax.validation.constraints.NotNull.class)) {
                 int min = -999;
-                if (method.isAnnotationPresent(javax.validation.constraints.Min.class) && setDefault) {
-                    min = (int) method.getAnnotation(javax.validation.constraints.Min.class).value();
+                if (method.isAnnotationPresent(javax.validation.constraints.Min.class)
+                        && setDefault) {
+                    min =
+                            (int)
+                                    method.getAnnotation(javax.validation.constraints.Min.class)
+                                            .value();
                 }
                 String propertyName = method.getName().replaceFirst("get", "");
-                propertyName = propertyName.substring(0, 1).toLowerCase() + propertyName.substring(1);
+                propertyName =
+                        propertyName.substring(0, 1).toLowerCase() + propertyName.substring(1);
                 namesValues.put(propertyName, min);
                 names.add(propertyName);
             }
@@ -308,17 +327,19 @@ public final class InstanceHelper {
                 } else {
                     if (fld.getType().equals(String.class) && "-".equals(oldValue)) {
                         fld.set(object, null);
-                    } else if (fld.getType().equals(java.util.Date.class) && emptyDate.equals(oldValue)) {
+                    } else if (fld.getType().equals(java.util.Date.class)
+                            && emptyDate.equals(oldValue)) {
                         fld.set(object, null);
-                    } else if (fld.getType().equals(Integer.class) && namesValues.get(property).equals(oldValue)
-                        && namesValues.get(property) == -999) {
+                    } else if (fld.getType().equals(Integer.class)
+                            && namesValues.get(property).equals(oldValue)
+                            && namesValues.get(property) == -999) {
                         fld.set(object, null);
                     }
                 }
             } catch (NoSuchFieldException ex) {
-LOG.error(null, ex.getMessage());
+                LOG.error(null, ex.getMessage());
             } catch (IllegalAccessException ex) {
-LOG.error(null, ex.getMessage());
+                LOG.error(null, ex.getMessage());
             }
         }
     }

@@ -9,10 +9,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
 import org.bitbucket.creditauto.LOG;
 import org.bitbucket.creditauto.entity.Credittype;
 import org.bitbucket.creditauto.entity.Externaldistributor;
@@ -24,7 +22,9 @@ import org.bitbucket.creditauto.tarification.facade.ITarification;
 import org.bitbucket.creditauto.tarification.facade.TarificationCalulateInputParam;
 import org.bitbucket.creditauto.wicket.JpaRequestCycle;
 
-/**.
+/**
+ * .
+ *
  * @author vko
  * @version $Revision$ $Date$
  */
@@ -41,19 +41,19 @@ public class TarificationServerImpl implements ITarification {
             return result;
         }
         EntityManager em = JpaRequestCycle.get().getEntityManager();
-        Query query = em.createQuery("select e from Externaldistributor e"
-                + " where e.id = :id");
+        Query query = em.createQuery("select e from Externaldistributor e" + " where e.id = :id");
         query.setParameter("id", param.getExternaldistributor().getId());
         List<Externaldistributor> eds = query.getResultList();
-        if (eds.get(0).getCredittypes() == null
-            || eds.get(0).getCredittypes().isEmpty()) {
+        if (eds.get(0).getCredittypes() == null || eds.get(0).getCredittypes().isEmpty()) {
             result.setErrorResult("Не определен ни один кредитный тип для этого магазина");
             return result;
         }
         List<Credittype> credittypes = new ArrayList<Credittype>();
         BigDecimal amountOfLoan = param.getTotalPrice().subtract(param.getDownpayment());
-        BigDecimal downpaymentPrc = param.getDownpayment().multiply(BigDecimal.valueOf(100D)).divide(
-            param.getTotalPrice(), 2, RoundingMode.HALF_UP);
+        BigDecimal downpaymentPrc =
+                param.getDownpayment()
+                        .multiply(BigDecimal.valueOf(100D))
+                        .divide(param.getTotalPrice(), 2, RoundingMode.HALF_UP);
         LOG.info(null, "downpaymentPrc - " + downpaymentPrc);
         for (Credittype ct : eds.get(0).getCredittypes()) {
             if (amountOfLoan.compareTo(ct.getTotalpricemin()) == -1) {
@@ -72,7 +72,7 @@ public class TarificationServerImpl implements ITarification {
             result.setErrorResult("Не найден не один кредитный тип для данного товара");
             return result;
         }
-    result.credittypes = credittypes;
+        result.credittypes = credittypes;
         return result;
     }
 
@@ -86,5 +86,4 @@ public class TarificationServerImpl implements ITarification {
     public CalculateOffersResult calculateOffers(TarificationCalulateInputParam param) {
         return new CalculateOffersResult();
     }
-
 }

@@ -5,12 +5,11 @@
  */
 package org.bitbucket.creditauto.tarification.server.amortization;
 
-import java.util.List;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.math.BigDecimal;
-
+import java.util.List;
 import org.bitbucket.creditauto.LOG;
 import org.bitbucket.creditauto.tarification.server.model.CalculationInputParameters;
 import org.bitbucket.creditauto.tarification.server.model.Payment;
@@ -18,6 +17,7 @@ import org.bitbucket.creditauto.tarification.server.model.PaymentDate;
 
 /**
  * .
+ *
  * @author vko
  * @version $Revision$ $Date$
  */
@@ -37,17 +37,16 @@ public class CarCalculation {
     private double rate;
     /** Date of the end of Grace Period */
     private Date endGracePeriodDate;
+
     private boolean flagNeedRound = true;
 
     /**
-     * Constructor. If class instance is made by this constructor, annuity sum will not be calculated internally and
-     * passed annuity sum by third parameter will be applied.
+     * Constructor. If class instance is made by this constructor, annuity sum will not be
+     * calculated internally and passed annuity sum by third parameter will be applied.
      *
-     * @param calendar
-     *            - PaymentDate object list (payment schedule).
-     * @param parameters
-     *            - input parameters (see CalculationInputParameters class) are needed to calculate amortization plan
-     *            for annuity calculation procedure.
+     * @param calendar - PaymentDate object list (payment schedule).
+     * @param parameters - input parameters (see CalculationInputParameters class) are needed to
+     *     calculate amortization plan for annuity calculation procedure.
      */
     public CarCalculation(List<PaymentDate> calendar, CalculationInputParameters parameters) {
         init(calendar, parameters);
@@ -56,11 +55,9 @@ public class CarCalculation {
     /**
      * Initialize object newly created.
      *
-     * @param calendar
-     *            - PaymentDate object list (payment schedule).
-     * @param parameters
-     *            - input parameters (see CalculationInputParameters class) are needed to calculate amortization plan
-     *            for annuity calculation procedure.
+     * @param calendar - PaymentDate object list (payment schedule).
+     * @param parameters - input parameters (see CalculationInputParameters class) are needed to
+     *     calculate amortization plan for annuity calculation procedure.
      */
     private void init(List<PaymentDate> calendar, CalculationInputParameters parameters) {
         this.calendar = calendar;
@@ -135,9 +132,11 @@ public class CarCalculation {
         // saveToFile(getRandomFileName("/tmp/round_analise/"), this.payments, total);
         completeTotal(totalCalendarDate);
 
-        if ((this.parameters.getEndGracePeriod() != null) && (this.parameters.getEndGracePeriod() > 0)) {
+        if ((this.parameters.getEndGracePeriod() != null)
+                && (this.parameters.getEndGracePeriod() > 0)) {
             try {
-                this.endGracePeriodDate = this.payments.get(this.parameters.getEndGracePeriod().intValue()).getDate();
+                this.endGracePeriodDate =
+                        this.payments.get(this.parameters.getEndGracePeriod().intValue()).getDate();
                 LOG.debug(this, "calc(): EndGracePeriodDate=" + this.endGracePeriodDate);
 
             } catch (Exception ex) {
@@ -148,9 +147,10 @@ public class CarCalculation {
 
     /**
      * set flag for need round values.
+     *
      * <ul>
-     * <li><b>true</b> - need to round ( for all, but skip last )</li>
-     * <li><b>false</b> natural values</li>
+     *   <li><b>true</b> - need to round ( for all, but skip last )
+     *   <li><b>false</b> natural values
      * </ul>
      *
      * @param newRoundValue set need round
@@ -162,8 +162,7 @@ public class CarCalculation {
     /**
      * Calculate effective rate according to National Bank of Ukraine rules.
      *
-     * @param payments
-     *            - payment list (Payment object list)
+     * @param payments - payment list (Payment object list)
      * @return - calculated rate with precision E -14.
      */
     private double calcEffectRate() {
@@ -220,13 +219,15 @@ public class CarCalculation {
 
     /**
      * add2Total.
+     *
      * @param payment for addition to destination
      */
     private void add2Total(Payment payment) {
         total.setTotalPayment(total.getTotalPayment() + payment.getTotalPayment());
         total.setCapitalPayment(total.getCapitalPayment() + payment.getCapitalPayment());
         total.setInterestPayment(total.getInterestPayment() + payment.getInterestPayment());
-        total.setTotalInterestPayment(total.getTotalInterestPayment() + payment.getTotalInterestPayment());
+        total.setTotalInterestPayment(
+                total.getTotalInterestPayment() + payment.getTotalInterestPayment());
         total.setOpeningFee(total.getOpeningFee() + payment.getOpeningFee());
         total.setMonthlyFee(total.getMonthlyFee() + payment.getMonthlyFee());
     }
@@ -345,17 +346,16 @@ public class CarCalculation {
     /**
      * Calculate annuity payment sum.
      *
-     * @param ammount
-     *            -
-     * @param duration
-     *            -
+     * @param ammount -
+     * @param duration -
      * @return the annuity sum
      */
     public double calcAnnuitySums(double ammount, int duration) {
         double sum;
-        sum = ((Math.pow(1 + (rate / 12 / 100.00), duration) * (rate / 12 / 100.00)) / (Math.pow(
-                1 + (rate / 12 / 100.00), duration) - 1))
-                * ammount;
+        sum =
+                ((Math.pow(1 + (rate / 12 / 100.00), duration) * (rate / 12 / 100.00))
+                                / (Math.pow(1 + (rate / 12 / 100.00), duration) - 1))
+                        * ammount;
         return round(sum, 2);
     }
 
@@ -374,10 +374,8 @@ public class CarCalculation {
     /**
      * Round value to defined number of signs after digit delimiter.
      *
-     * @param value
-     *            - value to be rounded
-     * @param number
-     *            - number of signs after digit delimiter for rounding to
+     * @param value - value to be rounded
+     * @param number - number of signs after digit delimiter for rounding to
      * @return rounded value.
      */
     public double round(double value, int number) {
@@ -387,8 +385,9 @@ public class CarCalculation {
     }
 
     /**
-     * Get monthly installment as rounded sum of monthly fee (some rate to be paid each month) and opening fee (some
-     * rate to be paid once when loan is granted) round(monthlyFee + annuitySum, 2).
+     * Get monthly installment as rounded sum of monthly fee (some rate to be paid each month) and
+     * opening fee (some rate to be paid once when loan is granted) round(monthlyFee + annuitySum,
+     * 2).
      *
      * @return full monthly payment
      */
@@ -414,8 +413,10 @@ public class CarCalculation {
         Calendar toDateCalendar = Calendar.getInstance();
         toDateCalendar.setTime(toDate);
 
-        long monthes = (toDateCalendar.get(Calendar.YEAR) * 12 + toDateCalendar.get(Calendar.MONTH))
-                - (fromDateCalendar.get(Calendar.YEAR) * 12 + fromDateCalendar.get(Calendar.MONTH));
+        long monthes =
+                (toDateCalendar.get(Calendar.YEAR) * 12 + toDateCalendar.get(Calendar.MONTH))
+                        - (fromDateCalendar.get(Calendar.YEAR) * 12
+                                + fromDateCalendar.get(Calendar.MONTH));
 
         long startDay = fromDateCalendar.get(Calendar.DATE);
         long endDay = toDateCalendar.get(Calendar.DATE);
@@ -429,7 +430,8 @@ public class CarCalculation {
 
     /**
      * Date of the end of grace period.
-     * @return  the end grace period date
+     *
+     * @return the end grace period date
      */
     public Date getEndGracePeriodDate() {
         return endGracePeriodDate;
@@ -437,6 +439,7 @@ public class CarCalculation {
 
     /**
      * Date of the end of grace period.
+     *
      * @param endGracePeriodDate the end grace period date
      */
     public void setEndGracePeriodDate(Date endGracePeriodDate) {

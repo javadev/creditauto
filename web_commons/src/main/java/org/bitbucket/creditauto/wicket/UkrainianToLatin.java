@@ -72,30 +72,35 @@ public class UkrainianToLatin {
         YuIu("Юю"),
         YaIa("Яя");
         private String cyrilic;
+
         private Convert(String cyrilic) {
             this.cyrilic = cyrilic;
         }
         /**
          * Gets cyrilic.
+         *
          * @return the cyrilic
          */
         public String getCyrilic() {
             return cyrilic;
         }
-
     }
+
     private static Map<String, ConvertCase> cyrToLat;
 
     private static class ConvertCase {
         private final Convert convert;
         private final boolean lowcase;
+
         public ConvertCase(Convert convert, boolean lowcase) {
             this.convert = convert;
             this.lowcase = lowcase;
         }
+
         public Convert getConvert() {
             return convert;
         }
+
         public boolean isLowcase() {
             return lowcase;
         }
@@ -104,20 +109,26 @@ public class UkrainianToLatin {
     static {
         cyrToLat = new HashMap<String, ConvertCase>();
         for (Convert convert : Convert.values()) {
-            cyrToLat.put(convert.getCyrilic().substring(INDEX_0, INDEX_1), new ConvertCase(convert, false));
-            cyrToLat.put(convert.getCyrilic().substring(INDEX_1, INDEX_2), new ConvertCase(convert, true));
+            cyrToLat.put(
+                    convert.getCyrilic().substring(INDEX_0, INDEX_1),
+                    new ConvertCase(convert, false));
+            cyrToLat.put(
+                    convert.getCyrilic().substring(INDEX_1, INDEX_2),
+                    new ConvertCase(convert, true));
             if (convert == Convert.EE) {
                 cyrToLat.put("Ё", new ConvertCase(convert, false));
                 cyrToLat.put("ё", new ConvertCase(convert, true));
             }
         }
     }
+
     private UkrainianToLatin() {
         super();
     }
 
     /**
      * Generates latinic from cyrilic.
+     *
      * @param name the name
      * @return the result
      */
@@ -129,7 +140,10 @@ public class UkrainianToLatin {
         ConvertCase prevConvertCase = null;
         for (int index = 0; index < name.length(); index += 1) {
             String curChar = name.substring(index, index + INDEX_1);
-            String nextChar = index == name.length() - 1 ? null : name.substring(index + INDEX_1, index + INDEX_2);
+            String nextChar =
+                    index == name.length() - 1
+                            ? null
+                            : name.substring(index + INDEX_1, index + INDEX_2);
             if (curChar.matches("[-'’,]")) {
                 result.append("’".equals(curChar) ? "'" : curChar);
                 continue;
@@ -143,11 +157,15 @@ public class UkrainianToLatin {
             }
             ConvertCase convertCase = cyrToLat.get(curChar);
             if (prevConvertCase == null) {
-                checkFirstChar(result, convertCase, cyrToLat.get(nextChar) == null ? convertCase : cyrToLat
-                        .get(nextChar));
+                checkFirstChar(
+                        result,
+                        convertCase,
+                        cyrToLat.get(nextChar) == null ? convertCase : cyrToLat.get(nextChar));
             } else {
-                checkMiddleChar(result, convertCase, cyrToLat.get(nextChar) == null ? convertCase : cyrToLat
-                        .get(nextChar));
+                checkMiddleChar(
+                        result,
+                        convertCase,
+                        cyrToLat.get(nextChar) == null ? convertCase : cyrToLat.get(nextChar));
             }
             prevConvertCase = convertCase;
         }
@@ -159,27 +177,37 @@ public class UkrainianToLatin {
      * @param convertCase
      * @param prevChar
      */
-    private static void checkFirstChar(StringBuffer result, ConvertCase convertCase, ConvertCase nextConvertCase) {
+    private static void checkFirstChar(
+            StringBuffer result, ConvertCase convertCase, ConvertCase nextConvertCase) {
         String latName = convertCase.getConvert().name();
         switch (latName.length()) {
-        case LENGTH_2:
-            result.append(convertCase.isLowcase() ? latName.substring(INDEX_0, INDEX_1).toLowerCase() : nextConvertCase
-                    .isLowcase() ? latName.substring(INDEX_0, INDEX_1) : latName.substring(INDEX_0, INDEX_1)
-                    .toUpperCase());
-            break;
-        case LENGTH_3:
-        case LENGTH_4:
-            result.append(convertCase.isLowcase() ? latName.substring(INDEX_0, INDEX_2).toLowerCase() : nextConvertCase
-                    .isLowcase() ? latName.substring(INDEX_0, INDEX_2) : latName.substring(INDEX_0, INDEX_2)
-                    .toUpperCase());
-            break;
-        case LENGTH_8:
-            result.append(convertCase.isLowcase() ? latName.substring(INDEX_0, INDEX_4).toLowerCase() : nextConvertCase
-                    .isLowcase() ? latName.substring(INDEX_0, INDEX_4) : latName.substring(INDEX_0, INDEX_4)
-                    .toUpperCase());
-            break;
-        default:
-            break;
+            case LENGTH_2:
+                result.append(
+                        convertCase.isLowcase()
+                                ? latName.substring(INDEX_0, INDEX_1).toLowerCase()
+                                : nextConvertCase.isLowcase()
+                                        ? latName.substring(INDEX_0, INDEX_1)
+                                        : latName.substring(INDEX_0, INDEX_1).toUpperCase());
+                break;
+            case LENGTH_3:
+            case LENGTH_4:
+                result.append(
+                        convertCase.isLowcase()
+                                ? latName.substring(INDEX_0, INDEX_2).toLowerCase()
+                                : nextConvertCase.isLowcase()
+                                        ? latName.substring(INDEX_0, INDEX_2)
+                                        : latName.substring(INDEX_0, INDEX_2).toUpperCase());
+                break;
+            case LENGTH_8:
+                result.append(
+                        convertCase.isLowcase()
+                                ? latName.substring(INDEX_0, INDEX_4).toLowerCase()
+                                : nextConvertCase.isLowcase()
+                                        ? latName.substring(INDEX_0, INDEX_4)
+                                        : latName.substring(INDEX_0, INDEX_4).toUpperCase());
+                break;
+            default:
+                break;
         }
     }
 
@@ -188,31 +216,44 @@ public class UkrainianToLatin {
      * @param convertCase
      * @param prevChar
      */
-    private static void checkMiddleChar(StringBuffer result, ConvertCase convertCase, ConvertCase nextConvertCase) {
+    private static void checkMiddleChar(
+            StringBuffer result, ConvertCase convertCase, ConvertCase nextConvertCase) {
         String latName = convertCase.getConvert().name();
         switch (latName.length()) {
-        case LENGTH_2:
-            result.append(convertCase.isLowcase() ? latName.substring(INDEX_1, INDEX_2).toLowerCase() : nextConvertCase
-                    .isLowcase() ? latName.substring(INDEX_1, INDEX_2) : latName.substring(INDEX_1, INDEX_2)
-                    .toUpperCase());
-            break;
-        case LENGTH_3:
-            result.append(convertCase.isLowcase() ? latName.substring(INDEX_2, INDEX_3).toLowerCase() : nextConvertCase
-                    .isLowcase() ? latName.substring(INDEX_2, INDEX_3) : latName.substring(INDEX_2, INDEX_3)
-                    .toUpperCase());
-            break;
-        case LENGTH_4:
-            result.append(convertCase.isLowcase() ? latName.substring(INDEX_2, INDEX_4).toLowerCase() : nextConvertCase
-                    .isLowcase() ? latName.substring(INDEX_2, INDEX_4) : latName.substring(INDEX_2, INDEX_4)
-                    .toUpperCase());
-            break;
-        case LENGTH_8:
-            result.append(convertCase.isLowcase() ? latName.substring(INDEX_4, INDEX_8).toLowerCase() : nextConvertCase
-                    .isLowcase() ? latName.substring(INDEX_4, INDEX_8) : latName.substring(INDEX_4, INDEX_8)
-                    .toUpperCase());
-            break;
-        default:
-            break;
+            case LENGTH_2:
+                result.append(
+                        convertCase.isLowcase()
+                                ? latName.substring(INDEX_1, INDEX_2).toLowerCase()
+                                : nextConvertCase.isLowcase()
+                                        ? latName.substring(INDEX_1, INDEX_2)
+                                        : latName.substring(INDEX_1, INDEX_2).toUpperCase());
+                break;
+            case LENGTH_3:
+                result.append(
+                        convertCase.isLowcase()
+                                ? latName.substring(INDEX_2, INDEX_3).toLowerCase()
+                                : nextConvertCase.isLowcase()
+                                        ? latName.substring(INDEX_2, INDEX_3)
+                                        : latName.substring(INDEX_2, INDEX_3).toUpperCase());
+                break;
+            case LENGTH_4:
+                result.append(
+                        convertCase.isLowcase()
+                                ? latName.substring(INDEX_2, INDEX_4).toLowerCase()
+                                : nextConvertCase.isLowcase()
+                                        ? latName.substring(INDEX_2, INDEX_4)
+                                        : latName.substring(INDEX_2, INDEX_4).toUpperCase());
+                break;
+            case LENGTH_8:
+                result.append(
+                        convertCase.isLowcase()
+                                ? latName.substring(INDEX_4, INDEX_8).toLowerCase()
+                                : nextConvertCase.isLowcase()
+                                        ? latName.substring(INDEX_4, INDEX_8)
+                                        : latName.substring(INDEX_4, INDEX_8).toUpperCase());
+                break;
+            default:
+                break;
         }
     }
 }

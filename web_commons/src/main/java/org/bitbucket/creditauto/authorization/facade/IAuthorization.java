@@ -7,13 +7,16 @@ package org.bitbucket.creditauto.authorization.facade;
 
 import org.bitbucket.creditauto.entity.User;
 
-/**.
+/**
+ * .
+ *
  * @author vko
  * @version $Revision$ $Date$
  */
 public interface IAuthorization {
     /**
      * Makes login and returns User object.
+     *
      * @param aLogin - login string
      * @param aPassword - password string
      * @param shopId - shop id string
@@ -24,6 +27,7 @@ public interface IAuthorization {
 
     /**
      * Changes password for user. Returns error in case of bad password.
+     *
      * @param forUser - user object
      * @param oldPassword - old password string
      * @param newPassword - new password string
@@ -33,6 +37,7 @@ public interface IAuthorization {
 
     /**
      * Check the password for user.
+     *
      * @param forUser - user object
      * @return the password valid result
      */

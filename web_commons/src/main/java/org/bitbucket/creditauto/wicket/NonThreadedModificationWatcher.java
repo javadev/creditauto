@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-
 import org.apache.wicket.util.listener.ChangeListenerSet;
 import org.apache.wicket.util.listener.IChangeListener;
 import org.apache.wicket.util.time.Duration;
@@ -20,24 +19,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Monitors one or more <code>IModifiable</code> objects, calling a
- * {@link IChangeListener IChangeListener} when a given object's modification
- * time changes.
- * 
+ * Monitors one or more <code>IModifiable</code> objects, calling a {@link IChangeListener
+ * IChangeListener} when a given object's modification time changes.
+ *
  * @author Jonathan Locke
  * @since 1.2.6
  */
 public class NonThreadedModificationWatcher implements IModificationWatcher {
     /** logger */
-    private static final Logger log = LoggerFactory
-            .getLogger(NonThreadedModificationWatcher.class);
+    private static final Logger log = LoggerFactory.getLogger(NonThreadedModificationWatcher.class);
 
     /** maps <code>IModifiable</code> objects to <code>Entry</code> objects */
-    private final Map<IModifiable, Entry> modifiableToEntry = new ConcurrentHashMap<IModifiable, Entry>();
+    private final Map<IModifiable, Entry> modifiableToEntry =
+            new ConcurrentHashMap<IModifiable, Entry>();
 
-    /**
-     * Container class for holding modifiable entries to watch.
-     */
+    /** Container class for holding modifiable entries to watch. */
     private static final class Entry {
         // The most recent lastModificationTime polled on the object
         Time lastModifiedTime;
@@ -49,29 +45,24 @@ public class NonThreadedModificationWatcher implements IModificationWatcher {
         IModifiable modifiable;
     }
 
-    /**
-     * Default constructor for two-phase construction.
-     */
-    public NonThreadedModificationWatcher() {
-    }
+    /** Default constructor for two-phase construction. */
+    public NonThreadedModificationWatcher() {}
 
     /**
-     * Constructor that accepts a <code>Duration</code> argument representing
-     * the poll frequency.
-     * 
-     * @param pollFrequency
-     *            how often to check on <code>IModifiable</code>s
+     * Constructor that accepts a <code>Duration</code> argument representing the poll frequency.
+     *
+     * @param pollFrequency how often to check on <code>IModifiable</code>s
      */
     public NonThreadedModificationWatcher(final Duration pollFrequency) {
         start(pollFrequency);
     }
 
     /**
-     * @see org.apache.wicket.util.watch.IModificationWatcher#add(org.apache.wicket.util.watch.IModifiable,
-     *      org.apache.wicket.util.listener.IChangeListener)
+     * @see
+     *     org.apache.wicket.util.watch.IModificationWatcher#add(org.apache.wicket.util.watch.IModifiable,
+     *     org.apache.wicket.util.listener.IChangeListener)
      */
-    public final boolean add(final IModifiable modifiable,
-            final IChangeListener listener) {
+    public final boolean add(final IModifiable modifiable, final IChangeListener listener) {
         // Look up entry for modifiable
         final Entry entry = modifiableToEntry.get(modifiable);
 
@@ -101,7 +92,8 @@ public class NonThreadedModificationWatcher implements IModificationWatcher {
     }
 
     /**
-     * @see org.apache.wicket.util.watch.IModificationWatcher#remove(org.apache.wicket.util.watch.IModifiable)
+     * @see
+     *     org.apache.wicket.util.watch.IModificationWatcher#remove(org.apache.wicket.util.watch.IModifiable)
      */
     public IModifiable remove(final IModifiable modifiable) {
         final Entry entry = modifiableToEntry.remove(modifiable);
@@ -112,10 +104,10 @@ public class NonThreadedModificationWatcher implements IModificationWatcher {
     }
 
     /**
-     * @see org.apache.wicket.util.watch.IModificationWatcher#start(org.apache.wicket.util.time.Duration)
+     * @see
+     *     org.apache.wicket.util.watch.IModificationWatcher#start(org.apache.wicket.util.time.Duration)
      */
-    public void start(final Duration pollFrequency) {
-    }
+    public void start(final Duration pollFrequency) {}
 
     protected void checkForModifications() {
         final Iterator<Entry> itor = modifiableToEntry.values().iterator();
@@ -124,8 +116,7 @@ public class NonThreadedModificationWatcher implements IModificationWatcher {
 
             // If the modifiable has been modified after the last known
             // modification time
-            final Time modifiableLastModified = entry.modifiable
-                    .lastModifiedTime();
+            final Time modifiableLastModified = entry.modifiable.lastModifiedTime();
             if ((modifiableLastModified != null)
                     && modifiableLastModified.after(entry.lastModifiedTime)) {
                 // Notify all listeners that the modifiable was modified
@@ -137,15 +128,10 @@ public class NonThreadedModificationWatcher implements IModificationWatcher {
         }
     }
 
-    /**
-     * @see org.apache.wicket.util.watch.IModificationWatcher#destroy()
-     */
-    public void destroy() {
-    }
+    /** @see org.apache.wicket.util.watch.IModificationWatcher#destroy() */
+    public void destroy() {}
 
-    /**
-     * @see org.apache.wicket.util.watch.IModificationWatcher#getEntries()
-     */
+    /** @see org.apache.wicket.util.watch.IModificationWatcher#getEntries() */
     public final Set<IModifiable> getEntries() {
         return modifiableToEntry.keySet();
     }

@@ -7,7 +7,6 @@ package org.bitbucket.creditauto;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -23,24 +22,16 @@ import org.codehaus.plexus.util.StringUtils;
  */
 public class Xls2sql extends AbstractMojo {
 
-    /**
-     * @parameter expression="${xlsFiles}"
-     */
+    /** @parameter expression="${xlsFiles}" */
     private String xlsFiles;
 
-    /**
-     * @parameter expression="${outSql}"
-     */
+    /** @parameter expression="${outSql}" */
     private String outSql;
 
-    /**
-     * @parameter expression="${basedir}"
-     */
+    /** @parameter expression="${basedir}" */
     private String basedir;
 
-    /**
-     * @parameter outcharset="${outcharset}"
-     */
+    /** @parameter outcharset="${outcharset}" */
     private String outcharset;
 
     public void execute() throws MojoExecutionException, MojoFailureException {

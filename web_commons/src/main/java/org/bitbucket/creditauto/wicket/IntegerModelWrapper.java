@@ -8,7 +8,9 @@ package org.bitbucket.creditauto.wicket;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.IWrapModel;
 
-/**.
+/**
+ * .
+ *
  * @author javadev
  * @version $Revision$ $Date$
  */
@@ -25,7 +27,10 @@ public class IntegerModelWrapper implements IWrapModel {
     }
 
     public Object getObject() {
-        return wrappedModel.getObject() == null ? null : ((Integer) wrappedModel.getObject() < 10 ? "0" : "") + String.valueOf(wrappedModel.getObject());
+        return wrappedModel.getObject() == null
+                ? null
+                : ((Integer) wrappedModel.getObject() < 10 ? "0" : "")
+                        + String.valueOf(wrappedModel.getObject());
     }
 
     public void setObject(Object object) {

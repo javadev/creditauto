@@ -6,12 +6,13 @@
 package org.bitbucket.creditauto.wicket;
 
 import java.util.Date;
-
 import org.bitbucket.creditauto.dictionary.facade.IDictionary;
 import org.bitbucket.creditauto.dictionary.server.DictionaryServerImpl;
 import org.bitbucket.creditauto.entity.Dictionary_data;
 
-/**.
+/**
+ * .
+ *
  * @author javadev
  * @version $Revision$ $Date$
  */
@@ -59,14 +60,18 @@ public enum InDossierStatus {
     InDossierStatus(String key) {
         this.key = key;
     }
+
     public String getStatusName() {
-        for (Dictionary_data item : new DictionaryServerImpl().getDictionary("statusList", IDictionary.LANGUAGE_RU, new Date())) {
+        for (Dictionary_data item :
+                new DictionaryServerImpl()
+                        .getDictionary("statusList", IDictionary.LANGUAGE_RU, new Date())) {
             if (this.key.equalsIgnoreCase(item.getDkey())) {
                 return item.getDvalue();
             }
         }
         return null;
     }
+
     public String getKey() {
         return this.key;
     }
@@ -79,14 +84,15 @@ public enum InDossierStatus {
         }
         return null;
     }
+
     public static String getStatusNameByKey(String dKey) {
-        for (Dictionary_data item : new DictionaryServerImpl().getDictionary("statusList",
-                IDictionary.LANGUAGE_RU, new Date())) {
+        for (Dictionary_data item :
+                new DictionaryServerImpl()
+                        .getDictionary("statusList", IDictionary.LANGUAGE_RU, new Date())) {
             if (item.getDkey().equalsIgnoreCase(dKey)) {
                 return item.getDvalue();
             }
         }
         return null;
     }
-
 }

@@ -5,7 +5,9 @@
  */
 package org.bitbucket.creditauto.printer.facade;
 
-/**.
+/**
+ * .
+ *
  * @author vko
  * @version $Revision$ $Date$
  */
@@ -20,10 +22,9 @@ public enum PrinterDocumentType {
 
     private String[] templateNames;
 
-    private PrinterDocumentType() {
-    }
+    private PrinterDocumentType() {}
 
-    private PrinterDocumentType(String ... templateNames) {
+    private PrinterDocumentType(String... templateNames) {
         this.templateNames = templateNames;
     }
 

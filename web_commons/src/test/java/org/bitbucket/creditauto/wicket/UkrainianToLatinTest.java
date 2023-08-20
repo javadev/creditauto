@@ -17,8 +17,9 @@
  */
 package org.bitbucket.creditauto.wicket;
 
-import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 /**
  * UkrainianToLatin unit test.
@@ -27,10 +28,9 @@ import static org.junit.Assert.assertEquals;
  * @version $Revision$ $Date$
  */
 public class UkrainianToLatinTest {
-    /**
-     * Checks string converter.
-     */
-    @Test public void generateLat() {
+    /** Checks string converter. */
+    @Test
+    public void generateLat() {
         assertEquals("", UkrainianToLatin.generateLat(""));
         assertEquals("abvhd", UkrainianToLatin.generateLat("абвгд"));
         assertEquals("abvhd kh", UkrainianToLatin.generateLat("абвгд х"));
@@ -42,5 +42,4 @@ public class UkrainianToLatinTest {
         assertEquals("Zhorany'", UkrainianToLatin.generateLat("Згорани'"));
         assertEquals("Zhorany'", UkrainianToLatin.generateLat("Згорани’"));
     }
-
 }

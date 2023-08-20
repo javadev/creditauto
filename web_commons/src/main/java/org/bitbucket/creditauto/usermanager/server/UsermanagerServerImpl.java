@@ -9,10 +9,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
 import org.bitbucket.creditauto.LOG;
 import org.bitbucket.creditauto.entity.Externaldistributor;
 import org.bitbucket.creditauto.entity.Powerofattorney;
@@ -23,7 +21,9 @@ import org.bitbucket.creditauto.usermanager.facade.IUsermanager;
 import org.bitbucket.creditauto.wicket.JpaRequestCycle;
 import org.bitbucket.creditauto.wicket.SearchData.AllUsers;
 
-/**.
+/**
+ * .
+ *
  * @author alisa
  * @version $Revision$ $Date$
  */
@@ -38,7 +38,7 @@ public class UsermanagerServerImpl implements IUsermanager {
         List<Externaldistributor> res;
         EntityManager em = JpaRequestCycle.get().getEntityManager();
         Query shops = em.createQuery("select x from Externaldistributor x");
-        res =  shops.getResultList();
+        res = shops.getResultList();
         if (em.getTransaction().isActive()) {
             em.getTransaction().commit();
         }
@@ -50,7 +50,7 @@ public class UsermanagerServerImpl implements IUsermanager {
         List<User> result;
         EntityManager em = JpaRequestCycle.get().getEntityManager();
         StringBuffer qUsersStr =
-            new StringBuffer("select u from User u left join fetch  u.powerofattorneys  ");
+                new StringBuffer("select u from User u left join fetch  u.powerofattorneys  ");
         Query queryUsers;
         if (usersSearchCriteria != null) {
             // users
@@ -66,7 +66,7 @@ public class UsermanagerServerImpl implements IUsermanager {
                 qUsersStr.append(!qUsersStr.toString().contains(WHERE) ? WHERE : AND);
                 qUsersStr.append(" UPPER(u.table_number) = :tnumber");
             }
-            //power of attor criteria
+            // power of attor criteria
             if (usersSearchCriteria.getPowerOfAttNumber() != null) {
                 qUsersStr.append(!qUsersStr.toString().contains(WHERE) ? WHERE : AND);
                 qUsersStr.append(" u.powerofattorneys.attorney_number = :number");
@@ -85,10 +85,12 @@ public class UsermanagerServerImpl implements IUsermanager {
                 queryUsers.setParameter("login", usersSearchCriteria.getUserLogin().toUpperCase());
             }
             if (usersSearchCriteria.getUserName() != null) {
-                queryUsers.setParameter("name", "%" + usersSearchCriteria.getUserName().toUpperCase() + "%");
+                queryUsers.setParameter(
+                        "name", "%" + usersSearchCriteria.getUserName().toUpperCase() + "%");
             }
             if (usersSearchCriteria.getUserTableNumber() != null) {
-                queryUsers.setParameter("tnumber", usersSearchCriteria.getUserTableNumber().toUpperCase());
+                queryUsers.setParameter(
+                        "tnumber", usersSearchCriteria.getUserTableNumber().toUpperCase());
             }
             if (usersSearchCriteria.getPowerOfAttNumber() != null) {
                 queryUsers.setParameter("number", usersSearchCriteria.getPowerOfAttNumber());
@@ -112,24 +114,25 @@ public class UsermanagerServerImpl implements IUsermanager {
 
     public Long save(User user) {
         EntityManager em = JpaRequestCycle.get().getEntityManager();
-         if (em != null) {
-             if (user.getId() == null) {
+        if (em != null) {
+            if (user.getId() == null) {
                 em.persist(user);
-             } else {
-                 em.merge(user);
-             }
+            } else {
+                em.merge(user);
+            }
 
-         if (em.getTransaction().isActive()) {
-             em.getTransaction().commit();
-         }
-         LOG.info(this, "user was saved, id=" + user.getId());
-         }
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().commit();
+            }
+            LOG.info(this, "user was saved, id=" + user.getId());
+        }
         return user.getId();
     }
 
     public User getUserWithRoles(User user) {
         EntityManager em = JpaRequestCycle.get().getEntityManager();
-        StringBuffer  qUsersStr = new StringBuffer("select u from User u left join fetch  u.uroles ");
+        StringBuffer qUsersStr =
+                new StringBuffer("select u from User u left join fetch  u.uroles ");
         qUsersStr.append(" where u.id = :id");
         Query query = em.createQuery(qUsersStr.toString());
         query.setParameter("id", user.getId());
@@ -160,7 +163,7 @@ public class UsermanagerServerImpl implements IUsermanager {
             }
             LOG.info(this, "user_role was deleted");
 
-        return 0L;
+            return 0L;
         } else {
             return null;
         }
@@ -170,7 +173,7 @@ public class UsermanagerServerImpl implements IUsermanager {
         User user2 = getUserWithRoles(user);
         for (Urole role : user2.getUroles()) {
             if (role.getId().equals(id)) {
-                //already has this role
+                // already has this role
                 return null;
             }
         }
@@ -178,7 +181,7 @@ public class UsermanagerServerImpl implements IUsermanager {
         for (Urole role : getAllRoles()) {
             mapRoles.put(role.getId(), role);
         }
-        //else
+        // else
         EntityManager em = JpaRequestCycle.get().getEntityManager();
         if (em != null) {
 
@@ -190,7 +193,7 @@ public class UsermanagerServerImpl implements IUsermanager {
             }
             LOG.info(this, "user_role was saved");
 
-        return 0L;
+            return 0L;
         } else {
             return null;
         }
@@ -198,7 +201,7 @@ public class UsermanagerServerImpl implements IUsermanager {
 
     public List<Urole> getAllRoles() {
         EntityManager em = JpaRequestCycle.get().getEntityManager();
-        StringBuffer  qStr = new StringBuffer("select r from Urole r order by r.id desc ");
+        StringBuffer qStr = new StringBuffer("select r from Urole r order by r.id desc ");
         Query query = em.createQuery(qStr.toString());
         List<Urole> res = (List<Urole>) query.getResultList();
         if (em.getTransaction().isActive()) {
@@ -209,9 +212,11 @@ public class UsermanagerServerImpl implements IUsermanager {
 
     public List<Externaldistributor> getUserExternaldistributors(User user) {
         EntityManager em = JpaRequestCycle.get().getEntityManager();
-        StringBuffer  qUsersStr = new StringBuffer("select x from Externaldistributor x"
-                + " where x.id in (select ue.externaldistributor_id from User_has_externaldistributor ue"
-                + " where ue.user_id = :user_id and (ue.active is null or ue.active = true)) order by x.ext_id");
+        StringBuffer qUsersStr =
+                new StringBuffer(
+                        "select x from Externaldistributor x"
+                                + " where x.id in (select ue.externaldistributor_id from User_has_externaldistributor ue"
+                                + " where ue.user_id = :user_id and (ue.active is null or ue.active = true)) order by x.ext_id");
         Query query = em.createQuery(qUsersStr.toString());
         query.setParameter("user_id", user.getId());
         List<Externaldistributor> res = (List<Externaldistributor>) query.getResultList();
@@ -223,9 +228,10 @@ public class UsermanagerServerImpl implements IUsermanager {
 
     public List<Powerofattorney> getUserPowerofattorneys(User user) {
         EntityManager em = JpaRequestCycle.get().getEntityManager();
-        StringBuffer  qUsersStr = new StringBuffer("select p from Powerofattorney p ");
+        StringBuffer qUsersStr = new StringBuffer("select p from Powerofattorney p ");
         qUsersStr.append(" where p.user = :user");
-        qUsersStr.append(" and (p.attorney_date_finish is null or p.attorney_date_finish >= :today) ");
+        qUsersStr.append(
+                " and (p.attorney_date_finish is null or p.attorney_date_finish >= :today) ");
         qUsersStr.append(" order by p.id desc ");
         Query query = em.createQuery(qUsersStr.toString());
         query.setParameter("user", user);
@@ -236,18 +242,18 @@ public class UsermanagerServerImpl implements IUsermanager {
     public Long save(Powerofattorney pow) {
         EntityManager em = JpaRequestCycle.get().getEntityManager();
         if (em != null) {
-         if (pow.getId() == null) {
-               em.persist(pow);
-         } else {
-             em.merge(pow);
-         }
+            if (pow.getId() == null) {
+                em.persist(pow);
+            } else {
+                em.merge(pow);
+            }
 
-        if (em.getTransaction().isActive()) {
-            em.getTransaction().commit();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().commit();
+            }
+            LOG.info(this, "Powerofattorney was saved, id=" + pow.getId());
         }
-        LOG.info(this, "Powerofattorney was saved, id=" + pow.getId());
-        }
-       return pow.getId();
+        return pow.getId();
     }
 
     public Long addUserExternaldistributor(User user, String extId) {
@@ -280,7 +286,7 @@ public class UsermanagerServerImpl implements IUsermanager {
             }
             LOG.info(this, "user_has_externaldistributor was saved");
 
-        return 0L;
+            return 0L;
         } else {
             return null;
         }
@@ -289,15 +295,19 @@ public class UsermanagerServerImpl implements IUsermanager {
     public Long deleteUserExternaldistributor(User user, Externaldistributor shop) {
         EntityManager em = JpaRequestCycle.get().getEntityManager();
 
-        Query q = em.createQuery("select u from User_has_externaldistributor u where " +
-                                 "u.user_id = :user_id and u.externaldistributor_id = :externaldistributor_id " +
-                                 "and (u.active is null or u.active = true)");
+        Query q =
+                em.createQuery(
+                        "select u from User_has_externaldistributor u where "
+                                + "u.user_id = :user_id and u.externaldistributor_id = :externaldistributor_id "
+                                + "and (u.active is null or u.active = true)");
         q.setParameter("user_id", user.getId());
         q.setParameter("externaldistributor_id", shop.getId());
-        User_has_externaldistributor uhase = (q.getResultList() != null && !q.getResultList().isEmpty()) ?
-                (User_has_externaldistributor) q.getResultList().get(0) : null;
+        User_has_externaldistributor uhase =
+                (q.getResultList() != null && !q.getResultList().isEmpty())
+                        ? (User_has_externaldistributor) q.getResultList().get(0)
+                        : null;
         if (uhase == null) {
-                    return null;
+            return null;
         }
         uhase.setActive(Boolean.FALSE);
         em.merge(uhase);
@@ -310,14 +320,16 @@ public class UsermanagerServerImpl implements IUsermanager {
 
     public Long deleteUserPowerofattorney(User user, Powerofattorney pow) {
         EntityManager em = JpaRequestCycle.get().getEntityManager();
-        StringBuffer  qUsersStr = new StringBuffer("select p from Powerofattorney p ");
+        StringBuffer qUsersStr = new StringBuffer("select p from Powerofattorney p ");
         qUsersStr.append(" where p.user = :user and p.id = :id");
         Query q = em.createQuery(qUsersStr.toString());
         q.setParameter("user", user);
         q.setParameter("id", pow.getId());
 
-        Powerofattorney result = (q.getResultList() != null && !q.getResultList().isEmpty()) ?
-                (Powerofattorney) q.getResultList().get(0) : null;
+        Powerofattorney result =
+                (q.getResultList() != null && !q.getResultList().isEmpty())
+                        ? (Powerofattorney) q.getResultList().get(0)
+                        : null;
         if (result == null) {
             return null;
         }

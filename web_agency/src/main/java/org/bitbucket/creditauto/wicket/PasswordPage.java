@@ -17,11 +17,13 @@ import org.bitbucket.creditauto.authorization.facade.IAuthorization;
 import org.bitbucket.creditauto.authorization.server.AuthorizationServerImpl;
 import org.bitbucket.creditauto.entity.User;
 
-/**.
+/**
+ * .
+ *
  * @author javadev
  * @version $Revision$ $Date$
  */
-@SuppressWarnings({ "unchecked", "serial" })
+@SuppressWarnings({"unchecked", "serial"})
 public class PasswordPage extends TemplatePage {
 
     public PasswordPage() {
@@ -35,6 +37,7 @@ public class PasswordPage extends TemplatePage {
             private String password;
             private String verify;
         }
+
         private User user = getCreditautoSession().getUser();
         private UserData userData = new UserData();
         private IAuthorization authorization;
@@ -56,7 +59,8 @@ public class PasswordPage extends TemplatePage {
 
         @Override
         protected void onSubmit() {
-            AuthorizationResult result = authorization.changePassword(user, userData.oldpassword, userData.password);
+            AuthorizationResult result =
+                    authorization.changePassword(user, userData.oldpassword, userData.password);
             if (result.isError) {
                 passwordField.error(result.messageKey);
                 return;

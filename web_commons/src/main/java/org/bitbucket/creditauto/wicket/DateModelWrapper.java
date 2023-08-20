@@ -7,9 +7,6 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.IWrapModel;
 import org.bitbucket.creditauto.LOG;
 
-/**
- * .
- */
 public class DateModelWrapper implements IWrapModel {
 
     private String template;

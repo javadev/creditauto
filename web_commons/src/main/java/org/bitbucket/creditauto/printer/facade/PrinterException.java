@@ -2,9 +2,6 @@ package org.bitbucket.creditauto.printer.facade;
 
 import java.io.Serializable;
 
-/**
- * .
- */
 @SuppressWarnings("serial")
 public class PrinterException extends Exception implements Serializable {
 

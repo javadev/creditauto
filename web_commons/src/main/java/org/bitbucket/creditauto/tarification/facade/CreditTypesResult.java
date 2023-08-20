@@ -5,9 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import org.bitbucket.creditauto.entity.Credittype;
 
-/**
- * .
- */
 public class CreditTypesResult implements Serializable {
     private static final long serialVersionUID = 500L;
 

@@ -16,9 +16,6 @@ import org.apache.wicket.util.resource.IResourceStream;
 import org.bitbucket.creditauto.LOG;
 import org.bitbucket.creditauto.entity.In_document_store;
 
-/**
- * .
- */
 public class PreviewPage extends TemplatePage {
     private String title;
     private In_document_store inDocumentStore;

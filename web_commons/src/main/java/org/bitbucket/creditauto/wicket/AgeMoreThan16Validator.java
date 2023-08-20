@@ -7,9 +7,6 @@ import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.form.validation.AbstractFormValidator;
 
-/**
- * .
- */
 public class AgeMoreThan16Validator extends AbstractFormValidator {
     private static final long serialVersionUID = 1L;
     private static final int MIN_AGE = 16;

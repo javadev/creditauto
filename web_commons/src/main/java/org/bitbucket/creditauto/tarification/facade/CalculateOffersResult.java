@@ -5,9 +5,6 @@ import java.util.List;
 import org.bitbucket.creditauto.helpers.GeneralResult;
 import org.bitbucket.creditauto.tarification.server.model.CalculationResult;
 
-/**
- * .
- */
 public class CalculateOffersResult extends GeneralResult {
     private static final long serialVersionUID = 500L;
     private List<CalculationResult> calculationResults = new ArrayList<CalculationResult>();

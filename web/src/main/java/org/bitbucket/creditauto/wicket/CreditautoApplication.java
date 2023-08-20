@@ -6,9 +6,6 @@ import org.apache.wicket.authorization.Action;
 import org.apache.wicket.authorization.IAuthorizationStrategy;
 import org.bitbucket.creditauto.wicket.workflow.GoodSelectionPage;
 
-/**
- * .
- */
 @SuppressWarnings({"unchecked", "serial"})
 public class CreditautoApplication extends CommonApplication {
 

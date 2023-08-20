@@ -17,9 +17,6 @@ import org.bitbucket.creditauto.tarification.facade.ITarification;
 import org.bitbucket.creditauto.tarification.facade.TarificationCalulateInputParam;
 import org.bitbucket.creditauto.wicket.JpaRequestCycle;
 
-/**
- * .
- */
 public class TarificationServerImpl implements ITarification {
 
     public CreditTypesResult getCreditTypes(CreditTypeInputParam param) {

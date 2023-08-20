@@ -3,9 +3,6 @@ package org.bitbucket.creditauto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * .
- */
 public class LOG {
     private enum MessageType {
         DEBUG,

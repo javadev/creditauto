@@ -10,9 +10,6 @@ import org.bitbucket.creditauto.tarification.server.model.CalculationInputParame
 import org.bitbucket.creditauto.tarification.server.model.Payment;
 import org.bitbucket.creditauto.tarification.server.model.PaymentDate;
 
-/**
- * .
- */
 public class CarCalculation {
     private static final int INTEREST_DAYS_30 = 30;
     private static final double N_PRECISION = -0.00000000000001;

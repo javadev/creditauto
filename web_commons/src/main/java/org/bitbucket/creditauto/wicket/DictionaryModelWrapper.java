@@ -6,9 +6,6 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.IWrapModel;
 import org.bitbucket.creditauto.entity.Dictionary_data;
 
-/**
- * .
- */
 public class DictionaryModelWrapper implements IWrapModel {
 
     private final IModel wrappedModel;

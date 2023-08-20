@@ -5,9 +5,6 @@ import org.apache.wicket.RequestCycle;
 import org.apache.wicket.request.target.resource.ResourceStreamRequestTarget;
 import org.apache.wicket.resource.ByteArrayResource;
 
-/**
- * .
- */
 public class ByteDataRequestTarget extends ByteArrayResource implements IRequestTarget {
     private String fileName;
 

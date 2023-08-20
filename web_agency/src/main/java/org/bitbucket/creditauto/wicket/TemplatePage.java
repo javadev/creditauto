@@ -9,9 +9,6 @@ import org.apache.wicket.model.PropertyModel;
 import org.bitbucket.creditauto.authorization.server.AuthorizationServerImpl;
 import org.bitbucket.creditauto.entity.In_instance;
 
-/**
- * .
- */
 @SuppressWarnings({"unchecked"})
 public class TemplatePage extends WebPage {
 

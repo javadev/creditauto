@@ -11,9 +11,6 @@ import org.bitbucket.creditauto.authorization.facade.AuthorizationResult;
 import org.bitbucket.creditauto.authorization.facade.IAuthorization;
 import org.bitbucket.creditauto.authorization.server.AuthorizationServerImpl;
 
-/**
- * .
- */
 public class HomePage extends WebPage {
 
     public HomePage() {

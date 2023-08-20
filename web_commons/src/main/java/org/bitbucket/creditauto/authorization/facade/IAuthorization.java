@@ -2,9 +2,6 @@ package org.bitbucket.creditauto.authorization.facade;
 
 import org.bitbucket.creditauto.entity.User;
 
-/**
- * .
- */
 public interface IAuthorization {
     /**
      * Makes login and returns User object.

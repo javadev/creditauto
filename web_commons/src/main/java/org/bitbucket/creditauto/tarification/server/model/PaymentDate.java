@@ -3,9 +3,6 @@ package org.bitbucket.creditauto.tarification.server.model;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * .
- */
 public class PaymentDate implements Serializable {
 
     private static final long serialVersionUID = -9078389073349605262L;

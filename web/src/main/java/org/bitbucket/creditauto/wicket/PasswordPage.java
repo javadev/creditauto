@@ -12,9 +12,6 @@ import org.bitbucket.creditauto.authorization.facade.IAuthorization;
 import org.bitbucket.creditauto.authorization.server.AuthorizationServerImpl;
 import org.bitbucket.creditauto.entity.User;
 
-/**
- * .
- */
 @SuppressWarnings({"unchecked", "serial"})
 public class PasswordPage extends TemplatePage {
 

@@ -22,9 +22,6 @@ import org.apache.wicket.validation.IValidatable;
 import org.apache.wicket.validation.ValidationError;
 import org.bitbucket.creditauto.entity.Dictionary_data;
 
-/**
- * .
- */
 public class EditBorder extends Border {
 
     /** OnChange. */

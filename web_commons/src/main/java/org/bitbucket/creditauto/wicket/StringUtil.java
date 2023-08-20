@@ -1,8 +1,5 @@
 package org.bitbucket.creditauto.wicket;
 
-/**
- * .
- */
 public final class StringUtil {
 
     public static String join(String prefix, String... strings) {

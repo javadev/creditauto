@@ -5,10 +5,12 @@
  */
 package org.bitbucket.creditauto.wicket;
 
-import org.apache.wicket.markup.html.border.Border;
 import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.markup.html.border.Border;
 
-/**.
+/**
+ * .
+ *
  * @author javadev
  * @version $Revision$ $Date$
  */

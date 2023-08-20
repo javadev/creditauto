@@ -7,22 +7,23 @@ package org.bitbucket.creditauto.wicket;
 
 import java.io.IOException;
 import java.io.OutputStream;
-
 import org.apache.wicket.behavior.SimpleAttributeModifier;
+import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.image.resource.DynamicImageResource;
 import org.apache.wicket.markup.html.link.Link;
-import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
+import org.apache.wicket.protocol.http.WebResponse;
+import org.apache.wicket.request.target.resource.ResourceStreamRequestTarget;
 import org.apache.wicket.util.resource.AbstractResourceStreamWriter;
 import org.apache.wicket.util.resource.IResourceStream;
-import org.apache.wicket.request.target.resource.ResourceStreamRequestTarget;
-import org.apache.wicket.protocol.http.WebResponse;
 import org.bitbucket.creditauto.LOG;
 import org.bitbucket.creditauto.entity.In_document_store;
 
-/**.
+/**
+ * .
+ *
  * @author javadev
  * @version $Revision$ $Date$
  */
@@ -69,12 +70,15 @@ public class PreviewPage extends TemplatePage {
         public void onClick() {
             IResourceStream resourceStream = new OnClickResourceStreamWriter();
 
-            getRequestCycle().setRequestTarget(new ResourceStreamRequestTarget(
-                    resourceStream).setFileName(inDocumentStore.getFilename()));
+            getRequestCycle()
+                    .setRequestTarget(
+                            new ResourceStreamRequestTarget(resourceStream)
+                                    .setFileName(inDocumentStore.getFilename()));
         }
     }
 
-    public PreviewPage(String title, In_document_store localInDocumentStore, final WebPage backPage) {
+    public PreviewPage(
+            String title, In_document_store localInDocumentStore, final WebPage backPage) {
         add(new FeedbackPanel("messages"));
         replace(new Label("title", "Personal finance::Просмотр " + title));
         add(new DownloadLink("downloadlink"));
@@ -84,11 +88,12 @@ public class PreviewPage extends TemplatePage {
 
         this.title = title;
         this.inDocumentStore = localInDocumentStore;
-        add(new Link("back") {
-            @Override
-            public void onClick()  {
-                setResponsePage(backPage);
-            }
-        });
+        add(
+                new Link("back") {
+                    @Override
+                    public void onClick() {
+                        setResponsePage(backPage);
+                    }
+                });
     }
 }

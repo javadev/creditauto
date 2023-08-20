@@ -4,6 +4,7 @@
  * Copyright (c) 2011, 2012 (javadev75@gmail.com)
  */
 package org.bitbucket.creditauto.printer.server;
+
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
@@ -72,20 +73,35 @@ public class MoneyToStrTest {
     /** setUp. */
     @Before
     public void setUp() {
-        moneyToStrUAH = new MoneyToStr(MoneyToStr.Currency.UAH, MoneyToStr.Language.UKR, MoneyToStr.Pennies.NUMBER);
-        moneyToStrPER100 = new MoneyToStr(MoneyToStr.Currency.PER100, MoneyToStr.Language.RUS, MoneyToStr.Pennies.TEXT);
+        moneyToStrUAH =
+                new MoneyToStr(
+                        MoneyToStr.Currency.UAH,
+                        MoneyToStr.Language.UKR,
+                        MoneyToStr.Pennies.NUMBER);
+        moneyToStrPER100 =
+                new MoneyToStr(
+                        MoneyToStr.Currency.PER100,
+                        MoneyToStr.Language.RUS,
+                        MoneyToStr.Pennies.TEXT);
     }
 
     /** checkUAH. */
     @Test
     public void checkUAH() {
         assertEquals("триста гривень 00 копійок", moneyToStrUAH.convert(V_300D));
-        assertEquals("дев’ятсот сімдесят вісім трильйонів шістсот " + "тридцять сім мільярдів "
-                + "двісті вісімдесят сім мільйонів сто " + "дев’яносто сім тисяч "
-                + "п’ятсот сорок гривень 12 копійок", moneyToStrUAH.convert(V_978637287197540L, V_12L));
-        assertEquals("двісті тридцять чотири ??? дев’ятсот сімдесят вісім трильйонів шістсот "
-                + "тридцять сім мільярдів двісті вісімдесят сім мільйонів сто " + "дев’яносто сім тисяч "
-                + "п’ятсот сорок гривень 12 копійок", moneyToStrUAH.convert(V_234978637287197540L, V_12L));
+        assertEquals(
+                "дев’ятсот сімдесят вісім трильйонів шістсот "
+                        + "тридцять сім мільярдів "
+                        + "двісті вісімдесят сім мільйонів сто "
+                        + "дев’яносто сім тисяч "
+                        + "п’ятсот сорок гривень 12 копійок",
+                moneyToStrUAH.convert(V_978637287197540L, V_12L));
+        assertEquals(
+                "двісті тридцять чотири ??? дев’ятсот сімдесят вісім трильйонів шістсот "
+                        + "тридцять сім мільярдів двісті вісімдесят сім мільйонів сто "
+                        + "дев’яносто сім тисяч "
+                        + "п’ятсот сорок гривень 12 копійок",
+                moneyToStrUAH.convert(V_234978637287197540L, V_12L));
         assertEquals("одинадцять гривень 00 копійок", moneyToStrUAH.convert(V_11D));
         assertEquals("дванадцять гривень 00 копійок", moneyToStrUAH.convert(V_12D));
         assertEquals("одинадцять гривень 12 копійок", moneyToStrUAH.convert(V_11_12D));
@@ -118,7 +134,8 @@ public class MoneyToStrTest {
         assertEquals("п’ять мільярдів гривень 00 копійок", moneyToStrUAH.convert(V_5000000000D));
         assertEquals("один трильйон гривень 00 копійок", moneyToStrUAH.convert(V_1000000000000D));
         assertEquals("два трильйона гривень 00 копійок", moneyToStrUAH.convert(V_2000000000000D));
-        assertEquals("п’ять трильйонів гривень 00 копійок", moneyToStrUAH.convert(V_5000000000000D));
+        assertEquals(
+                "п’ять трильйонів гривень 00 копійок", moneyToStrUAH.convert(V_5000000000000D));
         assertEquals("одна гривня 01 копійка", moneyToStrUAH.convert(V_1_01D));
         assertEquals("одна гривня 02 копійки", moneyToStrUAH.convert(V_1_02D));
     }
@@ -137,12 +154,24 @@ public class MoneyToStrTest {
     /** check percentToStr. */
     @Test
     public void checkPercentToStrRus() {
-        assertEquals("одна целая, одна сотая процента", MoneyToStr.percentToStr(V_1_01D, MoneyToStr.Language.RUS));
-        assertEquals("одна целая, одна десятая процента", MoneyToStr.percentToStr(V_1_1D, MoneyToStr.Language.RUS));
-        assertEquals("одна целая, две сотых процента", MoneyToStr.percentToStr(V_1_02D, MoneyToStr.Language.RUS));
-        assertEquals("одна целая, одиннадцать сотых процента", MoneyToStr.percentToStr(V_1_11D, MoneyToStr.Language.RUS));
-        assertEquals("две целых, две сотых процента", MoneyToStr.percentToStr(V_2_02D, MoneyToStr.Language.RUS));
-        assertEquals("пять целых, пять сотых процента", MoneyToStr.percentToStr(V_5_05D, MoneyToStr.Language.RUS));
+        assertEquals(
+                "одна целая, одна сотая процента",
+                MoneyToStr.percentToStr(V_1_01D, MoneyToStr.Language.RUS));
+        assertEquals(
+                "одна целая, одна десятая процента",
+                MoneyToStr.percentToStr(V_1_1D, MoneyToStr.Language.RUS));
+        assertEquals(
+                "одна целая, две сотых процента",
+                MoneyToStr.percentToStr(V_1_02D, MoneyToStr.Language.RUS));
+        assertEquals(
+                "одна целая, одиннадцать сотых процента",
+                MoneyToStr.percentToStr(V_1_11D, MoneyToStr.Language.RUS));
+        assertEquals(
+                "две целых, две сотых процента",
+                MoneyToStr.percentToStr(V_2_02D, MoneyToStr.Language.RUS));
+        assertEquals(
+                "пять целых, пять сотых процента",
+                MoneyToStr.percentToStr(V_5_05D, MoneyToStr.Language.RUS));
     }
 
     /** checkException. */

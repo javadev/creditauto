@@ -7,10 +7,8 @@ package org.bitbucket.creditauto.dossierserver.server;
 
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
 import org.bitbucket.creditauto.LOG;
 import org.bitbucket.creditauto.dossierserver.facade.DossierResult;
 import org.bitbucket.creditauto.dossierserver.facade.IDossierServer;
@@ -28,7 +26,8 @@ import org.bitbucket.creditauto.wicket.JpaRequestCycle;
  */
 public class DossierServerServerImpl implements IDossierServer {
 
-    public DossierResult initDossier(Externaldistributor externaldistributor, User user, Product product) {
+    public DossierResult initDossier(
+            Externaldistributor externaldistributor, User user, Product product) {
         DossierResult result = new DossierResult();
         if (externaldistributor == null) {
             throw new IllegalArgumentException("externaldistributor is null");
@@ -40,8 +39,7 @@ public class DossierServerServerImpl implements IDossierServer {
             throw new IllegalArgumentException("product is null");
         }
         EntityManager em = JpaRequestCycle.get().getEntityManager();
-        Query query = em.createQuery("select p from Product p"
-                + " where p.id = :id");
+        Query query = em.createQuery("select p from Product p" + " where p.id = :id");
         query.setParameter("id", product.getId());
         List<Product> products = query.getResultList();
         if (products.isEmpty()) {

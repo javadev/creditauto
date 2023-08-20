@@ -7,10 +7,8 @@ package org.bitbucket.creditauto.authorization.server;
 
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
 import org.bitbucket.creditauto.LOG;
 import org.bitbucket.creditauto.authorization.facade.AuthorizationResult;
 import org.bitbucket.creditauto.authorization.facade.IAuthorization;
@@ -18,7 +16,9 @@ import org.bitbucket.creditauto.entity.Externaldistributor;
 import org.bitbucket.creditauto.entity.User;
 import org.bitbucket.creditauto.wicket.JpaRequestCycle;
 
-/**.
+/**
+ * .
+ *
  * @author vko
  * @version $Revision$ $Date$
  */
@@ -27,6 +27,7 @@ public class AuthorizationServerImpl implements IAuthorization {
     public static final String DEFAULT_PASS = "Qwerty+1";
     /**
      * Makes login and returns User object.
+     *
      * @param aLogin - login string
      * @param aPassword - password string
      * @param shopId - the shop id
@@ -42,15 +43,17 @@ public class AuthorizationServerImpl implements IAuthorization {
                 break;
             } catch (javax.persistence.PersistenceException ex) {
                 if (tryCount == 3) {
-                   result.setErrorResult("Ошибка соединения с базой данных");
-                   return result;
+                    result.setErrorResult("Ошибка соединения с базой данных");
+                    return result;
                 } else {
                     continue;
                 }
             }
         }
-        Query query = em.createQuery("select u from User u"
-                + " where u.login = :login and u.password = :password");
+        Query query =
+                em.createQuery(
+                        "select u from User u"
+                                + " where u.login = :login and u.password = :password");
         query.setParameter("login", aLogin);
         query.setParameter("password", aPassword);
         List<User> users = java.util.Collections.<User>emptyList();
@@ -60,8 +63,8 @@ public class AuthorizationServerImpl implements IAuthorization {
                 break;
             } catch (javax.persistence.PersistenceException ex) {
                 if (tryCount == 3) {
-                   result.setErrorResult("Ошибка соединения с базой данных");
-                   return result;
+                    result.setErrorResult("Ошибка соединения с базой данных");
+                    return result;
                 } else {
                     continue;
                 }
@@ -69,7 +72,8 @@ public class AuthorizationServerImpl implements IAuthorization {
         }
         if (users.isEmpty()) {
             LOG.error(this, "Login failed");
-            result.setErrorResult("Пользователя с таким именем не существует или пароль введен неверно");
+            result.setErrorResult(
+                    "Пользователя с таким именем не существует или пароль введен неверно");
             return result;
         }
         User user = users.get(0);
@@ -91,12 +95,14 @@ public class AuthorizationServerImpl implements IAuthorization {
 
     /**
      * Changes password for user. Returns error in case of bad password.
+     *
      * @param forUser - user object
      * @param oldPassword - old password string
      * @param newPassword - new password string
      * @return the authorization result
      */
-    public AuthorizationResult changePassword(User forUser, String oldPassword, String newPassword) {
+    public AuthorizationResult changePassword(
+            User forUser, String oldPassword, String newPassword) {
         AuthorizationResult result = new AuthorizationResult();
         if (!forUser.getPassword().equals(oldPassword)) {
             result.setErrorResult("Неверный старый пароль");
@@ -106,11 +112,12 @@ public class AuthorizationServerImpl implements IAuthorization {
             result.setErrorResult("Новый пароль не должен совпадать с текущим");
             return result;
         }
-        if (newPassword.length() < 8 || newPassword.length() > 15
-            || !newPassword.matches(".*[A-Za-z]+.*")
-            || !newPassword.matches(".*[0-9]+.*")
-            || !newPassword.matches(".*[.,\\-+/\\()#$%^&*!]+.*")
-            || DEFAULT_PASS.equals(newPassword)) {
+        if (newPassword.length() < 8
+                || newPassword.length() > 15
+                || !newPassword.matches(".*[A-Za-z]+.*")
+                || !newPassword.matches(".*[0-9]+.*")
+                || !newPassword.matches(".*[.,\\-+/\\()#$%^&*!]+.*")
+                || DEFAULT_PASS.equals(newPassword)) {
             result.setErrorResult("Неверный формат пароля");
             return result;
         }

@@ -10,7 +10,9 @@ import java.util.Collections;
 import java.util.List;
 import org.bitbucket.creditauto.entity.Credittype;
 
-/**.
+/**
+ * .
+ *
  * @author vko
  * @version $Revision$ $Date$
  */

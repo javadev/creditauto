@@ -7,7 +7,6 @@ package org.bitbucket.creditauto;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -23,19 +22,13 @@ import org.codehaus.plexus.util.StringUtils;
  */
 public class Xml2wicket extends AbstractMojo {
 
-    /**
-     * @parameter expression="${xmlFiles}"
-     */
+    /** @parameter expression="${xmlFiles}" */
     private String xmlFiles;
 
-    /**
-     * @parameter expression="${outPackage}"
-     */
+    /** @parameter expression="${outPackage}" */
     private String outPackage;
 
-    /**
-     * @parameter expression="${basedir}"
-     */
+    /** @parameter expression="${basedir}" */
     private String basedir;
 
     public void execute() throws MojoExecutionException, MojoFailureException {

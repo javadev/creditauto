@@ -15,18 +15,16 @@ import java.io.Serializable;
  */
 public class GeneralResult implements Serializable {
 
-    /**
-     * Serilization/deserilization class back compatibillity.
-     */
+    /** Serilization/deserilization class back compatibillity. */
     private static final long serialVersionUID = 500L;
-    
+
     public Boolean isError = Boolean.FALSE;
-    public String  messageKey = "";
-    public String  localizedMessage = "";
-    public Long    id;
+    public String messageKey = "";
+    public String localizedMessage = "";
+    public Long id;
 
     public void setErrorResult(String messageKey) {
-        if (messageKey!=null) {
+        if (messageKey != null) {
             this.messageKey = messageKey;
             isError = true;
         }

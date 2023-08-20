@@ -9,27 +9,24 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugin.logging.SystemStreamLog;
@@ -46,13 +43,17 @@ import org.apache.velocity.runtime.resource.util.StringResourceRepository;
  * @version $Revision$ $Date$
  */
 public class JavaGenerator {
-    private static final Pattern TABLE_HEADER = Pattern.compile("CREATE  TABLE IF NOT EXISTS `mydb`.`(.*?)` \\(");
+    private static final Pattern TABLE_HEADER =
+            Pattern.compile("CREATE  TABLE IF NOT EXISTS `mydb`.`(.*?)` \\(");
     private static final Pattern TABLE_FOOTER = Pattern.compile(".*?PRIMARY KEY.*?\\);");
     private static final Pattern TABLE_FOOTER2 = Pattern.compile("^';");
     private static final Pattern COLUMN_WITH_COMMENT =
-        Pattern.compile("  `(\\S*?)` (\\S*?) (NOT\\s{0,1})*NULL (AUTO_INCREMENT )*COMMENT '(.*?)'.*");
-    private static final Pattern COLUMN_WITHOUT_COMMENT = Pattern.compile("  `(\\S*?)` (\\S*?) (NOT\\s{0,1})*NULL.*");
-    private static final Pattern FOREIGN_KEY = Pattern.compile("    FOREIGN KEY \\(`(\\S*?)` \\).*");
+            Pattern.compile(
+                    "  `(\\S*?)` (\\S*?) (NOT\\s{0,1})*NULL (AUTO_INCREMENT )*COMMENT '(.*?)'.*");
+    private static final Pattern COLUMN_WITHOUT_COMMENT =
+            Pattern.compile("  `(\\S*?)` (\\S*?) (NOT\\s{0,1})*NULL.*");
+    private static final Pattern FOREIGN_KEY =
+            Pattern.compile("    FOREIGN KEY \\(`(\\S*?)` \\).*");
     private static final Pattern TABLE_COMMENT = Pattern.compile("^COMMENT = '$");
     private static final Pattern TABLE_NAME_WITH_HAS = Pattern.compile("^(\\w+?)_has_(\\w+?)$");
     private final String basedir;
@@ -98,21 +99,23 @@ public class JavaGenerator {
     private void readLines() {
         lines = new ArrayList<String>();
         try {
-        for (String fileName : files) {
-getLog().info("read file - " + fileName);
-            BufferedReader input =  new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "UTF-8"));
-            try {
-                String line = input.readLine();
-                int count = 0;
-                while (line != null) {
-                    lines.add(line);
-                    line = input.readLine();
-                    count += 1;
+            for (String fileName : files) {
+                getLog().info("read file - " + fileName);
+                BufferedReader input =
+                        new BufferedReader(
+                                new InputStreamReader(new FileInputStream(fileName), "UTF-8"));
+                try {
+                    String line = input.readLine();
+                    int count = 0;
+                    while (line != null) {
+                        lines.add(line);
+                        line = input.readLine();
+                        count += 1;
+                    }
+                } finally {
+                    input.close();
                 }
-            } finally {
-                input.close();
             }
-        }
         } catch (IOException ex) {
             getLog().error(ex);
         }
@@ -140,7 +143,7 @@ getLog().info("read file - " + fileName);
                 tables.get(tableName).add(line);
             }
         }
-getLog().info("Generate tables: " + getKeys(tables));
+        getLog().info("Generate tables: " + getKeys(tables));
     }
 
     private void scanColumns() {
@@ -163,10 +166,15 @@ getLog().info("Generate tables: " + getKeys(tables));
                     item.put("name", lineWithComment.group(1));
                     item.put("type", lineWithComment.group(2));
                     if (item.get("type").toLowerCase().startsWith("varchar")) {
-                        item.put("length", lineWithComment.group(2).replaceFirst(".*?\\((\\d+)\\)", "$1"));
+                        item.put(
+                                "length",
+                                lineWithComment.group(2).replaceFirst(".*?\\((\\d+)\\)", "$1"));
                     }
-                    item.put("nullable", Boolean.valueOf(lineWithComment.group(3) == null).toString());
-                    String comment = lineWithComment.group(5).replaceFirst("(^.*?)@.*", "$1").trim();
+                    item.put(
+                            "nullable",
+                            Boolean.valueOf(lineWithComment.group(3) == null).toString());
+                    String comment =
+                            lineWithComment.group(5).replaceFirst("(^.*?)@.*", "$1").trim();
                     if (!"".equals(comment)) {
                         item.put("comment", comment.replaceAll("\\\\n", ""));
                     }
@@ -174,8 +182,17 @@ getLog().info("Generate tables: " + getKeys(tables));
                     boolean sizePresent = false;
                     boolean checkPresent = false;
                     if (lineWithComment.group(5).contains("@")) {
-                        for (String annotItem : lineWithComment.group(5).replaceAll("\\\\n", " ").replaceFirst("^.*?@", "").split(" @")) {
-                            item.put("annotation" + index, annotItem.replaceAll("\\\\\"", "\"").replaceAll("\\\\\\\\", "\\\\"));
+                        for (String annotItem :
+                                lineWithComment
+                                        .group(5)
+                                        .replaceAll("\\\\n", " ")
+                                        .replaceFirst("^.*?@", "")
+                                        .split(" @")) {
+                            item.put(
+                                    "annotation" + index,
+                                    annotItem
+                                            .replaceAll("\\\\\"", "\"")
+                                            .replaceAll("\\\\\\\\", "\\\\"));
                             if (!sizePresent) {
                                 sizePresent = annotItem.contains("Size");
                             }
@@ -185,7 +202,9 @@ getLog().info("Generate tables: " + getKeys(tables));
                             index += 1;
                         }
                     }
-                    if (item.get("length") != null && !item.get("length").isEmpty() && !sizePresent) {
+                    if (item.get("length") != null
+                            && !item.get("length").isEmpty()
+                            && !sizePresent) {
                         item.put("annotation" + index, "Size(max = " + item.get("length") + ")");
                         index += 1;
                     }
@@ -203,9 +222,13 @@ getLog().info("Generate tables: " + getKeys(tables));
                     item.put("name", lineWithoutComment.group(1));
                     item.put("type", lineWithoutComment.group(2));
                     if (item.get("type").toLowerCase().startsWith("varchar")) {
-                        item.put("length", lineWithoutComment.group(2).replaceFirst(".*?\\((\\d+)\\)", "$1"));
+                        item.put(
+                                "length",
+                                lineWithoutComment.group(2).replaceFirst(".*?\\((\\d+)\\)", "$1"));
                     }
-                    item.put("nullable", Boolean.valueOf(lineWithoutComment.group(3) == null).toString());
+                    item.put(
+                            "nullable",
+                            Boolean.valueOf(lineWithoutComment.group(3) == null).toString());
                     columns.get(tableName).add(item);
                     int index = 0;
                     if (item.get("length") != null && !item.get("length").isEmpty()) {
@@ -223,39 +246,62 @@ getLog().info("Generate tables: " + getKeys(tables));
                     if (foreignKey.matches()) {
                         for (Map<String, String> item : columns.get(tableName)) {
                             if (item.get("name").equals(foreignKey.group(1))) {
-                                item.put("name", foreignKey.group(1).replaceFirst("(\\w+)_.*" ,"$1").toLowerCase());
-                                String type = foreignKey.group(1).replaceFirst("(\\w+)_.*" ,"$1");
-                                type = type.substring(0,1).toUpperCase() + type.substring(1);
+                                item.put(
+                                        "name",
+                                        foreignKey
+                                                .group(1)
+                                                .replaceFirst("(\\w+)_.*", "$1")
+                                                .toLowerCase());
+                                String type = foreignKey.group(1).replaceFirst("(\\w+)_.*", "$1");
+                                type = type.substring(0, 1).toUpperCase() + type.substring(1);
                                 item.put("type", type);
                                 item.put("annotation0", "ManyToOne");
-                                item.put("annotation1", "JoinColumn(name=\"" + item.get("name") + "_id\")");
+                                item.put(
+                                        "annotation1",
+                                        "JoinColumn(name=\"" + item.get("name") + "_id\")");
                                 item.put("annotation2", "NotNull");
                             }
                         }
                     }
                 }
                 if (TABLE_COMMENT.matcher(line).matches()) {
-                   commentActive = true;
-                   continue;
+                    commentActive = true;
+                    continue;
                 }
                 if (commentActive) {
                     commentTable += line + "\n";
                 }
             }
-            Collections.sort(columns.get(tableName), new Comparator<Map<String, String>>() {
-                public int compare(Map<String, String> o1, Map<String, String> o2) {
-                    return o1.get("name").compareTo(o2.get("name"));
-                }
-            });
+            Collections.sort(
+                    columns.get(tableName),
+                    new Comparator<Map<String, String>>() {
+                        public int compare(Map<String, String> o1, Map<String, String> o2) {
+                            return o1.get("name").compareTo(o2.get("name"));
+                        }
+                    });
             if (!"".equals(commentTable)) {
                 Map<String, String> item = new TreeMap<String, String>();
-                item.put("commentTable", commentTable.replaceAll("\\\\n", " ").replaceFirst("(^.*?)@.*", "$1").trim());
+                item.put(
+                        "commentTable",
+                        commentTable
+                                .replaceAll("\\\\n", " ")
+                                .replaceFirst("(^.*?)@.*", "$1")
+                                .trim());
                 columns.get(tableName).add(0, item);
                 int index = 0;
                 if (commentTable.contains("@")) {
-                    for (String annotItem : commentTable.replaceAll("\\\\n", " ").replaceFirst("^.*?@", "").split(" @")) {
-                        item.put("annotation" + index, annotItem.replaceAll("[\\d\\n]", " ").replaceAll("\\\\\"", "\"")
-                            .replaceAll("\\\\\\\\", "\\\\").trim());
+                    for (String annotItem :
+                            commentTable
+                                    .replaceAll("\\\\n", " ")
+                                    .replaceFirst("^.*?@", "")
+                                    .split(" @")) {
+                        item.put(
+                                "annotation" + index,
+                                annotItem
+                                        .replaceAll("[\\d\\n]", " ")
+                                        .replaceAll("\\\\\"", "\"")
+                                        .replaceAll("\\\\\\\\", "\\\\")
+                                        .trim());
                         index += 1;
                     }
                 }
@@ -269,12 +315,17 @@ getLog().info("Generate tables: " + getKeys(tables));
             String tableName = tableKey.next();
             for (Map<String, String> item : columns.get(tableName)) {
                 if ("ManyToOne".equals(item.get("annotation0"))) {
-                     List<Map<String, String>> tableColumns = columns.get(item.get("name"));
-                     Map<String, String> newItem = new TreeMap<String, String>();
-                     newItem.put("name", tableName + "s");
-                     newItem.put("type", "List<" + tableName.substring(0,1).toUpperCase() + tableName.substring(1) + ">");
-                     newItem.put("annotation0", "OneToMany(mappedBy=\"" + item.get("name") + "\")");
-                     tableColumns.add(newItem);
+                    List<Map<String, String>> tableColumns = columns.get(item.get("name"));
+                    Map<String, String> newItem = new TreeMap<String, String>();
+                    newItem.put("name", tableName + "s");
+                    newItem.put(
+                            "type",
+                            "List<"
+                                    + tableName.substring(0, 1).toUpperCase()
+                                    + tableName.substring(1)
+                                    + ">");
+                    newItem.put("annotation0", "OneToMany(mappedBy=\"" + item.get("name") + "\")");
+                    tableColumns.add(newItem);
                 }
             }
         }
@@ -287,10 +338,12 @@ getLog().info("Generate tables: " + getKeys(tables));
             if (tableName.contains("_has_")) {
                 Matcher tableNameWithHas = TABLE_NAME_WITH_HAS.matcher(tableName);
                 if (tableNameWithHas.matches()) {
-                    if (!fillManyToMany(tableName, tableNameWithHas.group(1), tableNameWithHas.group(2))) {
+                    if (!fillManyToMany(
+                            tableName, tableNameWithHas.group(1), tableNameWithHas.group(2))) {
                         continue;
                     }
-                    if (!fillManyToMany(tableName, tableNameWithHas.group(2), tableNameWithHas.group(1))) {
+                    if (!fillManyToMany(
+                            tableName, tableNameWithHas.group(2), tableNameWithHas.group(1))) {
                         continue;
                     }
                 }
@@ -315,12 +368,21 @@ getLog().info("Generate tables: " + getKeys(tables));
         }
         Map<String, String> item = new TreeMap<String, String>();
         item.put("name", tableName2 + "s");
-        item.put("type", "List<" + tableName2.substring(0, 1).toUpperCase()
-            + tableName2.substring(1) + ">");
+        item.put(
+                "type",
+                "List<" + tableName2.substring(0, 1).toUpperCase() + tableName2.substring(1) + ">");
         item.put("annotation0", "ManyToMany(cascade=CascadeType.ALL)");
-        item.put("annotation1", "JoinTable(name = \""+ tableName + "\",\n"
-        + "          joinColumns = @JoinColumn(name = \"" + tableName1 + "_id\"),\n"
-        + "          inverseJoinColumns = @JoinColumn(name = \"" + tableName2 + "_id\"))");
+        item.put(
+                "annotation1",
+                "JoinTable(name = \""
+                        + tableName
+                        + "\",\n"
+                        + "          joinColumns = @JoinColumn(name = \""
+                        + tableName1
+                        + "_id\"),\n"
+                        + "          inverseJoinColumns = @JoinColumn(name = \""
+                        + tableName2
+                        + "_id\"))");
         items.add(item);
         return true;
     }
@@ -328,7 +390,9 @@ getLog().info("Generate tables: " + getKeys(tables));
     private void generateJava() {
         Properties p = new Properties();
         p.setProperty("resource.loader", "string");
-        p.setProperty("resource.loader.class", "org.apache.velocity.runtime.resource.loader.StringResourceLoader");
+        p.setProperty(
+                "resource.loader.class",
+                "org.apache.velocity.runtime.resource.loader.StringResourceLoader");
         Velocity.init(p);
 
         Template template = getTemplate("sample.vm");
@@ -336,8 +400,9 @@ getLog().info("Generate tables: " + getKeys(tables));
         Iterator<String> tableKey = tables.keySet().iterator();
         while (tableKey.hasNext()) {
             String tableName = tableKey.next();
-            String className = tableName.substring(0, 1).toUpperCase()
-                + tableName.substring(1).replaceFirst("(^.*?)@.*", "$1");
+            String className =
+                    tableName.substring(0, 1).toUpperCase()
+                            + tableName.substring(1).replaceFirst("(^.*?)@.*", "$1");
             VelocityContext context = new VelocityContext();
             context.put("className", className);
             context.put("tableName", tableName.replaceFirst("(^.*?)@(.*)", "$2"));
@@ -346,8 +411,9 @@ getLog().info("Generate tables: " + getKeys(tables));
             try {
                 String outDirs = basedir + "/src/main/java/" + outPackage.replaceAll("\\.", "/");
                 new File(outDirs).mkdirs();
-                Writer writer = new OutputStreamWriter(new FileOutputStream(outDirs + "/"
-                        + className + ".java"), "utf-8");
+                Writer writer =
+                        new OutputStreamWriter(
+                                new FileOutputStream(outDirs + "/" + className + ".java"), "utf-8");
                 template.merge(context, writer);
                 writer.flush();
                 writer.close();
@@ -360,7 +426,9 @@ getLog().info("Generate tables: " + getKeys(tables));
     private void generateJavaInstance() {
         Properties p = new Properties();
         p.setProperty("resource.loader", "string");
-        p.setProperty("resource.loader.class", "org.apache.velocity.runtime.resource.loader.StringResourceLoader");
+        p.setProperty(
+                "resource.loader.class",
+                "org.apache.velocity.runtime.resource.loader.StringResourceLoader");
         Velocity.init(p);
 
         Template template = getTemplate("instance.vm");
@@ -372,8 +440,9 @@ getLog().info("Generate tables: " + getKeys(tables));
         try {
             String outDirs = basedir + "/src/main/java/" + outPackage.replaceAll("\\.", "/");
             new File(outDirs).mkdirs();
-            Writer writer = new OutputStreamWriter(new FileOutputStream(outDirs + "/"
-                    + "In_instance.java"), "utf-8");
+            Writer writer =
+                    new OutputStreamWriter(
+                            new FileOutputStream(outDirs + "/" + "In_instance.java"), "utf-8");
             template.merge(context, writer);
             writer.flush();
             writer.close();
@@ -404,7 +473,10 @@ getLog().info("Generate tables: " + getKeys(tables));
      */
     private static String getTemplateFromResource(final String templatePath) {
         try {
-            InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(templatePath);
+            InputStream stream =
+                    Thread.currentThread()
+                            .getContextClassLoader()
+                            .getResourceAsStream(templatePath);
             return IOUtils.toString(stream, "UTF-8");
         } catch (IOException ex) {
             throw new RuntimeException(ex);

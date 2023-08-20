@@ -8,12 +8,19 @@ package org.bitbucket.creditauto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**.
+/**
+ * .
+ *
  * @author javadev
  * @version $Revision$ $Date$
  */
 public class LOG {
-    private enum MessageType { DEBUG, INFO, WARN, ERROR };
+    private enum MessageType {
+        DEBUG,
+        INFO,
+        WARN,
+        ERROR
+    };
 
     public static void debug(String aParam) {
         debug(null, aParam);
@@ -29,7 +36,7 @@ public class LOG {
 
     public static void error(Object obj, Throwable aProblem, String param) {
         log(MessageType.ERROR, obj, problem2String(param, aProblem));
-     }
+    }
 
     public static void info(Object obj, String param) {
         log(MessageType.INFO, obj, param);
@@ -70,13 +77,19 @@ public class LOG {
         if (aMsg != null) {
             sb.append(aMsg).append('\n');
         }
-        sb.append("Error is: ").append(aProblem.getClass().getName()).
-                append(" Message: ").append(aProblem.getMessage()).append('\n');
+        sb.append("Error is: ")
+                .append(aProblem.getClass().getName())
+                .append(" Message: ")
+                .append(aProblem.getMessage())
+                .append('\n');
         makeGoodTrace(sb, aProblem.getStackTrace());
         Throwable cause = aProblem.getCause();
         while (cause != null) {
-            sb.append("The cause is ").append(cause.getClass().getName()).
-                    append(" Message: ").append(aProblem.getMessage()).append('\n');
+            sb.append("The cause is ")
+                    .append(cause.getClass().getName())
+                    .append(" Message: ")
+                    .append(aProblem.getMessage())
+                    .append('\n');
             makeGoodTrace(sb, cause.getStackTrace());
             cause = cause.getCause();
         }
@@ -84,11 +97,11 @@ public class LOG {
     }
 
     public static String modifyString(String param) {
-         if (null == param && "".equals(param)) {
-             return "";
-         }
-         return param;
-     }
+        if (null == param && "".equals(param)) {
+            return "";
+        }
+        return param;
+    }
 
     private static String getLoggerName(Object aObj) {
         if (aObj == null) {
@@ -115,29 +128,29 @@ public class LOG {
     }
 
     /**
-     * Set logger NDC marker to mark current therad in LOG using specified marker.
-     * use org.apache.log4j.NDC.push(String );
+     * Set logger NDC marker to mark current therad in LOG using specified marker. use
+     * org.apache.log4j.NDC.push(String );
      *
      * @param marker marker
-     * */
+     */
     public static void setNCDMarger(String marker) {
         org.apache.log4j.NDC.push(marker);
     }
 
     /**
-     * Set logger NDC marker to mark current therad in LOG.
-     * use org.apache.log4j.NDC.peek()
+     * Set logger NDC marker to mark current therad in LOG. use org.apache.log4j.NDC.peek()
+     *
      * @return curent NDC marker
-     * */
+     */
     public static String getNDCMarker() {
         return org.apache.log4j.NDC.peek();
     }
 
     /**
-     * Remove logger NDC marker twhich mark current therad in LOG.
-     * use org.apache.log4j.NDC.peek()
+     * Remove logger NDC marker twhich mark current therad in LOG. use org.apache.log4j.NDC.peek()
+     *
      * @return curent NDC marker
-     * */
+     */
     public static String removeNDCMarker() {
         return org.apache.log4j.NDC.pop();
     }

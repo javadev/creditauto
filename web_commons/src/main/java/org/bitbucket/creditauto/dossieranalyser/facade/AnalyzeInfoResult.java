@@ -15,11 +15,9 @@ import org.bitbucket.creditauto.wicket.InDossierStatus;
  * @version $Revision$ $Date$
  */
 public class AnalyzeInfoResult extends GeneralResult {
-    /**
-     * Serilization/deserilization class back compatibillity.
-     * */
+    /** Serilization/deserilization class back compatibillity. */
     private static final long serialVersionUID = 500L;
-    
+
     public String analysisProgress = "";
     public InDossierStatus statusOfDossier = InDossierStatus.UNDEFINED;
 }

@@ -5,13 +5,15 @@
  */
 package org.bitbucket.creditauto.wicket;
 
-/**.
+/**
+ * .
+ *
  * @author javadev
  * @version $Revision$ $Date$
  */
 public final class StringUtil {
 
-    public static String join(String prefix, String ... strings) {
+    public static String join(String prefix, String... strings) {
         if (strings.length == 0) {
             return "";
         }
@@ -28,7 +30,7 @@ public final class StringUtil {
         return out.toString().trim().replaceAll("\\s+", " ");
     }
 
-    public static String join(String prefix, Object ... objects) {
+    public static String join(String prefix, Object... objects) {
         if (objects.length == 0) {
             return "";
         }
@@ -42,5 +44,4 @@ public final class StringUtil {
         }
         return join(prefix, strings);
     }
-
 }

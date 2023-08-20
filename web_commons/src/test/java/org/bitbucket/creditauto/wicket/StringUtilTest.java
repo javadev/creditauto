@@ -4,6 +4,7 @@
  * Copyright (c) 2012 (javadev75@gmail.com)
  */
 package org.bitbucket.creditauto.wicket;
+
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -23,7 +24,8 @@ public class StringUtilTest {
         assertEquals("", StringUtil.join(""));
         assertEquals("", StringUtil.join(null));
         assertEquals("144,123,Hello,world", StringUtil.join(",", "144", "123", "Hello", "world"));
-        assertEquals("144,123 ,Hello ,world", StringUtil.join(",", "144", "123   ", "Hello  ", "world"));
+        assertEquals(
+                "144,123 ,Hello ,world", StringUtil.join(",", "144", "123   ", "Hello  ", "world"));
         assertEquals("", StringUtil.join(",", null, null));
     }
 }

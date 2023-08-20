@@ -5,17 +5,16 @@
  */
 package org.bitbucket.creditauto.wicket.validator;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import org.apache.wicket.markup.html.form.DropDownChoice;
-import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.FormComponent;
+import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.form.validation.AbstractFormValidator;
 import org.bitbucket.creditauto.entity.Dictionary_data;
 
-/**.
+/**
+ * .
+ *
  * @author javadev
  * @version $Revision$ $Date$
  */
@@ -26,6 +25,7 @@ public class SumValidator extends AbstractFormValidator {
 
     /**
      * Constructor.
+     *
      * @param f1 the component1 (percent/sum value)
      * @param f2 the component2 (price variant)
      * @param f3 the component3 (total price value)
@@ -40,11 +40,12 @@ public class SumValidator extends AbstractFormValidator {
         if (f3 == null) {
             throw new IllegalArgumentException("FormComponent3 cannot be null");
         }
-        components = new FormComponent[] { f1, f2, f3 };
+        components = new FormComponent[] {f1, f2, f3};
     }
 
     /**
      * getDependentFormComponents.
+     *
      * @return the components
      */
     public FormComponent[] getDependentFormComponents() {
@@ -53,14 +54,21 @@ public class SumValidator extends AbstractFormValidator {
 
     /**
      * Validates the form.
+     *
      * @param form the form
      */
     public void validate(Form form) {
-        java.math.BigDecimal percentSum = ((TextField<java.math.BigDecimal>) components[0]).getConvertedInput();
-        Dictionary_data priceVariant = ((DropDownChoice<Dictionary_data>) components[1]).getConvertedInput();
-        java.math.BigDecimal totalPrice = ((TextField<java.math.BigDecimal>) components[2]).getConvertedInput();
+        java.math.BigDecimal percentSum =
+                ((TextField<java.math.BigDecimal>) components[0]).getConvertedInput();
+        Dictionary_data priceVariant =
+                ((DropDownChoice<Dictionary_data>) components[1]).getConvertedInput();
+        java.math.BigDecimal totalPrice =
+                ((TextField<java.math.BigDecimal>) components[2]).getConvertedInput();
         if (priceVariant != null && "2".equals(priceVariant.getDkey())) {
-            if (percentSum != null && totalPrice != null && (percentSum.intValue() < 0 || percentSum.intValue() > totalPrice.intValue())) {
+            if (percentSum != null
+                    && totalPrice != null
+                    && (percentSum.intValue() < 0
+                            || percentSum.intValue() > totalPrice.intValue())) {
                 error(components[0]);
             }
         }

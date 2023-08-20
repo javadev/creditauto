@@ -7,7 +7,9 @@ package org.bitbucket.creditauto.printer.facade;
 
 import java.io.Serializable;
 
-/**.
+/**
+ * .
+ *
  * @author vko
  * @version $Revision$ $Date$
  */
@@ -25,5 +27,4 @@ public class PrinterException extends Exception implements Serializable {
     public PrinterException(String msg, Throwable cause) {
         super(msg, cause);
     }
-
 }

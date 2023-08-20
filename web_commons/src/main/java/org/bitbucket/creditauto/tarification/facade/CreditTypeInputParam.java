@@ -8,12 +8,13 @@ package org.bitbucket.creditauto.tarification.facade;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
-
-import org.bitbucket.creditauto.entity.In_good;
 import org.bitbucket.creditauto.entity.Externaldistributor;
+import org.bitbucket.creditauto.entity.In_good;
 import org.bitbucket.creditauto.entity.User;
 
-/**.
+/**
+ * .
+ *
  * @author vko
  * @version $Revision$ $Date$
  */
@@ -26,8 +27,12 @@ public class CreditTypeInputParam implements Serializable {
     private final BigDecimal totalPrice;
     private final User user;
 
-    public CreditTypeInputParam(List<In_good> goods, Externaldistributor externaldistributor,
-            BigDecimal downpayment, BigDecimal totalPrice, User user) {
+    public CreditTypeInputParam(
+            List<In_good> goods,
+            Externaldistributor externaldistributor,
+            BigDecimal downpayment,
+            BigDecimal totalPrice,
+            User user) {
         this.goods = goods;
         this.externaldistributor = externaldistributor;
         this.downpayment = downpayment;
@@ -38,15 +43,19 @@ public class CreditTypeInputParam implements Serializable {
     public List<In_good> getGoods() {
         return goods;
     }
+
     public Externaldistributor getExternaldistributor() {
         return externaldistributor;
     }
+
     public BigDecimal getDownpayment() {
         return downpayment;
     }
+
     public BigDecimal getTotalPrice() {
         return totalPrice;
     }
+
     public User getUser() {
         return user;
     }

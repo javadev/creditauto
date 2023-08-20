@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.wicket;
 
 import org.apache.wicket.Component;
@@ -12,9 +7,6 @@ import org.apache.wicket.authorization.IAuthorizationStrategy;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 @SuppressWarnings({"unchecked", "serial"})
 public class CreditautoAgencyApplication extends CommonApplication {

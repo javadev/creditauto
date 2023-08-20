@@ -1,17 +1,9 @@
-/*
- * $Id$
- *
- * Copyright (c) 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.helpers;
 
 import org.bitbucket.creditauto.entity.In_instance;
 
 /**
  * InstanceResult.
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public class InstanceResult extends GeneralResult {
     /**

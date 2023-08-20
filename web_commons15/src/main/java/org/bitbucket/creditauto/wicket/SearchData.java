@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.wicket;
 
 import java.io.Serializable;
@@ -10,10 +5,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-/**.
- * @author javadev
- * @version $Revision$ $Date$
- */
 public class SearchData implements Serializable {
     private static final long serialVersionUID =-295829058L;
 

@@ -1,17 +1,8 @@
-/*
- * $Id$
- *
- * Copyright (c) 2012 (javadev)
- */
 package org.bitbucket.creditauto.entity.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-/**.
- * @author javadev
- * @version $Revision$ $Date$
- */
 public class IssueYearConstraint implements ConstraintValidator<IssueYear, Object> {
     public void initialize(IssueYear constraintAnnotation) {
     }

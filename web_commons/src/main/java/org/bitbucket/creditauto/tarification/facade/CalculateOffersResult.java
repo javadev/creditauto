@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.tarification.facade;
 
 import java.util.ArrayList;
@@ -12,9 +7,6 @@ import org.bitbucket.creditauto.tarification.server.model.CalculationResult;
 
 /**
  * .
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class CalculateOffersResult extends GeneralResult {
     private static final long serialVersionUID = 500L;

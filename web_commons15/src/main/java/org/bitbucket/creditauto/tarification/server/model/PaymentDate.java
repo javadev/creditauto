@@ -1,16 +1,9 @@
-/*
- * $Id$
- *
- * Copyright (c) 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.tarification.server.model;
 
 import java.util.Date;
 import java.io.Serializable;
 
 /**.
- * @author vko
- * @version $Revision$ $Date$
  */
 public class PaymentDate implements Serializable {
 

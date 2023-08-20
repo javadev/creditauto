@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.wicket;
 
 import java.math.BigDecimal;
@@ -33,10 +28,6 @@ import org.apache.wicket.util.convert.converter.BigDecimalConverter;
 import org.apache.wicket.util.convert.converter.DateConverter;
 import org.apache.wicket.request.mapper.CryptoMapper;
 
-/**.
- * @author javadev
- * @version $Revision$ $Date$
- */
 @SuppressWarnings({ "unchecked", "serial" })
 public class CommonApplication extends WebApplication {
     private NonThreadedModificationWatcher resourceWatcher = new NonThreadedModificationWatcher();

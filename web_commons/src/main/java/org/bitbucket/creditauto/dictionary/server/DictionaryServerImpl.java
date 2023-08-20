@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011, 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.dictionary.server;
 
 import java.util.Date;
@@ -17,8 +12,6 @@ import org.bitbucket.creditauto.wicket.JpaRequestCycle;
  * .
  *
  * @author alisa
- * @author vko
- * @version $Revision$ $Date$
  */
 public class DictionaryServerImpl implements IDictionary {
     // Setup 2 hour cache with 30 seconds check interval for 10000 items

@@ -1,15 +1,7 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011, 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.wicket;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public final class StringUtil {
 

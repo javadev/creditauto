@@ -1,16 +1,9 @@
-/*
- * $Id$
- *
- * Copyright (c) 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.tarification.server.model;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**.
- * @author vko
- * @version $Revision$ $Date$
  */
 public class CalculationInputParameters implements Serializable {
     private static final long serialVersionUID = -8460631603752150160L;

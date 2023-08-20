@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011, 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.wicket;
 
 import org.apache.wicket.markup.html.form.Form;
@@ -19,9 +14,6 @@ import org.bitbucket.creditauto.entity.User;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 @SuppressWarnings({"unchecked", "serial"})
 public class PasswordPage extends TemplatePage {

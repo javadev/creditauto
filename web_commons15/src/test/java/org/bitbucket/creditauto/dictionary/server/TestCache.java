@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.dictionary.server;
 
 import org.junit.Assert;

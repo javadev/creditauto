@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011, 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.wicket;
 
 import java.util.ArrayList;
@@ -24,9 +19,6 @@ import org.bitbucket.creditauto.entity.In_third_person;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 @SuppressWarnings({"unchecked"})
 public final class InstanceHelper {

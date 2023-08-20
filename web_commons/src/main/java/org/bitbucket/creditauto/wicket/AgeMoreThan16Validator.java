@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011, 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.wicket;
 
 import java.util.Calendar;
@@ -14,9 +9,6 @@ import org.apache.wicket.markup.html.form.validation.AbstractFormValidator;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public class AgeMoreThan16Validator extends AbstractFormValidator {
     private static final long serialVersionUID = 1L;

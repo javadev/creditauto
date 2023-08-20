@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto;
 
 import java.util.UUID;
@@ -23,9 +18,6 @@ import com.thoughtworks.selenium.Selenium;
 
 /**
  * AbstractWebDriverTest.
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class AbstractWebDriverTest {
     /**

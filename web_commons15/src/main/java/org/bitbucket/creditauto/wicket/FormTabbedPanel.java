@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.wicket;
 
 import java.util.List;

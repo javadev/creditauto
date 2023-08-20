@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.wicket;
 
 import java.util.Date;
@@ -12,9 +7,6 @@ import org.bitbucket.creditauto.entity.Dictionary_data;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public enum InDossierStatus {
     /** Неопределенный */

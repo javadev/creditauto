@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011, 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.wicket;
 
 import org.apache.wicket.markup.html.form.Form;
@@ -13,9 +8,6 @@ import org.bitbucket.creditauto.entity.In_document_store;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public class InDocumentStoreValidator extends AbstractFormValidator {
     private static final long serialVersionUID = 1L;

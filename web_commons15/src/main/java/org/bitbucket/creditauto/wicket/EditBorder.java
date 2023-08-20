@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.wicket;
 
 import java.util.Set;
@@ -29,10 +24,6 @@ import org.apache.wicket.validation.IValidatable;
 import org.apache.wicket.validation.ValidationError;
 import org.bitbucket.creditauto.entity.Dictionary_data;
 
-/**.
- * @author javadev
- * @version $Revision$ $Date$
- */
 public class EditBorder extends Border {
 
     /**

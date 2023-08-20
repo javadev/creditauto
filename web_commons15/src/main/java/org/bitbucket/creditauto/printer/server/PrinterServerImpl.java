@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.printer.server;
 
 import java.io.ByteArrayOutputStream;
@@ -34,9 +29,6 @@ import com.lowagie.text.pdf.BaseFont;
 
 /**
  * PrinterServerImpl.
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class PrinterServerImpl implements IPrinter {
     private In_instance inInstance;

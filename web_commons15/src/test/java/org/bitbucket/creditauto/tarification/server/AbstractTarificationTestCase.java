@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.tarification.server;
 
 import java.lang.reflect.Field;
@@ -18,8 +13,6 @@ import com.mycila.xmltool.XMLTag;
 
 /**
  * AbstractTarificationTestCase.
- * @author vko
- * @version $Revision$ $Date$
  */
 public abstract class AbstractTarificationTestCase {
 

@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.entity.validator;
 
 import javax.validation.ConstraintValidator;
@@ -10,8 +5,6 @@ import javax.validation.ConstraintValidatorContext;
 
 /**
  * Check that a string contains only cyrilic symbols.
- * @author vko
- * @version $Revision$ $Date$
  */
 public class CyrilicSymbolsConstraint implements ConstraintValidator<CyrilicSymbols, String> {
     public void initialize(CyrilicSymbols constraintAnnotation) {

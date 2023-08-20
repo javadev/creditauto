@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.wicket;
 
 import javax.persistence.EntityManager;
@@ -16,10 +11,6 @@ import org.apache.wicket.request.http.WebRequest;
 import org.apache.wicket.protocol.http.WebSession;
 import org.apache.wicket.request.cycle.AbstractRequestCycleListener;
 
-/**.
- * @author javadev
- * @version $Revision$ $Date$
- */
 public class JpaRequestCycle extends AbstractRequestCycleListener {
 
     private EntityManager em;

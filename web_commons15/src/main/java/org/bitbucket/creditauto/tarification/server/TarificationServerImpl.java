@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.tarification.server;
 
 import java.math.BigDecimal;
@@ -25,8 +20,6 @@ import org.bitbucket.creditauto.tarification.facade.TarificationCalulateInputPar
 import org.bitbucket.creditauto.wicket.JpaRequestCycle;
 
 /**.
- * @author vko
- * @version $Revision$ $Date$
  */
 public class TarificationServerImpl implements ITarification {
 

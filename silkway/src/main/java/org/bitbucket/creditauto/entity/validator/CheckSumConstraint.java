@@ -1,17 +1,8 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011 (alisa)
- */
 package org.bitbucket.creditauto.entity.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-/**.
- * @author alisa
- * @version $Revision$ $Date$
- */
 public class CheckSumConstraint implements ConstraintValidator<CheckSum, String> {
     public void initialize(CheckSum constraintAnnotation) {
     }

@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.wicket;
 
 import javax.persistence.EntityManager;
@@ -16,9 +11,6 @@ import org.bitbucket.creditauto.entity.In_instance;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 @SuppressWarnings({"unchecked"})
 public class TemplatePage extends WebPage {

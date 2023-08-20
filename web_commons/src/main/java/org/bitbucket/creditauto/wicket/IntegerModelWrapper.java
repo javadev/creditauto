@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011, 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.wicket;
 
 import org.apache.wicket.model.IModel;
@@ -10,9 +5,6 @@ import org.apache.wicket.model.IWrapModel;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public class IntegerModelWrapper implements IWrapModel {
 

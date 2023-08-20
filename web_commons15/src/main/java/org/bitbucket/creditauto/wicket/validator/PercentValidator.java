@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.wicket.validator;
 
 import java.util.Calendar;
@@ -15,10 +10,6 @@ import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.validation.AbstractFormValidator;
 import org.bitbucket.creditauto.entity.Dictionary_data;
 
-/**.
- * @author javadev
- * @version $Revision$ $Date$
- */
 public class PercentValidator extends AbstractFormValidator {
     private static final long serialVersionUID = 1L;
     /** form components to be validated. */

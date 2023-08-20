@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.printer.server;
 
 import java.io.IOException;
@@ -18,9 +13,6 @@ import org.bitbucket.creditauto.dictionary.server.DictionaryServerImpl;
 
 /**
  * .
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class DictionaryDirective extends Directive {
 

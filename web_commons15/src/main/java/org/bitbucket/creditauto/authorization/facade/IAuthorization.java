@@ -1,15 +1,8 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011, 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.authorization.facade;
 
 import org.bitbucket.creditauto.entity.User;
 
 /**.
- * @author vko
- * @version $Revision$ $Date$
  */
 public interface IAuthorization {
     /**

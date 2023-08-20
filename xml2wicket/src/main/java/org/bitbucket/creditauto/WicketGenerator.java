@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011, 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto;
 
 import com.mycila.xmltool.XMLDoc;
@@ -29,9 +24,6 @@ import org.apache.velocity.runtime.resource.util.StringResourceRepository;
 
 /**
  * WicketGenerator.
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class WicketGenerator {
 

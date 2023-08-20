@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011, 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto;
 
 import java.io.BufferedReader;
@@ -38,9 +33,6 @@ import org.apache.velocity.runtime.resource.util.StringResourceRepository;
 
 /**
  * JavaGenerator.
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class JavaGenerator {
     private static final Pattern TABLE_HEADER =

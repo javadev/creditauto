@@ -1,16 +1,9 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.entity.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**.
- * @author vko
- * @version $Revision$ $Date$
  */
 public class CompareNotNullOrTrueConstraint implements ConstraintValidator<CompareNotNullOrTrue, Object> {
     private String checkNull;

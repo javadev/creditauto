@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.wicket.validator;
 
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -14,9 +9,6 @@ import org.bitbucket.creditauto.entity.Dictionary_data;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public class SumValidator extends AbstractFormValidator {
     private static final long serialVersionUID = 1L;

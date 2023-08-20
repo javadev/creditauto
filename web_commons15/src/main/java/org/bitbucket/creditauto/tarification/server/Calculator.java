@@ -1,18 +1,9 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011, 2012 (alisa)
- */
 package org.bitbucket.creditauto.tarification.server;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-/**.
- * @author alisa
- * @version $Revision$ $Date$
- */
 public class Calculator implements Serializable {
     /**
      *

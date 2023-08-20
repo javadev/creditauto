@@ -1,17 +1,9 @@
-/*
- * $Id$
- *
- * Copyright (c) 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.helpers;
 
 import java.io.Serializable;
 
 /**
  * GeneralResult.
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public class GeneralResult implements Serializable {
 

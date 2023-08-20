@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011, 2012 (alisa)
- */
 package org.bitbucket.creditauto.usermanager.facade;
 
 import java.util.List;
@@ -13,10 +8,6 @@ import org.bitbucket.creditauto.entity.Urole;
 import org.bitbucket.creditauto.entity.User;
 import org.bitbucket.creditauto.wicket.SearchData.AllUsers;
 
-/**.
- * @author alisa
- * @version $Revision$ $Date$
- */
 public interface IUsermanager {
     List<Externaldistributor> getExternaldistributors();
     List<User> getUsers(AllUsers usersSearchCriteria);

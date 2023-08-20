@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto;
 
 import java.util.ArrayList;
@@ -17,8 +12,6 @@ import org.codehaus.plexus.util.StringUtils;
  *
  * @goal generate
  * @phase generate-sources
- * @author vko
- * @version $Revision$ $Date$
  */
 public class Xls2sql extends AbstractMojo {
 

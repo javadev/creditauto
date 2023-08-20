@@ -22,9 +22,6 @@ import java.io.InputStream;
 
 /**
  * Converts numbers to symbols.
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class MoneyToStr {
     private static final int INDEX_3 = 3;

@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.wicket;
 
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -10,9 +5,6 @@ import org.apache.wicket.protocol.http.WebResponse;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public class MainPage extends TemplatePage {
 

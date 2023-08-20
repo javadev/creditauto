@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.printer.server;
 
 import java.io.IOException;
@@ -16,9 +11,6 @@ import org.apache.velocity.runtime.parser.node.Node;
 
 /**
  * .
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class DateDirective extends Directive {
     private java.text.SimpleDateFormat defaultFormat =

@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011, 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto;
 
 import java.io.File;
@@ -19,9 +14,6 @@ import org.apache.maven.plugin.logging.SystemStreamLog;
 
 /**
  * SqlGenerator.
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class SqlGenerator {
 

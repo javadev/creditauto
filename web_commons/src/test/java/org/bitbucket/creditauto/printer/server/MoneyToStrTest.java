@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2011, 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.printer.server;
 
 import static org.junit.Assert.assertEquals;
@@ -12,9 +7,6 @@ import org.junit.Test;
 
 /**
  * MoneyToStr unit test.
- *
- * @author Valentyn V Kolesnikov
- * @version $Revision$ $Date$
  */
 public class MoneyToStrTest {
 

@@ -1,8 +1,3 @@
-/*
- * $Id$
- *
- * Copyright (c) 2012 (javadev75@gmail.com)
- */
 package org.bitbucket.creditauto.tarification.server.amortization;
 
 import java.util.List;
@@ -16,8 +11,6 @@ import org.bitbucket.creditauto.tarification.server.model.PaymentDate;
 
 /**
  * MonthlyCalendarFiller.
- * @author vko
- * @version $Revision$ $Date$
  */
 public class MonthlyCalendarFiller {
     /**

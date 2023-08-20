@@ -11,9 +11,6 @@ import org.bitbucket.creditauto.entity.Externaldistributor;
 import org.bitbucket.creditauto.entity.User;
 import org.bitbucket.creditauto.wicket.JpaRequestCycle;
 
-/**
- * .
- */
 public class AuthorizationServerImpl implements IAuthorization {
 
     public static final String DEFAULT_PASS = "Qwerty+1";

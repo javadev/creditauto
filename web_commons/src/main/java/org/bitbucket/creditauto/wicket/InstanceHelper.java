@@ -17,9 +17,6 @@ import org.bitbucket.creditauto.entity.In_instance;
 import org.bitbucket.creditauto.entity.In_person;
 import org.bitbucket.creditauto.entity.In_third_person;
 
-/**
- * .
- */
 @SuppressWarnings({"unchecked"})
 public final class InstanceHelper {
 

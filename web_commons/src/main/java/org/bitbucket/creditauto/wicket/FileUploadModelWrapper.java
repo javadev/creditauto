@@ -5,9 +5,6 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.IWrapModel;
 import org.bitbucket.creditauto.entity.In_document_store;
 
-/**
- * .
- */
 public class FileUploadModelWrapper implements IWrapModel {
 
     private IModel wrappedModel;

@@ -1,8 +1,5 @@
 package org.bitbucket.creditauto.printer.facade;
 
-/**
- * .
- */
 public enum PrinterDocumentType {
     DEFAULT,
     SIMULATION,

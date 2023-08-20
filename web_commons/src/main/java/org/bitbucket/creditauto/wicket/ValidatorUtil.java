@@ -10,9 +10,6 @@ import org.apache.wicket.validation.IValidatable;
 import org.apache.wicket.validation.ValidationError;
 import org.bitbucket.creditauto.LOG;
 
-/**
- * .
- */
 public final class ValidatorUtil {
     private static final class JSR303ClassValidator implements INullAcceptingValidator {
         private final Object object;

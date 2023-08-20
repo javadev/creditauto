@@ -9,9 +9,6 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.directive.Directive;
 import org.apache.velocity.runtime.parser.node.Node;
 
-/**
- * .
- */
 public class MoneyToStrDirective extends Directive {
 
     public String getName() {

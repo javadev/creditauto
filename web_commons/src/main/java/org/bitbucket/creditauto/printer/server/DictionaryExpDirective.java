@@ -11,9 +11,6 @@ import org.apache.velocity.runtime.parser.node.Node;
 import org.bitbucket.creditauto.dictionary.facade.IDictionary;
 import org.bitbucket.creditauto.dictionary.server.DictionaryServerImpl;
 
-/**
- * .
- */
 public class DictionaryExpDirective extends Directive {
 
     private IDictionary dictionary = new DictionaryServerImpl();

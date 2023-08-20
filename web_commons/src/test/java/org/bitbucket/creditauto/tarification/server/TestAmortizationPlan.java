@@ -10,9 +10,6 @@ import org.bitbucket.creditauto.tarification.server.model.PaymentDate;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * .
- */
 public class TestAmortizationPlan extends AbstractTarificationTestCase {
     /** test of Grace Period */
     @Test

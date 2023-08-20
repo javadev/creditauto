@@ -3,9 +3,6 @@ package org.bitbucket.creditauto.wicket;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.protocol.http.WebResponse;
 
-/**
- * .
- */
 public class MainPage extends TemplatePage {
 
     public MainPage() {

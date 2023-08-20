@@ -5,9 +5,6 @@ import org.bitbucket.creditauto.dictionary.facade.IDictionary;
 import org.bitbucket.creditauto.dictionary.server.DictionaryServerImpl;
 import org.bitbucket.creditauto.entity.Dictionary_data;
 
-/**
- * .
- */
 public enum InDossierStatus {
     /** Неопределенный */
     UNDEFINED("0"),

@@ -7,9 +7,6 @@ import org.bitbucket.creditauto.entity.Externaldistributor;
 import org.bitbucket.creditauto.entity.In_good;
 import org.bitbucket.creditauto.entity.User;
 
-/**
- * .
- */
 public class CreditTypeInputParam implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -6,9 +6,6 @@ import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.form.validation.AbstractFormValidator;
 import org.bitbucket.creditauto.entity.In_document_store;
 
-/**
- * .
- */
 public class InDocumentStoreValidator extends AbstractFormValidator {
     private static final long serialVersionUID = 1L;
     /** form components to be validated. */

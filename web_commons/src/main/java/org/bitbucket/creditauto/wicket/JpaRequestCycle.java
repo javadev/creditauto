@@ -10,9 +10,6 @@ import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.protocol.http.WebRequest;
 import org.apache.wicket.protocol.http.WebRequestCycle;
 
-/**
- * .
- */
 public class JpaRequestCycle extends WebRequestCycle {
 
     private EntityManager em;

@@ -5,9 +5,6 @@ import org.apache.wicket.RestartResponseException;
 import org.apache.wicket.authorization.Action;
 import org.apache.wicket.authorization.IAuthorizationStrategy;
 
-/**
- * .
- */
 @SuppressWarnings({"unchecked", "serial"})
 public class CreditautoAgencyApplication extends CommonApplication {
 

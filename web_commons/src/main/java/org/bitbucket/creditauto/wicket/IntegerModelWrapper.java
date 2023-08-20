@@ -3,9 +3,6 @@ package org.bitbucket.creditauto.wicket;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.IWrapModel;
 
-/**
- * .
- */
 public class IntegerModelWrapper implements IWrapModel {
 
     private IModel wrappedModel;

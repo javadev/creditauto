@@ -6,9 +6,6 @@ import org.apache.wicket.validation.IValidatable;
 import org.apache.wicket.validation.ValidationError;
 import org.bitbucket.creditauto.entity.User;
 
-/**
- * .
- */
 public class UserLoginValidator implements INullAcceptingValidator {
     private static final long serialVersionUID = 1L;
     private Long userId;

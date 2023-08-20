@@ -7,9 +7,6 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.form.validation.AbstractFormValidator;
 import org.bitbucket.creditauto.entity.Dictionary_data;
 
-/**
- * .
- */
 public class SumValidator extends AbstractFormValidator {
     private static final long serialVersionUID = 1L;
     /** form components to be validated. */

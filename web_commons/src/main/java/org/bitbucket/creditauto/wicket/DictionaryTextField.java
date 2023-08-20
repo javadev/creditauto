@@ -7,9 +7,6 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.util.convert.IConverter;
 import org.bitbucket.creditauto.entity.Dictionary_data;
 
-/**
- * .
- */
 public class DictionaryTextField extends TextField {
     private List<Dictionary_data> dictionary;
 

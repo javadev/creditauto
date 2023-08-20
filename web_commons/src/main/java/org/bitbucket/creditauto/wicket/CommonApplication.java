@@ -24,9 +24,6 @@ import org.apache.wicket.util.convert.ConverterLocator;
 import org.apache.wicket.util.convert.converters.BigDecimalConverter;
 import org.apache.wicket.util.convert.converters.DateConverter;
 
-/**
- * .
- */
 @SuppressWarnings({"unchecked", "serial"})
 public class CommonApplication extends WebApplication {
     private NonThreadedModificationWatcher resourceWatcher = new NonThreadedModificationWatcher();

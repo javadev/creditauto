@@ -2,9 +2,6 @@ package org.bitbucket.creditauto.printer.facade;
 
 import org.bitbucket.creditauto.entity.In_instance;
 
-/**
- * .
- */
 public interface IPrinter {
     /**
      * Generates PDF from In_instance for the specified type.

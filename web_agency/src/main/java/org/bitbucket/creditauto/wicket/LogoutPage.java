@@ -4,9 +4,6 @@ import org.apache.wicket.RestartResponseException;
 import org.bitbucket.creditauto.LOG;
 import org.bitbucket.creditauto.LOGMarker;
 
-/**
- * .
- */
 public class LogoutPage extends TemplatePage {
 
     public LogoutPage() {

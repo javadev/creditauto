@@ -8,11 +8,6 @@ import org.bitbucket.creditauto.dictionary.facade.IDictionary;
 import org.bitbucket.creditauto.entity.Dictionary_data;
 import org.bitbucket.creditauto.wicket.JpaRequestCycle;
 
-/**
- * .
- *
- * @author alisa
- */
 public class DictionaryServerImpl implements IDictionary {
     // Setup 2 hour cache with 30 seconds check interval for 10000 items
     private static Cache<String, List<Dictionary_data>> cached =

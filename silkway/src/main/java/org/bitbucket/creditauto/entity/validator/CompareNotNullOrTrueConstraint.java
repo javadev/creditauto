@@ -1,14 +1,9 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.entity.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**.
- * @author vko
- * @version $Revision$ $Date$
  */
 public class CompareNotNullOrTrueConstraint implements ConstraintValidator<CompareNotNullOrTrue, Object> {
     private String checkNull;

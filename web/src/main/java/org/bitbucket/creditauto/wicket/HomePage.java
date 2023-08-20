@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.wicket;
 
 import org.apache.wicket.markup.html.WebPage;
@@ -16,9 +13,6 @@ import org.bitbucket.creditauto.authorization.server.AuthorizationServerImpl;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public class HomePage extends WebPage {
 

@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.entity;
 
 import java.io.Serializable;
@@ -42,8 +39,6 @@ import org.bitbucket.creditauto.entity.validator.*;
  * Automatically generated.
  *
  * Таблица хранит заявки
- * @author vko
- * @version $Revision$ $Date$
  */
 @Entity
 @Table(name = "in_dossier")

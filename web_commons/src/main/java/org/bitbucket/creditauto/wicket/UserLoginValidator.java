@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.wicket;
 
 import java.util.List;
@@ -11,9 +8,6 @@ import org.bitbucket.creditauto.entity.User;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public class UserLoginValidator implements INullAcceptingValidator {
     private static final long serialVersionUID = 1L;

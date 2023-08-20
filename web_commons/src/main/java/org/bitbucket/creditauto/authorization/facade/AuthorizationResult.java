@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.authorization.facade;
 
 import java.io.Serializable;
@@ -9,9 +6,6 @@ import org.bitbucket.creditauto.entity.User;
 
 /**
  * AuthorizationResult.
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class AuthorizationResult implements Serializable {
     private static final long serialVersionUID = 500L;

@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.usermanager.server;
 
 import java.util.Date;
@@ -19,12 +16,6 @@ import org.bitbucket.creditauto.usermanager.facade.IUsermanager;
 import org.bitbucket.creditauto.wicket.JpaRequestCycle;
 import org.bitbucket.creditauto.wicket.SearchData.AllUsers;
 
-/**
- * .
- *
- * @author alisa
- * @version $Revision$ $Date$
- */
 public class UsermanagerServerImpl implements IUsermanager {
     private static final String WHERE = " where ";
     private static final String AND = " and ";

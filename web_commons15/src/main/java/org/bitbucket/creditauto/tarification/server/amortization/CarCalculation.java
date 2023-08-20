@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.tarification.server.amortization;
 
 import java.util.List;
@@ -16,8 +13,6 @@ import org.bitbucket.creditauto.tarification.server.model.PaymentDate;
 
 /**
  * .
- * @author vko
- * @version $Revision$ $Date$
  */
 public class CarCalculation {
     private static final int INTEREST_DAYS_30 = 30;

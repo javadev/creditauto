@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.dossieranalyser.server;
 
 import org.bitbucket.creditauto.dossieranalyser.facade.IDossierAnalyser;
@@ -12,9 +9,6 @@ import org.bitbucket.creditauto.wicket.InDossierStatus;
 
 /**
  * DossierAnalyserServerImpl.
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class DossierAnalyserServerImpl implements IDossierAnalyser {
     public GeneralResult analyseDossier(In_instance inInstance, final String profile, final Boolean isOnceHandled, final InDossierStatus tobeStatus, final String user) {

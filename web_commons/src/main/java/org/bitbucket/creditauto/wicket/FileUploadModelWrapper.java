@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.wicket;
 
 import org.apache.wicket.markup.html.form.upload.FileUpload;
@@ -10,9 +7,6 @@ import org.bitbucket.creditauto.entity.In_document_store;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public class FileUploadModelWrapper implements IWrapModel {
 

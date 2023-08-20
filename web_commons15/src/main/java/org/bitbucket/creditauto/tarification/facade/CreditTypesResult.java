@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.tarification.facade;
 
 import java.io.Serializable;
@@ -9,8 +6,6 @@ import java.util.List;
 import org.bitbucket.creditauto.entity.Credittype;
 
 /**.
- * @author vko
- * @version $Revision$ $Date$
  */
 public class CreditTypesResult implements Serializable {
     private static final long serialVersionUID = 500L;

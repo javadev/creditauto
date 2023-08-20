@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto;
 
 /**
@@ -11,8 +8,6 @@ package org.bitbucket.creditauto;
  * -
  * Java internal thread number, usefull fro lock debug
  * -
- * @author javadev
- * @version $Revision$ $Date$
  */
 public class LOGMarker {
 

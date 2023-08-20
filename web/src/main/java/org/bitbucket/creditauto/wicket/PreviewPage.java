@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.wicket;
 
 import java.io.IOException;
@@ -21,9 +18,6 @@ import org.bitbucket.creditauto.entity.In_document_store;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public class PreviewPage extends TemplatePage {
     private String title;

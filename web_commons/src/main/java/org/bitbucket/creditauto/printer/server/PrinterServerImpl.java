@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.printer.server;
 
 import java.io.ByteArrayOutputStream;
@@ -35,9 +32,6 @@ import org.bitbucket.creditauto.printer.facade.PrinterException;
 
 /**
  * PrinterServerImpl.
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class PrinterServerImpl implements IPrinter {
     private In_instance inInstance;

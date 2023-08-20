@@ -1,11 +1,6 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.printer.facade;
 
 /**.
- * @author vko
- * @version $Revision$ $Date$
  */
 public enum PrinterDocumentType {
     DEFAULT,

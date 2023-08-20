@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.wicket;
 
 import java.util.List;
@@ -11,10 +8,6 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.util.convert.IConverter;
 import org.bitbucket.creditauto.entity.Dictionary_data;
 
-/**.
- * @author javadev
- * @version $Revision$ $Date$
- */
 public class DictionaryTextField extends TextField {
     private List<Dictionary_data> dictionary;
 

@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.tarification.server;
 
 import java.math.BigDecimal;
@@ -22,9 +19,6 @@ import org.bitbucket.creditauto.wicket.JpaRequestCycle;
 
 /**
  * .
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class TarificationServerImpl implements ITarification {
 

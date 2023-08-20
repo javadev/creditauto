@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.authorization.server;
 
 import java.util.Date;
@@ -16,9 +13,6 @@ import org.bitbucket.creditauto.wicket.JpaRequestCycle;
 
 /**
  * .
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class AuthorizationServerImpl implements IAuthorization {
 

@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.wicket;
 
 import java.text.ParseException;
@@ -12,9 +9,6 @@ import org.bitbucket.creditauto.LOG;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public class DateModelWrapper implements IWrapModel {
 

@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.tarification.facade;
 
 import java.io.Serializable;

@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.entity.validator;
 
 import java.util.regex.Pattern;

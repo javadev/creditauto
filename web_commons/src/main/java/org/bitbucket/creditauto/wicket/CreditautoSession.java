@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.wicket;
 
 import org.apache.wicket.Request;
@@ -11,9 +8,6 @@ import org.bitbucket.creditauto.entity.User;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 @SuppressWarnings({"serial"})
 public class CreditautoSession extends WebSession {

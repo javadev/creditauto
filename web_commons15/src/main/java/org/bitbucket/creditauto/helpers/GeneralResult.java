@@ -1,15 +1,9 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.helpers;
 
 import java.io.Serializable;
 
 /**
  * GeneralResult.
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public class GeneralResult implements Serializable {
 

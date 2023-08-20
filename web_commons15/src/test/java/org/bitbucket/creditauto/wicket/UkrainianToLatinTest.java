@@ -22,9 +22,6 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * UkrainianToLatin unit test.
- *
- * @author Valentyn Kolesnikov
- * @version $Revision$ $Date$
  */
 public class UkrainianToLatinTest {
     /**

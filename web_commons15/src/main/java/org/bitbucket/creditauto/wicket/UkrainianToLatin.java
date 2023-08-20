@@ -22,9 +22,6 @@ import java.util.Map;
 
 /**
  * UkrainianToLatin utility class.
- *
- * @author Valentyn Kolesnikov
- * @version $Revision$ $Date$
  */
 public class UkrainianToLatin {
     private static final int INDEX_0 = 0;

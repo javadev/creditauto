@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto;
 
 import java.util.ArrayList;
@@ -15,8 +12,6 @@ import org.codehaus.plexus.util.StringUtils;
  *
  * @goal generate
  * @phase generate-sources
- * @author vko
- * @version $Revision$ $Date$
  */
 public class Xml2wicket extends AbstractMojo {
 

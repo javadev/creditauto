@@ -23,9 +23,6 @@ import org.junit.Test;
 
 /**
  * UkrainianToLatin unit test.
- *
- * @author Valentyn Kolesnikov
- * @version $Revision$ $Date$
  */
 public class UkrainianToLatinTest {
     /** Checks string converter. */

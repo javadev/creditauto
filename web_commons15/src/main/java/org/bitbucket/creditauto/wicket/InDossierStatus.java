@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.wicket;
 
 import java.util.Date;
@@ -9,10 +6,6 @@ import org.bitbucket.creditauto.dictionary.facade.IDictionary;
 import org.bitbucket.creditauto.dictionary.server.DictionaryServerImpl;
 import org.bitbucket.creditauto.entity.Dictionary_data;
 
-/**.
- * @author javadev
- * @version $Revision$ $Date$
- */
 public enum InDossierStatus {
     /** Неопределенный */
     UNDEFINED("0"),

@@ -1,13 +1,7 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.wicket;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public final class StringUtil {
 

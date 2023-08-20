@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.dossieranalyser.facade;
 
 import org.bitbucket.creditauto.helpers.GeneralResult;
@@ -8,9 +5,6 @@ import org.bitbucket.creditauto.wicket.InDossierStatus;
 
 /**
  * AnalyzeInfoResult.
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public class AnalyzeInfoResult extends GeneralResult {
     /**

@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.tarification.server;
 
 import java.util.List;
@@ -15,8 +12,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**.
- * @author vko
- * @version $Revision$ $Date$
  */
 public class TestAmortizationPlan extends AbstractTarificationTestCase {
     /**

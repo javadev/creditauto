@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.entity.validator;
 
 import javax.validation.ConstraintValidator;
@@ -8,10 +5,6 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.bitbucket.creditauto.LOG;
 
-/**.
- * @author javadev
- * @version $Revision$ $Date$
- */
 public class YearConstraint implements ConstraintValidator<Year, Object> {
     private String min;
     private String max;

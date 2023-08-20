@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.tarification.server.amortization;
 
 import static org.junit.Assert.assertEquals;
@@ -14,8 +11,6 @@ import org.junit.Test;
 
 /**
  * CarCalculationTest.
- * @author vko
- * @version $Revision$ $Date$
  */
 public class CarCalculationTest extends AbstractTarificationTestCase {
     private CarCalculation carCalculation;

@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.wicket;
 import static org.junit.Assert.assertEquals;
 
@@ -8,9 +5,6 @@ import org.junit.Test;
 
 /**
  * StringUtil unit test.
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class StringUtilTest {
 

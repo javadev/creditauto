@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.printer.server;
 
 import java.io.IOException;
@@ -16,9 +13,6 @@ import org.bitbucket.creditauto.dictionary.server.DictionaryServerImpl;
 
 /**
  * .
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class DictionaryExpDirective extends Directive {
 

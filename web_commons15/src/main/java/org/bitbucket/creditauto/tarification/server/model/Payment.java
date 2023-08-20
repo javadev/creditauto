@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.tarification.server.model;
 
 import java.io.Serializable;
@@ -8,8 +5,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**.
- * @author vko
- * @version $Revision$ $Date$
  */
 public class Payment implements Serializable {
     private static final long serialVersionUID = -4510613745741158767L;

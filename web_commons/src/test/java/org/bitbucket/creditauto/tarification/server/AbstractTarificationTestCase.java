@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.tarification.server;
 
 import com.mycila.xmltool.XMLDoc;
@@ -14,9 +11,6 @@ import org.bitbucket.creditauto.LOG;
 
 /**
  * AbstractTarificationTestCase.
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public abstract class AbstractTarificationTestCase {
 

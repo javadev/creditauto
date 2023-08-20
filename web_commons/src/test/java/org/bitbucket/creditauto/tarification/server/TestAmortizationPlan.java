@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.tarification.server;
 
 import java.util.List;
@@ -15,9 +12,6 @@ import org.junit.Test;
 
 /**
  * .
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class TestAmortizationPlan extends AbstractTarificationTestCase {
     /** test of Grace Period */

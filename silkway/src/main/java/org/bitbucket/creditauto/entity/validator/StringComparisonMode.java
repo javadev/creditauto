@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.entity.validator;
 
 public enum StringComparisonMode {

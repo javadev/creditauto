@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.wicket;
 
 import org.apache.wicket.RestartResponseException;
@@ -9,9 +6,6 @@ import org.bitbucket.creditauto.LOGMarker;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public class LogoutPage extends TemplatePage {
 

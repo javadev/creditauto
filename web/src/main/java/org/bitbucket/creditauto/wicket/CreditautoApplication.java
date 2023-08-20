@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.wicket;
 
 import org.apache.wicket.Component;
@@ -11,9 +8,6 @@ import org.bitbucket.creditauto.wicket.workflow.GoodSelectionPage;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 @SuppressWarnings({"unchecked", "serial"})
 public class CreditautoApplication extends CommonApplication {

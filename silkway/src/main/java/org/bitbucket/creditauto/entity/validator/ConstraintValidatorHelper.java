@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.entity.validator;
 
 import java.beans.IntrospectionException;
@@ -10,8 +7,6 @@ import java.lang.reflect.Method;
 import org.bitbucket.creditauto.LOG;
 
 /**.
- * @author vko
- * @version $Revision$ $Date$
  */
 public abstract class ConstraintValidatorHelper {
 

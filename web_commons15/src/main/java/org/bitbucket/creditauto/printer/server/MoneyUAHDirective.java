@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.printer.server;
 
 import java.io.IOException;
@@ -14,8 +11,6 @@ import org.apache.velocity.runtime.directive.Directive;
 import org.apache.velocity.runtime.parser.node.Node;
 
 /**.
- * @author vko
- * @version $Revision$ $Date$
  */
 public class MoneyUAHDirective extends Directive {
 

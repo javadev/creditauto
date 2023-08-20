@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.wicket;
 
 import java.lang.reflect.Field;
@@ -15,10 +12,6 @@ import org.apache.wicket.validation.IValidatable;
 import org.apache.wicket.validation.ValidationError;
 import org.bitbucket.creditauto.LOG;
 
-/**.
- * @author javadev
- * @version $Revision$ $Date$
- */
 public final class ValidatorUtil {
     private static final class JSR303ClassValidator implements INullAcceptingValidator {
         private final Object object;

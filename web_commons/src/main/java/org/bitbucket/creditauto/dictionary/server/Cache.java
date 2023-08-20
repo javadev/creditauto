@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.dictionary.server;
 
 import java.util.ArrayList;
@@ -9,9 +6,6 @@ import org.apache.commons.collections.map.LRUMap;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public class Cache<K, T> {
 

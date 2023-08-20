@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.tarification.facade;
 
 import java.io.Serializable;
@@ -12,9 +9,6 @@ import org.bitbucket.creditauto.entity.User;
 
 /**
  * .
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class CreditTypeInputParam implements Serializable {
 

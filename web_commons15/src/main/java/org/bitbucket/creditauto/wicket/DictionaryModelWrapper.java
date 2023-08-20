@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.wicket;
 
 import java.util.List;
@@ -9,10 +6,6 @@ import org.apache.wicket.model.IWrapModel;
 import org.bitbucket.creditauto.entity.Dictionary_data;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 
-/**.
- * @author javadev
- * @version $Revision$ $Date$
- */
 public class DictionaryModelWrapper implements IWrapModel {
 
     private final IModel wrappedModel;

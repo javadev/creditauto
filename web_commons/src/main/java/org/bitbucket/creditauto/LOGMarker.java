@@ -1,14 +1,8 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto;
 
 /**
  * Marker format. host/time-dependent-prefix (sysid) - incremental counter number (session number) -
  * Java internal thread number, usefull fro lock debug -
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public class LOGMarker {
 

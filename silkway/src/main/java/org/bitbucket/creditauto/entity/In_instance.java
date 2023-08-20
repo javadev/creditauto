@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.entity;
 
 import java.io.Serializable;
@@ -9,9 +6,6 @@ import java.util.ArrayList;
 
 /**
  * Automatically generated.
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class In_instance implements Serializable {
 

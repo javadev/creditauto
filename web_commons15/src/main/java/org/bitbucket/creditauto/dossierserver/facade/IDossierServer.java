@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.dossierserver.facade;
 
 import java.util.Date;

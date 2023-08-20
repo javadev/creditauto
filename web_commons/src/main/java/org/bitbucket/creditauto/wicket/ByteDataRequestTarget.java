@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.wicket;
 
 import org.apache.wicket.IRequestTarget;
@@ -10,9 +7,6 @@ import org.apache.wicket.resource.ByteArrayResource;
 
 /**
  * .
- *
- * @author javadev
- * @version $Revision$ $Date$
  */
 public class ByteDataRequestTarget extends ByteArrayResource implements IRequestTarget {
     private String fileName;

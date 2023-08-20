@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.dossieranalyser.facade;
 
 import org.bitbucket.creditauto.helpers.GeneralResult;

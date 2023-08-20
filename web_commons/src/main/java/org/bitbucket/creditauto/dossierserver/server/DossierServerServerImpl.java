@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.dossierserver.server;
 
 import java.util.Date;
@@ -18,9 +15,6 @@ import org.bitbucket.creditauto.wicket.JpaRequestCycle;
 
 /**
  * DossierServerServerImpl.
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class DossierServerServerImpl implements IDossierServer {
 

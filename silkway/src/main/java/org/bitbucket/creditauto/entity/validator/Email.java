@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.entity.validator;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;

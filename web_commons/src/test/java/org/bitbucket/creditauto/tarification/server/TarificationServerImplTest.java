@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package org.bitbucket.creditauto.tarification.server;
 
 import org.bitbucket.creditauto.tarification.facade.CreditTypeInputParam;
@@ -8,9 +5,6 @@ import org.junit.Test;
 
 /**
  * .
- *
- * @author vko
- * @version $Revision$ $Date$
  */
 public class TarificationServerImplTest {
     private TarificationServerImpl server = new TarificationServerImpl();

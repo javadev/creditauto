@@ -1,6 +1,3 @@
-/*
- * $Id$
- */
 package $package;
 
 import java.text.SimpleDateFormat;

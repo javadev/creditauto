@@ -1,7 +1,5 @@
 /*
  * $Id$
- *
- * Copyright (c) 2011 (alisa)
  */
 package org.bitbucket.creditauto.wicket;
 

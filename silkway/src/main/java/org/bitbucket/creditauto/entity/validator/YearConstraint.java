@@ -1,7 +1,5 @@
 /*
  * $Id$
- *
- * Copyright (c) 2012 (javadev)
  */
 package org.bitbucket.creditauto.entity.validator;
 

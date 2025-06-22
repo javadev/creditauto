@@ -118,7 +118,7 @@
     </plugins>
   </build>
   <properties>
-    <wicket.version>1.4.22</wicket.version>
+    <wicket.version>1.4.23</wicket.version>
     <slf4j.version>1.4.2</slf4j.version>
     <jetty.version>6.1.26</jetty.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

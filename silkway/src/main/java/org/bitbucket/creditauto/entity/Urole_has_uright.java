@@ -37,6 +37,7 @@ import org.bitbucket.creditauto.entity.validator.*;
 
 /**
  * Automatically generated.
+ *
  */
 @Entity
 @Table(name = "urole_has_uright")

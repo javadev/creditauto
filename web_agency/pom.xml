@@ -92,7 +92,7 @@
               <basedir>${basedir}/../web</basedir>
               <xlsFiles>CR-Data_Externaldistributor.xls,CR-Data_PricingConfig.xls,CR-Data_Pricing.xls,CR-Data_GrantLoan.xls,CR-Data-Client-Info.xls</xlsFiles>
               <outSql>${basedir}/src/main/resources/import.sql</outSql>
-              <outcharset>cp1251</outcharset>
+              <outcharset>UTF8</outcharset>
             </configuration>
           </execution>
           <execution>
@@ -104,7 +104,7 @@
               <basedir>${basedir}/../web</basedir>
               <xlsFiles>Creditauto_Dictionary_Address.xls</xlsFiles>
               <outSql>${basedir}/src/main/resources/import-address.sql</outSql>
-              <outcharset>cp1251</outcharset>
+              <outcharset>UTF8</outcharset>
             </configuration>
           </execution>
         </executions>

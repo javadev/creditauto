@@ -133,7 +133,7 @@ public class SqlGenerator {
             IOUtils.write(
                     deleteCommands.toString() + result.toString(),
                     new FileOutputStream(outSql),
-                    outcharset == null || "".equals(outcharset) ? "cp1251" : outcharset);
+                    outcharset == null || "".equals(outcharset) ? "UTF-8" : outcharset);
         } catch (Exception ex) {
             getLog().error(ex);
         }

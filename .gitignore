@@ -1,6 +1,7 @@
-target/**/*
+*/target/**/*
 wicket/workflow/*
 import.sql
 *.jar
 *.war
 *.orig
+.idea/
